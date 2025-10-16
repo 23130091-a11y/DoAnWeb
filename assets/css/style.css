@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 62.5%;
+}
+
+html {
+    font-size: 1.4rem;
+}
+
+a {
+    text-decoration: none;
+}
