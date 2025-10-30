@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
     <!-- Link favicon -->
 </head>
 <body>
@@ -170,5 +171,62 @@
             </div>
         </div>
     </header>
+
+    <!-- Danh mục, nav, hero -->
+    <main class="main" style="height: 5000px;">
+        <div class="cta">
+            <div class="grid wide">
+                <div class="row small-gutter">
+                    <div class="col l-2 m-0 c-0">
+                        <nav class="category">
+                            <h3 class="category__heading">Danh mục</h3>
+                            <ul class="category__list">
+                                <li class="category__item category__item--active">
+                                    <a href="#!" class="category__link">Gia dụng - Nhà cửa</a>
+                                </li>
+                                <li class="category__item">
+                                    <a href="#!" class="category__link">Phụ kiện ô tô</a>
+                                </li>
+                                <li class="category__item">
+                                    <a href="#!" class="category__link">Thời trang</a>
+                                </li>
+                                <li class="category__item">
+                                    <a href="#!" class="category__link">Âm thanh - Camera</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col l-10 m-12 c-12">
+                        <div class="navigation">
+                            <a href="#!" class="navigation__link navigation__link--active">Trang chủ</a>
+                            <i class="fa-solid fa-chevron-right navigation__icon navigation__icon--active"></i>
+                        </div>
+                        <figure class="hero">
+                            <div id="slider">
+                                <div class="slide" style="background-image:url('./assets/img/hero_slide-01.jpg')"></div>
+                                <div class="slide" style="background-image:url('./assets/img/hero_slide-02.jpg')"></div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
+
+<!-- Script slider -->
+<script>
+  const slides = document.querySelectorAll("#slider .slide");
+  let index = 0;
+
+  function nextSlide() {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+  }
+
+  slides[index].classList.add("active");
+  setInterval(nextSlide, 3000);
+</script>
+
 </html>

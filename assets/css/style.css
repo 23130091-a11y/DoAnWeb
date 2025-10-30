@@ -17,7 +17,7 @@ html {
 body {
     font-size: 1.6rem;
     font-family: "Poppins", sans-serif;
-    background: var(--white-color);
+    background-color: var(--white-color);
 }
 
 button,
@@ -49,7 +49,7 @@ a {
 
 /* Làm phần header */
 .header {
-    background: var(--primary-color);
+    background-color: var(--primary-color);
 }
 
 .header-top {
@@ -552,6 +552,94 @@ a {
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--white-color);
+}
+
+/* CSS phần cta */
+.cta {
+    background-color: #d9d9d9;
+}
+
+.category {
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.category__heading {
+    padding: 16px 16px 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.category__item--active .category__link {
+    color: var(--primary-color);
+}
+
+.category__link {
+    display: block;
+    padding: 8px 20px;
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.category__link:hover {
+    color: var(--primary-color);
+}
+
+/* navigation */
+.navigation {
+    display: flex;
+    align-items: center;
+    padding: 14px 22px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.navigation__link {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 1.4rem;
+    color: #05e;
+}
+
+.navigation__link--active {
+    color: #555;
+    font-weight: 600;
+}
+
+.navigation__icon {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.navigation__icon--active {
+    display: none;
+}
+
+/* Slide */
+#slider {
+    position: relative;
+    margin-top: 10px;
+    padding-top: 50%;
+    overflow: hidden;
+}
+
+#slider .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: top center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    will-change: opacity;
+}
+  
+#slider .slide.active {
+    opacity: 1;
 }
 
 /* Keyframe fadeIn */
