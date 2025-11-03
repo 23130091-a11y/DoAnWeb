@@ -13,3 +13,16 @@ if (slides.length > 0) {
 
   slides[index].classList.add("active");
   setInterval(nextSlide, 3000);
+}
+
+/* Xử lý load phần header */
+function loadComponent(id, path) {
+  fetch(path)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById(id).innerHTML = html;
+    })
+    .catch(err => console.error("Error loading component:", err));
+}
+
+loadComponent("header", "./layout/header.html");
