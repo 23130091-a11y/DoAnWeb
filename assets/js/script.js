@@ -26,3 +26,37 @@ function loadComponent(id, path) {
 }
 
 loadComponent("header", "./layout/header.html");
+ // Script Navigation button 
+slides[index].classList.add("active");
+setInterval(nextSlide, 3000);
+document.querySelectorAll('.featured').forEach(section => {
+    const list = section.querySelector('.product-list');
+    const btnLeft = section.querySelector('.scroll-btn.left');
+    const btnRight = section.querySelector('.scroll-btn.right');
+
+    if (btnLeft && btnRight && list) {
+        btnLeft.addEventListener('click', () => {
+            list.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+
+        btnRight.addEventListener('click', () => {
+            list.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+    }
+});
+//Click button like
+const favBtns = document.querySelectorAll('.fav-btn');
+favBtns.forEach(favBtn => {
+  favBtn.addEventListener('click', () => {
+    favBtn.classList.toggle('active');
+    const heartIcon = favBtn.querySelector('i');
+
+    if(favBtn.classList.contains('active')){
+      heartIcon.classList.remove('fa-regular');
+      heartIcon.classList.add('fa-solid');
+    } else {
+      heartIcon.classList.remove('fa-solid');
+      heartIcon.classList.add('fa-regular');
+    }
+  });
+});
