@@ -735,10 +735,10 @@
     opacity: 1;
 }
 
+/* Chi tiết sản phẩm */
 .featured{
     width: 100%;  
-    background: var(--white-color);     
-    max-width: 1200px;  
+    background: var(--white-color);
     margin: 40px auto;  
     padding: 15px;
     border-top: 5px solid var(--primary-color);
@@ -930,3 +930,113 @@
 
 .scroll-btn.left { left: 5px; }
 .scroll-btn.right { right: 5px; } 
+
+/* CSS phần footer */
+.footer {
+    /* Dùng linear-gradient để tạo 2 khung màu (background-image) từ trái sang phải */
+    background: linear-gradient(to right, #262626 43%, transparent 42%);
+    border-top: 4px solid var(--primary-color);
+    padding-top: 16px;
+}
+
+.footer__inner {
+    display: flex;
+}
+
+.footer__left {
+    width: 42%;
+}
+
+.footer__right {
+    flex: 1;
+}
+
+/* Left */
+.footer-info {
+    margin-top: 15px;
+}
+
+.footer-info__item {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    width: 548px;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--white-color);
+}
+
+.footer-info__label {
+    font-weight: 500;
+}
+
+.footer-info__icon {
+    margin-right: 8px;
+    font-size: 1.6rem;
+    color: var(--white-color);
+    flex-shrink: 0;
+}
+
+.footer-info__link {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--white-color);
+}
+
+/* Right */
+.footer__row {
+    margin-left: 128px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 58px 137px;
+}
+
+.footer-column__list {
+    margin-top: 14px;
+}
+
+.footer__heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.11;
+    color: var(--text-color);
+}
+
+.footer-column__link {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 2;
+    color: #737373;
+}
+
+.socials {
+    margin-top: 14px;
+    display: flex;
+    column-gap: 8px;
+}
+
+.socials__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #FFF6ED;
+    box-shadow: 0 16px 28px -10px rgba(211, 132, 53, 0.33);
+}
+
+.socials__link:hover {
+    opacity: 0.9;
+}
+
+.footer__copyright {
+    padding: 12px 0;
+    margin-top: 36px;
+    background-color: #FFF6ED;
+}
+.footer__text {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #737373;
+}

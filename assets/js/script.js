@@ -26,6 +26,7 @@ function loadComponent(id, path) {
 }
 
 loadComponent("header", "./layout/header.html");
+
  // Script Navigation button 
 slides[index].classList.add("active");
 setInterval(nextSlide, 3000);
