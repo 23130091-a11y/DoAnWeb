@@ -954,13 +954,13 @@
 /* Left */
 .footer-info {
     margin-top: 15px;
+    padding-right: 30px;
 }
 
 .footer-info__item {
     margin-bottom: 12px;
     display: flex;
     align-items: center;
-    width: 548px;
     font-size: 1.5rem;
     line-height: 1.4;
     color: var(--white-color);

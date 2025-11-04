@@ -5,7 +5,7 @@
     padding: 0;
 }
 .grid.wide {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 /* Giải thích margin âm: margin âm trên .row sẽ "kéo" các phần tử con của nó (các .col) sát lại mép ngoài của container.*/
