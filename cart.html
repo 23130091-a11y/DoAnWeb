@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/cart.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header id="header" class="header"></header>
+
+    <main class="main" style="background-color: #f5f5f5; padding: 20px 0;">
+        <div class="grid wide">
+            <div class="cart-container">
+                <!-- Header -->
+                <div class="cart-header flex">
+                    <div class="col product-col">Sản phẩm</div>
+                    <div class="col price-col">Đơn giá</div>
+                    <div class="col qty-col">Số lượng</div>
+                    <div class="col total-col">Số tiền</div>
+                    <div class="col action-col">Thao tác</div>
+                </div>
+                <!-- cart list product -->
+                <div class="shop-block">
+                    <div class="shop-title flex">
+                        <input type="checkbox" class="shop-checkbox">
+                        <span class="date-add">11/9/2025</span>
+                    </div>
+
+                    <div class="cart-item flex">
+                        <div class="col product-col flex">
+                            <input type="checkbox" class="item-checkbox">
+                            <img src="./assets/img/bochuyendoi.jpg" alt="">
+                            <div class="item-info">
+                                <p>[Giá Sỉ] Mũ Ô Đội Đầu Che Mưa...</p>
+                            </div>
+                        </div>
+                        <div class="col price-col">
+                            <div class="price-wrapper">
+                                <div class="old-price-box">
+                                    <span class="old-price">59.000đ</span>
+                                    <small class="price-note">Đã cập nhật</small>
+                                </div>
+                                <div class="new-price-box">
+                                    <span class="new-price">56.050đ</span>
+                                    <small class="price-discount">Discount 5%</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col qty-col item-qty">
+                            <button type="button">-</button>
+                            <input class="text" type="text" value="1">
+                            <button type="button">+</button>
+                        </div>
+                        <div class="col total-col">56050đ</div>
+                        <div class="col action-col"><button type="button" class="item-delete">Xóa</button></div>
+                    </div>
+
+                    <div class="cart-item flex">
+                        <div class="col product-col flex">
+                            <input type="checkbox" class="item-checkbox">
+                            <img src="./assets/img/bochuyendoi.jpg" alt="">
+                            <div class="item-info">
+                                <p>[Giá Sỉ] Mũ Ô Đội...</p>
+                            </div>
+                        </div>
+                        <div class="col price-col">
+                            <div class="price-wrapper">
+                                <div class="old-price-box">
+                                    <span class="old-price">59.000đ</span>
+                                    <small class="price-note">Đã cập nhật</small>
+                                </div>
+                                <div class="new-price-box">
+                                    <span class="new-price">56.050đ</span>
+                                    <small class="price-discount">Discount 5%</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col qty-col item-qty">
+                            <button type="button">-</button>
+                            <input class="text" type="text" value="2">
+                            <button type="button">+</button>
+                        </div>
+                        <div class="col total-col">116100đ</div>
+                        <div class="col action-col"><button type="button" class="item-delete">Xóa</button></div>
+                    </div>
+                </div>
+
+                <div class="shop-block">
+                    <div class="shop-title flex">
+                        <input type="checkbox" class="shop-checkbox">
+                        <span class="date-add">20/9/2025</span>
+                    </div>
+
+                    <div class="cart-item flex">
+                        <div class="col product-col flex">
+                            <input type="checkbox" class="item-checkbox">
+                            <img src="./assets/img/bochuyendoi.jpg" alt="">
+                            <div class="item-info">
+                                <p>[Giá Sỉ] Mũ Ô Đội Đầu Che Mưa...</p>
+                            </div>
+                        </div>
+                        <div class="col price-col">
+                            <div class="price-wrapper">
+                                <div class="old-price-box">
+                                    <span class="old-price">59.000đ</span>
+                                    <small class="price-note">Đã cập nhật</small>
+                                </div>
+                                <div class="new-price-box">
+                                    <span class="new-price">56.050đ</span>
+                                    <small class="price-discount">Discount 5%</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col qty-col item-qty">
+                            <button type="button">-</button>
+                            <input class="text" type="text" value="1">
+                            <button type="button">+</button>
+                        </div>
+                        <div class="col total-col">56050đ</div>
+                        <div class="col action-col"><button type="button" class="item-delete">Xóa</button></div>
+                    </div>
+
+                    <div class="cart-item flex">
+                        <div class="col product-col flex">
+                            <input type="checkbox" class="item-checkbox">
+                            <img src="./assets/img/bochuyendoi.jpg" alt="">
+                            <div class="item-info">
+                                <p>[Giá Sỉ] Mũ Ô Đội...</p>
+                            </div>
+                        </div>
+                        <div class="col price-col">
+                            <div class="price-wrapper">
+                                <div class="old-price-box">
+                                    <span class="old-price">59.000đ</span>
+                                    <small class="price-note">Đã cập nhật</small>
+                                </div>
+                                <div class="new-price-box">
+                                    <span class="new-price">56.050đ</span>
+                                    <small class="price-discount">Discount 5%</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col qty-col item-qty">
+                            <button type="button">-</button>
+                            <input class="text" type="text" value="2">
+                            <button type="button">+</button>
+                        </div>
+                        <div class="col total-col">116100đ</div>
+                        <div class="col action-col"><button type="button" class="item-delete">Xóa</button></div>
+                    </div>
+                </div>
+
+
+                <!-- Footer -->
+                <div class="cart-footer flex">
+                    <input type="checkbox" id="select-all-footer"> Chọn tất cả
+                    <button type="button" class="footer-btn">Xóa</button>
+                    <button type="button" class="footer-btn">Lưu vào mục yêu thích</button>
+
+                    <div class="cart-summary">
+                        Tổng cộng (<span class="total-items">0</span> sản phẩm): <span class="total-price">0đ</span>
+                    </div>
+
+                    <button type="button" class="buy-btn">Mua hàng</button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>

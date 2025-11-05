@@ -14,6 +14,55 @@ if (slides.length > 0) {
   slides[index].classList.add("active");
   setInterval(nextSlide, 3000);
 }
+//cart 
+document.addEventListener("DOMContentLoaded", function () {
+    const selectAllFooter = document.getElementById("select-all-footer");
+    const totalPriceEl = document.querySelector(".total-price");
+    const totalItemsEl = document.querySelector(".total-items");
+
+    // Cập nhật tổng tiền và số lượng
+    function updateFooterSummary() {
+        const selectedItems = document.querySelectorAll(".item-checkbox:checked");
+        let totalPrice = 0;
+        let totalQty = 0;
+
+        selectedItems.forEach(item => {
+            const cartItem = item.closest(".cart-item");
+            const price = parseInt(cartItem.querySelector(".new-price").textContent);
+            const qty = parseInt(cartItem.querySelector("input[type='text']").value);
+            totalPrice += price * qty;
+            totalQty += qty;
+        });
+
+        totalPriceEl.textContent = totalPrice.toLocaleString("vi-VN") + "đ";
+        totalItemsEl.textContent = totalQty;
+    }
+
+    // Cập nhật trạng thái checkbox footer
+    function updateFooterCheckbox() {
+        const allItems = document.querySelectorAll(".item-checkbox");
+        selectAllFooter.checked = Array.from(allItems).every(i => i.checked);
+    }
+
+    // Khi click checkbox footer: chọn tất cả sản phẩm
+    selectAllFooter.addEventListener("change", function () {
+        const allItems = document.querySelectorAll(".item-checkbox");
+        allItems.forEach(item => item.checked = selectAllFooter.checked);
+        updateFooterSummary();
+    });
+
+    // Khi click checkbox từng sản phẩm: cập nhật tổng và footer checkbox
+    const itemCheckboxes = document.querySelectorAll(".item-checkbox");
+    itemCheckboxes.forEach(item => {
+        item.addEventListener("change", function () {
+            updateFooterSummary();
+            updateFooterCheckbox();
+        });
+    });
+
+    updateFooterSummary();
+    updateFooterCheckbox();
+});
 
 /* Xử lý load phần header */
 function loadComponent(id, path) {
