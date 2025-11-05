@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
     <link rel="stylesheet" href="./assets/css/grid.css">
-     <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/product.css">
     <!-- Link favicon -->
@@ -23,15 +23,15 @@
 <body>
     <header id="header" class="header"></header>
 
-    <main class="main">
+    <main class="main" style="height: 5000px;">
         <!-- product-details -->
         <div class="product-details">
-            <div class="container">
+            <div class="grid wide">
                 <div class="product-details__inner">
                     <!-- Media Details -->
                     <figure class="media-details">
                         <img src="./assets/img/details-img.jpg" alt="Product Image" class="media-details__img">
-                        <figure class="more-details">
+                        <div class="more-details">
                             <button class="more-details__thumb">
                                 <img class="more-details__img" src="./assets/img/details-img.jpg" alt="">
                             </button>
@@ -47,7 +47,7 @@
                             <button class="more-details__thumb">
                                 <img class="more-details__img" src="./assets/img/detail-04.jpg" alt="">
                             </button>
-                        </figure>
+                        </div>
                     </figure>
                     
                     <!-- Content Details -->
@@ -72,27 +72,43 @@
                                 <span class="content-feedback__level">1,2k</span>
                             </div>
                         </div>
+
                         <div class="content-details__desc-wrap">
                             <span class="content-details__desc">Giá</span>
                             <span class="content-details__price">378.000 đ</span>
                         </div>
+
                         <div class="content-details__desc-wrap">
                             <span class="content-details__desc">Trọng lượng</span>
                             <span class="content-details__info">1.8kg</span>
                         </div>
+
                         <div class="content-details__desc-wrap">
                             <span class="content-details__desc">Chất liệu</span>
                             <span class="content-details__info">Kim loại sơn tĩnh điện</span>
                         </div>
-                        <div class="content-details__desc-wrap">
-                            <span class="content-details__desc">Công suất</span>
-                            <span class="content-details__info">20 - 25W</span>
-                        </div>
+
                         <div class="content-details__desc-wrap">
                             <span class="content-details__desc">Công dụng</span>
                             <span class="content-details__info">Quạt làm mát</span>
                         </div>
-                        <div class="content-details__desc-wrap">
+
+                        <div class="content-details__desc-wrap content-details__option">
+                            <span class="content-details__desc">Loại</span>
+                            <div class="group-option">
+                                <label class="radio" for="1pin">
+                                    <input type="radio" name="type" id="1pin" value="QUẠT + 1 PIN + 1 SẠC" />
+                                    QUẠT + 1 PIN + 1 SẠC
+                                </label>
+
+                                <label class="radio" for="2pin">
+                                    <input type="radio" name="type" id="2pin" value="QUẠT + 2 PIN + 1 SẠC" />
+                                    QUẠT + 2 PIN + 1 SẠC
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="content-details__desc-wrap content-details__option">
                             <span class="content-details__desc">Số lượng</span>
                             <div class="content-quantity">
                                 <button class="content-quantity__btn content-quantity__btn--disable">-</button>
@@ -100,6 +116,7 @@
                                 <button class="content-quantity__btn">+</button>
                             </div>
                         </div>
+
                         <div class="content-details__act">
                             <button class="content-details__cart-btn btn">
                                 <i class="fa-solid fa-cart-plus content-details__cart-icon"></i>
@@ -107,6 +124,7 @@
                             </button>
                             <button class="content-details__buy btn btn--default-color">Mua ngay</button>
                         </div>
+
                         <div class="content-details__trp">
                             <span class="content-details__trp-text">Vận chuyển</span>
                             <a href="#!" class="content-details__trp-link">
@@ -118,9 +136,55 @@
                 </div>
             </div>
         </div>
+
+        <div class="product-desc">
+            <div class="grid wide">
+                <div class="row small-gutter product-desc__inner">
+                    <div class="col l-9 m-12 c-12">
+                        <div class="product-desc__content">
+                            <h3 class="product-desc__name">Quạt tích điện Makita</h3>
+                            <p class="product-desc__text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, eaque rem quidem ratione sint aut praesentium sequi, labore dolorem cupiditate reprehenderit quo consectetur, corrupti aliquam itaque numquam accusamus tenetur ipsam?
+                                Quis sunt neque ipsam corrupti! Id, odit! Dolores, consectetur numquam voluptatibus optio molestiae labore distinctio eum praesentium facere, cumque, velit dolore. Accusantium nihil necessitatibus id iste placeat, quam repudiandae aperiam?
+                                Consectetur iure ut illo deleniti, eius assumenda suscipit quaerat explicabo recusandae velit dolore nulla labore, iusto rerum quisquam. Voluptate dolores ipsa pariatur distinctio qui eum aut laudantium? Ad, laudantium rerum.
+                                Distinctio accusamus fugiat soluta possimus harum iusto! Dolorum sint nam aliquam cupiditate ut expedita nisi accusantium numquam provident quia voluptatem accusamus quos sapiente, eius cumque unde fuga ipsam? Distinctio, voluptatum?
+                                Officia eveniet amet quas aliquid itaque voluptates eaque iste incidunt quasi nisi ea aspernatur a quo doloribus quis tempora dicta tempore, suscipit deserunt assumenda pariatur non quam natus voluptatum? Quia!
+                            </p>
+                            <figure class="product-desc__thumb">
+                                <img class="product-desc__img" src="./assets/img/detail-01.jpg" alt="Quạt Makita" />
+                            </figure>
+                            <p class="product-desc__text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nam pariatur sunt totam autem. Natus autem, eum obcaecati, quod praesentium fugit voluptatum odit officiis neque necessitatibus magnam reprehenderit iste consequuntur.
+                                Totam quam sint maxime veritatis dolor, cumque, earum nesciunt dicta provident tenetur, voluptatum eum distinctio reiciendis esse excepturi modi. Repellendus, omnis consectetur ab earum molestiae voluptatum vitae velit quaerat distinctio?
+                                Eum quisquam accusamus quos mollitia maxime accusantium illum expedita aperiam consequuntur esse, cum quasi tempora! Facere magni, officia veniam, consequuntur repellat sapiente, iusto commodi fugiat harum ex molestiae saepe dolorem.
+                                Ad, quod ex nisi corrupti doloremque dicta magni adipisci consectetur eos culpa provident sed odio, temporibus, veniam facilis eius veritatis doloribus quibusdam quae? Alias quasi consequatur commodi ratione corrupti maxime!
+                                Id, magnam? Rerum, temporibus impedit! Itaque in minima rerum incidunt laborum odio earum mollitia illo cupiditate placeat perferendis molestiae nam ipsum nihil odit officia aspernatur adipisci, quos illum! Quae, dolorem!
+                            </p>
+                            <h3 class="product-desc__name">Thông tin sản phẩm</h3>
+                            <ul class="product-desc__features">
+                                <li class="product-desc__text product-desc__text--bullet">Công suất mạnh mẽ giúp làm mát nhanh</li>
+                                <li class="product-desc__text product-desc__text--bullet">Dung lượng pin lớn, sử dụng lâu</li>
+                                <li class="product-desc__text product-desc__text--bullet">Thiết kế nhỏ gọn dễ mang theo</li>
+                                <li class="product-desc__text product-desc__text--bullet">Đầy đủ phụ kiện: 1 pin + 1 sạc</li>
+                            </ul>
+                            <figure class="product-desc__thumb">
+                                <img class="product-desc__img" src="./assets/img/detail-02.jpg" alt="Quạt Makita" />
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="col l-3 m-0 c-0">
+                        <div class="product-desc__view-more">
+                            <h2>Lorem ipsum dolor sit amet.</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 
 <!-- Link JS -->
 <script src="./assets/js/script.js"></script>
+
 </html>
