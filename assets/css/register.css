@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     color: #333;
     background-color: #f7f7f7;
+    font-size: 1.6rem !important;
 }
 
 a {
@@ -13,7 +14,7 @@ a {
 /* --- HEADER --- */
 .main-header {
     background-color: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .main-header .container {
@@ -34,9 +35,12 @@ a {
 }
 
 .main-header h1 {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 500;
     margin: 0;
+    color: var(--text-color, #333) !important;
+    margin-left: 15px;
+    white-space: nowrap;
 }
 
 /* --- NỘI DUNG CHÍNH --- */
@@ -63,7 +67,7 @@ a {
     background-color: white;
     padding: 30px;
     border-radius: 5px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     width: 380px;
 }
 
@@ -121,15 +125,18 @@ a {
     color: #aaa;
     margin: 15px 0;
 }
+
 .separator::before,
 .separator::after {
     content: '';
     flex: 1;
     border-bottom: 1px solid #eee;
 }
+
 .separator:not(:empty)::before {
     margin-right: .5em;
 }
+
 .separator:not(:empty)::after {
     margin-left: .5em;
 }
@@ -175,6 +182,7 @@ a {
     font-size: 14px;
     color: #888;
 }
+
 .register-link a {
     color: #FF8C00;
     font-weight: bold;

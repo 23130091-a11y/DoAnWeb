@@ -132,7 +132,8 @@
     box-shadow: 0 1px 3rem rgba(0, 0, 0, 0.2);
     transform-origin: calc(100% - 18px) top;
     animation: scaleUp ease-in 0.3s;
-    will-change: opacity, transform; /* Nói cho trình duyệt biết cái nào sẽ thay đổi trong animation */
+    will-change: opacity, transform;
+    /* Nói cho trình duyệt biết cái nào sẽ thay đổi trong animation */
     cursor: default;
     z-index: 3;
 }
@@ -290,7 +291,8 @@
     box-shadow: 0 1px 2px #d8d8d8;
     transform-origin: calc(100% - 16px) top;
     animation: scaleUp ease-in 0.3s;
-    will-change: opacity, transform; /* Nói cho trình duyệt biết cái nào sẽ thay đổi trong animation */
+    will-change: opacity, transform;
+    /* Nói cho trình duyệt biết cái nào sẽ thay đổi trong animation */
     z-index: 1;
 }
 
@@ -384,7 +386,8 @@
     font-size: 1.4rem;
     color: var(--text-color);
     padding: 0 16px;
-    border-radius: 2px; /* Thêm border vào input mà không dùng over hidden để tránh các phần tử con phía sau bị che mất */
+    border-radius: 2px;
+    /* Thêm border vào input mà không dùng over hidden để tránh các phần tử con phía sau bị che mất */
 }
 
 .header-search__btn {
@@ -393,7 +396,8 @@
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translateY(-50%); /* canh giữa theo chiều dọc */
+    transform: translateY(-50%);
+    /* canh giữa theo chiều dọc */
     border-radius: 2px;
 }
 
@@ -426,7 +430,7 @@
     z-index: 2;
 }
 
-.header-search__input:focus ~ .search-history {
+.header-search__input:focus~.search-history {
     display: block;
 }
 
@@ -445,7 +449,8 @@
     padding: 0 12px;
     height: 38px;
     line-height: 38px;
-    display: block; /* Tự động kế thừa chiều ngang nên sẽ hiện bàn tay */
+    display: block;
+    /* Tự động kế thừa chiều ngang nên sẽ hiện bàn tay */
     font-size: 1.4rem;
     color: var(--text-color);
 }
@@ -667,17 +672,21 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 2;
     /* Ẩn menu ban đầu */
-    pointer-events: none; /* không tương tác khi ẩn */
+    pointer-events: none;
+    /* không tương tác khi ẩn */
     opacity: 0;
-    transform: translateX(-10px); /* trượt vào từ trái */
+    transform: translateX(-10px);
+    /* trượt vào từ trái */
     transition: opacity 0.2s ease, transform 0.2s ease;
     will-change: opacity, visibility;
 }
 
-.category__item:hover > .category-menu {
-    pointer-events: auto; /* cho phép tương tác khi hover */
+.category__item:hover>.category-menu {
+    pointer-events: auto;
+    /* cho phép tương tác khi hover */
     opacity: 1;
-    transform: translateX(0); /* vị trí cuối */
+    transform: translateX(0);
+    /* vị trí cuối */
 }
 
 /* navigation */
@@ -730,161 +739,168 @@
     transition: opacity 1s ease-in-out;
     will-change: opacity;
 }
-  
+
 #slider .slide.active {
     opacity: 1;
 }
 
 /* Chi tiết sản phẩm */
-.featured{
-    width: 100%;  
+.featured {
+    width: 100%;
     background: var(--white-color);
-    margin: 40px auto;  
+    margin: 40px auto;
     padding: 15px;
     border-top: 5px solid var(--primary-color);
     position: relative;
     box-sizing: border-box;
     border-radius: 8px;
-} 
+}
 
-.featured h2{
-  background: var(--primary-color);
-  color: var(--white-color);
-  display: inline-block;
-  padding: 10px 15px;
-  font-size: 18px;
-  position: absolute;
-  top: -20px;
-  left: 20px;
-  border-radius: 8px;
+.featured h2 {
+    background: var(--primary-color);
+    color: var(--white-color);
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 18px;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    border-radius: 8px;
 }
+
 .product-card p {
-  font-size: 14px;
-  color: var(--text-color);
-  line-height: 1.4;
-  margin: 2px 2px 4px 4px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;       
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: justify;
+    font-size: 14px;
+    color: var(--text-color);
+    line-height: 1.4;
+    margin: 2px 2px 4px 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
 }
+
 .product-list {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 15px;
-  padding-bottom: 12px;
-  padding-left: 6px;  
-  padding-right: 6px;
-  padding-top: 6px;
-  margin-top: 12px;
-  scroll-behavior: smooth;   
-       
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding-bottom: 12px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    margin-top: 12px;
+    scroll-behavior: smooth;
+
 }
 
 .product-list::-webkit-scrollbar {
-  height: 8px;
+    height: 8px;
 }
+
 .product-list::-webkit-scrollbar-track {
-  background: var(--white-color);
-  border-radius: 10px;
+    background: var(--white-color);
+    border-radius: 10px;
 }
+
 .product-list::-webkit-scrollbar-thumb {
-  background: var(--soft-color);
-  border-radius: 10px;
+    background: var(--soft-color);
+    border-radius: 10px;
 }
 
 .product-card {
-  position: relative; 
-  flex: 0 0 22%;
-  background: var(--white-color);
-  border: 1px solid var(--primary-color);
-  padding: 10px;
-  text-align: center;
-  transition: transform 0.3s;
-  scroll-snap-align: start;
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 8px
+    position: relative;
+    flex: 0 0 22%;
+    background: var(--white-color);
+    border: 1px solid var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+    scroll-snap-align: start;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px
 }
 
 .product-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .product-card img {
-  width: 100%;                 
-  max-height: 200px;          
-  min-height: 150px;         
-  height: auto;               
-  object-fit: cover;           
-  object-position: center;     
-  border-radius: 5px;         
+    width: 100%;
+    max-height: 200px;
+    min-height: 150px;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
 }
 
 .product-card .price {
-  color: red;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 25px; 
-  margin-left: 4px;
-  margin-bottom: 5px;
+    color: red;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    margin-left: 4px;
+    margin-bottom: 5px;
 }
 
 .product-card .bottom {
-  display: flex;
-  align-items: center;
-  gap: 80px; 
+    display: flex;
+    align-items: center;
+    gap: 80px;
 }
 
 .bottom .star {
-  color: var(--primary-color);             
-  align-items: center;
-  gap: 5px;
+    color: var(--primary-color);
+    align-items: center;
+    gap: 5px;
 }
 
- .bottom .fav-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: none; 
-  border: none;     
-  color: var(--primary-color);     
-  cursor: pointer;
-  font-size: 16px;
-  transition: transform 0.2s, color 0.2s;
-}
-.fav-btn:hover {
-  color: var(--primary-color);
-  transform: scale(1.2);
-}
-.fav-btn.active i.fa-heart {
-  color: var(--primary-color);
-}
-.product-card .price-discount{
+.bottom .fav-btn {
     display: flex;
-    flex-direction: column; 
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.fav-btn:hover {
+    color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.fav-btn.active i.fa-heart {
+    color: var(--primary-color);
+}
+
+.product-card .price-discount {
+    display: flex;
+    flex-direction: column;
     gap: 5px;
     margin-left: 4px;
     margin-bottom: 5px;
 }
 
-.price-discount  .price-top {
+.price-discount .price-top {
     display: flex;
-    justify-content: flex-start; 
-    align-items: center;         
-    gap: 10px;                   
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
 }
 
 .price-discount .price-bottom {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -892,7 +908,7 @@
     color: red;
 }
 
-.price-discount  .price-top .old-price {
+.price-discount .price-top .old-price {
     color: #989292;
     text-decoration: line-through;
     font-weight: normal;
@@ -909,30 +925,37 @@
 }
 
 .scroll-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--soft-color);
-  color: var(--white-color);
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  opacity: 0.8;
-  transition: opacity 0.3s;
-  z-index: 10;
-}
-.scroll-btn:hover {
-  opacity: 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--soft-color);
+    color: var(--white-color);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    z-index: 10;
 }
 
-.scroll-btn.left { left: 5px; }
-.scroll-btn.right { right: 5px; } 
+.scroll-btn:hover {
+    opacity: 1;
+}
+
+.scroll-btn.left {
+    left: 5px;
+}
+
+.scroll-btn.right {
+    right: 5px;
+}
 
 /* CSS phần footer */
 .footer {
+    margin-top: 40px;
     /* Dùng linear-gradient để tạo 2 khung màu (background-image) từ trái sang phải */
     background: linear-gradient(to right, #262626 43%, transparent 42%);
     border-top: 4px solid var(--primary-color);
@@ -1034,8 +1057,8 @@
     padding: 12px 0;
     margin-top: 36px;
     background-color: #FFF6ED;
-    
 }
+
 .footer__text {
     text-align: center;
     font-size: 1.4rem;
