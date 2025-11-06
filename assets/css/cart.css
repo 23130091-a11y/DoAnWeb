@@ -9,7 +9,7 @@
     align-items: center;
 }
 .cart-header {
-    background: var(--white-color);
+    background: var(--primary-color);
     padding: 12px;
     border-radius: 6px;
 }
@@ -42,10 +42,10 @@
 
 .checkbox-col { width: 5%; justify-content: center; }
 .product-col { width: 40%; gap: 10px; }
-.price-col { width: 15%; justify-content: flex-end; }
-.qty-col { width: 10%; justify-content: center; }
-.total-col { width: 15%; justify-content: flex-end; }
-.action-col { width: 15%; justify-content: center; }
+.price-col { width: 18%; justify-content: center; }
+.qty-col { width: 20%; justify-content: center;}
+.total-col { width: 12%; justify-content: flex-end}
+.action-col { width: 15%; justify-content: flex-end;; }
 
 .product-col img {
     width: 60px;
@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ebbe6c;
+    background-color: var(--soft-color);
     border: none;
     color: var(--primary-color)f;
     font-size: 18px;
@@ -98,14 +98,13 @@
 
 .old-price {
     text-decoration: line-through;
-    color: #999;
     font-size: 14px;
     margin-bottom: 2px;
 }
 
 .price-note {
-    font-size: 11px;
-    color: #777;
+    font-size: 13px;
+    color: var(--primary-color);
 }
 
 .new-price-box {
@@ -113,16 +112,22 @@
     flex-direction: column;
     align-items: flex-end;
 }
-
+.new-price-row {
+    display: flex;
+    align-items: flex-end; 
+    gap: 3px;
+}
 .new-price {
-    color: var(--primary-color);
-    font-weight: 600;
     font-size: 16px;
     margin-bottom: 2px;
 }
+.currency {
+    font-size: 14px;
+    opacity: 1;
+}
 
 .price-discount {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--primary-color);
 }
 .cart-footer {
@@ -135,7 +140,7 @@
 }
 
 .footer-btn, .buy-btn, .item-delete {
-    background-color: #ebbe6c;
+    background-color: var(--soft-color);
     color: #fff;
     border: none;
     padding: 5px 12px;
@@ -145,4 +150,13 @@
 
 .footer-btn:hover, .buy-btn:hover, .item-delete:hover {
     background-color: var(--primary-color);
+}
+.empty-message {
+    display: none; 
+    text-align: center;
+    padding: 40px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ccc;
+    border-radius: 6px;
 }
