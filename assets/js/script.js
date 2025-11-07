@@ -14,6 +14,50 @@ if (slides.length > 0) {
   slides[index].classList.add("active");
   setInterval(nextSlide, 3000);
 }
+/* Xử lý load phần header */
+function loadComponent(id, path) {
+  fetch(path)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById(id).innerHTML = html;
+    })
+    .catch(err => console.error("Error loading component:", err));
+}
+
+loadComponent("header", "./layout/header.html");
+
+// Script Navigation button 
+document.querySelectorAll('.featured').forEach(section => {
+  const list = section.querySelector('.product-list');
+  const btnLeft = section.querySelector('.scroll-btn.left');
+  const btnRight = section.querySelector('.scroll-btn.right');
+
+  if (btnLeft && btnRight && list) {
+    btnLeft.addEventListener('click', () => {
+      list.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+
+    btnRight.addEventListener('click', () => {
+      list.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  }
+});
+//Click button like
+const favBtns = document.querySelectorAll('.fav-btn');
+favBtns.forEach(favBtn => {
+  favBtn.addEventListener('click', () => {
+    favBtn.classList.toggle('active');
+    const heartIcon = favBtn.querySelector('i');
+
+    if (favBtn.classList.contains('active')) {
+      heartIcon.classList.remove('fa-regular');
+      heartIcon.classList.add('fa-solid');
+    } else {
+      heartIcon.classList.remove('fa-solid');
+      heartIcon.classList.add('fa-regular');
+    }
+  });
+});
 //cart 
 document.addEventListener("DOMContentLoaded", function () {
   // Lấy checkbox 
@@ -124,80 +168,35 @@ document.addEventListener("DOMContentLoaded", function () {
   updateAllItemTotals();
   updateFooterSummary();
   updateFooterCheckbox();
-});
+  // Xóa sản phẩm
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("item-delete")) {
+      const cartItem = e.target.closest(".cart-item");
+      const shopBlock = cartItem.closest(".shop-block");
 
-// Xóa sản phẩm
-document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("item-delete")) {
-    const cartItem = e.target.closest(".cart-item");
-    const shopBlock = cartItem.closest(".shop-block");
+      cartItem.remove();
+      if (shopBlock.querySelectorAll(".cart-item").length === 0) {
+        shopBlock.remove();
+      }
 
-    cartItem.remove();
-    if (shopBlock.querySelectorAll(".cart-item").length === 0) {
-      shopBlock.remove();
-    }
-
-    updateFooterSummary();
-    updateFooterCheckbox();
-  }
-});
-// Xóa toàn bộ giỏ hàng
-document.querySelector(".footer-btn").addEventListener("click", function () {
-  const shopBlocks = document.querySelectorAll(".shop-block");
-  shopBlocks.forEach(block => block.remove());
-
-  const cartFooter = document.querySelector(".cart-footer");
-  if (cartFooter) cartFooter.style.display = "none";
-
-  const cartHeader = document.querySelector(".cart-header");
-  if (cartHeader) cartHeader.remove();
-
-  const emptyMessage = document.querySelector(".empty-message");
-  if (emptyMessage) emptyMessage.style.display = "block";
-});
-/* Xử lý load phần header */
-function loadComponent(id, path) {
-  fetch(path)
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById(id).innerHTML = html;
-    })
-    .catch(err => console.error("Error loading component:", err));
-}
-
-loadComponent("header", "./layout/header.html");
-
-// Script Navigation button 
-slides[index].classList.add("active");
-setInterval(nextSlide, 3000);
-document.querySelectorAll('.featured').forEach(section => {
-  const list = section.querySelector('.product-list');
-  const btnLeft = section.querySelector('.scroll-btn.left');
-  const btnRight = section.querySelector('.scroll-btn.right');
-
-  if (btnLeft && btnRight && list) {
-    btnLeft.addEventListener('click', () => {
-      list.scrollBy({ left: -300, behavior: 'smooth' });
-    });
-
-    btnRight.addEventListener('click', () => {
-      list.scrollBy({ left: 300, behavior: 'smooth' });
-    });
-  }
-});
-//Click button like
-const favBtns = document.querySelectorAll('.fav-btn');
-favBtns.forEach(favBtn => {
-  favBtn.addEventListener('click', () => {
-    favBtn.classList.toggle('active');
-    const heartIcon = favBtn.querySelector('i');
-
-    if (favBtn.classList.contains('active')) {
-      heartIcon.classList.remove('fa-regular');
-      heartIcon.classList.add('fa-solid');
-    } else {
-      heartIcon.classList.remove('fa-solid');
-      heartIcon.classList.add('fa-regular');
+      updateFooterSummary();
+      updateFooterCheckbox();
     }
   });
+
+  // Xóa toàn bộ giỏ hàng
+  document.querySelector(".footer-btn").addEventListener("click", function () {
+    const shopBlocks = document.querySelectorAll(".shop-block");
+    shopBlocks.forEach(block => block.remove());
+
+    const cartFooter = document.querySelector(".cart-footer");
+    if (cartFooter) cartFooter.style.display = "none";
+
+    const cartHeader = document.querySelector(".cart-header");
+    if (cartHeader) cartHeader.remove();
+
+    const emptyMessage = document.querySelector(".empty-message");
+    if (emptyMessage) emptyMessage.style.display = "block";
+  });
 });
+
