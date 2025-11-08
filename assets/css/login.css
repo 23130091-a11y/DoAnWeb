@@ -3,17 +3,24 @@ body {
     font-family: Arial, sans-serif;
     color: #333;
     background-color: #f7f7f7;
+    font-size: 1.6rem;
 }
 
 a {
     text-decoration: none;
-    color: #4CAF50;
+    color: #FF8C00;
+}
+
+.container {
+    padding: 0 10%;
+    /* Khôi phục padding/margin cho container */
+    max-width: 100%;
 }
 
 /* --- HEADER --- */
 .main-header {
     background-color: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .main-header .container {
@@ -34,15 +41,20 @@ a {
 }
 
 .main-header h1 {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 500;
     margin: 0;
+    color: var(--text-color, #333) !important;
+    margin-left: 15px;
+    white-space: nowrap;
 }
 
 /* --- NỘI DUNG CHÍNH --- */
+
 .main-content {
     position: relative;
-    min-height: 80vh;
+    min-height: calc(100vh - 200px);
+    padding-bottom: 200px;
 }
 
 .banner-section {
@@ -63,8 +75,9 @@ a {
     background-color: white;
     padding: 30px;
     border-radius: 5px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     width: 380px;
+    font-size: inherit;
 }
 
 .login-form h3 {
@@ -82,9 +95,9 @@ a {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    font-size: 16px;            
-    border: none;               
-    outline: none;              
+    font-size: 16px;
+    border: none;
+    outline: none;
     border-radius: 6px;
     box-sizing: border-box;
     background-color: #fff;
@@ -128,15 +141,18 @@ a {
     color: #aaa;
     margin: 15px 0;
 }
+
 .separator::before,
 .separator::after {
     content: '';
     flex: 1;
     border-bottom: 1px solid #eee;
 }
+
 .separator:not(:empty)::before {
     margin-right: .5em;
 }
+
 .separator:not(:empty)::after {
     margin-left: .5em;
 }
@@ -187,12 +203,8 @@ a {
     font-size: 14px;
     color: #888;
 }
+
 .register-link a {
     color: #FF8C00;
     font-weight: bold;
-}
-
-/* --- FOOTER  --- */
-.main-footer {
-    display: none;
 }

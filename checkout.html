@@ -1,67 +1,218 @@
 <!DOCTYPE html>
-<html lang="vi">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký Gia Dụng Online</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <title>Thanh toán - WebGiaDung</title>
     <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/register.css">
+    <link rel="stylesheet" href="./assets/css/style.css"> 
+    <link rel="stylesheet" href="./assets/css/checkout.css"> 
 </head>
-
 <body>
+    
+    <header id="header" class="header header-checkout">
+        
+        <div class="header-top">
+            <div class="grid wide">
+                <nav class="navbar">
+                    <ul class="navbar__list">
+                        <li class="navbar__item navbar__item--saparate navbar__item--fade-qr">
+                            Vào cửa hàng trên ứng dụng
+                            <div class="navbar-qr">
+                                <img src="./assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
+                                <div class="navbar-qr__wrap">
+                                    <a class="navbar-qr__link" href="#!">
+                                        <img src="./assets/img/googleplay.png" alt="Google Play" class="navbar-qr__media">
+                                    </a>
+                                    <a class="navbar-qr__link" href="#!">
+                                        <img src="./assets/img/appstore.png" alt="App store" class="navbar-qr__media">
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="navbar__item">
+                            <span class="navbar__item--no-pointer">Kết nối</span> 
+                            <a href="#!" class="navbar__item-icon-link">
+                                <i class="navbar__item-symbol fa-brands fa-facebook"></i>
+                            </a>
+                            <a href="#!" class="navbar__item-icon-link">
+                                <i class="navbar__item-symbol fa-brands fa-square-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
 
-    <header class="main-header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="./assets/img/logo.png" alt="Logo Gia Dụng Online">
-                </a>
-                <h1>Đăng ký</h1>
+                    <ul class="navbar__list">
+                        <li class="navbar__item navbar__item--fade-notify">
+                            <i class="navbar__item-symbol fa-regular fa-bell"></i>
+                            <a href="#!" class="navbar__link">
+                                Thông báo
+                            </a>
+                            <div class="navbar-notify">
+                                <div class="navbar-notify__wrap">
+                                    <header class="navbar-notify__header">
+                                        <h3 class="navbar-notify__heading">Thông báo mới nhận</h3>
+                                    </header>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="navbar__item">
+                            <i class="navbar__item-symbol fa-solid fa-circle-question"></i>
+                            <a href="#!" class="navbar__link">Trợ giúp</a>
+                        </li>
+                        <li class="navbar__item navbar__item--saparate">
+                            <a href="#!" class="navbar__link navbar__link--strong-weight">Đăng ký</a>
+                        </li>
+                        <li class="navbar__item">
+                            <a href="#!" class="navbar__link navbar__link--strong-weight">Đăng nhập</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <div class="support-link">
-                <a href="#">Bạn cần giúp đỡ?</a>
+        </div>
+        <div class="grid wide">
+            <div class="header-checkout-content">
+                <a href="#!" class="logo">
+                    <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                </a>
+                <h1 class="checkout-heading-main">THANH TOÁN</h1>
             </div>
         </div>
     </header>
 
-    <main class="main-content">
-        <div class="banner-section"></div>
+    <main class="main" style="background-color: #f5f5f5; padding-top: 20px;">
+        <div class="grid wide">
+            
+            <div class="row">
+                
+                <div class="col l-8 m-12 c-12">
+                    
+                    <section class="checkout-section shipping-info-section">
+                        <h2 class="section-title">
+                            <i class="fa-solid fa-location-dot"></i> Địa chỉ nhận hàng
+                        </h2>
+                        
+                        <div class="current-address">
+                            <p class="address-name-phone">
+                                **Nguyễn Văn A** (+84) 1234567989
+                            </p>
+                            <p class="address-detail">
+                                123,abc, Phường XYZ, Quận 1, Thành phố Hồ Chí Minh
+                            </p>
+                            <a href="#!" class="change-address-link">THAY ĐỔI</a>
+                        </div>
+                    </section>
+                    
+                    <section class="checkout-section shipping-method-section">
+                        <h2 class="section-title">
+                            <i class="fa-solid fa-truck-fast"></i> Phương thức Vận chuyển
+                        </h2>
+                        <div class="shipping-options">
+                            <label class="shipping-option">
+                                <input type="radio" name="shipping-method" value="standard" checked>
+                                <div class="shipping-details">
+                                    <p class="shipping-name">Giao hàng Tiêu Chuẩn</p>
+                                    <span class="shipping-time">Nhận hàng dự kiến: 2 - 4 ngày</span>
+                                </div>
+                                <span class="shipping-price">25.000đ</span>
+                            </label>
+                            
+                            <label class="shipping-option">
+                                <input type="radio" name="shipping-method" value="express">
+                                <div class="shipping-details">
+                                    <p class="shipping-name">Giao hàng Hỏa Tốc</p>
+                                    <span class="shipping-time">Nhận hàng dự kiến: Trong 24h</span>
+                                </div>
+                                <span class="shipping-price">50.000đ</span>
+                            </label>
+                        </div>
+                    </section>
+                    
+                    <section class="checkout-section payment-method-section">
+                        <h2 class="section-title">
+                            <i class="fa-solid fa-credit-card"></i> Phương thức Thanh toán
+                        </h2>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cod" checked>
+                                <span class="custom-radio"></span>
+                                Thanh toán khi nhận hàng (COD)
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="bank">
+                                <span class="custom-radio"></span>
+                                Chuyển khoản ngân hàng (QR Code)
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="e-wallet">
+                                <span class="custom-radio"></span>
+                                Ví điện tử (Momo, ZaloPay,...)
+                            </label>
+                        </div>
+                    </section>
 
-        <div class="login-container">
-            <form class="login-form">
-                <h3>Đăng ký</h3>
-
-                <input type="text" placeholder="Số điện thoại" required>
-                <input type="password" placeholder="Mật khẩu" required>
-                <input type="password" placeholder="Nhập lại mật khẩu" required>
-
-                <button type="submit" class="btn-login">TIẾP THEO</button>
-
-                <div class="separator">
-                    <span>HOẶC</span>
+                    <section class="checkout-section note-section">
+                        <h2 class="section-title">Ghi chú đơn hàng (Tùy chọn)</h2>
+                        <textarea id="note" rows="2" placeholder="Ví dụ: Giao ngoài giờ hành chính..."></textarea>
+                    </section>
                 </div>
 
-                <div class="social-login">
-                    <button type="button" class="btn-facebook">Facebook</button>
-                    <button type="button" class="btn-google">
-                        <img src="./assets/img/google-logo.png" alt="Google Logo" class="google-icon">
-                        Google
-                    </button>
-                </div>
+                <div class="col l-4 m-12 c-12">
+                    <section class="checkout-section order-summary sticky-summary">
+                        <h2 class="section-title">Tóm tắt Đơn hàng</h2>
+                        
+                        <div class="product-list-summary">
+                            <div class="summary-product-item">
+                                <img src="./assets/img/loadeban.jpg" alt="Loa để bàn mini" class="summary-thumb">
+                                <div class="summary-product-details">
+                                    <p class="summary-product-name">Loa để bàn mini nhỏ gọn...</p>
+                                    <span class="summary-quantity">SL: 1</span>
+                                </div>
+                                <span class="summary-price">162.000đ</span>
+                            </div>
+                            <div class="summary-product-item">
+                                <img src="./assets/img/maylamtoc.png" alt="Máy làm tóc 3 trong 1" class="summary-thumb">
+                                <div class="summary-product-details">
+                                    <p class="summary-product-name">Máy làm tóc đa năng 3 trong 1...</p>
+                                    <span class="summary-quantity">SL: 1</span>
+                                </div>
+                                <span class="summary-price">266.000đ</span>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-line">
+                            <span>Tạm tính (2 SP):</span>
+                            <span>428.000đ</span>
+                        </div>
+                        <div class="summary-line">
+                            <span>Phí vận chuyển:</span>
+                            <span class="shipping-cost">25.000đ</span>
+                        </div>
+                        <div class="summary-line coupon">
+                            <span>Mã giảm giá:</span>
+                            <span class="coupon-discount">- 50.000đ</span>
+                        </div>
+                        
+                        <div class="summary-total-final">
+                            <span>TỔNG THANH TOÁN:</span>
+                            <span class="final-price">403.000đ</span>
+                        </div>
 
-                <div class="register-link">
-                    <span>Đã có tài khoản?</span> <a href="login.html">Đăng nhập</a>
+                        <button class="btn btn--primary btn-place-order">ĐẶT HÀNG</button>
+
+                    </section>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
+
     <footer id="footer" class="footer">
         <div class="grid wide">
             <div class="footer__inner">
@@ -206,6 +357,4 @@
         </div>
     </footer>
 </body>
-<script src="./assets/js/script.js"></script>
-
 </html>
