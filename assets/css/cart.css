@@ -1,7 +1,7 @@
 .cart-container {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 30px;
 }
 
 .flex {
@@ -12,40 +12,131 @@
     background: var(--primary-color);
     padding: 12px;
     border-radius: 6px;
+    margin-bottom: 20px;
 }
 
 .shop-block {
     background: var(--white-color);
     border-radius: 6px;
-    padding: 10px 0;
+    border: 1px solid var(--primary-color);
 }
-
-
 .shop-title {
     padding: 10px 14px;
     border-bottom: 1px solid var(--primary-color);
+}
+.shop-title .date-add{
+    color: var(--primary-color);
+}
+.shop-checkbox {
+    appearance: none;         
+    -webkit-appearance: none;  
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);   
+    border-radius: 4px;        
+    cursor: pointer;
+    position: relative;
+}
+
+.shop-checkbox:checked {
+    background-color: var(--primary-color);    
+}
+
+.shop-checkbox:checked::after {
+    content: "✔";
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    left: 3px;
+}
+.item-checkbox {
+    appearance: none;         
+    -webkit-appearance: none;  
+    border: 2px solid var(--primary-color);           
+    cursor: pointer;
+    border-radius: 2px; 
+    min-width: 15px;   
+    min-height: 15px;
+    position: relative;
+}
+
+.item-checkbox:checked {
+    background-color: var(--primary-color);    
+}
+
+.item-checkbox:after {
+    content: "✔";
+    color: white;
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    left: 3px;
+}
+.select-all-footer {
+    appearance: none;         
+    -webkit-appearance: none;  
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);   
+    border-radius: 4px;        
+    cursor: pointer;
+    position: relative;
+}
+
+.select-all-footer:checked {
+    background-color: var(--primary-color);    
+}
+
+.select-all-footer:checked::after {
+    content: "✔";
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    left: 3px;
+}
+.shop-checkbox {
+    appearance: none;         
+    -webkit-appearance: none;  
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);   
+    border-radius: 4px;        
+    cursor: pointer;
+    position: relative;
+}
+
+.shop-checkbox:checked {
+    background-color: var(--primary-color);    
+}
+
+.shop-checkbox:checked::after {
+    content: "✔";
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    left: 3px;
 }
 .cart-item {
     padding: 14px;
     border-bottom: 1px solid var(--primary-color);
 }
-
 .cart-item:last-child {
     border-bottom: none;
 }
-
 .col {
     padding: 0 10px;
     display: flex;
     align-items: center;
+    justify-content: center; 
 }
-
-.checkbox-col { width: 5%; justify-content: center; }
-.product-col { width: 40%; gap: 10px; }
-.price-col { width: 18%; justify-content: center; }
-.qty-col { width: 20%; justify-content: center;}
-.total-col { width: 12%; justify-content: flex-end}
-.action-col { width: 15%; justify-content: flex-end;; }
+.product-col { width: 40%; gap: 10px; justify-content: flex-start}  
+.price-col { width: 25%; justify-content: center; }  
+.qty-col { width: 15%; justify-content: center; }   
+.total-col { width: 12%; justify-content: center; } 
+.action-col { width: 13%; justify-content: center; } 
 
 .product-col img {
     width: 60px;
@@ -78,16 +169,16 @@
     width: 36px;         
     height: 28px;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid var(--primary-color);
     border-radius: 4px;
     margin: 0 6px;
     font-size: 14px;
 }
 .price-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-end;
-    width: 100%;
+    gap: 20px;
 }
 
 .old-price-box {
@@ -114,7 +205,6 @@
 }
 .new-price-row {
     display: flex;
-    align-items: flex-end; 
     gap: 3px;
 }
 .new-price {
@@ -123,9 +213,8 @@
 }
 .currency {
     font-size: 14px;
-    opacity: 1;
+    opacity: 2;
 }
-
 .price-discount {
     font-size: 13px;
     color: var(--primary-color);
@@ -137,6 +226,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    border: 1px solid var(--primary-color);
 }
 
 .footer-btn, .buy-btn, .item-delete {
@@ -157,8 +247,14 @@
     padding: 40px 0;
     font-size: 18px;
     font-weight: 500;
-    color: #ccc;
+    color: #555;
     border-radius: 6px;
+}
+.featured-list{
+    padding-top: 40px;
+}
+.featured-list .featured{
+   border: 1px solid var(--primary-color);
 }
 .list {
   display: grid;
