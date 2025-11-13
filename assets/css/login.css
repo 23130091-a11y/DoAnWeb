@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Open Sans", sans-serif;
     color: #333;
     background-color: #f7f7f7;
     font-size: 1.6rem;
@@ -41,11 +41,10 @@ a {
 }
 
 .main-header h1 {
-    font-size: 2.2rem;
-    font-weight: 500;
+    font-size: 2.1rem;
+    font-weight: 600;
     margin: 0;
     color: var(--text-color, #333) !important;
-    margin-left: 15px;
     white-space: nowrap;
 }
 
@@ -53,14 +52,13 @@ a {
 
 .main-content {
     position: relative;
-    min-height: calc(100vh - 200px);
-    padding-bottom: 200px;
+    min-height: 80vh;
 }
 
 .banner-section {
     background: url("../img/banner-background.jpg") center / cover no-repeat;
     background-color: #f7931e;
-    height: 550px;
+    height: 600px;
 }
 
 .login-container {
