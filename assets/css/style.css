@@ -320,9 +320,11 @@
 }
 
 .navbar-user__link {
+    white-space: nowrap;
     padding: 8px 12px;
     display: block;
     font-size: 1.4rem;
+    line-height: 1.4;
     color: var(--text-color);
 }
 

@@ -1,0 +1,111 @@
+/* CSS nav các mục bên trái của trang account*/
+.account {
+    padding: 20px 0;
+}
+
+.account__section {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.account__title {
+    margin: 0 0 10px;
+    padding: 0 8px;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    font-weight: 700;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.account__list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.account__item:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.account__link {
+    display: block;
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.account__link:hover {
+    background-color: #f2f2f2;
+    color: var(--primary-color);
+    padding-left: 16px;
+}
+
+.account__link--active {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: var(--primary-color);
+    font-weight: 600;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 14px;
+}
+
+/* CSS phần thông tin chi tiết bên phải */
+.account__content {
+    margin-top: 16px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.account__heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background-color: rgba(0, 123, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.account__form {
+    padding: 16px;
+    width: 50%;
+}
+
+.account__form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.account__label {
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.account__input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.account__input:focus {
+    border-color: #666;
+    outline: none;
+}
+
+.account__btn {
+    --height: 50px;
+
+    width: 100%;
+    border-radius: 6px;
+}
