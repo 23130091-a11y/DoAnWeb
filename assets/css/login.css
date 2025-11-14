@@ -131,69 +131,6 @@ a {
     font-size: 13px;
 }
 
-/* --- PHÂN CÁCH --- */
-.separator {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #aaa;
-    margin: 15px 0;
-}
-
-.separator::before,
-.separator::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #eee;
-}
-
-.separator:not(:empty)::before {
-    margin-right: .5em;
-}
-
-.separator:not(:empty)::after {
-    margin-left: .5em;
-}
-
-/* --- ĐĂNG NHẬP MẠNG --- */
-.social-login {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.social-login button {
-    flex-basis: 48%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.btn-facebook {
-    background-color: #3b5998;
-    color: white;
-}
-
-.btn-google {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-basis: 48%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    cursor: pointer;
-    background-color: white;
-    color: #333;
-}
-
-.google-icon {
-    height: 18px;
-    vertical-align: middle;
-    margin-right: 8px;
-    margin-top: -2px;
-}
 
 /* --- ĐĂNG KÝ --- */
 .register-link {
