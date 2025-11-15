@@ -263,13 +263,13 @@
                             <h2 class="account__title">Tài khoản của tôi</h2>
                             <ul class="account__list">
                                 <li class="account__item">
-                                <a href="#!" class="account__link account__link--active">Thông tin cá nhân</a>
+                                <a href="#info" class="account__link account__link--active">Thông tin cá nhân</a>
                                 </li>
                                 <li class="account__item">
-                                <a href="#!" class="account__link">Địa chỉ</a>
+                                <a href="#address" class="account__link">Địa chỉ</a>
                                 </li>
                                 <li class="account__item">
-                                <a href="#!" class="account__link">Đổi mật khẩu</a>
+                                <a href="#password" class="account__link">Đổi mật khẩu</a>
                                 </li>
                             </ul>
                         </section>
@@ -307,7 +307,7 @@
 
                 <!-- Khối nội dung chính -->
                 <div class="col l-10 m-12 c-12">
-                    <section class="account__content">
+                    <section id="info" class="account__content">
                         <h2 class="account__heading">Thông tin cá nhân</h2>
 
                         <form class="account__form" action="#" method="post">
@@ -334,6 +334,92 @@
                                     name="phone"
                                     class="account__input"
                                     value=""
+                                    required
+                                >
+                            </div>
+
+                            <button type="submit" class="account__btn btn btn--default-color">Lưu thông tin</button>
+                        </form>
+                    </section>
+
+                    <section id="address" class="account__content">
+                        <h2 class="account__heading">Địa chỉ</h2>
+
+                        <form class="account__form" action="#" method="post">
+                            <!-- Tỉnh/thành phố -->
+                            <div class="account__form-group">
+                                <label for="tinh" class="account__label">Tỉnh/thành phố</label>
+                                <select id="tinh" name="tinh" class="account__select" required>
+                                    <option value="">Chọn tỉnh/thành phố</option>
+                                    <option value="HN">Hà Nội</option>
+                                    <option value="HCM">TP. Hồ Chí Minh</option>
+                                    <option value="DN">Đà Nẵng</option>
+                                </select>
+                            </div>
+
+                            <!-- Quận/huyện -->
+                            <div class="account__form-group">
+                                <label for="huyen" class="account__label">Quận/huyện</label>
+                                <select id="huyen" name="huyen" class="account__select" required>
+                                    <option value="">Chọn quận/huyện</option>
+                                    <option value="Q1">Quận 1</option>
+                                    <option value="Q3">Quận 3</option>
+                                    <option value="Q5">Quận 5</option>
+                                </select>
+                            </div>
+
+                            <!-- Địa chỉ -->
+                              <div class="account__form-group">
+                                <label for="diachi" class="account__label">Địa chỉ</label>
+                                <input 
+                                    type="text"
+                                    id="diachi"
+                                    name="diachi"
+                                    class="account__input"
+                                    required
+                                >
+                            </div>
+
+                            <button type="submit" class="account__btn btn btn--default-color">Lưu thông tin</button>
+                        </form>
+                    </section>
+
+                    <section id="password" class="account__content">
+                        <h2 class="account__heading">Đổi mật khẩu</h2>
+
+                        <form class="account__form" action="#" method="post">
+                            <!-- Mật khẩu hiện tại -->
+                            <div class="account__form-group">
+                                <label for="current-password" class="account__label">Mật khẩu hiện tại</label>
+                                <input 
+                                    type="password"
+                                    id="current-password"
+                                    name="current-password"
+                                    class="account__input"
+                                    required
+                                >
+                            </div>
+
+                            <!-- Mật khẩu mới -->
+                            <div class="account__form-group">
+                                <label for="new-password" class="account__label">Mật khẩu mới</label>
+                                <input 
+                                    type="password"
+                                    id="new-password"
+                                    name="new-password"
+                                    class="account__input"
+                                    required
+                                >
+                            </div>
+
+                            <!-- Xác nhận mật khẩu mới -->
+                            <div class="account__form-group">
+                                <label for="confirm-password" class="account__label">Xác nhận mật khẩu mới</label>
+                                <input 
+                                    type="password"
+                                    id="confirm-password"
+                                    name="confirm-password"
+                                    class="account__input"
                                     required
                                 >
                             </div>
