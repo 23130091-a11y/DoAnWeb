@@ -78,3 +78,47 @@
     border-bottom: 2px solid #fff;
     rotate: -45deg;
 }
+
+.search-filter-reviews {
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.search-filter-reviews:first-of-type {
+    margin-top: 10px;
+}
+
+.search-filter-reviews__input {
+    display: none;
+}
+
+.search-filter-reviews__input:checked + .search-filter-reviews__content {
+    background-color: rgba(0, 0, 0, .09);
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+
+.search-filter-reviews__content {
+    padding: 6px 0;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.4rem;
+}
+
+.rating__star {
+    color: #666;
+}
+
+.rating__star--gold {
+    color: var(--star-color-gold);
+}
+
+.rating__label {
+    font-size: 1.3rem;
+    color: var(--text-color);
+}
