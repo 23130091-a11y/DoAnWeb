@@ -98,27 +98,3 @@
     border-radius: 6px;
     padding: 6px 8px;
 }
-
-.search-filter-reviews__content {
-    padding: 6px 0;
-}
-
-.rating {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 1.4rem;
-}
-
-.rating__star {
-    color: #666;
-}
-
-.rating__star--gold {
-    color: var(--star-color-gold);
-}
-
-.rating__label {
-    font-size: 1.3rem;
-    color: var(--text-color);
-}
