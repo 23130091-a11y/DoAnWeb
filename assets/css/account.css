@@ -137,3 +137,21 @@
 .account__select:focus {
     outline: none;
 }
+/*Phần thông tin sản phẩm yêu thích*/
+.product-content{
+    display:none;
+}
+.favorite-product-list{
+    padding: 16px;
+}
+.favorite-product-list  .product-card {
+    height: 390px;
+}
+.favorite-product-list .product-card .cart {
+    color: var(--primary-color);
+    display: flex;        
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+ 

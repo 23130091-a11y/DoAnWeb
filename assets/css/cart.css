@@ -126,7 +126,7 @@
 .cart-item:last-child {
     border-bottom: none;
 }
-.col {
+.colum {
     padding: 0 10px;
     display: flex;
     align-items: center;
@@ -256,10 +256,6 @@
 .featured-list .featured{
    border: 1px solid var(--primary-color);
 }
-.list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 15px;
-  padding: 6px;
-  margin-top: 12px;
+.list{
+    margin-top:20px;
 }
