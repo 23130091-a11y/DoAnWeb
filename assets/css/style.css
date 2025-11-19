@@ -878,8 +878,8 @@
 
 .product-card .bottom {
     display: flex;
-    align-items: center;
-    gap: 80px;
+    align-items: center;      
+    justify-content: space-between; 
 }
 
 .bottom .star {
@@ -903,10 +903,6 @@
 .fav-btn:hover {
     color: var(--primary-color);
     transform: scale(1.2);
-}
-
-.fav-btn.active i.fa-heart {
-    color: var(--primary-color);
 }
 
 .product-card .price-discount {
