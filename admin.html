@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang admin</title>
+
+        <!-- Link Reset CSS -->
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <!-- Link font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Link icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
+    <!-- Link favicon -->
+</head>
+<body>
+    <header class="header">
+        <div class="grid wide">
+            <nav class="navbar">
+                <ul class="navbar__list">
+                    <li class="navbar__item">
+                        <a href="/" class="logo">
+                            <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        </a>
+                    </li>
+                    <li class="navbar__item">
+                        <span class="navbar__greeting">Xin chào Admin</span>
+                    </li>
+                </ul>
+
+                <ul class="navbar__list">
+                    <li class="navbar__item">
+                        <i class="navbar__icon fa-solid fa-house"></i>
+                        <a href="#!" class="navbar__link">Trang chủ</a>
+                    </li>
+                    <li class="navbar__item">
+                        <i class="navbar__icon fa-solid fa-right-from-bracket"></i>
+                        <a href="#!" class="navbar__link">Đăng xuất</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="manage">
+            <div class="grid wide">
+                <div class="row small-gutter">
+                    <div class="col l-2 m-0 c-0">
+                        <section class="manage-nav">
+                            <h2 class="manage__heading">Danh mục quản lý</h2>
+                            
+                            <ul class="manage-nav__list">
+                                <li class="manage-nav__item">
+                                    <a href="#!" class="manage-nav__link">Cấu hình</a>
+                                </li>
+                                <li class="manage-nav__item">
+                                    <a href="#!" class="manage-nav__link">Tin tức</a>
+                                </li>
+                                <li class="manage-nav__item">
+                                    <a href="#!" class="manage-nav__link manage-nav__link--active">Sản phẩm</a>
+                                </li>
+                                <li class="manage-nav__item">
+                                    <a href="#!" class="manage-nav__link">Đơn hàng</a>
+                                </li>
+                            </ul>
+
+                        </section>
+                    </div>
+
+                    <div class="col l-10 m-12 c-12">
+                        <section class="manage-detail">
+                            <h2 class="manage__heading">Sản phẩm</h2>
+
+                            <!-- Header bảng -->
+                            <div class="product-table">
+                                <div class="product-table__header">
+                                    <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
+                                </div>
+
+                                <!-- Bảng sản phẩm -->
+                                <div class="product-table__inner">
+
+                                    <!-- Hàng tiêu đề -->
+                                    <div class="product-table__row">
+                                        <div class="product-table__cell">Ảnh</div>
+                                        <div class="product-table__cell">Tên sản phẩm</div>
+                                        <div class="product-table__cell">Ngày tạo</div>
+                                        <div class="product-table__cell">Ngày cập nhật</div>
+                                        <div class="product-table__cell">Copy</div>
+                                        <div class="product-table__cell">Sửa</div>
+                                        <div class="product-table__cell">Xóa</div>
+                                    </div>
+
+                                    <!-- Một sản phẩm -->
+                                    <article class="product-table__row">
+                                        
+                                        <div class="product-table__cell">
+                                            <img src="./assets/img/binhxit.png" alt="" class="product-table__img">
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">Sản phẩm ABC</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">20/11/2025</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">21/11/2025</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Copy</button>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Sửa</button>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Xóa</button>
+                                        </div>
+
+                                    </article>
+
+                                    <!-- Một sản phẩm -->
+                                    <article class="product-table__row">
+                                        
+                                        <div class="product-table__cell">
+                                            <img src="./assets/img/binhxit.png" alt="" class="product-table__img">
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">Sản phẩm ABC</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">20/11/2025</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">21/11/2025</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Copy</button>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Sửa</button>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Xóa</button>
+                                        </div>
+
+                                    </article>
+
+                                    <!-- Một sản phẩm -->
+                                    <article class="product-table__row">
+                                        
+                                        <div class="product-table__cell">
+                                            <img src="./assets/img/binhxit.png" alt="" class="product-table__img">
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">Sản phẩm ABC</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">20/11/2025</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <span class="product-table__text">21/11/2025</span>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Copy</button>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Sửa</button>
+                                        </div>
+
+                                        <div class="product-table__cell">
+                                            <button class="product-table__edit">Xóa</button>
+                                        </div>
+
+                                    </article>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
