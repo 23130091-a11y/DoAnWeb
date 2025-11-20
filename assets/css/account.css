@@ -95,7 +95,8 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 1.6rem;
+    color: var(--text-color);
 }
 
 .account__input:focus {
@@ -120,12 +121,9 @@
 }
 
 .account__select {
-    appearance: none;
-    /* Chrome, Safari, Opera */
-    -webkit-appearance: none;
-    /* Safari & Chrome */
-    -moz-appearance: none;
-    /* Firefox */
+    appearance: none; /* Chrome, Safari, Opera */
+    -webkit-appearance: none;  /* Safari & Chrome */
+    -moz-appearance: none; /* Firefox */
 
     background: #fff;
     border: 1px solid #ccc;
@@ -141,7 +139,7 @@
 }
 
 
-/* CSS THÔNG TIN ĐƠN HÀNG (Đã sắp xếp)*/
+/* CSS THÔNG TIN ĐƠN HÀNG */
 /*Layout Chung */
 .order-list {
     padding: 10px 16px;
