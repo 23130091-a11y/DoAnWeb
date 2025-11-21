@@ -14,10 +14,12 @@
     flex-wrap: wrap;
     margin-left: -4px;
     margin-right: -4px;
+    margin-bottom: -20px; 
 }
 .col {
     padding-left: 4px;
     padding-right: 4px;
+    margin-bottom: 20px; 
 }
 .row.no-gutters {
     margin-left: 0;
