@@ -13,6 +13,10 @@
     padding: 30px 0;
 }
 
+.nav-product {
+    padding: 0 0 22px;
+}
+
 .product-details__inner {
     display: flex;
     column-gap: 20px;
@@ -66,7 +70,6 @@
 }
 
 .content-quantity,
-.rating,
 .content-sold,
 .content-feedback,
 .content-details__review-wrap {
@@ -389,13 +392,9 @@
 }
 
 .product-comment__title {
+    margin-right: 4px;
     font-size: 1.4rem;
     color: var(--text-color);
-}
-
-.product-comment__rating {
-    padding: 0;
-    margin-left: 8px;
 }
 
 .product-comment__input {
@@ -453,10 +452,6 @@
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--text-color);
-}
-
-.rating {
-    padding: 5px 0;
 }
 
 .product-review__thumb {

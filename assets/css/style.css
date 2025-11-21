@@ -1,3 +1,26 @@
+/* Common */
+.rating {
+    margin: -1 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 0;
+    font-size: 1.4rem;
+}
+
+.rating__star {
+    color: #666;
+}
+
+.rating__star--gold {
+    color: var(--star-color-gold);
+}
+
+.rating__label {
+    font-size: 1.3rem;
+    color: var(--text-color);
+}
+
 /* Làm phần header */
 .header {
     background-color: var(--primary-color);
@@ -702,7 +725,6 @@
 
 .navigation__link {
     display: inline-block;
-    margin-right: 8px;
     font-size: 1.4rem;
     color: #05e;
 }
@@ -713,12 +735,14 @@
 }
 
 .navigation__icon {
+    display: none;
     font-size: 1.2rem;
     color: #555;
 }
 
 .navigation__icon--active {
-    display: none;
+    margin: 0 8px;
+    display: inline-block;
 }
 
 /* Slide */
@@ -854,8 +878,8 @@
 
 .product-card .bottom {
     display: flex;
-    align-items: center;
-    gap: 80px;
+    align-items: center;      
+    justify-content: space-between; 
 }
 
 .bottom .star {
@@ -879,10 +903,6 @@
 .fav-btn:hover {
     color: var(--primary-color);
     transform: scale(1.2);
-}
-
-.fav-btn.active i.fa-heart {
-    color: var(--primary-color);
 }
 
 .product-card .price-discount {
