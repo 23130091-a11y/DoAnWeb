@@ -47,3 +47,22 @@ favBtns.forEach(favBtn => {
     }
   });
 });
+//Click button view
+const slideWrappers = document.querySelectorAll('.slide-wrapper');
+
+slideWrappers.forEach(wrapper => {
+    const button = wrapper.querySelector('.button-view');
+    const icon = button.querySelector('i');
+    
+    button.addEventListener('click', () => {
+        wrapper.classList.toggle('active');
+
+        if(wrapper.classList.contains('active')) {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+        } else {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+        }
+    });
+});
