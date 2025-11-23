@@ -162,7 +162,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <button class="header-search__btn btn btn--default-color">
+                        <button class="header-search__btn btn btn--default-color"  onclick="window.location.href='search.html'">
                             <i class="header-search__icon fa-solid fa-magnifying-glass"></i>
                             <span class="header-search__text">Tìm kiếm</span>
                         </button>
@@ -307,10 +307,12 @@
                             <i class="fa-solid fa-chevron-right navigation__icon"></i>
                         </div>
                         <figure class="hero">
-                            <div id="slider">
-                                <div class="slide" style="background-image:url('./assets/img/hero_slide-01.jpg')"></div>
-                                <div class="slide" style="background-image:url('./assets/img/hero_slide-02.jpg')"></div>
-                            </div>
+                                <div id="slider" >
+                                    <a class="slide" href="slide.html" style="background-image:url('./assets/img/hero_slide-01.jpg')">
+                                    </a>
+                                    <a class="slide" style="background-image:url('./assets/img/hero_slide-02.jpg')">
+                                    </a>
+                                </div>
                         </figure>
                     </div>
                 </div>
@@ -820,13 +822,14 @@
                     <div class="blog__list row small-gutter ">
                         <div class="col c-3 m-3 l-3">
                             <article class="blog-item">
-                                <a href="#!" class="blog-item__link">
+                                <a href="blog.html" class="blog-item__link">
                                     <img src="./assets/img/blog-img-01.jpg" alt="Hướng dẫn vệ sinh máy giặt"
                                         class="blog-item__img">
                                 </a>
                                 <div class="blog-item__content">
                                     <h3>
-                                        <a class="blog-item__title" href="#!">Hướng dẫn vệ sinh máy giặt đúng cách</a>
+                                        <a class="blog-item__title" href="blog.html">Hướng dẫn vệ sinh máy giặt đúng
+                                            cách</a>
                                     </h3>
                                     <p class="blog-item__desc">
                                         Máy giặt sử dụng lâu ngày không được vệ sinh đúng cách sẽ khiến máy giặt trở nên
