@@ -413,6 +413,14 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+.product-comment__btn {
+    --height: 48px;
+
+    min-width: 140px;
+    margin-top: 12px;
+    border-radius: 2px;
+}
+
 /* CSS phần bình luận */
 .product-review__heading {
     margin-bottom: 5px;

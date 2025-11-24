@@ -104,7 +104,7 @@
     background-color: var(--white-color);
     animation: fadeIn ease-in 0.3s;
     will-change: opacity;
-    z-index: 3;
+    z-index: 5;
 }
 
 .navbar-qr::before {
@@ -158,7 +158,7 @@
     will-change: opacity, transform;
     /* Nói cho trình duyệt biết cái nào sẽ thay đổi trong animation */
     cursor: default;
-    z-index: 3;
+    z-index: 5;
 }
 
 .cart-list::after,
@@ -452,7 +452,7 @@
     box-shadow: 0 1px 5px #e6e6e6;
     overflow: hidden;
     background-color: var(--white-color);
-    z-index: 2;
+    z-index: 4;
 }
 
 .header-search__input:focus~.search-history {
@@ -695,7 +695,7 @@
     background: #fff;
     border-left: 3px solid var(--primary-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 2;
+    z-index: 3;
     /* Ẩn menu ban đầu */
     pointer-events: none;
     /* không tương tác khi ẩn */

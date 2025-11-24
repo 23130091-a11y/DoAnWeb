@@ -9,6 +9,10 @@
     border-top-right-radius: inherit;
 }
 
+.navbar {
+    height: 46px;
+}
+
 /* Link */
 .manage-detail {
     display: none;
@@ -19,12 +23,9 @@
 }
 
 /* Navbar header */
-.navbar__item:nth-of-type(2) {
-    cursor: default;
-}
-
 .navbar__greeting {
     font-size: 1.6rem;
+    cursor: default;
 }
 
 .navbar__icon {
