@@ -492,8 +492,24 @@
                                     <i class="fa-solid fa-star rating__star rating__star--gold"></i>
                                 </div>
                             </div>
+
                             <textarea class="product-comment__input" name="new_comment" id="new_comment" rows="4"
                                 placeholder="Nhập câu hỏi / Bình luận / Nhận xét tại đây"></textarea>
+
+                            <div class="product-comment__upload">
+                                <label for="reviewImage" class="product-comment__upload-label">
+                                    Upload ảnh đánh giá:
+                                </label>
+
+                                <input 
+                                    type="file" 
+                                    id="reviewImage" 
+                                    name="reviewImage" 
+                                    class="product-comment__upload-input"
+                                    accept="image/*"
+                                    multiple
+                                >
+                            </div>
 
                             <button class="product-comment__btn btn btn--default-color">Gửi đánh giá</button>
                         </div>

@@ -413,6 +413,41 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Wrapper */
+.product-comment__upload {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+/* Label */
+.product-comment__upload-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+/* Input file */
+.product-comment__upload-input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.product-comment__upload-input:hover {
+    border-color: #777;
+    background: #fff;
+}
+
+.product-comment__upload-input:focus {
+    outline: none;
+    border-color: var(--border-color);
+}
+
 .product-comment__btn {
     --height: 48px;
 
