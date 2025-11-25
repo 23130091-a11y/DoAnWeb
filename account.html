@@ -137,16 +137,16 @@
                             <span class="navbar-user__name">anhaiti</span>
                             <ul class="navbar-user__menu">
                                 <li class="navbar-user__item">
-                                    <a href="#!" class="navbar-user__link">Tài khoản của tôi</a>
+                                    <a href="account.html#info" class="navbar-user__link">Tài khoản của tôi</a>
                                 </li>
                                 <li class="navbar-user__item">
-                                    <a href="#!" class="navbar-user__link">Yêu thích</a>
+                                    <a href="account.html#favorite-product" class="navbar-user__link">Yêu thích</a>
                                 </li>
                                 <li class="navbar-user__item">
-                                    <a href="#!" class="navbar-user__link">Thông tin đơn hàng</a>
+                                    <a href="account.html#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
                                 </li>
                                 <li class="navbar-user__item navbar-user__item--separate">
-                                    <a href="#!" class="navbar-user__link">Đăng xuất</a>
+                                    <a href="login.html" class="navbar-user__link">Đăng xuất</a>
                                 </li>
                             </ul>
                         </div>
@@ -180,83 +180,87 @@
                     <div class="header-cart">
                         <div class="header-cart__scale header-cart__scale--fade-product">
                             <!-- Khi không có sản phẩm: header-cart__scale--empty -->
-                            <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
+                            <a href="cart.html">
+                                <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
+                            </a>
                             <span class="header-cart__notice">3</span>
-                            <div class="cart-list">
+                            <div class="cart-list cart-list--no-cart">
                                 <!-- Chưa đăng nhập:  cart-list--no-cart -->
-                                <!-- <img src="./assets/img/no-cart_img.png" alt="" class="header-cart__img">
-                                <span class="header-cart__msg">Chưa có sản phẩm</span> -->
+                                <!-- <img src="./assets/img/no-cart_img.png" alt="" class="header-cart__img"> -->
+                                <!-- <span class="header-cart__msg">Chưa có sản phẩm</span> -->
                                 <!-- Có sản phẩm -->
                                 <div class="cart-list__wrap">
                                     <h3 class="cart-list__header">
                                         Sản phẩm đã thêm
                                     </h3>
                                     <ul class="cart-list__list">
-                                        <li class="cart-list__item">
-                                           
-                                            <img src="./assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
-                                            <section class="cart-list__body">
-                                                <div class="cart-list__info">
-                                                    <h4 class="cart-list__heading">Gương để bàn bông hoa Gương để bàn
-                                                        bông hoa Gương để bàn bông hoa</h4>
-                                                    <div class="cart-list__price-wrap">
-                                                        <span class="cart-list__price">19.300đ</span>
-                                                        <span class="cart-list__multiply">x</span>
-                                                        <span class="cart-list__qnt">1</span>
+                                        <a href="cart.html">
+                                            <li class="cart-list__item">
+                                                <img src="./assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
+                                                <section class="cart-list__body">
+                                                    <div class="cart-list__info">
+                                                        <h4 class="cart-list__heading">Gương để bàn bông hoa Gương để
+                                                            bàn bông hoa Gương để bàn bông hoa</h4>
+                                                        <div class="cart-list__price-wrap">
+                                                            <span class="cart-list__price">19.300đ</span>
+                                                            <span class="cart-list__multiply">x</span>
+                                                            <span class="cart-list__qnt">1</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="cart-list__desc">
-                                                    <span class="cart-list__product-cate">
-                                                        Phân loại: Gương
-                                                    </span>
-                                                    <span class="cart-list__remove">Xóa</span>
-                                                </div>
-                                            </section>
-                                        </li>
-
-                                        <li class="cart-list__item">
-                                           
-                                            <img src="./assets/img/add-cart-02.jpeg" alt="" class="cart-list__img">
-                                            <section class="cart-list__body">
-                                                <div class="cart-list__info">
-                                                    <h4 class="cart-list__heading">Đĩa Sứ Tròn 8.5inch CHIBI</h4>
-                                                    <div class="cart-list__price-wrap">
-                                                        <span class="cart-list__price">44.500đ</span>
-                                                        <span class="cart-list__multiply">x</span>
-                                                        <span class="cart-list__qnt">1</span>
+                                                    <div class="cart-list__desc">
+                                                        <span class="cart-list__product-cate">
+                                                            Phân loại: Gương
+                                                        </span>
+                                                        <span class="cart-list__remove">Xóa</span>
                                                     </div>
-                                                </div>
-                                                <div class="cart-list__desc">
-                                                    <span class="cart-list__product-cate">
-                                                        Phân loại: Hàng sứ - Thủy tinh
-                                                    </span>
-                                                    <span class="cart-list__remove">Xóa</span>
-                                                </div>
-                                            </section>
-                                        </li>
-
-                                        <li class="cart-list__item">
-                                           
-                                            <img src="./assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
-                                            <section class="cart-list__body">
-                                                <div class="cart-list__info">
-                                                    <h4 class="cart-list__heading">Gạt Tàn BRUNSWICK YG8005</h4>
-                                                    <div class="cart-list__price-wrap">
-                                                        <span class="cart-list__price">8.300đ</span>
-                                                        <span class="cart-list__multiply">x</span>
-                                                        <span class="cart-list__qnt">1</span>
+                                                </section>
+                                            </li>
+                                        </a>
+                                        <a href="cart.html">
+                                            <li class="cart-list__item">
+                                                <img src="../assets/img/add-cart-02.jpeg" alt="" class="cart-list__img">
+                                                <section class="cart-list__body">
+                                                    <div class="cart-list__info">
+                                                        <h4 class="cart-list__heading">Đĩa Sứ Tròn 8.5inch CHIBI</h4>
+                                                        <div class="cart-list__price-wrap">
+                                                            <span class="cart-list__price">44.500đ</span>
+                                                            <span class="cart-list__multiply">x</span>
+                                                            <span class="cart-list__qnt">1</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="cart-list__desc">
-                                                    <span class="cart-list__product-cate">
-                                                        Phân loại: Hàng sứ - Thủy tinh
-                                                    </span>
-                                                    <span class="cart-list__remove">Xóa</span>
-                                                </div>
-                                            </section>
-                                        </li>
+                                                    <div class="cart-list__desc">
+                                                        <span class="cart-list__product-cate">
+                                                            Phân loại: Hàng sứ - Thủy tinh
+                                                        </span>
+                                                        <span class="cart-list__remove">Xóa</span>
+                                                    </div>
+                                                </section>
+                                            </li>
+                                        </a>
+                                        <a href="cart.html">
+                                            <li class="cart-list__item">
+                                                <img src="./assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
+                                                <section class="cart-list__body">
+                                                    <div class="cart-list__info">
+                                                        <h4 class="cart-list__heading">Gạt Tàn BRUNSWICK YG8005</h4>
+                                                        <div class="cart-list__price-wrap">
+                                                            <span class="cart-list__price">8.300đ</span>
+                                                            <span class="cart-list__multiply">x</span>
+                                                            <span class="cart-list__qnt">1</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cart-list__desc">
+                                                        <span class="cart-list__product-cate">
+                                                            Phân loại: Hàng sứ - Thủy tinh
+                                                        </span>
+                                                        <span class="cart-list__remove">Xóa</span>
+                                                    </div>
+                                                </section>
+                                            </li>
+                                        </a>
                                     </ul>
-                                    <a href="#" class="cart-list__view btn btn--default-color">Xem giỏ hàng</a>
+                                    <a href="#" class="cart-list__view btn btn--default-color"
+                                        onclick="window.location.href='cart.html'">Xem giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -414,7 +418,7 @@
                                 <button type="submit" class="account__btn btn btn--default-color">Lưu thông tin</button>
                             </form>
                         </section>
-                        
+
                         <section id="orders-all" class="account__content">
                             <h2 class="account__heading">Tất cả đơn hàng</h2>
                             <div class="order-list">
@@ -629,8 +633,8 @@
                                             lại</button>
                                     </footer>
                                 </article>
-                            </section>
-                            <section id="favorite-product" class="account__content">
+                        </section>
+                        <section id="favorite-product" class="account__content">
                             <h2 class="account__heading">Sản phẩm đã thích</h2>
                             <div class="favorite-product-list row small-gutter">
                                 <div class="col l-3 m-4 c-6">
@@ -807,7 +811,8 @@
                                     <div class="product-card">
                                         <a><img src="./assets/img/balo.jpg" alt=""></a>
                                         <a>
-                                            <p>Balo đựng sách vở, laptop,...cho học sinh,sinh viên vải dù cao cấp, Màu trắng khóa xanh</p>
+                                            <p>Balo đựng sách vở, laptop,...cho học sinh,sinh viên vải dù cao cấp, Màu
+                                                trắng khóa xanh</p>
                                         </a>
                                         <span class="price">228.000đ</span>
                                         <div class="cart">
@@ -828,7 +833,7 @@
                 </div>
             </div>
     </main>
-    
+
     <footer id="footer" class="footer">
         <div class="grid wide">
             <div class="footer__inner">
