@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/admin.css">
-    <!-- Link favicon -->
+     <!-- Include stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
 <body>
     <header class="header">
@@ -200,6 +201,53 @@
                             </div>
                         </section>
 
+                        <section id="add-product" class="manage-detail" style="display:none;">
+                            <h2 class="manage__heading">Thêm sản phẩm</h2>
+
+                            <div class="product-table">
+                                <div class="product-table__header">
+                                    <button type="submit" class="product-table__save">
+                                        <i class="fa-solid fa-floppy-disk"></i>
+                                    </button>
+                                </div>
+
+                                <div class="product-table__inner">
+                                    <form id="addProductFormInline" class="add-product-form">
+
+                                        <!-- Tên sản phẩm -->
+                                        <div class="add-product-form__field">
+                                            <label for="productNameInline" class="add-product-form__label">Tên sản phẩm:</label>
+                                            <input type="text" id="productNameInline" name="productName" class="add-product-form__input" required>
+                                        </div>
+
+                                        <!-- Giá sản phẩm -->
+                                        <div class="add-product-form__field">
+                                            <label for="productPriceInline" class="add-product-form__label">Giá sản phẩm:</label>
+                                            <input type="text" id="productPriceInline" name="productPrice" class="add-product-form__input" required>
+                                        </div>
+
+                                        <!-- Ảnh đại diện -->
+                                        <div class="add-product-form__field">
+                                            <label for="productImageInline" class="add-product-form__label">Ảnh đại diện:</label>
+                                            <input type="file" id="productImageInline" name="productImage" class="add-product-form__input" accept="image/*" required>
+                                        </div>
+
+                                        <!-- Thư viện ảnh -->
+                                        <div class="add-product-form__field">
+                                            <label for="productGalleryInline" class="add-product-form__label">Thư viện ảnh:</label>
+                                            <input type="file" id="productGalleryInline" name="productGallery[]" class="add-product-form__input" accept="image/*" multiple>
+                                        </div>
+
+                                        <!-- Mô tả sản phẩm -->
+                                        <div class="add-product-form__field">
+                                            <label for="productDescInline" class="add-product-form__label">Mô tả sản phẩm:</label>
+                                            <!-- Create the editor container -->
+                                            <div id="editor" style="min-height: 200px;"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
                         <section id="order" class="manage-detail">
                             <h2 class="manage__heading">Đơn hàng</h2>
 
@@ -348,4 +396,85 @@
         </div>
     </main>
 </body>
+<script>
+    const sectionProduct = document.getElementById("product");
+    const sectionAdd = document.getElementById("add-product");
+    const sectionOrder = document.getElementById("order");
+    const menuLinks = document.querySelectorAll(".manage-nav__link");
+    const btnAdd = document.querySelector(".product-table__btn");
+
+    // Hàm ẩn tất cả section
+    function hideAllSections() {
+        sectionProduct.style.display = "none";
+        sectionAdd.style.display = "none";
+        sectionOrder.style.display = "none";
+    }
+
+    // Click menu
+    menuLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href").replace("#","");
+            hideAllSections(); // ẩn tất cả trước
+
+            if(targetId === "product") sectionProduct.style.display = "block";
+            if(targetId === "order") sectionOrder.style.display = "block";
+        });
+    });
+
+    // Click "Thêm sản phẩm"
+    btnAdd.addEventListener("click", () => {
+        hideAllSections();       // ẩn tất cả trước
+        sectionAdd.style.display = "block"; // chỉ hiện form thêm sản phẩm
+    });
+
+    // Nếu muốn quay lại bảng sản phẩm, có thể thêm nút "Quay lại"
+    const backBtn = document.createElement("button");
+    backBtn.textContent = "Quay lại danh sách sản phẩm";
+    backBtn.className = "btn btn--default-color product-table__back-btn";
+    sectionAdd.appendChild(backBtn);
+
+    backBtn.addEventListener("click", () => {
+        sectionAdd.style.display = "none";
+        sectionProduct.style.display = "block";
+    });
+
+    // Xử lý submit form
+    const formInline = document.getElementById("addProductFormInline");
+    formInline.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log("Thêm sản phẩm inline:", {
+            name: document.getElementById("productNameInline").value,
+            image: document.getElementById("productImageInline").files[0],
+            date: document.getElementById("productDateInline").value
+        });
+
+        // Sau khi submit xong, quay lại bảng sản phẩm
+        sectionAdd.style.display = "none";
+        sectionProduct.style.display = "block";
+        formInline.reset();
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+            [{ header: [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['link', 'image'],
+            ['clean']
+        ]
+      }
+    });
+
+    // Gán nội dung khởi tạo
+    quill.setText('Nội dung');
+  });
+</script>
+
 </html>
