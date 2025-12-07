@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <title>Tìm kiếm sản phẩm</title>
 
     <!-- Link Reset CSS -->
-    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <!-- Link font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +20,10 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/search.css">
+    <link rel="stylesheet" href="assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/search.css">
 
     <!-- Link favicon -->
 </head>
@@ -37,14 +38,14 @@
                         <li class="navbar__item navbar__item--saparate navbar__item--fade-qr">
                             Vào cửa hàng trên ứng dụng
                             <div class="navbar-qr">
-                                <img src="./assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
+                                <img src="assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
                                 <div class="navbar-qr__wrap">
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/googleplay.png" alt="Google Play"
-                                            class="navbar-qr__media">
+                                        <img src="assets/img/googleplay.png" alt="Google Play"
+                                             class="navbar-qr__media">
                                     </a>
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/appstore.png" alt="App store" class="navbar-qr__media">
+                                        <img src="assets/img/appstore.png" alt="App store" class="navbar-qr__media">
                                     </a>
                                 </div>
                             </div>
@@ -68,7 +69,7 @@
                                 Thông báo
                                 <div class="navbar-notify navbar-notify--no-login">
                                     <!-- navbar-notify--no-login -->
-                                    <img src="./assets/img/no-login_img.png" alt="" class="navbar-notify__img">
+                                    <img src="assets/img/no-login_img.png" alt="" class="navbar-notify__img">
                                     <span class="navbar-notify__message">Đăng nhập để xem thông báo</span>
                                     <!---->
                                     <!-- <div class="navbar-notify__wrap">
@@ -143,7 +144,7 @@
                 <!-- Search -->
                 <div class="search">
                     <a href="/" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <div class="header-search">
                         <div class="header-search__wrap">
@@ -168,13 +169,13 @@
                     <div class="header-cart">
                         <div class="header-cart__scale header-cart__scale--fade-product header-cart__scale--empty">
                             <!-- Khi không có sản phẩm: header-cart__scale--empty -->
-                            <a href="cart.html">
+                            <a href="cart.jsp">
                                 <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                             </a>
                             <!-- <span class="header-cart__notice">3</span> -->
                             <div class="cart-list cart-list--no-cart">
                                 <!-- Chưa đăng nhập:  cart-list--no-cart -->
-                                <img src="./assets/img/no-cart_img.png" alt="" class="header-cart__img">
+                                <img src="assets/img/no-cart_img.png" alt="" class="header-cart__img">
                                 <span class="header-cart__msg">Chưa có sản phẩm</span>
                                 <!-- Có sản phẩm -->
                                 <!-- <div class="cart-list__wrap">
@@ -451,7 +452,7 @@
                             <div class="row-list row small-gutter">
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/vienvesinh.jpg" alt=""></a>
+                                        <a><img src="assets/img/vienvesinh.jpg" alt=""></a>
                                         <a>
                                             <p>Combo 12 viên vệ sinh lồng máy giặt, diệt khuẩn tiện lợi</p>
                                         </a>
@@ -465,7 +466,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/moilua.jpg" alt=""></a>
+                                        <a><img src="assets/img/moilua.jpg" alt=""></a>
                                         <a>
                                             <p>Dụng cụ mồi lửa bếp gas bằng tia điện cán dài</p>
                                         </a>
@@ -479,7 +480,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/luoicatco.png" alt=""></a>
+                                        <a><img src="assets/img/luoicatco.png" alt=""></a>
                                         <a>
                                             <p>Lưỡi cắt cỏ tận gốc 5 cánh thiết kế thông minh an toàn tiện lợi</p>
                                         </a>
@@ -501,7 +502,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/keochuot.jpg" alt=""></a>
+                                        <a><img src="assets/img/keochuot.jpg" alt=""></a>
                                         <a>
                                             <p>(Combo 5 miếng) Keo bẫy chuột siêu dính sạch sẽ, an toàn cho gia đình</p>
                                         </a>
@@ -524,7 +525,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/nhang.png" alt=""></a>
+                                        <a><img src="assets/img/nhang.png" alt=""></a>
                                         <a>
                                             <p>Set 50 Nhang ngải cứu đuổi muỗi hương nhẹ dễ chịu kèm đế gỗ</p>
                                         </a>
@@ -539,7 +540,7 @@
 
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/quatsac.png" alt=""></a>
+                                        <a><img src="assets/img/quatsac.png" alt=""></a>
                                         <a>
                                             <p>Quạt sạc mini pin trâu 20000mah hiện đại dùng được lâu dài
                                             </p>
@@ -562,7 +563,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/binhxit.png" alt=""></a>
+                                        <a><img src="assets/img/binhxit.png" alt=""></a>
                                         <a>
                                             <p>Bình xịt diệt bọ rệp, mạt bụi thảo mộc thiên nhiên an toàn 330ml</p>
                                         </a>
@@ -579,7 +580,7 @@
 
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/chotkhoa.jpg" alt=""></a>
+                                        <a><img src="assets/img/chotkhoa.jpg" alt=""></a>
                                         <a>
                                             <p>Chốt khóa cửa hợp kim núm vặn xoay bền chắc, chống trộm, 42*30mm dày 13mm
                                             </p>
@@ -602,7 +603,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/maymay.jpg" alt=""></a>
+                                        <a><img src="assets/img/maymay.jpg" alt=""></a>
                                         <a>
                                             <p>Máy may mini gia đình có vắt sổ đa năng tích hợp 12 kiểu may</p>
                                             </p>
@@ -625,7 +626,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/voboc.jpg" alt=""></a>
+                                        <a><img src="assets/img/voboc.jpg" alt=""></a>
                                         <a>
                                             <p>Vỏ bọc yên xe máy chống thấm nước siêu bền</p>
                                         </a>
@@ -647,7 +648,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/tuivai.jpg" alt=""></a>
+                                        <a><img src="assets/img/tuivai.jpg" alt=""></a>
                                         <a>
                                             <p>Túi vải khung thép xếp gọn quần áo, chăn màn chống ẩm mốc, Dung tích 78L:
                                                 50x40x33cm </p>
@@ -662,7 +663,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/thuockep.jpg" alt=""></a>
+                                        <a><img src="assets/img/thuockep.jpg" alt=""></a>
                                         <a>
                                             <p>Thước kẹp điện tử Syntek 150mm màn hình LCD sắc nét</p>
                                         </a>
@@ -679,7 +680,7 @@
 
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/candien.jpg" alt=""></a>
+                                        <a><img src="assets/img/candien.jpg" alt=""></a>
                                         <a>
                                             <p>Cân điện tử thông minh Xiaomi Smart Scale Gen 2</p>
                                         </a>
@@ -701,7 +702,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/denhoc.jpg" alt=""></a>
+                                        <a><img src="assets/img/denhoc.jpg" alt=""></a>
                                         <a>
                                             <p>Đèn bàn học bóng LED chống cận bảo vệ mắt, Thân đèn</p>
                                         </a>
@@ -724,7 +725,7 @@
                                 </div>
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="./assets/img/mayhutbui.jpg" alt=""></a>
+                                        <a><img src="assets/img/mayhutbui.jpg" alt=""></a>
                                         <a>
                                             <p>Máy hút bụi cầm tay không dây đa năng, nhỏ gọn, lực hút mạnh</p>
                                         </a>
@@ -755,6 +756,6 @@
     </main>
 </body>
 <!-- Link JS -->
-<script src="./assets/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 
 </html>

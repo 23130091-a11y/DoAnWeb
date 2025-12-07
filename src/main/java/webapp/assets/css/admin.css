@@ -42,7 +42,7 @@
 .manage-detail,
 .manage-nav {
     border-radius: 4px;
-    border: 1px solid #ddd; 
+    border: 1px solid #ddd;
 }
 
 /* Danh sách */
@@ -129,7 +129,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px 5px;
-    
+
     border-left: 1px solid #ccc;
     font-size: 1.4rem;
     font-weight: 500;
@@ -298,11 +298,11 @@
 
 .order-table__row {
     grid-template-columns: 50px 98px 1fr 1fr 1fr 122px 130px;
-    border: none; 
+    border: none;
 }
 
 .order-table__row  + .order-table__row  {
-    border-top: 1px solid #ddd; 
+    border-top: 1px solid #ddd;
 }
 
 .order-table__row.order-table__row--cancelled {

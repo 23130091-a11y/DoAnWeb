@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -8,11 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
 
 
 </head>
@@ -22,8 +23,8 @@
     <header class="main-header">
         <div class="container">
             <div class="logo">
-                <a href="index.html">
-                    <img src="./assets/img/logo.png" alt="Logo Gia Dụng Online">
+                <a href="index.jsp">
+                    <img src="assets/img/logo.png" alt="Logo Gia Dụng Online">
                 </a>
                 <h1>Đăng nhập</h1>
             </div>
@@ -54,7 +55,7 @@
                 </div>
 
                 <div class="register-link">
-                    <span>Đăng ký thành viên mới?</span> <a href="register.html">Đăng ký</a>
+                    <span>Đăng ký thành viên mới?</span> <a href="register.jsp">Đăng ký</a>
                 </div>
             </form>
         </div>
@@ -64,7 +65,7 @@
             <div class="footer__inner">
                 <div class="footer__left">
                     <a href="#" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <ul class="footer-info">
                         <li class="footer-info__item">
@@ -204,6 +205,6 @@
     </footer>
 </body>
 
-<script src="./assets/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 
 </html>

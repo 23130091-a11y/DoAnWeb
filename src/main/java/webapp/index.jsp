@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,26 +8,26 @@
     <title>WebGiaDung</title>
 
     <!-- Link favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="./assets/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="./assets/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="./assets/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="./assets/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="./assets/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="./assets/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="./assets/favicon/manifest.json">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
     <!-- Link Reset CSS -->
-    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <!-- Link font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,9 +39,9 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -53,14 +54,14 @@
                         <li class="navbar__item navbar__item--saparate navbar__item--fade-qr">
                             Vào cửa hàng trên ứng dụng
                             <div class="navbar-qr">
-                                <img src="./assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
+                                <img src="assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
                                 <div class="navbar-qr__wrap">
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/googleplay.png" alt="Google Play"
-                                            class="navbar-qr__media">
+                                        <img src="assets/img/googleplay.png" alt="Google Play"
+                                             class="navbar-qr__media">
                                     </a>
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/appstore.png" alt="App store" class="navbar-qr__media">
+                                        <img src="assets/img/appstore.png" alt="App store" class="navbar-qr__media">
                                     </a>
                                 </div>
                             </div>
@@ -84,7 +85,7 @@
                                 Thông báo
                                 <div class="navbar-notify navbar-notify--no-login">
                                     <!-- navbar-notify--no-login -->
-                                    <img src="./assets/img/no-login_img.png" alt="" class="navbar-notify__img">
+                                    <img src="assets/img/no-login_img.png" alt="" class="navbar-notify__img">
                                     <span class="navbar-notify__message">Đăng nhập để xem thông báo</span>
                                     <!---->
                                     <!-- <div class="navbar-notify__wrap">
@@ -134,9 +135,9 @@
                             <i class="navbar__item-symbol fa-regular fa-circle-question"></i>
                             <a href="#!" class="navbar__link">Trợ giúp</a>
                         </li>
-                        <a href="register.html" class="navbar__item navbar__item--strong-weight navbar__item--saparate">Đăng ký</li>
+                        <a href="register.jsp" class="navbar__item navbar__item--strong-weight navbar__item--saparate">Đăng ký</li>
                         </a>
-                        <a href="login.html" class="navbar__item navbar__item--strong-weight">Đăng nhập</li>
+                        <a href="login.jsp" class="navbar__item navbar__item--strong-weight">Đăng nhập</li>
                         </a>
                         <!-- <div class="navbar__item navbar-user">
                             <img class="navbar-user__img" src="data:image/png;base64,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" alt="">
@@ -161,7 +162,7 @@
                 <!-- Search -->
                 <div class="search">
                     <a href="/" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <div class="header-search">
                         <div class="header-search__wrap">
@@ -178,7 +179,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <button class="header-search__btn btn btn--default-color"  onclick="window.location.href='search.html'">
+                        <button class="header-search__btn btn btn--default-color"  onclick="window.location.href='search.jsp'">
                             <i class="header-search__icon fa-solid fa-magnifying-glass"></i>
                             <span class="header-search__text">Tìm kiếm</span>
                         </button>
@@ -186,13 +187,13 @@
                     <div class="header-cart">
                         <div class="header-cart__scale header-cart__scale--fade-product header-cart__scale--empty">
                             <!-- Khi không có sản phẩm: header-cart__scale--empty -->
-                            <a href="cart.html">
+                            <a href="cart.jsp">
                                 <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                             </a>
                             <span class="header-cart__notice">3</span>
                             <div class="cart-list cart-list--no-cart">
                                 <!-- Chưa đăng nhập:  cart-list--no-cart -->
-                                <img src="./assets/img/no-cart_img.png" alt="" class="header-cart__img">
+                                <img src="assets/img/no-cart_img.png" alt="" class="header-cart__img">
                                 <span class="header-cart__msg">Chưa có sản phẩm</span>
                                 <!-- Có sản phẩm -->
                                 <!-- <div class="cart-list__wrap">
@@ -289,7 +290,7 @@
                                     <a href="#!" class="category__link">Gia dụng - Nhà cửa</a>
                                     <ul class="category-menu">
                                         <li class="category-menu__item">
-                                            <a href="search.html" class="category-menu__link">Đồ dùng nhà bếp</a>
+                                            <a href="search.jsp" class="category-menu__link">Đồ dùng nhà bếp</a>
                                         </li>
                                         <li class="category-menu__item">
                                             <a href="#!" class="category-menu__link">Dụng cụ làm vườn</a>
@@ -324,9 +325,9 @@
                         </div>
                         <figure class="hero">
                                 <div id="slider" >
-                                    <a class="slide" href="slide.html" style="background-image:url('./assets/img/hero_slide-01.jpg')">
+                                    <a class="slide" href="slide.jsp" style="background-image:url('assets/img/hero_slide-01.jpg')">
                                     </a>
-                                    <a class="slide" style="background-image:url('./assets/img/hero_slide-02.jpg')">
+                                    <a class="slide" style="background-image:url('assets/img/hero_slide-02.jpg')">
                                     </a>
                                 </div>
                         </figure>
@@ -344,8 +345,8 @@
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
                         <div class="product-card">
-                            <a href="product.html"><img src="./assets/img/details-img.jpg" alt=""></a>
-                            <a href="product.html">
+                            <a href="product.jsp"><img src="assets/img/details-img.jpg" alt=""></a>
+                            <a href="product.jsp">
                                 <p> Quạt tích điện Makita làm mát cực nhanh, pin dung lượng lớn, QUẠT + 1 PIN + 1 SẠC
                                 </p>
                             </a>
@@ -356,7 +357,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/fan.jpg" alt=""></a>
+                            <a><img src="assets/img/fan.jpg" alt=""></a>
                             <a>
                                 <p>Quạt đôi mini xoay 360 độ 12V-24V tiện ích trên ô tô </p>
                             </a>
@@ -367,7 +368,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/thatlung.png" alt=""></a>
+                            <a><img src="assets/img/thatlung.png" alt=""></a>
                             <a>
                                 <p>Thắt lưng dây da cao cấp có khóa tự động cho nam</p>
                             </a>
@@ -378,7 +379,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/micro.jpg" alt=""></a>
+                            <a><img src="assets/img/micro.jpg" alt=""></a>
                             <a>
                                 <p>Micro không dây kèm loa bluetooth YS-69 bass mạnh hỗ trợ ghi âm cao cấp</p>
                             </a>
@@ -389,7 +390,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/loa.jpg" alt=""></a>
+                            <a><img src="assets/img/loa.jpg" alt=""></a>
                             <a>
                                 <p>Loa để bàn mini nhỏ gọn âm thanh vượt trội</p>
                             </a>
@@ -400,7 +401,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/maylamtoc.png" alt=""></a>
+                            <a><img src="assets/img/maylamtoc.png" alt=""></a>
                             <a>
                                 <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
                             </a>
@@ -411,7 +412,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/tuirac.jpg" alt=""></a>
+                            <a><img src="assets/img/tuirac.jpg" alt=""></a>
                             <a>
                                 <p>Combo 500 túi lọc rác bồn rửa bát chống tắc nghẽn tiện lợi</p>
                             </a>
@@ -430,7 +431,7 @@
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
                         <div class="product-card">
-                            <a><img src="./assets/img/bochuyendoi.jpg" alt=""></a>
+                            <a><img src="assets/img/bochuyendoi.jpg" alt=""></a>
                             <a>
                                 <p>Bộ chuyển đổi CarPlay không dây 2in1 cho xe hơi hiện đại</p>
                             </a>
@@ -449,7 +450,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/khan.jpg" alt=""></a>
+                            <a><img src="assets/img/khan.jpg" alt=""></a>
                             <a>
                                 <p>Khăn lau xe ô tô chuyên dụng mềm mịn và thấm hút tốt, Loại 35cm x 35cm</p>
                             </a>
@@ -468,7 +469,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/chaixit.jpg" alt=""></a>
+                            <a><img src="assets/img/chaixit.jpg" alt=""></a>
                             <a>
                                 <p>Chai xịt rệp giường, mạt bụi hiệu quả an toàn</p>
                             </a>
@@ -487,7 +488,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/ghe.jpg" alt=""></a>
+                            <a><img src="assets/img/ghe.jpg" alt=""></a>
                             <a>
                                 <p>Gối tựa lưng cao su non giúp thư giãn dành cho dân văn phòng, Màu đen</p>
                             </a>
@@ -506,7 +507,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/giado.jpg" alt=""></a>
+                            <a><img src="assets/img/giado.jpg" alt=""></a>
                             <a>
                                 <p>Giá đỡ chuyển đổi máy cầm tay thành máy bàn chuyên dụng, đa năng và an toàn khi thao
                                     tác
@@ -527,7 +528,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/thuphatamthnah.png" alt=""></a>
+                            <a><img src="assets/img/thuphatamthnah.png" alt=""></a>
                             <a>
                                 <p>Bộ thu phát âm thanh không dây truyền tín hiệu mạnh, kết nối đa thiết bị, Bộ thu phát
                                     âm
@@ -548,7 +549,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/vali.jpg" alt=""></a>
+                            <a><img src="assets/img/vali.jpg" alt=""></a>
                             <a>
                                 <p>Vali nhựa Immax X11 24inch</p>
                             </a>
@@ -576,7 +577,7 @@
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
                         <div class="product-card">
-                            <a><img src="./assets/img/denhoc.jpg" alt=""></a>
+                            <a><img src="assets/img/denhoc.jpg" alt=""></a>
                             <a>
                                 <p>Đèn học chống cận cao cấp 3 chế độ sáng, bật tắt cảm ứng tiện lợi, Loại 6000mah (gồm
                                     cả
@@ -589,7 +590,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/loadeban.jpg" alt=""></a>
+                            <a><img src="assets/img/loadeban.jpg" alt=""></a>
                             <a>
                                 <p>Loa để bàn mini nhỏ gọn âm thanh vượt trội</p>
                             </a>
@@ -601,7 +602,7 @@
                         </div>
 
                         <div class="product-card">
-                            <a><img src="./assets/img/maylamtoc.png" alt=""></a>
+                            <a><img src="assets/img/maylamtoc.png" alt=""></a>
                             <a>
                                 <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
                             </a>
@@ -612,7 +613,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/thuphatamthnah.png" alt=""></a>
+                            <a><img src="assets/img/thuphatamthnah.png" alt=""></a>
                             <a>
                                 <p>Bộ thu phát âm thanh không dây truyền tín hiệu mạnh, kết nối đa thiết bị, Bộ thu phát
                                     âm
@@ -633,7 +634,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/fan.jpg" alt=""></a>
+                            <a><img src="assets/img/fan.jpg" alt=""></a>
                             <a>
                                 <p>Quạt đôi mini xoay 360 độ 12V-24V tiện ích trên ô tô </p>
                             </a>
@@ -644,7 +645,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/ghe.jpg" alt=""></a>
+                            <a><img src="assets/img/ghe.jpg" alt=""></a>
                             <a>
                                 <p>Gối tựa lưng cao su non giúp thư giãn dành cho dân văn phòng, Màu đen</p>
                             </a>
@@ -663,7 +664,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/maylamtoc.png" alt=""></a>
+                            <a><img src="assets/img/maylamtoc.png" alt=""></a>
                             <a>
                                 <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
                             </a>
@@ -674,7 +675,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/khan.jpg" alt=""></a>
+                            <a><img src="assets/img/khan.jpg" alt=""></a>
                             <a>
                                 <p>Khăn lau xe ô tô chuyên dụng mềm mịn và thấm hút tốt, Loại 35cm x 35cm</p>
                             </a>
@@ -701,7 +702,7 @@
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
                         <div class="product-card">
-                            <a><img src="./assets/img/tuixach.jpg" alt=""></a>
+                            <a><img src="assets/img/tuixach.jpg" alt=""></a>
                             <a>
                                 <p>Túi xách Reeyee RY302B/G 2 trong 1</p>
                             </a>
@@ -721,7 +722,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/amthuoc.jpg" alt=""></a>
+                            <a><img src="assets/img/amthuoc.jpg" alt=""></a>
                             <a>
                                 <p>Ấm sắc thuốc bắc tự động chất liệu gốm sứ cao cấp tự ngắt điện an toàn</p>
                             </a>
@@ -733,7 +734,7 @@
                         </div>
 
                         <div class="product-card">
-                            <a><img src="./assets/img/mayxay.jpg" alt=""></a>
+                            <a><img src="assets/img/mayxay.jpg" alt=""></a>
                             <a>
                                 <p>Máy xay đa năng cầm tay 6 lưỡi cối thủy tinh chịu nhiệt</p>
                             </a>
@@ -744,7 +745,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/thotkinh.jpg" alt=""></a>
+                            <a><img src="assets/img/thotkinh.jpg" alt=""></a>
                             <a>
                                 <p>Thớt kính cường lực chống rơi vỡ siêu bền
                                 </p>
@@ -764,7 +765,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/bodungcu.jpg" alt=""></a>
+                            <a><img src="assets/img/bodungcu.jpg" alt=""></a>
                             <a>
                                 <p>Bộ dụng cụ cắt, thái, gọt, nạo, bào sợi rau củ quả đa năng 14 trong 1 tiện lợi</p>
                             </a>
@@ -775,7 +776,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/bogoui.jpg" alt=""></a>
+                            <a><img src="assets/img/bogoui.jpg" alt=""></a>
                             <a>
                                 <p>Bộ gối tựa đầu, gối tựa lưng massage 6 chế độ chất lượng cao</p>
                             </a>
@@ -794,7 +795,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/maylamtoc.png" alt=""></a>
+                            <a><img src="assets/img/maylamtoc.png" alt=""></a>
                             <a>
                                 <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
                             </a>
@@ -805,7 +806,7 @@
                             </div>
                         </div>
                         <div class="product-card">
-                            <a><img src="./assets/img/donghodientu.jpg" alt=""></a>
+                            <a><img src="assets/img/donghodientu.jpg" alt=""></a>
                             <a>
                                 <p>Đồng hồ điện tử đeo tay chống nước thời trang siêu bền</p>
                             </a>
@@ -838,13 +839,13 @@
                     <div class="blog__list row small-gutter ">
                         <div class="col c-3 m-3 l-3">
                             <article class="blog-item">
-                                <a href="blog.html" class="blog-item__link">
-                                    <img src="./assets/img/blog-img-01.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                        class="blog-item__img">
+                                <a href="blog.jsp" class="blog-item__link">
+                                    <img src="assets/img/blog-img-01.jpg" alt="Hướng dẫn vệ sinh máy giặt"
+                                         class="blog-item__img">
                                 </a>
                                 <div class="blog-item__content">
                                     <h3>
-                                        <a class="blog-item__title" href="blog.html">Hướng dẫn vệ sinh máy giặt đúng
+                                        <a class="blog-item__title" href="blog.jsp">Hướng dẫn vệ sinh máy giặt đúng
                                             cách</a>
                                     </h3>
                                     <p class="blog-item__desc">
@@ -866,8 +867,8 @@
                         <div class="col c-3 m-3 l-3">
                             <article class="blog-item">
                                 <a href="#!" class="blog-item__link">
-                                    <img src="./assets/img/blog-img-02.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                        class="blog-item__img">
+                                    <img src="assets/img/blog-img-02.jpg" alt="Hướng dẫn vệ sinh máy giặt"
+                                         class="blog-item__img">
                                 </a>
                                 <div class="blog-item__content">
                                     <h3>
@@ -893,8 +894,8 @@
                         <div class="col c-3 m-3 l-3">
                             <article class="blog-item">
                                 <a href="#!" class="blog-item__link">
-                                    <img src="./assets/img/blog-img-03.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                        class="blog-item__img">
+                                    <img src="assets/img/blog-img-03.jpg" alt="Hướng dẫn vệ sinh máy giặt"
+                                         class="blog-item__img">
                                 </a>
                                 <div class="blog-item__content">
                                     <h3>
@@ -919,8 +920,8 @@
                         <div class="col c-3 m-3 l-3">
                             <article class="blog-item">
                                 <a href="#!" class="blog-item__link">
-                                    <img src="./assets/img/blog-img-04.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                        class="blog-item__img">
+                                    <img src="assets/img/blog-img-04.jpg" alt="Hướng dẫn vệ sinh máy giặt"
+                                         class="blog-item__img">
                                 </a>
                                 <div class="blog-item__content">
                                     <h3>
@@ -950,7 +951,7 @@
             <div class="footer__inner">
                 <div class="footer__left">
                     <a href="#" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <ul class="footer-info">
                         <li class="footer-info__item">
@@ -1091,7 +1092,7 @@
 </body>
 
 <!-- Link JS -->
-<script src="./assets/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 
 </html>
 

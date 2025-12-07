@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <title>Tên sản phẩm</title>
 
     <!-- Link Reset CSS -->
-    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <!-- Link font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +20,10 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/product.css">
+    <link rel="stylesheet" href="assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/product.css">
     <!-- Link favicon -->
 </head>
 
@@ -36,14 +37,14 @@
                         <li class="navbar__item navbar__item--saparate navbar__item--fade-qr">
                             Vào cửa hàng trên ứng dụng
                             <div class="navbar-qr">
-                                <img src="./assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
+                                <img src="assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
                                 <div class="navbar-qr__wrap">
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/googleplay.png" alt="Google Play"
-                                            class="navbar-qr__media">
+                                        <img src="assets/img/googleplay.png" alt="Google Play"
+                                             class="navbar-qr__media">
                                     </a>
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/appstore.png" alt="App store" class="navbar-qr__media">
+                                        <img src="assets/img/appstore.png" alt="App store" class="navbar-qr__media">
                                     </a>
                                 </div>
                             </div>
@@ -67,7 +68,7 @@
                                 Thông báo
                                 <div class="navbar-notify navbar-notify--no-login">
                                     <!-- navbar-notify--no-login -->
-                                    <img src="./assets/img/no-login_img.png" alt="" class="navbar-notify__img">
+                                    <img src="assets/img/no-login_img.png" alt="" class="navbar-notify__img">
                                     <span class="navbar-notify__message">Đăng nhập để xem thông báo</span>
                                     <!---->
                                     <!-- <div class="navbar-notify__wrap">
@@ -142,7 +143,7 @@
                 <!-- Search -->
                 <div class="search">
                     <a href="/" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <div class="header-search">
                         <div class="header-search__wrap">
@@ -160,7 +161,7 @@
                             </div>
                         </div>
                         <button class="header-search__btn btn btn--default-color"
-                            onclick="window.location.href='search.html'">
+                            onclick="window.location.href='search.jsp'">
                             <i class="header-search__icon fa-solid fa-magnifying-glass"></i>
                             <span class="header-search__text">Tìm kiếm</span>
                         </button>
@@ -168,7 +169,7 @@
                     <div class="header-cart">
                         <div class="header-cart__scale header-cart__scale--fade-product">
                             <!-- Khi không có sản phẩm: header-cart__scale--empty -->
-                            <a href="cart.html">
+                            <a href="cart.jsp">
                                 <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                             </a>
                             <span class="header-cart__notice">3</span>
@@ -182,9 +183,9 @@
                                         Sản phẩm đã thêm
                                     </h3>
                                     <ul class="cart-list__list">
-                                        <a href="cart.html">
+                                        <a href="cart.jsp">
                                             <li class="cart-list__item">
-                                                <img src="./assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
+                                                <img src="assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
                                                 <section class="cart-list__body">
                                                     <div class="cart-list__info">
                                                         <h4 class="cart-list__heading">Gương để bàn bông hoa Gương để
@@ -204,7 +205,7 @@
                                                 </section>
                                             </li>
                                         </a>
-                                        <a href="cart.html">
+                                        <a href="cart.jsp">
                                             <li class="cart-list__item">
                                                 <img src="../assets/img/add-cart-02.jpeg" alt="" class="cart-list__img">
                                                 <section class="cart-list__body">
@@ -225,9 +226,9 @@
                                                 </section>
                                             </li>
                                         </a>
-                                        <a href="cart.html">
+                                        <a href="cart.jsp">
                                             <li class="cart-list__item">
-                                                <img src="./assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
+                                                <img src="assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
                                                 <section class="cart-list__body">
                                                     <div class="cart-list__info">
                                                         <h4 class="cart-list__heading">Gạt Tàn BRUNSWICK YG8005</h4>
@@ -277,22 +278,22 @@
                 <div class="product-details__inner">
                     <!-- Media Details -->
                     <figure class="media-details">
-                        <img src="./assets/img/details-img.jpg" alt="Product Image" class="media-details__img">
+                        <img src="assets/img/details-img.jpg" alt="Product Image" class="media-details__img">
                         <div class="more-details">
                             <button class="more-details__thumb">
-                                <img class="more-details__img" src="./assets/img/details-img.jpg" alt="">
+                                <img class="more-details__img" src="assets/img/details-img.jpg" alt="">
                             </button>
                             <button class="more-details__thumb">
-                                <img class="more-details__img" src="./assets/img/detail-01.jpg" alt="">
+                                <img class="more-details__img" src="assets/img/detail-01.jpg" alt="">
                             </button>
                             <button class="more-details__thumb">
-                                <img class="more-details__img" src="./assets/img/detail-02.jpg" alt="">
+                                <img class="more-details__img" src="assets/img/detail-02.jpg" alt="">
                             </button>
                             <button class="more-details__thumb">
-                                <img class="more-details__img" src="./assets/img/detail-03.jpg" alt="">
+                                <img class="more-details__img" src="assets/img/detail-03.jpg" alt="">
                             </button>
                             <button class="more-details__thumb">
-                                <img class="more-details__img" src="./assets/img/detail-04.jpg" alt="">
+                                <img class="more-details__img" src="assets/img/detail-04.jpg" alt="">
                             </button>
                         </div>
                     </figure>
@@ -409,7 +410,7 @@
                                 pariatur non quam natus voluptatum? Quia!
                             </p>
                             <figure class="product-desc__thumb">
-                                <img class="product-desc__img" src="./assets/img/detail-01.jpg" alt="Quạt Makita" />
+                                <img class="product-desc__img" src="assets/img/detail-01.jpg" alt="Quạt Makita" />
                             </figure>
                             <p class="product-desc__text">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nam pariatur sunt totam
@@ -440,7 +441,7 @@
                                 </li>
                             </ul>
                             <figure class="product-desc__thumb">
-                                <img class="product-desc__img" src="./assets/img/detail-02.jpg" alt="Quạt Makita" />
+                                <img class="product-desc__img" src="assets/img/detail-02.jpg" alt="Quạt Makita" />
                             </figure>
                         </div>
                     </div>
@@ -451,7 +452,7 @@
                                 <h2 class="section-title product-propose__heading">Đề xuất cho bạn</h2>
                                 <article class="product-propose__item">
                                     <a href="#!">
-                                        <img class="product-propose__img" src="./assets/img/propose-01.jpg"
+                                        <img class="product-propose__img" src="assets/img/propose-01.jpg"
                                             alt="Máy xay đa năng cầm tay">
                                         <h3 class="product-propose__name">Máy xay đa năng cầm tay 6 lưỡi cối thủy tinh
                                             chịu nhiệt</h3>
@@ -460,7 +461,7 @@
                                 </article>
                                 <article class="product-propose__item">
                                     <a href="#!">
-                                        <img class="product-propose__img" src="./assets/img/propose-02.jpg"
+                                        <img class="product-propose__img" src="assets/img/propose-02.jpg"
                                             alt="Máy xay đa năng cầm tay">
                                         <h3 class="product-propose__name">Ấm siêu tốc 2 lớp bền đẹp Thái Lan công nghệ
                                             Inverter</h3>
@@ -469,7 +470,7 @@
                                 </article>
                                 <article class="product-propose__item">
                                     <a href="#!">
-                                        <img class="product-propose__img" src="./assets/img/propose-03.jpg"
+                                        <img class="product-propose__img" src="assets/img/propose-03.jpg"
                                             alt="Máy xay đa năng cầm tay">
                                         <h3 class="product-propose__name">Đèn bắt muỗi năng lượng mặt trời Đèn diệt muỗi
                                             điện tử LED</h3>
@@ -526,7 +527,7 @@
 
                             <section class="product-review__item">
                                 <figure class="product-review__avatar">
-                                    <img class="avatar" src="./assets/img/avatar1.jpg" alt="Avatar Trần Phương">
+                                    <img class="avatar" src="assets/img/avatar1.jpg" alt="Avatar Trần Phương">
                                 </figure>
 
                                 <article class="product-review__content-wrapper">
@@ -559,7 +560,7 @@
                             </section>
                             <section class="product-review__item">
                                 <figure class="product-review__avatar">
-                                    <img class="avatar" src="./assets/img/avatar2.jpg" alt="Avatar Văn Thảo">
+                                    <img class="avatar" src="assets/img/avatar2.jpg" alt="Avatar Văn Thảo">
                                 </figure>
 
                                 <article class="product-review__content-wrapper">
@@ -624,7 +625,7 @@
             <div class="footer__inner">
                 <div class="footer__left">
                     <a href="#" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <ul class="footer-info">
                         <li class="footer-info__item">
@@ -765,6 +766,6 @@
 </body>
 
 <!-- Link JS -->
-<script src="./assets/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 
 </html>

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hướng Dẫn Vệ Sinh Máy Giặt - WebGiaDung</title>
 
-    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,10 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/blog.css">
+    <link rel="stylesheet" href="assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/blog.css">
 </head>
 
 <body>
@@ -30,14 +31,14 @@
                         <li class="navbar__item navbar__item--saparate navbar__item--fade-qr">
                             Vào cửa hàng trên ứng dụng
                             <div class="navbar-qr">
-                                <img src="./assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
+                                <img src="assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
                                 <div class="navbar-qr__wrap">
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/googleplay.png" alt="Google Play"
-                                            class="navbar-qr__media">
+                                        <img src="assets/img/googleplay.png" alt="Google Play"
+                                             class="navbar-qr__media">
                                     </a>
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/appstore.png" alt="App store" class="navbar-qr__media">
+                                        <img src="assets/img/appstore.png" alt="App store" class="navbar-qr__media">
                                     </a>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@
                             <a href="#!" class="navbar__link">
                                 Thông báo
                                 <div class="navbar-notify navbar-notify--no-login">
-                                    <img src="./assets/img/no-login_img.png" alt="" class="navbar-notify__img">
+                                    <img src="assets/img/no-login_img.png" alt="" class="navbar-notify__img">
                                     <span class="navbar-notify__message">Đăng nhập để xem thông báo</span>
                                 </div>
                             </a>
@@ -74,7 +75,7 @@
                 </nav>
                 <div class="search">
                     <a href="/" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <div class="header-search">
                         <div class="header-search__wrap">
@@ -98,12 +99,12 @@
                     </div>
                     <div class="header-cart">
                         <div class="header-cart__scale header-cart__scale--fade-product header-cart__scale--empty">
-                            <a href="cart.html">
+                            <a href="cart.jsp">
                                 <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                             </a>
                             <span class="header-cart__notice">3</span>
                             <div class="cart-list cart-list--no-cart">
-                                <img src="./assets/img/no-cart_img.png" alt="" class="header-cart__img">
+                                <img src="assets/img/no-cart_img.png" alt="" class="header-cart__img">
                                 <span class="header-cart__msg">Chưa có sản phẩm</span>
                             </div>
                         </div>
@@ -134,8 +135,8 @@
                             giặt nhà bạn có những dấu hiệu trên thì đã đến lúc để làm sạch máy giặt.
                         </p>
 
-                        <img src="./assets/img/maygiat1.jpg" alt="Thực hiện vệ sinh lồng máy giặt"
-                            class="blog-article__img">
+                        <img src="assets/img/maygiat1.jpg" alt="Thực hiện vệ sinh lồng máy giặt"
+                             class="blog-article__img">
 
                         <h2 class="blog-article__subtitle">Bước 1: Làm sạch máy giặt</h2>
                         <p class="blog-article__content">
@@ -151,8 +152,8 @@
                             <li>Sau khi quá trình giặt kết thúc, bạn dùng khăn mềm sạch lau khô lồng giặt.</li>
                         </ul>
 
-                        <img src="./assets/img/maygiat2.jpg" alt="Lau sạch bên trong lồng giặt"
-                            class="blog-article__img">
+                        <img src="assets/img/maygiat2.jpg" alt="Lau sạch bên trong lồng giặt"
+                             class="blog-article__img">
 
                         <h2 class="blog-article__subtitle">Bước 2: Vệ sinh miếng lọc cặn trong lồng giặt</h2>
                         <p class="blog-article__content">
@@ -168,8 +169,8 @@
                             <li>Lau khô miếng lọc và lắp lại vào máy giặt.</li>
                         </ul>
 
-                        <img src="./assets/img/maygiat3.jpg" alt="Vệ sinh ngăn chứa bột giặt, nước xả"
-                            class="blog-article__img">
+                        <img src="assets/img/maygiat3.jpg" alt="Vệ sinh ngăn chứa bột giặt, nước xả"
+                             class="blog-article__img">
 
                         <h2 class="blog-article__subtitle">Bước 3: Vệ sinh ngăn chứa bột giặt, nước xả</h2>
                         <p class="blog-article__content">
@@ -186,8 +187,8 @@
                             <li>Lau khô và lắp lại vào máy giặt.</li>
                         </ul>
 
-                        <img src="./assets/img/maygiat4.jpg" alt="Vệ sinh máy giặt cửa trước và gioăng cao su"
-                            class="blog-article__img">
+                        <img src="assets/img/maygiat4.jpg" alt="Vệ sinh máy giặt cửa trước và gioăng cao su"
+                             class="blog-article__img">
 
                         <h2 class="blog-article__subtitle">Lưu ý khi vệ sinh máy giặt cửa trước (Vệ sinh gioăng cao su)
                         </h2>
@@ -218,8 +219,8 @@
                                 <div class="col c-4 m-4 l-4">
                                     <article class="blog-item">
                                         <a href="#!" class="blog-item__link">
-                                            <img src="./assets/img/blog-img-02.jpg" alt="Thực phẩm hút chân không"
-                                                class="blog-item__img">
+                                            <img src="assets/img/blog-img-02.jpg" alt="Thực phẩm hút chân không"
+                                                 class="blog-item__img">
                                         </a>
                                         <div class="blog-item__content">
                                             <h3>
@@ -242,8 +243,8 @@
                                 <div class="col c-4 m-4 l-4">
                                     <article class="blog-item">
                                         <a href="#!" class="blog-item__link">
-                                            <img src="./assets/img/blog-img-03.jpg" alt="Đèn bắt muỗi"
-                                                class="blog-item__img">
+                                            <img src="assets/img/blog-img-03.jpg" alt="Đèn bắt muỗi"
+                                                 class="blog-item__img">
                                         </a>
                                         <div class="blog-item__content">
                                             <h3>
@@ -265,8 +266,8 @@
                                 <div class="col c-4 m-4 l-4">
                                     <article class="blog-item">
                                         <a href="#!" class="blog-item__link">
-                                            <img src="./assets/img/blog-img-04.jpg" alt="Máy xay sinh tố"
-                                                class="blog-item__img">
+                                            <img src="assets/img/blog-img-04.jpg" alt="Máy xay sinh tố"
+                                                 class="blog-item__img">
                                         </a>
                                         <div class="blog-item__content">
                                             <h3>
@@ -299,7 +300,7 @@
             <div class="footer__inner">
                 <div class="footer__left">
                     <a href="#" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <ul class="footer-info">
                         <li class="footer-info__item">
@@ -437,7 +438,7 @@
             </div>
         </div>
     </footer>
-    <script src="./assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 
 </body>
 

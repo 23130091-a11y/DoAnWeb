@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh toán - WebGiaDung</title>
-    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,10 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/checkout.css">
+    <link rel="stylesheet" href="assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/checkout.css">
 </head>
 
 <body>
@@ -31,14 +32,14 @@
                         <li class="navbar__item navbar__item--saparate navbar__item--fade-qr">
                             Vào cửa hàng trên ứng dụng
                             <div class="navbar-qr">
-                                <img src="./assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
+                                <img src="assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
                                 <div class="navbar-qr__wrap">
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/googleplay.png" alt="Google Play"
-                                            class="navbar-qr__media">
+                                        <img src="assets/img/googleplay.png" alt="Google Play"
+                                             class="navbar-qr__media">
                                     </a>
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/appstore.png" alt="App store" class="navbar-qr__media">
+                                        <img src="assets/img/appstore.png" alt="App store" class="navbar-qr__media">
                                     </a>
                                 </div>
                             </div>
@@ -70,7 +71,7 @@
                                         <li class="navbar-notify__item navbar-notify__item--view">
                                             <a href="#!" class="navbar-notify__link">
                                                 <img class="navbar-notify__login-img"
-                                                    src="./assets/img/notify-img-01.png"
+                                                    src="assets/img/notify-img-01.png"
                                                     alt="Túi đựng quần áo, chăn ga">
                                                 <div class="navbar-notify__content">
                                                     <span class="navbar-notify__title">Tặng ngay 1 túi đựng quần áo,
@@ -83,7 +84,7 @@
                                         <li class="navbar-notify__item">
                                             <a href="#!" class="navbar-notify__link">
                                                 <img class="navbar-notify__login-img"
-                                                    src="./assets/img/notify-img-02.jpg"
+                                                    src="assets/img/notify-img-02.jpg"
                                                     alt="Túi đựng quần áo, chăn ga">
                                                 <div class="navbar-notify__content">
                                                     <span class="navbar-notify__title">Combo 12 viên vệ sinh lồng
@@ -96,7 +97,7 @@
                                         <li class="navbar-notify__item">
                                             <a href="#!" class="navbar-notify__link">
                                                 <img class="navbar-notify__login-img"
-                                                    src="./assets/img/notify-img-03.jpg"
+                                                    src="assets/img/notify-img-03.jpg"
                                                     alt="Túi đựng quần áo, chăn ga">
                                                 <div class="navbar-notify__content">
                                                     <span class="navbar-notify__title">Khăn lau xe ô tô chuyên dụng
@@ -125,16 +126,16 @@
                             <span class="navbar-user__name">anhaiti</span>
                             <ul class="navbar-user__menu">
                                 <li class="navbar-user__item">
-                                    <a href="account.html#info" class="navbar-user__link">Tài khoản của tôi</a>
+                                    <a href="account.jsp#info" class="navbar-user__link">Tài khoản của tôi</a>
                                 </li>
                                 <li class="navbar-user__item">
-                                    <a href="account.html#favorite-product" class="navbar-user__link">Yêu thích</a>
+                                    <a href="account.jsp#favorite-product" class="navbar-user__link">Yêu thích</a>
                                 </li>
                                 <li class="navbar-user__item">
-                                    <a href="account.html#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
+                                    <a href="account.jsp#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
                                 </li>
                                 <li class="navbar-user__item navbar-user__item--separate">
-                                    <a href="login.html" class="navbar-user__link">Đăng xuất</a>
+                                    <a href="login.jsp" class="navbar-user__link">Đăng xuất</a>
                                 </li>
                             </ul>
                     </ul>
@@ -144,7 +145,7 @@
         <div class="grid wide">
             <div class="header-checkout-content">
                 <a href="#!" class="logo">
-                    <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                    <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                 </a>
                 <h1 class="checkout-heading-main">THANH TOÁN</h1>
             </div>
@@ -234,7 +235,7 @@
 
                         <div class="product-list-summary">
                             <div class="summary-product-item">
-                                <img src="./assets/img/loadeban.jpg" alt="Loa để bàn mini" class="summary-thumb">
+                                <img src="assets/img/loadeban.jpg" alt="Loa để bàn mini" class="summary-thumb">
                                 <div class="summary-product-details">
                                     <p class="summary-product-name">Loa để bàn mini nhỏ gọn...</p>
                                     <span class="summary-quantity">SL: 1</span>
@@ -242,7 +243,7 @@
                                 <span class="summary-price">162.000đ</span>
                             </div>
                             <div class="summary-product-item">
-                                <img src="./assets/img/maylamtoc.png" alt="Máy làm tóc 3 trong 1" class="summary-thumb">
+                                <img src="assets/img/maylamtoc.png" alt="Máy làm tóc 3 trong 1" class="summary-thumb">
                                 <div class="summary-product-details">
                                     <p class="summary-product-name">Máy làm tóc đa năng 3 trong 1...</p>
                                     <span class="summary-quantity">SL: 1</span>
@@ -282,7 +283,7 @@
             <div class="footer__inner">
                 <div class="footer__left">
                     <a href="#" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <ul class="footer-info">
                         <li class="footer-info__item">

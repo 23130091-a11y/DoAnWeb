@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,11 +8,11 @@
     <title>Giỏ hàng</title>
 
     <!-- Reset CSS -->
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/cart.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,14 +36,14 @@
                         <li class="navbar__item navbar__item--saparate navbar__item--fade-qr">
                             Vào cửa hàng trên ứng dụng
                             <div class="navbar-qr">
-                                <img src="./assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
+                                <img src="assets/img/qr_code.jpg" alt="QR Code" class="navbar-qr__img">
                                 <div class="navbar-qr__wrap">
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/googleplay.png" alt="Google Play"
-                                            class="navbar-qr__media">
+                                        <img src="assets/img/googleplay.png" alt="Google Play"
+                                             class="navbar-qr__media">
                                     </a>
                                     <a class="navbar-qr__link" href="#!">
-                                        <img src="./assets/img/appstore.png" alt="App store" class="navbar-qr__media">
+                                        <img src="assets/img/appstore.png" alt="App store" class="navbar-qr__media">
                                     </a>
                                 </div>
                             </div>
@@ -78,7 +79,7 @@
                                             <li class="navbar-notify__item navbar-notify__item--view">
                                                 <a href="#!" class="navbar-notify__link">
                                                     <img class="navbar-notify__login-img"
-                                                        src="./assets/img/notify-img-01.png"
+                                                        src="assets/img/notify-img-01.png"
                                                         alt="Túi đựng quần áo, chăn ga">
                                                     <div class="navbar-notify__content">
                                                         <span class="navbar-notify__title">Tặng ngay 1 túi đựng quần áo,
@@ -91,7 +92,7 @@
                                             <li class="navbar-notify__item">
                                                 <a href="#!" class="navbar-notify__link">
                                                     <img class="navbar-notify__login-img"
-                                                        src="./assets/img/notify-img-02.jpg"
+                                                        src="assets/img/notify-img-02.jpg"
                                                         alt="Túi đựng quần áo, chăn ga">
                                                     <div class="navbar-notify__content">
                                                         <span class="navbar-notify__title">Combo 12 viên vệ sinh lồng
@@ -104,7 +105,7 @@
                                             <li class="navbar-notify__item">
                                                 <a href="#!" class="navbar-notify__link">
                                                     <img class="navbar-notify__login-img"
-                                                        src="./assets/img/notify-img-03.jpg"
+                                                        src="assets/img/notify-img-03.jpg"
                                                         alt="Túi đựng quần áo, chăn ga">
                                                     <div class="navbar-notify__content">
                                                         <span class="navbar-notify__title">Khăn lau xe ô tô chuyên dụng
@@ -134,16 +135,16 @@
                             <span class="navbar-user__name">anhaiti</span>
                             <ul class="navbar-user__menu">
                                 <li class="navbar-user__item">
-                                    <a href="account.html#info" class="navbar-user__link">Tài khoản của tôi</a>
+                                    <a href="account.jsp#info" class="navbar-user__link">Tài khoản của tôi</a>
                                 </li>
                                 <li class="navbar-user__item">
-                                    <a href="account.html#favorite-product" class="navbar-user__link">Yêu thích</a>
+                                    <a href="account.jsp#favorite-product" class="navbar-user__link">Yêu thích</a>
                                 </li>
                                 <li class="navbar-user__item">
-                                    <a href="account.html#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
+                                    <a href="account.jsp#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
                                 </li>
                                 <li class="navbar-user__item navbar-user__item--separate">
-                                    <a href="login.html" class="navbar-user__link">Đăng xuất</a>
+                                    <a href="login.jsp" class="navbar-user__link">Đăng xuất</a>
                                 </li>
                             </ul>
                         </div>
@@ -152,7 +153,7 @@
                 <!-- Search -->
                 <div class="search">
                     <a href="/" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <div class="header-search">
                         <div class="header-search__wrap">
@@ -190,7 +191,7 @@
                                     </h3>
                                     <ul class="cart-list__list">
                                         <li class="cart-list__item">
-                                            <img src="./assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
+                                            <img src="assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
                                             <section class="cart-list__body">
                                                 <div class="cart-list__info">
                                                     <h4 class="cart-list__heading">Gương để bàn bông hoa Gương để bàn
@@ -211,7 +212,7 @@
                                         </li>
 
                                         <li class="cart-list__item">
-                                            <img src="./assets/img/add-cart-02.jpeg" alt="" class="cart-list__img">
+                                            <img src="assets/img/add-cart-02.jpeg" alt="" class="cart-list__img">
                                             <section class="cart-list__body">
                                                 <div class="cart-list__info">
                                                     <h4 class="cart-list__heading">Đĩa Sứ Tròn 8.5inch CHIBI</h4>
@@ -231,7 +232,7 @@
                                         </li>
 
                                         <li class="cart-list__item">
-                                            <img src="./assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
+                                            <img src="assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
                                             <section class="cart-list__body">
                                                 <div class="cart-list__info">
                                                     <h4 class="cart-list__heading">Gạt Tàn BRUNSWICK YG8005</h4>
@@ -287,7 +288,7 @@
                     <div class="cart-item flex">
                         <div class="colum product-col flex">
                             <input type="checkbox" class="item-checkbox">
-                            <a><img src="./assets/img/add-cart-01.jpeg" alt=""></a>
+                            <a><img src="assets/img/add-cart-01.jpeg" alt=""></a>
                             <a>
                                 <div class="item-info">
                                     <p>Gương để bàn bông hoa Gương để bàn
@@ -325,7 +326,7 @@
                     <div class="cart-item flex">
                         <div class="col product-col flex">
                             <input type="checkbox" class="item-checkbox">
-                            <a><img src="./assets/img/add-cart-02.jpeg" alt=""></a>
+                            <a><img src="assets/img/add-cart-02.jpeg" alt=""></a>
                             <a>
                                 <div class="item-info">
                                     <p>Đĩa Sứ Tròn 8.5inch CHIBI</p>
@@ -360,7 +361,7 @@
                     <div class="cart-item flex">
                         <div class="colum product-col flex">
                             <input type="checkbox" class="item-checkbox">
-                            <a><img src="./assets/img/add-cart-03.jpeg" alt=""></a>
+                            <a><img src="assets/img/add-cart-03.jpeg" alt=""></a>
                             <a>
                                 <div class="item-info">
                                     <p>Gạt Tàn BRUNSWICK YG8005</p>
@@ -403,7 +404,7 @@
                     <div class="cart-item flex">
                         <div class="col product-col flex">
                             <input type="checkbox" class="item-checkbox">
-                            <a><img src="./assets/img/maylambap.jpg" alt=""></a>
+                            <a><img src="assets/img/maylambap.jpg" alt=""></a>
                             <a>
                                 <div class="item-info">
                                     <p>Máy làm bắp rang bơ sokany RH-288 cao cấp</p>
@@ -439,7 +440,7 @@
                     <div class="cart-item flex">
                         <div class="colum product-col flex">
                             <input type="checkbox" class="item-checkbox">
-                            <a><img src="./assets/img/maysaysinhto.jpg" alt=""></a>
+                            <a><img src="assets/img/maysaysinhto.jpg" alt=""></a>
                             <a>
                                 <div class="item-info">
                                     <p>Máy xay sinh tố 2 cối cao cấp Shake'n Take</p>
@@ -481,7 +482,7 @@
                     <div class="cart-item flex">
                         <div class="colum product-col flex">
                             <input type="checkbox" class="item-checkbox">
-                            <a><img src="./assets/img/thapdungbia.jpg" alt=""></a>
+                            <a><img src="assets/img/thapdungbia.jpg" alt=""></a>
                             <a>
                                 <div class="item-info">
                                     <p>Tháp đựng bia rượu, hoa quả cao cấp</p>
@@ -517,7 +518,7 @@
                     <div class="cart-item flex">
                         <div class="colum product-col flex">
                             <input type="checkbox" class="item-checkbox">
-                            <a><img src="./assets/img/cantieuly.jpg" alt=""></a>
+                            <a><img src="assets/img/cantieuly.jpg" alt=""></a>
                             <a>
                                 <div class="item-info">
                                     <p>Cân Tiểu Ly Điện Tử 50g độ chính xác 0.001g</p>
@@ -560,7 +561,7 @@
                         Tổng cộng (<span class="total-items">0</span> sản phẩm): <span class="total-price">0đ</span>
                     </div>
 
-                    <button type="button" class="buy-btn" onclick="window.location.href='checkout.html'">Thanh
+                    <button type="button" class="buy-btn" onclick="window.location.href='checkout.jsp'">Thanh
                         toán</button>
                 </div>
                 <p class="empty-message">
@@ -573,7 +574,7 @@
                     <div class="list row small-gutter">
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/thuphatamthnah.png" alt=""></a>
+                                <a><img src="assets/img/thuphatamthnah.png" alt=""></a>
                                 <a>
                                     <p>Bộ thu phát âm thanh không dây truyền tín hiệu mạnh, kết nối đa thiết bị, Bộ thu
                                         phát
@@ -597,7 +598,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/fan.jpg" alt=""></a>
+                                <a><img src="assets/img/fan.jpg" alt=""></a>
                                 <a>
                                     <p>Quạt đôi mini xoay 360 độ 12V-24V tiện ích trên ô tô </p>
                                 </a>
@@ -610,7 +611,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/maylamtoc.png" alt=""></a>
+                                <a><img src="assets/img/maylamtoc.png" alt=""></a>
                                 <a>
                                     <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
                                 </a>
@@ -623,7 +624,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/ghe.jpg" alt=""></a>
+                                <a><img src="assets/img/ghe.jpg" alt=""></a>
                                 <a>
                                     <p>Gối tựa lưng cao su non giúp thư giãn dành cho dân văn phòng, Màu đen</p>
                                 </a>
@@ -644,7 +645,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/bochuyendoi.jpg" alt=""></a>
+                                <a><img src="assets/img/bochuyendoi.jpg" alt=""></a>
                                 <a>
                                     <p>Bộ chuyển đổi CarPlay không dây 2in1 cho xe hơi hiện đại</p>
                                 </a>
@@ -665,7 +666,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/denhoc.jpg" alt=""></a>
+                                <a><img src="assets/img/denhoc.jpg" alt=""></a>
                                 <a>
                                     <p>Đèn học chống cận cao cấp 3 chế độ sáng, bật tắt cảm ứng tiện lợi, Loại 6000mah
                                         (gồm
@@ -681,7 +682,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/tuirac.jpg" alt=""></a>
+                                <a><img src="assets/img/tuirac.jpg" alt=""></a>
                                 <a>
                                     <p>Combo 500 túi lọc rác bồn rửa bát chống tắc nghẽn tiện lợi</p>
                                 </a>
@@ -694,7 +695,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/micro.jpg" alt=""></a>
+                                <a><img src="assets/img/micro.jpg" alt=""></a>
                                 <a>
                                     <p>Micro không dây kèm loa bluetooth YS-69 bass mạnh hỗ trợ ghi âm cao cấp</p>
                                 </a>
@@ -707,7 +708,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/bochuyendoi.jpg" alt=""></a>
+                                <a><img src="assets/img/bochuyendoi.jpg" alt=""></a>
                                 <a>
                                     <p>Bộ chuyển đổi CarPlay không dây 2in1 cho xe hơi hiện đại</p>
                                 </a>
@@ -728,7 +729,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/chaixit.jpg" alt=""></a>
+                                <a><img src="assets/img/chaixit.jpg" alt=""></a>
                                 <a>
                                     <p>Chai xịt rệp giường, mạt bụi hiệu quả an toàn</p>
                                 </a>
@@ -749,7 +750,7 @@
                         </div>
                         <div class="col l-3 4 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/quatsac.png" alt=""></a>
+                                <a><img src="assets/img/quatsac.png" alt=""></a>
                                 <a>
                                     <p>Quạt sạc mini pin trâu 20000mah hiện đại dùng được lâu dài
                                     </p>
@@ -772,7 +773,7 @@
                         </div>
                         <div class="col l-3 m-4 c-6">
                             <div class="product-card">
-                                <a><img src="./assets/img/binhxit.png" alt=""></a>
+                                <a><img src="assets/img/binhxit.png" alt=""></a>
                                 <a>
                                     <p>Bình xịt diệt bọ rệp, mạt bụi thảo mộc thiên nhiên an toàn 330ml</p>
                                 </a>
@@ -794,7 +795,7 @@
             <div class="footer__inner">
                 <div class="footer__left">
                     <a href="#" class="logo">
-                        <img class="logo__img" src="./assets/img/logo.png" alt="webgiadung">
+                        <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
                     <ul class="footer-info">
                         <li class="footer-info__item">
@@ -932,7 +933,7 @@
             </div>
         </div>
     </footer>
-    <script src="./assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
