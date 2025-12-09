@@ -1,0 +1,357 @@
+/* Common */
+.manage__heading {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--primary-color);
+    padding: 8px 16px;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+
+.navbar {
+    height: 46px;
+}
+
+/* Link */
+.manage-detail {
+    display: none;
+}
+
+.manage-detail:target {
+    display: block;
+}
+
+/* Navbar header */
+.navbar__greeting {
+    font-size: 1.6rem;
+    cursor: default;
+}
+
+.navbar__icon {
+    display: inline-block;
+    font-size: 1.8rem;
+    margin: 0 4px;
+}
+
+/* Navbar quản lý */
+.manage {
+    padding: 40px 0;
+}
+
+.manage-detail,
+.manage-nav {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Danh sách */
+.manage-nav__link {
+    position: relative;
+    display: block;
+    padding: 10px 12px;
+    border-radius: inherit;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    transition: 0.2s ease;
+}
+
+.manage-nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: #ddd;
+}
+
+.manage-nav__item:last-child .manage-nav__link::after {
+    display: none;
+}
+
+.manage-nav__link:hover {
+    background-color: #f0f0f0;
+}
+
+.manage-nav__link--active {
+    color: var(--primary-color);
+}
+
+/* Bảng sản phẩm */
+.order-table,
+.product-table {
+    padding: 8px;
+}
+
+.product-table__header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.product-table__btn {
+    --height: 36px;
+
+    min-width: 140px;
+    float: right;
+    border-radius: 2px;
+}
+
+.product-table__inner {
+    margin-top: 20px;
+}
+
+.order-table__row,
+.product-table__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 80px 80px 80px;
+    border: 1px solid #ccc;
+}
+
+.product-table__row + .product-table__row {
+    border-top: none;
+}
+
+.product-table__row:first-child {
+    background-color: var(--primary-color);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.product-table__row:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.product-table__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 5px;
+
+    border-left: 1px solid #ccc;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--white-color);
+}
+
+.product-table__cell:first-child {
+    border-left: none;
+    padding: 5px;
+}
+
+.product-table__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.product-table__text {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.product-table__edit {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #E06A1C;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+/* CSS phần thêm sản phẩm */
+.product-table__save {
+    padding-right: 8px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-radius: 4px;
+    font-size: 3rem;
+    float: right;
+    cursor: pointer;
+}
+
+/* Form */
+.add-product-form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-product-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-product-form__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.add-product-form__input {
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.add-product-form__input:focus {
+    border: 1px solid #666;
+}
+
+.product-table__back-btn {
+    margin: 20px auto 0 auto;
+    display: block;           /* block để margin auto có hiệu lực */
+    min-width: 200px;
+    border-radius: 2px;
+}
+
+/* CSS phần đơn hàng */
+.order-table__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-table__heading {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.order-table__btn {
+    --height: 36px;
+
+    min-width: 180px;
+    border-radius: 2px;
+    font-size: 1.4rem;
+}
+
+.order-table__filter {
+    width: 100%;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.order-table__search {
+    flex: 1;
+    height: 100%;
+}
+
+.order-table__filter-label {
+    height: 100%;
+    padding: 6px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: #f4f4f4;
+    border-radius: 2px;
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.order-table__filter-icon {
+    margin-left: 4px;
+}
+
+.order-table__search {
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    outline: none;
+    font-size: 1.4rem;
+}
+
+.order-table__search:placeholder-shown {
+    font-size: 1.4rem;
+}
+
+.order-table__search-btn {
+    --height: 30px;
+
+    min-width: 100px;
+    border-radius: 2px;
+    font-size: 1.4rem;
+}
+
+.order-table__inner {
+    margin-top: 30px;
+}
+
+.order-table__row {
+    grid-template-columns: 50px 98px 1fr 1fr 1fr 122px 130px;
+    border: none;
+}
+
+.order-table__row  + .order-table__row  {
+    border-top: 1px solid #ddd;
+}
+
+.order-table__row.order-table__row--cancelled {
+    background-color: #f8c1ca;
+    border-top: 1px solid #f49aa8;
+    border-radius: 2px;
+}
+
+.order-table__row--cancelled .order-table__total {
+    text-decoration-line: line-through;
+}
+
+.order-table__check {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.order-table__checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.order-table__cell {
+    padding: 10px 5px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.order-table__link {
+    color: #5863e7;
+    cursor: pointer;
+}
+
+.order-table__payment,
+.order-table__status {
+    font-weight: 600;
+}
+
+.order-table__payment--paid,
+.order-table__status--completed {
+    color: #1cc452;
+}
+
+.order-table__status--cancelled {
+    color: #e3013b;
+}
+
+.order-table__payment--pending {
+    color: #19a7c4;
+}
