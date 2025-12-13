@@ -350,12 +350,15 @@
                                 <a href="product.jsp">
                                     <img src="${p.img}" alt="${p.name}">
                                 </a>
+
                                 <a href="product.jsp">
                                     <p>${p.name}</p>
                                 </a>
+
                                 <span class="price">${p.price}đ</span>
+
                                 <div class="bottom">
-                                    <div class="star"><i class="fa-solid fa-star"></i> ${p.rating}</div>
+                                    <div class="star"><i class="fa-solid fa-star"></i> 5</div>
                                     <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
                                 </div>
                             </div>
@@ -430,7 +433,7 @@
 <%--                        <div class="product-card">--%>
 <%--                            <a><img src="assets/img/tuirac.jpg" alt=""></a>--%>
 <%--                            <a>--%>
-<%--                                <p>Combo 500 túi lọc rác bồn rửa bát chống tắc nghẽn tiện lợi</p>--%>
+<%--                                <p>Combo 500 túi lọc rác bồn rửa bát chống tắc nghẽn tiện lợ</p>--%>
 <%--                            </a>--%>
 <%--                            <span class="price">154.000đ</span>--%>
 <%--                            <div class="bottom">--%>

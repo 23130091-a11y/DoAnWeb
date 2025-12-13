@@ -355,3 +355,184 @@
 .order-table__payment--pending {
     color: #19a7c4;
 }
+/* customer */
+
+.customer-table {
+    padding: 8px;
+}
+
+.customer-table__header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.customer-table__btn {
+    --height: 36px;
+    min-width: 140px;
+    float: right;
+    border-radius: 2px;
+}
+
+.customer-table__inner {
+    margin-top: 20px;
+}
+
+.customer-table__row {
+    display: grid;
+    grid-template-columns:
+        80px        /* Avatar */
+        1fr         /* Tên */
+        1fr         /* Email */
+        1fr         /* Địa chỉ */
+        80px        /* Xem */
+        80px        /* Sửa */
+        80px;       /* Xóa */
+    border: 1px solid #ccc;
+}
+
+.customer-table__row + .customer-table__row {
+    border-top: none;
+}
+
+.customer-table__row:first-child {
+    background-color: var(--primary-color);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.customer-table__row:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.customer-table__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 5px;
+
+    border-left: 1px solid #ccc;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--white-color);
+}
+
+.customer-table__cell:first-child {
+    border-left: none;
+    padding: 8px;
+}
+
+.customer-table__img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.customer-table__text {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.customer-table__edit,
+.customer-table__delete,
+.customer-table__view
+{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #E06A1C;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.customer-table__view:hover,
+.customer-table__edit:hover,
+.customer-table__delete:hover {
+    color: #fff;
+    background-color: var(--soft-color);
+}
+.customer-table__view:active,
+.customer-table__edit:active,
+.customer-table__delete:active {
+    background-color: var(--soft-color);
+}
+
+.hidden {
+    display: none;
+}
+
+.customer-detail {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.customer-detail__card {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.customer-detail__avatar {
+    width: 180px;
+    text-align: center;
+}
+
+.customer-detail__avatar img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #eee;
+}
+
+.customer-detail__status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 12px;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.customer-detail__status.online {
+    background-color: #e6f7ee;
+    color: #1e9d60;
+}
+
+.customer-detail__status.offline {
+    background-color: #fdeaea;
+    color: #d93025;
+}
+
+.customer-detail__info {
+    flex: 1;
+}
+
+.customer-detail__row {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+}
+
+.customer-detail__row .label {
+    width: 160px;
+    font-weight: 600;
+    color: #555;
+}
+
+.customer-detail__row .value {
+    color: #333;
+}
+
+.customer-detail__actions {
+    margin-top: 20px;
+    text-align: right;
+}

@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="assets/css/grid.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/admin.css?v=3">
     <!-- Include stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
@@ -72,6 +72,7 @@
                             <li class="manage-nav__item">
                                 <a href="#!" class="manage-nav__link">Tin tức</a>
                             </li>
+                            <li class="manage-nav__item"><a href="#customer" class="manage-nav__link">Khách hàng</a></li>
                             <li class="manage-nav__item">
                                 <a href="#product" class="manage-nav__link manage-nav__link--active">Sản phẩm</a>
                             </li>
@@ -84,6 +85,312 @@
                 </div>
 
                 <div class="col l-10 m-12 c-12">
+                    <section id="customer" class="manage-detail">
+                        <h2 class="manage__heading">Khách hàng</h2>
+
+                        <div class="customer-table">
+                            <div class="customer-table__header">
+                               Danh sách khách hàng
+                            </div>
+
+                            <!-- Bảng khách hàng -->
+                            <div class="customer-table__inner">
+
+                                <!-- Hàng tiêu đề -->
+                                <div class="customer-table__row">
+                                    <div class="customer-table__cell">Avatar</div>
+                                    <div class="customer-table__cell">Tên</div>
+                                    <div class="customer-table__cell">Email</div>
+                                    <div class="customer-table__cell">Địa chỉ</div>
+                                    <div class="customer-table__cell">Xem</div>
+                                    <div class="customer-table__cell">Sửa</div>
+                                    <div class="customer-table__cell">Xóa</div>
+                                </div>
+
+                                <!-- Một khách hàng -->
+                                <article class="customer-table__row">
+                                    <div class="customer-table__cell">
+                                        <img src="assets/img/avatar4.jpg" class="customer-table__img" alt="">
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">Nguyễn Văn A</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">vana@example.com</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">Hà Nội</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__view">Xem</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__edit">Sửa</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__delete">Xóa</button>
+                                    </div>
+
+                                </article>
+
+                                <!-- Một khách hàng -->
+                                <article class="customer-table__row">
+                                    <div class="customer-table__cell">
+                                        <img src="assets/img/avatar5.jpg" class="customer-table__img" alt="">
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">Trần Thị B</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">tranb@example.com</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">TP. HCM</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__view">Xem</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__edit">Sửa</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__delete">Xóa</button>
+                                    </div>
+
+                                </article>
+
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Chi tiết khách hàng -->
+                    <section id="customer-detail" class="customer-detail hidden">
+                        <h2 class="manage__heading">Chi tiết khách hàng</h2>
+
+                        <div class="customer-detail__card">
+                            <!-- Avatar -->
+                            <div class="customer-detail__avatar">
+                                <img src="assets/img/avatar5.png" alt="Avatar">
+                                <span class="customer-detail__status online">Đang đăng nhập</span>
+                                <!-- <span class="customer-detail__status offline">Đã đăng xuất</span> -->
+                            </div>
+
+                            <!-- Thông tin -->
+                            <div class="customer-detail__info">
+                                <div class="customer-detail__row">
+                                    <span class="label">Tên:</span>
+                                    <span class="value">Nguyễn Văn A</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Email:</span>
+                                    <span class="value">vana@example.com</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Password:</span>
+                                    <span class="value">********</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Số điện thoại:</span>
+                                    <span class="value">0123 456 789</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Địa chỉ:</span>
+                                    <span class="value">Hà Nội</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Ngày tạo:</span>
+                                    <span class="value">01/12/2025</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Ngày cập nhật:</span>
+                                    <span class="value">10/12/2025</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nút đóng -->
+                        <div class="customer-detail__actions">
+                            <button class="btn btn--default-color" onclick="hideCustomerDetail()">
+                                Đóng
+                            </button>
+                        </div>
+                    </section>
+                    <!-- Sửa khách hàng -->
+                    <section id="customer-edit" class="customer-detail hidden">
+                        <h2 class="manage__heading">Sửa thông tin khách hàng</h2>
+
+                        <div class="customer-detail__card">
+                            <!-- Avatar -->
+                            <div class="customer-detail__avatar">
+                                <img src="assets/img/avatar.png" alt="Avatar">
+                                <span class="customer-detail__status online">Đang hoạt động</span>
+                            </div>
+
+                            <!-- Form thông tin -->
+                            <form class="customer-detail__info" id="customerEditForm">
+                                <div class="customer-detail__row">
+                                    <label class="label">Tên:</label>
+                                    <input type="text" class="input" value="Nguyễn Văn A">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Email:</label>
+                                    <input type="email" class="input" value="vana@example.com">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Password:</label>
+                                    <input type="password" class="input" placeholder="Nhập mật khẩu mới">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Số điện thoại:</label>
+                                    <input type="text" class="input" value="0123 456 789">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Địa chỉ:</label>
+                                    <input type="text" class="input" value="Hà Nội">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Ngày tạo:</label>
+                                    <input type="text" class="input" value="01/12/2025" disabled>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Ngày cập nhật:</label>
+                                    <input type="text" class="input" value="10/12/2025" disabled>
+                                </div>
+
+                                <!-- Action -->
+                                <div class="customer-detail__actions">
+                                    <button type="submit" class="btn btn--default-color">
+                                        Lưu thay đổi
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn--default-color"
+                                            onclick="hideCustomerEdit()">
+                                        Hủy
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <section id="add-customer" class="manage-detail" style="display:none;">
+                        <h2 class="manage__heading">Thêm khách hàng</h2>
+
+                        <div class="customer-table">
+                            <div class="customer-table__header">
+                                <button type="submit"
+                                        form="addCustomerForm"
+                                        class="customer-table__save">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                </button>
+                            </div>
+
+                            <div class="customer-table__inner">
+                                <form id="addCustomerForm" class="add-customer-form">
+
+                                    <!-- Avatar -->
+                                    <div class="add-customer-form__field">
+                                        <label class="add-customer-form__label">
+                                            Ảnh đại diện:
+                                        </label>
+                                        <input type="file"
+                                               name="avatar"
+                                               class="add-customer-form__input"
+                                               accept="image/*"
+                                               required>
+                                    </div>
+
+                                    <!-- Tên -->
+                                    <div class="add-customer-form__field">
+                                        <label class="add-customer-form__label">
+                                            Họ và tên:
+                                        </label>
+                                        <input type="text"
+                                               name="name"
+                                               class="add-customer-form__input"
+                                               required>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="add-customer-form__field">
+                                        <label class="add-customer-form__label">
+                                            Email:
+                                        </label>
+                                        <input type="email"
+                                               name="email"
+                                               class="add-customer-form__input"
+                                               required>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="add-customer-form__field">
+                                        <label class="add-customer-form__label">
+                                            Mật khẩu:
+                                        </label>
+                                        <input type="password"
+                                               name="password"
+                                               class="add-customer-form__input"
+                                               required>
+                                    </div>
+
+                                    <!-- Số điện thoại -->
+                                    <div class="add-customer-form__field">
+                                        <label class="add-customer-form__label">
+                                            Số điện thoại:
+                                        </label>
+                                        <input type="text"
+                                               name="phone"
+                                               class="add-customer-form__input">
+                                    </div>
+
+                                    <!-- Địa chỉ -->
+                                    <div class="add-customer-form__field">
+                                        <label class="add-customer-form__label">
+                                            Địa chỉ:
+                                        </label>
+                                        <input type="text"
+                                               name="address"
+                                               class="add-customer-form__input">
+                                    </div>
+
+                                    <!-- Trạng thái -->
+                                    <div class="add-customer-form__field">
+                                        <label class="add-customer-form__label">
+                                            Trạng thái:
+                                        </label>
+                                        <select name="status" class="add-customer-form__input">
+                                            <option value="offline">Đã đăng xuất</option>
+                                            <option value="online">Đang đăng nhập</option>
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
                     <section id="product" class="manage-detail">
                         <h2 class="manage__heading">Sản phẩm</h2>
 
@@ -408,6 +715,9 @@
     const sectionProduct = document.getElementById("product");
     const sectionAdd = document.getElementById("add-product");
     const sectionOrder = document.getElementById("order");
+    const sectionCustomer = document.getElementById("customer");
+    const sectionCustomerDetail = document.getElementById("customer-detail");
+    const sectionCustomerEdit = document.getElementById("customer-edit");
     const menuLinks = document.querySelectorAll(".manage-nav__link");
     const btnAdd = document.querySelector(".product-table__btn");
 
@@ -416,6 +726,9 @@
         sectionProduct.style.display = "none";
         sectionAdd.style.display = "none";
         sectionOrder.style.display = "none";
+        sectionCustomer.style.display = "none";
+        sectionCustomerDetail.style.display = "none";
+        sectionCustomerEdit.style.display = "none";
     }
 
     // Click menu
@@ -427,6 +740,7 @@
 
             if(targetId === "product") sectionProduct.style.display = "block";
             if(targetId === "order") sectionOrder.style.display = "block";
+            if (targetId === "customer") sectionCustomer.style.display = "block";
         });
     });
 
@@ -462,6 +776,42 @@
         sectionProduct.style.display = "block";
         formInline.reset();
     });
+    // Click nút "Xem"
+    document.querySelectorAll(".customer-table__view").forEach(btn => {
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            sectionCustomerDetail.style.display = "block";
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    // Click nút "Đóng"
+    const btnBackCustomer = document.querySelector(
+        "#customer-detail .btn--default-color"
+    );
+
+    if (btnBackCustomer) {
+        btnBackCustomer.addEventListener("click", () => {
+            sectionCustomerDetail.style.display = "none";
+            sectionCustomer.style.display = "block";
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+    // SỬA KHÁCH HÀNG
+    document.querySelectorAll(".customer-table__edit").forEach(btn => {
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            sectionCustomerEdit.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+    function hideCustomerEdit() {
+        hideAllSections();
+        sectionCustomer.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
