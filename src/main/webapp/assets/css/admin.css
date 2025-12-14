@@ -355,3 +355,49 @@
 .order-table__payment--pending {
     color: #19a7c4;
 }
+///////////////////////////////////////////////////*/
+/* ===== CẤU HÌNH ===== */
+
+.config-box {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.config-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.config-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.config-label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-color);
+}
+
+.config-input,
+.config-textarea {
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.config-input:focus,
+.config-textarea:focus {
+    border-color: #666;
+}
+
+.config-actions {
+    margin-top: 20px;
+    text-align: right;
+}
