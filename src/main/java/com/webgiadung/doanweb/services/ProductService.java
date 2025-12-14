@@ -6,9 +6,9 @@ import com.webgiadung.doanweb.model.Product;
 import java.util.List;
 
 public class ProductService {
-   ProductDao pdao= new ProductDao();
-   public List<Product> getListProduct(){
-       List<Product> products = pdao.getListProduct();
-       return products;
-   }
+    ProductDao pdao = new ProductDao();
+
+    public List<Product> getListProduct(){
+        return pdao.getListProduct();
+    }
 }

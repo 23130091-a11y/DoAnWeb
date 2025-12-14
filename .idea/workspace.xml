@@ -2,178 +2,54 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="DoAnWeb" />
+      <artifact name="DoAnWeb:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ce9ba27-d2cb-432d-8844-263b7313160e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ListProduct.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/BaseDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/ProductDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/db.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6ce9ba27-d2cb-432d-8844-263b7313160e" name="Changes" comment="Chuyển dự án tĩnh sang web application (đã chạy êm ko lỗi)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/LogoutController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/AuthDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DoAnWeb.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/account.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/account.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/account.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/blog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/cart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/checkout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/checkout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/grid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/product.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/product.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/register.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/search.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/search.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/slide.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/slide.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/android-icon-144x144.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/android-icon-144x144.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/android-icon-192x192.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/android-icon-192x192.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/android-icon-36x36.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/android-icon-36x36.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/android-icon-48x48.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/android-icon-48x48.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/android-icon-72x72.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/android-icon-72x72.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/android-icon-96x96.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/android-icon-96x96.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-114x114.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-114x114.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-120x120.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-120x120.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-144x144.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-144x144.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-152x152.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-152x152.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-180x180.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-180x180.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-57x57.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-57x57.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-60x60.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-60x60.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-72x72.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-72x72.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-76x76.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-76x76.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon-precomposed.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon-precomposed.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/apple-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/apple-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/browserconfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/browserconfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/favicon-16x16.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/favicon-16x16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/favicon-32x32.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/favicon-32x32.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/favicon-96x96.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/favicon-96x96.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/ms-icon-144x144.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/ms-icon-144x144.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/ms-icon-150x150.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/ms-icon-150x150.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/ms-icon-310x310.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/ms-icon-310x310.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/favicon/ms-icon-70x70.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/favicon/ms-icon-70x70.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/add-cart-01.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/add-cart-01.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/add-cart-02.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/add-cart-02.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/add-cart-03.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/add-cart-03.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/amthuoc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/amthuoc.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/appstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/appstore.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/avatar1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/avatar1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/avatar2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/avatar2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/avatar3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/avatar3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/balo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/balo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/banner-background.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/banner-background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/battrumxe.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/battrumxe.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/binhxit.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/binhxit.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/blog-img-01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/blog-img-01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/blog-img-02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/blog-img-02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/blog-img-03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/blog-img-03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/blog-img-04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/blog-img-04.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/bochuyendoi.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/bochuyendoi.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/bodieukhien.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/bodieukhien.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/bodungcu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/bodungcu.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/bogoui.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/bogoui.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/candien.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/candien.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/cantieuly.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/cantieuly.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/chaixit.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/chaixit.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/chotkhoa.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/chotkhoa.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/coruabinh.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/coruabinh.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/denbanled.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/denbanled.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/denbatmuoi.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/denbatmuoi.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/denhoc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/denhoc.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/detail-01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/detail-01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/detail-02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/detail-02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/detail-03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/detail-03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/detail-04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/detail-04.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/details-img.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/details-img.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/donghodientu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/donghodientu.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/donghotreotuong.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/donghotreotuong.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/dungcucatmong.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/dungcucatmong.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/fan.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/fan.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/ghe.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/ghe.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/giado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/giado.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/google-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/google-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/googleplay.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/googleplay.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/hero_slide-01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/hero_slide-01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/hero_slide-02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/hero_slide-02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/hopcomdien.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/hopcomdien.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/keochuot.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/keochuot.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/keogiay.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/keogiay.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/ketreoquanao.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/ketreoquanao.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/khan.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/khan.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/khoatayga.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/khoatayga.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/kinhvienthi.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/kinhvienthi.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/leucamtrai.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/leucamtrai.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/loa.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/loa.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/loadeban.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/loadeban.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/luoicatco.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/luoicatco.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maygiat1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maygiat1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maygiat2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maygiat2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maygiat3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maygiat3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maygiat4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maygiat4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/mayhutbui.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/mayhutbui.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maylambanh.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maylambanh.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maylambap.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maylambap.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maylamtoc.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maylamtoc.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maymay.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maymay.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/maysaysinhto.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/maysaysinhto.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/mayxay.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/mayxay.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/micro.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/micro.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/moilua.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/moilua.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/nhang.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/nhang.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/no-cart_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/no-cart_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/no-login_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/no-login_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/notify-img-01.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/notify-img-01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/notify-img-02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/notify-img-02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/notify-img-03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/notify-img-03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/propose-01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/propose-01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/propose-02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/propose-02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/propose-03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/propose-03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/qr_code.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/qr_code.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/quatsac.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/quatsac.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/senhoc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/senhoc.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/set30nut.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/set30nut.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/tachuong.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/tachuong.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/thapdungbia.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/thapdungbia.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/thatlung.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/thatlung.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/thotkinh.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/thotkinh.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/thuockep.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/thuockep.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/thuphatamthnah.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/thuphatamthnah.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/tuichongsoc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/tuichongsoc.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/tuirac.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/tuirac.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/tuitreo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/tuitreo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/tuivai.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/tuivai.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/tuixach.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/tuixach.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/tấuc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/tấuc.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/vali.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/vali.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/vienvesinh.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/vienvesinh.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/voboc.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/voboc.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/voisen.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/voisen.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/img/xaytieu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/xaytieu.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/blog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/blog.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cart.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/checkout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/checkout.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/product.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/search.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webapp/slide.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/slide.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ListProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ListProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/BaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/BaseDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/HomeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/HomeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/controller/ListProduct.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/ProductDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/ProductDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/services/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/services/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/assets/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/HomeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/HomeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/controller/ListProduct.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/ProductDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/ProductDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/services/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/services/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/db.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,8 +59,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
+        <option value="Servlet" />
       </list>
     </option>
   </component>
@@ -200,7 +77,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/23130091-a11y/DoAnWeb.git&quot;,
-    &quot;accountId&quot;: &quot;928dfe79-bfbf-4237-a649-71782bb85879&quot;
+    &quot;accountId&quot;: &quot;46b41889-ad49-43c1-8c87-70d8c6bebf78&quot;
   }
 }</component>
   <component name="LogFilters">
@@ -229,7 +106,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Application.BaseDao$DBProperties.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BaseDao$DBProperties.executor&quot;: &quot;Coverage&quot;,
     &quot;Application.Test.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
     &quot;Maven.DoAnWeb [clean].executor&quot;: &quot;Run&quot;,
@@ -246,10 +123,11 @@
     &quot;Tomcat Server.Tomcat 9.0.112.executor&quot;: &quot;Run&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;23130005__BuiThiPhuongAnh&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nguye/OneDrive/DoAnWeb/src/main/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -264,6 +142,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nguye\OneDrive\DoAnWeb\src\main\resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\DoAnLapTrinh\DoAnWeb\src\main" />
     </key>
@@ -282,19 +163,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 11.0.14">
-    <configuration name="BaseDao$DBProperties" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.webgiadung.doanweb.dao.BaseDao$DBProperties" />
-      <module name="DoAnWeb" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.webgiadung.doanweb.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.webgiadung.doanweb.dao.Test" />
       <module name="DoAnWeb" />
@@ -308,10 +176,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tomcat 11.0.14" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.14" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:/Program Files/Java/jdk-21">
+    <configuration name="Tomcat 11.0.14" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.14" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="21">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="DoAnWeb">
+        <artifact name="DoAnWeb:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/DoAnWeb" />
           </settings>
@@ -392,21 +260,26 @@
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
           <artifact name="DoAnWeb" />
+          <artifact name="DoAnWeb:war exploded" />
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Tomcat Server.Tomcat 11.0.14" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.BaseDao$DBProperties" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
@@ -423,10 +296,26 @@
       <workItem from="1765100949079" duration="2267000" />
       <workItem from="1765175373279" duration="13098000" />
       <workItem from="1765194684862" duration="12008000" />
+      <workItem from="1765532480916" duration="4567000" />
+      <workItem from="1765550047637" duration="5933000" />
+      <workItem from="1765560013484" duration="2198000" />
+      <workItem from="1765581455070" duration="1169000" />
+      <workItem from="1765582878296" duration="264000" />
+      <workItem from="1765584867301" duration="811000" />
+      <workItem from="1765588533496" duration="754000" />
+      <workItem from="1765597626712" duration="606000" />
+      <workItem from="1765604816695" duration="64000" />
+      <workItem from="1765699280824" duration="662000" />
+      <workItem from="1765712570067" duration="9142000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DoAnWeb$BaseDao_DBProperties.ic" NAME="BaseDao$DBProperties Coverage Results" MODIFIED="1765282209857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.webgiadung.doanweb.dao.*</FILTER>
+    </SUITE>
   </component>
 </project>
