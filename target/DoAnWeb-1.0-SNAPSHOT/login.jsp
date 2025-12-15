@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập Gia Dụng Online</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/grid.css">
@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/login.css">
 
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 
@@ -41,12 +43,23 @@
         </div>
 
         <div class="login-container">
-            <form class="login-form" >
+            <form class="login-form" action="login" method="post" onsubmit="return validateForm()" >
                 <h3>Đăng nhập</h3>
+                <!-- Thông báo lỗi -->
+                <c:if test="${not empty error}">
+                    <div class="text-danger mb-1">${error}</div>
+                </c:if>
 
-                <input type="text" placeholder="Email" required>
+                <input type="email"
+                       name="email"
+                       value="${requestScope.email}"
+                       placeholder="Email"
+                       required>
 
-                <input type="password" placeholder="Mật khẩu" required>
+                <input type="password"
+                       name="password"
+                       placeholder="Mật khẩu"
+                       required>
 
                 <button type="submit" class="btn-login">ĐĂNG NHẬP</button>
 

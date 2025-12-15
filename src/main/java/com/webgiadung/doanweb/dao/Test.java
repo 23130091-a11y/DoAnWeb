@@ -7,16 +7,12 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-            // Tạo instance service
-            ProductService ps = new ProductService();
+        ProductService ps = new ProductService();
 
-            // Lấy danh sách sản phẩm
-            List<Product> products = ps.getListProduct();
+        List<Product> products = ps.getListProduct();
 
-            // In ra console
-            for (Product p : products) {
-                System.out.println(p.toString());
-
-            }
+        for (Product p : products) {
+            System.out.println(p.toString());
+        }
     }
 }

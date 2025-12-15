@@ -216,7 +216,7 @@
 
 .product-table__back-btn {
     margin: 20px auto 0 auto;
-    display: block;           /* block để margin auto có hiệu lực */
+    display: block;
     min-width: 200px;
     border-radius: 2px;
 }
@@ -355,6 +355,52 @@
 .order-table__payment--pending {
     color: #19a7c4;
 }
+
+/* ===== CẤU HÌNH ===== */
+
+.config-box {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.config-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.config-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.config-label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-color);
+}
+
+.config-input,
+.config-textarea {
+    padding: 10px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.config-input:focus,
+.config-textarea:focus {
+    border-color: #666;
+}
+
+.config-actions {
+    margin-top: 20px;
+    text-align: right;
+}
 /* customer */
 
 .customer-table {
@@ -381,13 +427,13 @@
 .customer-table__row {
     display: grid;
     grid-template-columns:
-        80px        /* Avatar */
-        1fr         /* Tên */
-        1fr         /* Email */
-        1fr         /* Địa chỉ */
-        80px        /* Xem */
-        80px        /* Sửa */
-        80px;       /* Xóa */
+        80px
+        1fr
+        1fr
+        1fr
+        80px
+        80px
+        80px;
     border: 1px solid #ccc;
 }
 
@@ -536,3 +582,358 @@
     margin-top: 20px;
     text-align: right;
 }
+/* ====== NEWS ====== */
+
+.news-menu {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.news-menu__btn {
+    padding: 8px 16px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.news-menu__btn.active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
+}
+
+.news-search {
+    margin-bottom: 8px;
+}
+
+.news-search__input {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-table__header{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.add-table__btn{
+    --height: 36px;
+    min-width: 140px;
+    float: right;
+}
+
+.news-table {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.news-table__inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-table__row {
+    display: grid;
+    grid-template-columns:
+        80px
+        2fr
+        1fr
+        1fr
+        1fr
+        80px
+        80px
+        80px
+        80px;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    padding: 8px 5px;
+}
+
+.news-table__row:first-child {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-weight: 600;
+}
+
+.news-table__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.news-table__cell:first-child {
+    justify-content: center;
+    padding: 5px;
+}
+
+.news-table__img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid #ddd;
+}
+
+/* Buttons */
+.news-table__view,
+.news-table__edit,
+.news-table__delete {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #E06A1C;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.news-table__view:hover,
+.news-table__edit:hover,
+.news-table__delete:hover {
+    color: #fff;
+    background-color: var(--soft-color);
+}
+
+.news-table__view:active,
+.news-table__edit:active,
+.news-table__delete:active {
+    background-color: var(--soft-color);
+}
+
+/* Status */
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status--active {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+}
+
+.status--inactive {
+    background-color: #fdecea;
+    color: #c82333;
+}
+
+/* Hidden */
+.hidden {
+    display: none;
+}
+/* === Slide Detail & Blog Detail Section === */
+.slide-detail,
+.blog-detail {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: 'Arial', sans-serif;
+}
+
+.slide-detail__card,
+.blog-detail__card {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fafafa;
+}
+
+/* Hình ảnh */
+.slide-detail__image,
+.blog-detail__image {
+    width: 180px;
+    text-align: center;
+}
+
+.slide-detail__image img,
+.blog-detail__image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 3px solid #eee;
+}
+
+.slide-detail__status,
+.blog-detail__status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 14px;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Status active/inactive */
+.slide-detail__status.active,
+.blog-detail__status.active {
+    background-color: #e6f7ee;
+    color: #1e9d60;
+}
+
+.slide-detail__status.inactive,
+.blog-detail__status.inactive {
+    background-color: #fdeaea;
+    color: #d93025;
+}
+
+/* Thông tin */
+.slide-detail__info,
+.blog-detail__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slide-detail__row,
+.blog-detail__row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+}
+
+.slide-detail__row .label,
+.blog-detail__row .label {
+    width: 160px;
+    font-weight: 600;
+    color: #555;
+}
+
+.slide-detail__row .value,
+.blog-detail__row .value {
+    color: #333;
+    word-break: break-word;
+}
+
+/* Nút đóng */
+.slide-detail__actions,
+.blog-detail__actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.slide-detail__actions .btn,
+.blog-detail__actions .btn {
+    min-width: 120px;
+    height: 36px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #1e9d60;
+    color: #fff;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.slide-detail__actions .btn:hover,
+.blog-detail__actions .btn:hover {
+    background-color: #16834d;
+}
+
+.slide-detail__row input[type="checkbox"],
+.blog-detail__row input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+/* ================= ADD BLOG ================= */
+.add-blog-form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-blog-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-blog-form__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.add-blog-form__input {
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.add-blog-form__editor {
+    min-height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1.4rem;
+}
+/* ================= ADD SLIDE ================= */
+.add-slide-form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-slide-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-slide-form__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.add-slide-form__input {
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.add-slide-form__input:focus {
+    border: 1px solid #666;
+}
+
