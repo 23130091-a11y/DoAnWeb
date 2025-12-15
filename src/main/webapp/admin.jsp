@@ -67,7 +67,7 @@
 
                         <ul class="manage-nav__list">
                             <li class="manage-nav__item">
-                                <a href="#!" class="manage-nav__link">Cấu hình</a>
+                                <a href="#config" class="manage-nav__link">Cấu hình</a>
                             </li>
                             <li class="manage-nav__item">
                                 <a href="#!" class="manage-nav__link">Tin tức</a>
@@ -84,6 +84,59 @@
                 </div>
 
                 <div class="col l-10 m-12 c-12">
+                    <section id="config" class="manage-detail">
+                        <h2 class="manage__heading">Cấu hình hệ thống</h2>
+
+                        <div class="config-box">
+                            <form class="config-form">
+
+                                <div class="config-group">
+                                    <label class="config-label">Tên website</label>
+                                    <input type="text" class="config-input" placeholder="Nhập tên website">
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Logo website</label>
+                                    <input type="file" class="config-input">
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Email liên hệ</label>
+                                    <input type="email" class="config-input" placeholder="contact@gmail.com">
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Số điện thoại</label>
+                                    <input type="text" class="config-input" placeholder="0123 456 789">
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Địa chỉ</label>
+                                    <input type="text" class="config-input" placeholder="Địa chỉ cửa hàng">
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Mô tả website</label>
+                                    <textarea class="config-textarea" rows="4"
+                                              placeholder="Mô tả ngắn về website"></textarea>
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Nội dung footer</label>
+                                    <textarea class="config-textarea" rows="3"
+                                              placeholder="Bản quyền, thông tin công ty"></textarea>
+                                </div>
+
+                                <div class="config-actions">
+                                    <button type="submit" class="btn btn--default-color">
+                                        Lưu cấu hình
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+
                     <section id="product" class="manage-detail">
                         <h2 class="manage__heading">Sản phẩm</h2>
 
@@ -405,6 +458,7 @@
 </main>
 </body>
 <script>
+    const sectionConfig = document.getElementById("config");
     const sectionProduct = document.getElementById("product");
     const sectionAdd = document.getElementById("add-product");
     const sectionOrder = document.getElementById("order");
@@ -416,6 +470,7 @@
         sectionProduct.style.display = "none";
         sectionAdd.style.display = "none";
         sectionOrder.style.display = "none";
+        sectionConfig.style.display = "none";
     }
 
     // Click menu
@@ -424,7 +479,7 @@
             e.preventDefault();
             const targetId = this.getAttribute("href").replace("#","");
             hideAllSections(); // ẩn tất cả trước
-
+            if(targetId === "config") sectionConfig.style.display = "block";
             if(targetId === "product") sectionProduct.style.display = "block";
             if(targetId === "order") sectionOrder.style.display = "block";
         });
