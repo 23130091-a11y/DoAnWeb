@@ -85,10 +85,12 @@
 
                 <div class="col l-10 m-12 c-12">
                     <section id="config" class="manage-detail">
-                        <h2 class="manage__heading">Cấu hình hệ thống</h2>
+                        <h2 class="manage__heading">Cấu hình hệ thống Bán hàng</h2>
 
                         <div class="config-box">
                             <form class="config-form">
+
+                                <h3 class="config-sub-heading">🌐 Cấu hình chung</h3>
 
                                 <div class="config-group">
                                     <label class="config-label">Tên website</label>
@@ -98,38 +100,98 @@
                                 <div class="config-group">
                                     <label class="config-label">Logo website</label>
                                     <input type="file" class="config-input">
+                                    <small class="config-note">Logo này cũng sẽ được dùng làm Favicon nếu không có tùy chọn riêng.</small>
                                 </div>
 
                                 <div class="config-group">
                                     <label class="config-label">Email liên hệ</label>
-                                    <input type="email" class="config-input" placeholder="contact@gmail.com">
+                                    <input type="email" class="config-input" placeholder="contact@example.com">
                                 </div>
 
                                 <div class="config-group">
-                                    <label class="config-label">Số điện thoại</label>
+                                    <label class="config-label">Số điện thoại Hotline</label>
                                     <input type="text" class="config-input" placeholder="0123 456 789">
                                 </div>
 
                                 <div class="config-group">
-                                    <label class="config-label">Địa chỉ</label>
-                                    <input type="text" class="config-input" placeholder="Địa chỉ cửa hàng">
+                                    <label class="config-label">Địa chỉ Trụ sở/Cửa hàng</label>
+                                    <input type="text" class="config-input" placeholder="Địa chỉ chi tiết">
                                 </div>
 
                                 <div class="config-group">
                                     <label class="config-label">Mô tả website</label>
                                     <textarea class="config-textarea" rows="4"
-                                              placeholder="Mô tả ngắn về website"></textarea>
+                                              placeholder="Mô tả ngắn về website, hiển thị ở chân trang và giới thiệu"></textarea>
                                 </div>
 
                                 <div class="config-group">
-                                    <label class="config-label">Nội dung footer</label>
+                                    <label class="config-label">Nội dung Footer (Chân trang)</label>
                                     <textarea class="config-textarea" rows="3"
-                                              placeholder="Bản quyền, thông tin công ty"></textarea>
+                                              placeholder="Bản quyền, thông tin công ty, liên kết nhanh..."></textarea>
+                                </div>
+
+                                <hr class="config-divider">
+
+                                <h3 class="config-sub-heading">💰 Cấu hình Thanh toán & Vận chuyển</h3>
+
+                                <div class="config-group">
+                                    <label class="config-label">Tiền tệ mặc định</label>
+                                    <select class="config-input">
+                                        <option value="VND">VND (Việt Nam Đồng)</option>
+                                        <option value="USD">USD (Đô la Mỹ)</option>
+                                        <option value="EUR">EUR (Euro)</option>
+                                    </select>
+                                </div>
+
+                                <div class="config-group config-group--checkbox">
+                                    <label class="config-label">Kích hoạt thanh toán COD (Thanh toán khi nhận hàng)</label>
+                                    <input type="checkbox" id="enable_cod" checked>
+                                    <label for="enable_cod" class="checkbox-toggle"></label>
+                                </div>
+
+                                <div class="config-group config-group--checkbox">
+                                    <label class="config-label">Kích hoạt thanh toán Online (VNPay, Momo...)</label>
+                                    <input type="checkbox" id="enable_online_payment">
+                                    <label for="enable_online_payment" class="checkbox-toggle"></label>
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Phí vận chuyển mặc định (Đơn hàng dưới ngưỡng)</label>
+                                    <input type="number" class="config-input" placeholder="Ví dụ: 30000" min="0">
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Ngưỡng miễn phí vận chuyển (VNĐ)</label>
+                                    <input type="number" class="config-input" placeholder="Ví dụ: 500000" min="0">
+                                    <small class="config-note">Đơn hàng đạt ngưỡng này sẽ được miễn phí vận chuyển.</small>
+                                </div>
+
+                                <hr class="config-divider">
+
+                                <h3 class="config-sub-heading">🔍 Cấu hình SEO</h3>
+
+                                <div class="config-group">
+                                    <label class="config-label">Tiêu đề SEO mặc định</label>
+                                    <input type="text" class="config-input" placeholder="Tiêu đề trang chủ">
+                                    <small class="config-note">Tối đa 60 ký tự.</small>
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Mô tả SEO mặc định</label>
+                                    <textarea class="config-textarea" rows="3"
+                                              placeholder="Mô tả cho công cụ tìm kiếm"></textarea>
+                                    <small class="config-note">Tối đa 160 ký tự.</small>
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Mã Google Analytics/Google Tag Manager</label>
+                                    <input type="text" class="config-input" placeholder="GTM-XXXXXX hoặc UA-XXXXXX">
+                                    <small class="config-note">Dùng để theo dõi truy cập và hành vi người dùng.</small>
                                 </div>
 
                                 <div class="config-actions">
                                     <button type="submit" class="btn btn--default-color">
-                                        Lưu cấu hình
+                                        Lưu tất cả cấu hình
                                     </button>
                                 </div>
 
