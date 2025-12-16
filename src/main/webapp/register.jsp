@@ -36,18 +36,44 @@
         <div class="banner-section"></div>
 
         <div class="login-container">
-            <form class="login-form">
+            <form class="login-form" action="register" method="post">
                 <h3>Đăng ký</h3>
-                <input type="text" placeholder="Email" required>
-                <input type="text" placeholder="Số điện thoại" required>
-                <input type="password" placeholder="Mật khẩu" required>
-                <input type="password" placeholder="Nhập lại mật khẩu" required>
+
+                <input type="text"
+                       name="email"
+                       placeholder="Email"
+                       required>
+
+                <input type="text"
+                       name="phone"
+                       placeholder="Số điện thoại"
+                       required>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Mật khẩu"
+                       required>
+
+                <input type="password"
+                       name="repassword"
+                       placeholder="Nhập lại mật khẩu"
+                       required>
 
                 <button type="submit" class="btn-login">ĐĂNG KÝ</button>
+
+                <%-- HIỂN THỊ LỖI --%>
+                <% if (request.getAttribute("error") != null) { %>
+                <p style="color:red; margin-top:10px;">
+                    <%= request.getAttribute("error") %>
+                </p>
+                <% } %>
+
                 <div class="register-link">
-                    <span>Đã có tài khoản?</span> <a href="login.jsp">Đăng nhập</a>
+                    <span>Đã có tài khoản?</span>
+                    <a href="login.jsp">Đăng nhập</a>
                 </div>
             </form>
+
         </div>
     </main>
     <footer id="footer" class="footer">
