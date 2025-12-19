@@ -216,7 +216,7 @@
 
 .product-table__back-btn {
     margin: 20px auto 0 auto;
-    display: block;           /* block để margin auto có hiệu lực */
+    display: block;
     min-width: 200px;
     border-radius: 2px;
 }
@@ -356,94 +356,75 @@
     color: #19a7c4;
 }
 
-/* ===== CẤU HÌNH ===== */
+/*TRANG CẤU HÌNH HỆ THỐNG */
 
-<style>
-
-     /*  Cấu trúc và Tiêu đề */
-
- .manage-detail {
-     max-width: 900px;
-     margin: 30px auto;
-     padding: 30px;
-     background-color: #f7f9fc; /* Nền nhẹ nhàng */
-     border-radius: 12px;
-     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
- }
+#config.manage-detail {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px 28px;
+    border: 1px solid #e6e6e6;
+}
 
 .manage__heading {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f6a500;
     color: #333;
-    font-size: 2em;
-    padding-bottom: 15px;
-    margin-bottom: 30px;
-    border-bottom: 3px solid #e0e0e0;
+}
+
+.config-box {
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.config-form {
+    max-width: 900px;
 }
 
 .config-sub-heading {
-    margin-top: 40px;
-    margin-bottom: 25px;
-    color: #007bff;
-    font-size: 1.35em;
+    font-size: 16px;
     font-weight: 600;
-    padding: 10px 0;
-    border-left: 5px solid #007bff; /* Điểm nhấn bên trái */
-    padding-left: 15px;
-    background-color: #eaf5ff;
+    margin: 28px 0 16px;
+    color: #444;
 }
 
 .config-divider {
-    border: 0;
-    border-top: 1px solid #ddd;
-    margin: 40px 0;
-}
-
-
-/*  Nhóm Form và Input */
-
-.config-box {
-    padding: 10px;
+    border: none;
+    border-top: 1px dashed #ddd;
+    margin: 28px 0;
 }
 
 .config-group {
-    margin-bottom: 25px;
-    padding: 18px;
-    background: #fff;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-    transition: box-shadow 0.3s ease;
-}
-
-.config-group:focus-within {
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2); /* Hiệu ứng khi focus */
-    border-color: #007bff;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
 }
 
 .config-label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #495057;
-    font-size: 1.05em;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
 }
 
 .config-input,
-.config-textarea,
-.config-group select {
+.config-textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
+    padding: 10px 12px;
+    font-size: 14px;
     border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 1em;
-    color: #495057;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    border: 1px solid #ccc;
+    background: #fff;
+    transition: all 0.2s ease;
 }
 
 .config-input:focus,
-.config-textarea:focus,
-.config-group select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+.config-textarea:focus {
+    border-color: #f6a500;
+    box-shadow: 0 0 0 2px rgba(246,165,0,0.15);
     outline: none;
 }
 
@@ -452,88 +433,611 @@
     min-height: 80px;
 }
 
-.config-note {
-    display: block;
-    margin-top: 8px;
-    font-size: 0.85em;
-    color: #6c757d;
+.config-input[type="file"] {
+    padding: 8px;
+    background: #fff;
+    cursor: pointer;
 }
 
-
-/*  Tùy chọn Checkbox (Toggle Switch) */
+.config-note {
+    font-size: 12px;
+    color: #777;
+}
 
 .config-group--checkbox {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    border-left: 5px solid #28a745; /* Màu xanh lá cho tùy chọn bật/tắt */
-    background: #e6f7eb;
+    justify-content: space-between;
 }
 
 .config-group--checkbox input[type="checkbox"] {
-    display: none; /* Ẩn checkbox gốc */
+    display: none;
 }
 
-/* Tạo Toggle Slider */
 .checkbox-toggle {
-    cursor: pointer;
-    display: block;
-    width: 50px;
-    height: 26px;
+    width: 42px;
+    height: 22px;
     background: #ccc;
-    border-radius: 13px;
+    border-radius: 22px;
     position: relative;
-    transition: background-color 0.3s;
+    cursor: pointer;
+    transition: background 0.25s;
 }
 
-.checkbox-toggle:after {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 20px;
-    height: 20px;
-    background: white;
+.checkbox-toggle::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    background: #fff;
     border-radius: 50%;
-    transition: transform 0.3s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.25s;
 }
 
-/* Khi checkbox được check */
-.config-group--checkbox input:checked + .checkbox-toggle {
-    background: #28a745;
+input[type="checkbox"]:checked + .checkbox-toggle {
+    background: #f6a500;
 }
 
-.config-group--checkbox input:checked + .checkbox-toggle:after {
-    transform: translateX(24px); /* Di chuyển nút tròn sang phải */
+input[type="checkbox"]:checked + .checkbox-toggle::after {
+    transform: translateX(20px);
 }
-
-
-/*  Hành động (Button) */
 
 .config-actions {
+    margin-top: 30px;
     text-align: right;
-    margin-top: 40px;
 }
 
-.btn--default-color {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 25px;
+.config-actions .btn {
+    padding: 10px 26px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    background: #f6a500;
     border: none;
-    border-radius: 8px;
+    color: #fff;
     cursor: pointer;
-    font-size: 1.1em;
+    transition: background 0.2s;
+}
+
+.config-actions .btn:hover {
+    background: #e69500;
+}
+
+/* customer */
+
+.customer-table {
+    padding: 8px;
+}
+
+.customer-table__header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.customer-table__btn {
+    --height: 36px;
+    min-width: 140px;
+    float: right;
+    border-radius: 2px;
+}
+
+.customer-table__inner {
+    margin-top: 20px;
+}
+
+.customer-table__row {
+    display: grid;
+    grid-template-columns:
+        80px
+        1fr
+        1fr
+        1fr
+        80px
+        80px
+        80px;
+    border: 1px solid #ccc;
+}
+
+.customer-table__row + .customer-table__row {
+    border-top: none;
+}
+
+.customer-table__row:first-child {
+    background-color: var(--primary-color);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.customer-table__row:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.customer-table__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 5px;
+
+    border-left: 1px solid #ccc;
+    font-size: 1.4rem;
     font-weight: 500;
-    transition: background-color 0.3s, transform 0.1s;
+    color: var(--white-color);
 }
 
-.btn--default-color:hover {
-    background-color: #0056b3;
-    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
+.customer-table__cell:first-child {
+    border-left: none;
+    padding: 8px;
 }
 
-.btn--default-color:active {
-    transform: translateY(1px);
+.customer-table__img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
 }
-</style>
+
+.customer-table__text {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.customer-table__edit,
+.customer-table__delete,
+.customer-table__view
+{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #E06A1C;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.customer-table__view:hover,
+.customer-table__edit:hover,
+.customer-table__delete:hover {
+    color: #fff;
+    background-color: var(--soft-color);
+}
+.customer-table__view:active,
+.customer-table__edit:active,
+.customer-table__delete:active {
+    background-color: var(--soft-color);
+}
+
+.hidden {
+    display: none;
+}
+
+.customer-detail {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.customer-detail__card {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.customer-detail__avatar {
+    width: 180px;
+    text-align: center;
+}
+
+.customer-detail__avatar img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #eee;
+}
+
+.customer-detail__status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 12px;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.customer-detail__status.online {
+    background-color: #e6f7ee;
+    color: #1e9d60;
+}
+
+.customer-detail__status.offline {
+    background-color: #fdeaea;
+    color: #d93025;
+}
+
+.customer-detail__info {
+    flex: 1;
+}
+
+.customer-detail__row {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+}
+
+.customer-detail__row .label {
+    width: 160px;
+    font-weight: 600;
+    color: #555;
+}
+
+.customer-detail__row .value {
+    color: #333;
+}
+
+.customer-detail__actions {
+    margin-top: 20px;
+    text-align: right;
+}
+/* ====== NEWS ====== */
+
+.news-menu {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.news-menu__btn {
+    padding: 8px 16px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.news-menu__btn.active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
+}
+
+.news-search {
+    margin-bottom: 8px;
+}
+
+.news-search__input {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-table__header{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.add-table__btn{
+    --height: 36px;
+    min-width: 140px;
+    float: right;
+}
+
+.news-table {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.news-table__inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-table__row {
+    display: grid;
+    grid-template-columns:
+        80px
+        2fr
+        1fr
+        1fr
+        1fr
+        80px
+        80px
+        80px
+        80px;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    padding: 8px 5px;
+}
+
+.news-table__row:first-child {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-weight: 600;
+}
+
+.news-table__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.news-table__cell:first-child {
+    justify-content: center;
+    padding: 5px;
+}
+
+.news-table__img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid #ddd;
+}
+
+/* Buttons */
+.news-table__view,
+.news-table__edit,
+.news-table__delete {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #E06A1C;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.news-table__view:hover,
+.news-table__edit:hover,
+.news-table__delete:hover {
+    color: #fff;
+    background-color: var(--soft-color);
+}
+
+.news-table__view:active,
+.news-table__edit:active,
+.news-table__delete:active {
+    background-color: var(--soft-color);
+}
+
+/* Status */
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status--active {
+    background-color: #e6f4ea;
+    color: #1e7e34;
+}
+
+.status--inactive {
+    background-color: #fdecea;
+    color: #c82333;
+}
+
+/* Hidden */
+.hidden {
+    display: none;
+}
+/* === Slide Detail & Blog Detail Section === */
+.slide-detail,
+.blog-detail {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: 'Arial', sans-serif;
+}
+
+.slide-detail__card,
+.blog-detail__card {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fafafa;
+}
+
+/* Hình ảnh */
+.slide-detail__image,
+.blog-detail__image {
+    width: 180px;
+    text-align: center;
+}
+
+.slide-detail__image img,
+.blog-detail__image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 3px solid #eee;
+}
+
+.slide-detail__status,
+.blog-detail__status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 14px;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Status active/inactive */
+.slide-detail__status.active,
+.blog-detail__status.active {
+    background-color: #e6f7ee;
+    color: #1e9d60;
+}
+
+.slide-detail__status.inactive,
+.blog-detail__status.inactive {
+    background-color: #fdeaea;
+    color: #d93025;
+}
+
+/* Thông tin */
+.slide-detail__info,
+.blog-detail__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slide-detail__row,
+.blog-detail__row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+}
+
+.slide-detail__row .label,
+.blog-detail__row .label {
+    width: 160px;
+    font-weight: 600;
+    color: #555;
+}
+
+.slide-detail__row .value,
+.blog-detail__row .value {
+    color: #333;
+    word-break: break-word;
+}
+
+/* Nút đóng */
+.slide-detail__actions,
+.blog-detail__actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.slide-detail__actions .btn,
+.blog-detail__actions .btn {
+    min-width: 120px;
+    height: 36px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #1e9d60;
+    color: #fff;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.slide-detail__actions .btn:hover,
+.blog-detail__actions .btn:hover {
+    background-color: #16834d;
+}
+
+.slide-detail__row input[type="checkbox"],
+.blog-detail__row input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+/* ================= ADD BLOG ================= */
+.add-blog-form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-blog-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-blog-form__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.add-blog-form__input {
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.add-blog-form__editor {
+    min-height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1.4rem;
+}
+/* ================= ADD SLIDE ================= */
+.add-slide-form {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-slide-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.add-slide-form__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.add-slide-form__input {
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.add-slide-form__input:focus {
+    border: 1px solid #666;
+}
+

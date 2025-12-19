@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="assets/css/grid.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/admin.css?v=2">
     <!-- Include stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
@@ -70,8 +70,9 @@
                                 <a href="#config" class="manage-nav__link">Cấu hình</a>
                             </li>
                             <li class="manage-nav__item">
-                                <a href="#!" class="manage-nav__link">Tin tức</a>
+                                <a href="#news" class="manage-nav__link">Tin tức</a>
                             </li>
+                            <li class="manage-nav__item"><a href="#customer" class="manage-nav__link">Khách hàng</a></li>
                             <li class="manage-nav__item">
                                 <a href="#product" class="manage-nav__link manage-nav__link--active">Sản phẩm</a>
                             </li>
@@ -196,6 +197,605 @@
                                 </div>
 
                             </form>
+                        </div>
+                    </section>
+                    <section id="customer" class="manage-detail">
+                        <h2 class="manage__heading">Khách hàng</h2>
+
+                        <div class="customer-table">
+                            <div class="news-search">
+                                <input type="text" placeholder="Tìm kiếm..." class="news-search__input" id="searchSlide">
+                            </div>
+
+                            <!-- Bảng khách hàng -->
+                            <div class="customer-table__inner">
+
+                                <!-- Hàng tiêu đề -->
+                                <div class="customer-table__row">
+                                    <div class="customer-table__cell">Avatar</div>
+                                    <div class="customer-table__cell">Tên</div>
+                                    <div class="customer-table__cell">Email</div>
+                                    <div class="customer-table__cell">Địa chỉ</div>
+                                    <div class="customer-table__cell">Xem</div>
+                                    <div class="customer-table__cell">Sửa</div>
+                                    <div class="customer-table__cell">Xóa</div>
+                                </div>
+
+                                <!-- Một khách hàng -->
+                                <article class="customer-table__row">
+                                    <div class="customer-table__cell">
+                                        <img src="assets/img/avatar4.jpg" class="customer-table__img" alt="">
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">Nguyễn Văn A</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">vana@example.com</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">Hà Nội</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__view">Xem</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__edit">Sửa</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__delete">Xóa</button>
+                                    </div>
+
+                                </article>
+
+                                <!-- Một khách hàng -->
+                                <article class="customer-table__row">
+                                    <div class="customer-table__cell">
+                                        <img src="assets/img/avatar5.jpg" class="customer-table__img" alt="">
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">Trần Thị B</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">tranb@example.com</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <span class="customer-table__text">TP. HCM</span>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__view">Xem</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__edit">Sửa</button>
+                                    </div>
+
+                                    <div class="customer-table__cell">
+                                        <button class="customer-table__delete">Xóa</button>
+                                    </div>
+
+                                </article>
+
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Chi tiết khách hàng -->
+                    <section id="customer-detail" class="customer-detail hidden">
+                        <h2 class="manage__heading">Chi tiết khách hàng</h2>
+
+                        <div class="customer-detail__card">
+                            <!-- Avatar -->
+                            <div class="customer-detail__avatar">
+                                <img src="assets/img/avatar5.png" alt="Avatar">
+                                <span class="customer-detail__status online">Đang đăng nhập</span>
+                                <!-- <span class="customer-detail__status offline">Đã đăng xuất</span> -->
+                            </div>
+
+                            <!-- Thông tin -->
+                            <div class="customer-detail__info">
+                                <div class="customer-detail__row">
+                                    <span class="label">Tên:</span>
+                                    <span class="value">Nguyễn Văn A</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Email:</span>
+                                    <span class="value">vana@example.com</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Password:</span>
+                                    <span class="value">********</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Số điện thoại:</span>
+                                    <span class="value">0123 456 789</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Địa chỉ:</span>
+                                    <span class="value">Hà Nội</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Ngày tạo:</span>
+                                    <span class="value">01/12/2025</span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <span class="label">Ngày cập nhật:</span>
+                                    <span class="value">10/12/2025</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nút đóng -->
+                        <div class="customer-detail__actions">
+                            <button class="btn btn--default-color" onclick="hideCustomerDetail()">
+                                Đóng
+                            </button>
+                        </div>
+                    </section>
+                    <!-- Sửa khách hàng -->
+                    <section id="customer-edit" class="customer-detail hidden">
+                        <h2 class="manage__heading">Sửa thông tin khách hàng</h2>
+
+                        <div class="customer-detail__card">
+                            <!-- Avatar -->
+                            <div class="customer-detail__avatar">
+                                <img src="assets/img/avatar4.jpg" alt="Avatar">
+                                <span class="customer-detail__status online">Đang hoạt động</span>
+                            </div>
+
+                            <!-- Form thông tin -->
+                            <form class="customer-detail__info" id="customerEditForm">
+                                <div class="customer-detail__row">
+                                    <label class="label">Tên:</label>
+                                    <input type="text" class="input" value="Nguyễn Văn A">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Email:</label>
+                                    <input type="email" class="input" value="vana@example.com">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Password:</label>
+                                    <input type="password" class="input" placeholder="Nhập mật khẩu mới">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Số điện thoại:</label>
+                                    <input type="text" class="input" value="0123 456 789">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Địa chỉ:</label>
+                                    <input type="text" class="input" value="Hà Nội">
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Ngày tạo:</label>
+                                    <input type="text" class="input" value="01/12/2025" disabled>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Ngày cập nhật:</label>
+                                    <input type="text" class="input" value="10/12/2025" disabled>
+                                </div>
+
+                                <!-- Action -->
+                                <div class="customer-detail__actions">
+                                    <button type="submit" class="btn btn--default-color">
+                                        Lưu thay đổi
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn btn--default-color"
+                                            onclick="hideCustomerEdit()">
+                                        Hủy
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <section id="news" class="manage-detail">
+                        <h2 class="manage__heading">Danh mục tin tức</h2>
+
+                        <!-- Menu danh mục -->
+                        <div class="news-menu">
+                            <button class="news-menu__btn active" data-target="news-slide">Slide quảng cáo</button>
+                            <button class="news-menu__btn" data-target="news-blog">Blog tin tức</button>
+                        </div>
+
+                        <!-- Slide quảng cáo -->
+                        <div class="news-table" id="news-slide">
+                            <!-- Tìm kiếm -->
+                            <div class="news-search">
+                                <input type="text" placeholder="Tìm kiếm slide..." class="news-search__input" id="searchSlide">
+                            </div>
+                            <div class="add-table__header">
+                                <button class="btn btn--default-color add-table__btn">Thêm Slide</button>
+                            </div>
+
+                            <div class="news-table__inner">
+                                <!-- Header -->
+                                <div class="news-table__row news-table__row--header">
+                                    <div class="news-table__cell">Ảnh</div>
+                                    <div class="news-table__cell">Tên slide</div>
+                                    <div class="news-table__cell">Trạng thái</div>
+                                    <div class="news-table__cell">Ngày tạo</div>
+                                    <div class="news-table__cell">Ngày cập nhật</div>
+                                    <div class="news-table__cell">Post</div>
+                                    <div class="news-table__cell">Xem</div>
+                                    <div class="news-table__cell">Sửa</div>
+                                    <div class="news-table__cell">Xóa</div>
+                                </div>
+
+                                <!-- Dữ liệu mẫu -->
+                                <article class="news-table__row">
+                                    <div class="news-table__cell"><img src="assets/img/hero_slide-01.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell">Slide khuyến mãi 12.12</div>
+                                    <div class="news-table__cell"><span class="status status--active">Đang post</span></div>
+                                    <div class="news-table__cell">01/12/2025</div>
+                                    <div class="news-table__cell">10/12/2025</div>
+                                    <div class="news-table__cell"><input type="checkbox" checked></div>
+                                    <div class="news-table__cell"><button class="news-table__view">Xem</button></div>
+                                    <div class="news-table__cell"><button class="news-table__edit">Sửa</button></div>
+                                    <div class="news-table__cell"><button class="news-table__delete">Xóa</button></div>
+                                </article>
+
+                                <article class="news-table__row">
+                                    <div class="news-table__cell"><img src="assets/img/hero_slide-02.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell">Slide Black Friday</div>
+                                    <div class="news-table__cell"><span class="status status--inactive">Chưa post</span></div>
+                                    <div class="news-table__cell">15/11/2025</div>
+                                    <div class="news-table__cell">20/11/2025</div>
+                                    <div class="news-table__cell"><input type="checkbox"></div>
+                                    <div class="news-table__cell"><button class="news-table__view">Xem</button></div>
+                                    <div class="news-table__cell"><button class="news-table__edit">Sửa</button></div>
+                                    <div class="news-table__cell"><button class="news-table__delete">Xóa</button></div>
+                                </article>
+                            </div>
+                        </div>
+
+                        <!-- Blog tin tức -->
+                        <div class="news-table hidden" id="news-blog">
+                            <!-- Tìm kiếm -->
+                            <div class="news-search">
+                                <input type="text" placeholder="Tìm kiếm blog..." class="news-search__input" id="searchBlog">
+                            </div>
+                            <div class="add-table__header">
+                                <button class="btn btn--default-color add-table__btn">Thêm Blog</button>
+                            </div>
+
+                            <div class="news-table__inner">
+                                <!-- Header -->
+                                <div class="news-table__row news-table__row--header">
+                                    <div class="news-table__cell">Ảnh</div>
+                                    <div class="news-table__cell">Tiêu đề</div>
+                                    <div class="news-table__cell">Trạng thái</div>
+                                    <div class="news-table__cell">Ngày tạo</div>
+                                    <div class="news-table__cell">Ngày cập nhật</div>
+                                    <div class="news-table__cell">Post</div>
+                                    <div class="news-table__cell">Xem</div>
+                                    <div class="news-table__cell">Sửa</div>
+                                    <div class="news-table__cell">Xóa</div>
+                                </div>
+
+                                <!-- Dữ liệu mẫu -->
+                                <article class="news-table__row">
+                                    <div class="news-table__cell"><img src="assets/img/blog1.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell">Ra mắt sản phẩm mới 2025</div>
+                                    <div class="news-table__cell"><span class="status status--active">Đang post</span></div>
+                                    <div class="news-table__cell">05/12/2025</div>
+                                    <div class="news-table__cell">10/12/2025</div>
+                                    <div class="news-table__cell"><input type="checkbox" checked></div>
+                                    <div class="news-table__cell"><button class="news-table__view">Xem</button></div>
+                                    <div class="news-table__cell"><button class="news-table__edit">Sửa</button></div>
+                                    <div class="news-table__cell"><button class="news-table__delete">Xóa</button></div>
+                                </article>
+
+                                <article class="news-table__row">
+                                    <div class="news-table__cell"><img src="assets/img/blog2.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell">Cập nhật chương trình ưu đãi</div>
+                                    <div class="news-table__cell"><span class="status status--inactive">Chưa post</span></div>
+                                    <div class="news-table__cell">20/11/2025</div>
+                                    <div class="news-table__cell">25/11/2025</div>
+                                    <div class="news-table__cell"><input type="checkbox"></div>
+                                    <div class="news-table__cell"><button class="news-table__view">Xem</button></div>
+                                    <div class="news-table__cell"><button class="news-table__edit">Sửa</button></div>
+                                    <div class="news-table__cell"><button class="news-table__delete">Xóa</button></div>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Chi tiết Slide -->
+                    <section id="slide-detail" class="slide-detail hidden">
+                        <h2 class="manage__heading">Chi tiết Slide</h2>
+
+                        <div class="slide-detail__card">
+                            <!-- Hình Slide -->
+                            <div class="slide-detail__image">
+                                <img src="assets/img/hero_slide-01.jpg" alt="Slide Image">
+                                <span class="slide-detail__status active">Đang post</span>
+                            </div>
+
+                            <!-- Thông tin Slide -->
+                            <div class="slide-detail__info">
+                                <div class="slide-detail__row">
+                                    <span class="label">Tên slide:</span>
+                                    <span class="value">Slide khuyến mãi 12.12</span>
+                                </div>
+                                <div class="slide-detail__row">
+                                    <span class="label">Trạng thái:</span>
+                                    <span class="value">Đang post</span>
+                                </div>
+                                <div class="slide-detail__row">
+                                    <span class="label">Ngày tạo:</span>
+                                    <span class="value">01/12/2025</span>
+                                </div>
+                                <div class="slide-detail__row">
+                                    <span class="label">Ngày cập nhật:</span>
+                                    <span class="value">10/12/2025</span>
+                                </div>
+                                <div class="slide-detail__row">
+                                    <span class="label">Post:</span>
+                                    <span class="value"><input type="checkbox" checked></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nút đóng -->
+                        <div class="slide-detail__actions">
+                            <button class="btn btn--default-color" onclick="hideSlideDetail()">Đóng</button>
+                        </div>
+                    </section>
+
+                    <!-- Chi tiết Blog -->
+                    <section id="blog-detail" class="blog-detail hidden">
+                        <h2 class="manage__heading">Chi tiết Blog</h2>
+
+                        <div class="blog-detail__card">
+                            <!-- Hình Blog -->
+                            <div class="blog-detail__image">
+                                <img src="assets/img/blog1.jpg" alt="Blog Image">
+                                <span class="blog-detail__status active">Đang post</span>
+                            </div>
+
+                            <!-- Thông tin Blog -->
+                            <div class="blog-detail__info">
+                                <div class="blog-detail__row">
+                                    <span class="label">Tiêu đề:</span>
+                                    <span class="value">Ra mắt sản phẩm mới 2025</span>
+                                </div>
+                                <div class="blog-detail__row">
+                                    <span class="label">Trạng thái:</span>
+                                    <span class="value">Đang post</span>
+                                </div>
+                                <div class="blog-detail__row">
+                                    <span class="label">Ngày tạo:</span>
+                                    <span class="value">05/12/2025</span>
+                                </div>
+                                <div class="blog-detail__row">
+                                    <span class="label">Ngày cập nhật:</span>
+                                    <span class="value">10/12/2025</span>
+                                </div>
+                                <div class="blog-detail__row">
+                                    <span class="label">Post:</span>
+                                    <span class="value"><input type="checkbox" checked></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nút đóng -->
+                        <div class="blog-detail__actions">
+                            <button class="btn btn--default-color" onclick="hideBlogDetail()">Đóng</button>
+                        </div>
+                    </section>
+                    <!-- Sửa Slide -->
+                    <section id="slide-edit" class="slide-detail hidden">
+                        <h2 class="manage__heading">Sửa Slide</h2>
+
+                        <div class="slide-detail__card">
+                            <!-- Hình Slide -->
+                            <div class="slide-detail__image">
+                                <img src="assets/img/slide1.jpg" alt="Slide Image">
+                                <span class="slide-detail__status active">Đang post</span>
+                            </div>
+
+                            <!-- Form thông tin -->
+                            <form class="slide-detail__info" id="slideEditForm">
+                                <div class="slide-detail__row">
+                                    <label class="label">Tên slide:</label>
+                                    <input type="text" class="input" value="Slide khuyến mãi 12.12">
+                                </div>
+
+                                <div class="slide-detail__row">
+                                    <label class="label">Trạng thái:</label>
+                                    <select class="input">
+                                        <option value="active" selected>Đang post</option>
+                                        <option value="inactive">Chưa post</option>
+                                    </select>
+                                </div>
+
+                                <div class="slide-detail__row">
+                                    <label class="label">Ngày tạo:</label>
+                                    <input type="text" class="input" value="01/12/2025" disabled>
+                                </div>
+
+                                <div class="slide-detail__row">
+                                    <label class="label">Ngày cập nhật:</label>
+                                    <input type="text" class="input" value="10/12/2025" disabled>
+                                </div>
+
+                                <div class="slide-detail__row">
+                                    <label class="label">Hình ảnh mới:</label>
+                                    <input type="file" class="input">
+                                </div>
+
+                                <!-- Action -->
+                                <div class="slide-detail__actions">
+                                    <button type="submit" class="btn btn--default-color">Lưu thay đổi</button>
+                                    <button type="button" class="btn btn--default-color" onclick="hideSlideEdit()">Hủy</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <!-- Sửa Blog -->
+                    <section id="blog-edit" class="blog-detail hidden">
+                        <h2 class="manage__heading">Sửa Blog</h2>
+
+                        <div class="blog-detail__card">
+                            <!-- Hình Blog -->
+                            <div class="blog-detail__image">
+                                <img src="assets/img/blog1.jpg" alt="Blog Image">
+                                <span class="blog-detail__status active">Đang post</span>
+                            </div>
+
+                            <!-- Form thông tin -->
+                            <form class="blog-detail__info" id="blogEditForm">
+                                <div class="blog-detail__row">
+                                    <label class="label">Tiêu đề:</label>
+                                    <input type="text" class="input" value="Ra mắt sản phẩm mới 2025">
+                                </div>
+
+                                <div class="blog-detail__row">
+                                    <label class="label">Trạng thái:</label>
+                                    <select class="input">
+                                        <option value="active" selected>Đang post</option>
+                                        <option value="inactive">Chưa post</option>
+                                    </select>
+                                </div>
+
+                                <div class="blog-detail__row">
+                                    <label class="label">Ngày tạo:</label>
+                                    <input type="text" class="input" value="05/12/2025" disabled>
+                                </div>
+
+                                <div class="blog-detail__row">
+                                    <label class="label">Ngày cập nhật:</label>
+                                    <input type="text" class="input" value="10/12/2025" disabled>
+                                </div>
+
+                                <div class="blog-detail__row">
+                                    <label class="label">Hình ảnh mới:</label>
+                                    <input type="file" class="input">
+                                </div>
+
+                                <!-- Action -->
+                                <div class="blog-detail__actions">
+                                    <button type="submit" class="btn btn--default-color ">Lưu thay đổi</button>
+                                    <button type="button" class="btn btn--default-color" onclick="hideBlogEdit()">Hủy</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <!-- ================= THÊM SLIDE ================= -->
+                    <section id="add-slide" class="manage-detail" style="display:none;">
+                        <h2 class="manage__heading">Thêm slide</h2>
+
+                        <div class="slide-table">
+                            <div class="slide-table__header">
+                                <button type="submit" form="addSlideForm" class="slide-table__save">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                </button>
+                            </div>
+
+                            <div class="slide-table__inner">
+                                <form id="addSlideForm" class="add-slide-form">
+
+                                    <!-- Tên slide -->
+                                    <div class="add-slide-form__field">
+                                        <label class="add-slide-form__label">Tên slide:</label>
+                                        <input type="text" class="add-slide-form__input" required>
+                                    </div>
+
+                                    <!-- Trạng thái -->
+                                    <div class="add-slide-form__field">
+                                        <label class="add-slide-form__label">Trạng thái:</label>
+                                        <select class="add-slide-form__input">
+                                            <option value="active">Đang post</option>
+                                            <option value="inactive">Chưa post</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Ảnh slide -->
+                                    <div class="add-slide-form__field">
+                                        <label class="add-slide-form__label">Ảnh slide:</label>
+                                        <input type="file" class="add-slide-form__input" accept="image/*" required>
+                                    </div>
+
+                                    <button type="button"
+                                            class="btn btn--default-color product-table__back-btn"
+                                            onclick="hideSlideAdd()">
+                                        Quay lại
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- ================= THÊM BLOG ================= -->
+                    <section id="add-blog" class="manage-detail" style="display:none;">
+                        <h2 class="manage__heading">Thêm blog</h2>
+
+                        <div class="blog-table">
+                            <div class="blog-table__header">
+                                <button type="submit" form="addBlogForm" class="blog-table__save">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                </button>
+                            </div>
+
+                            <div class="blog-table__inner">
+                                <form id="addBlogForm" class="add-blog-form">
+
+                                    <!-- Tiêu đề -->
+                                    <div class="add-blog-form__field">
+                                        <label class="add-blog-form__label">Tiêu đề:</label>
+                                        <input type="text" class="add-blog-form__input" required>
+                                    </div>
+
+                                    <!-- Trạng thái -->
+                                    <div class="add-blog-form__field">
+                                        <label class="add-blog-form__label">Trạng thái:</label>
+                                        <select class="add-blog-form__input">
+                                            <option value="active">Đang post</option>
+                                            <option value="inactive">Chưa post</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Ảnh đại diện -->
+                                    <div class="add-blog-form__field">
+                                        <label class="add-blog-form__label">Ảnh đại diện:</label>
+                                        <input type="file" class="add-blog-form__input" accept="image/*">
+                                    </div>
+
+                                    <!-- Nội dung -->
+                                    <div class="add-blog-form__field">
+                                        <label class="add-blog-form__label">Nội dung:</label>
+                                        <div id="blogEditor" class="add-blog-form__editor"></div>
+                                    </div>
+
+                                    <button type="button"
+                                            class="btn btn--default-color product-table__back-btn"
+                                            onclick="hideBlogAdd()">
+                                        Quay lại
+                                    </button>
+
+                                </form>
+                            </div>
                         </div>
                     </section>
 
@@ -524,6 +1124,26 @@
     const sectionProduct = document.getElementById("product");
     const sectionAdd = document.getElementById("add-product");
     const sectionOrder = document.getElementById("order");
+    const sectionCustomer = document.getElementById("customer");
+    const sectionCustomerDetail = document.getElementById("customer-detail");
+    const sectionCustomerEdit = document.getElementById("customer-edit");
+    const sectionNews = document.getElementById("news");
+    const newsMenuButtons = document.querySelectorAll(".news-menu__btn");
+    const sectionSlideDetail = document.getElementById("slide-detail");
+    const sectionBlogDetail = document.getElementById("blog-detail");
+    const sectionSlideEdit = document.getElementById("slide-edit");
+    const sectionBlogEdit = document.getElementById("blog-edit");
+    const sectionSlide = document.getElementById("news-slide");
+    const sectionBlog = document.getElementById("news-blog");
+    const sectionSlideAdd = document.getElementById("add-slide");
+    const sectionBlogAdd  = document.getElementById("add-blog");
+    const btnAddSlide = document.querySelector("#news-slide .add-table__btn");
+    const btnAddBlog  = document.querySelector("#news-blog .add-table__btn");
+
+    const newsSections = {
+        "news-slide": document.getElementById("news-slide"),
+        "news-blog": document.getElementById("news-blog")
+    };
     const menuLinks = document.querySelectorAll(".manage-nav__link");
     const btnAdd = document.querySelector(".product-table__btn");
 
@@ -533,6 +1153,10 @@
         sectionAdd.style.display = "none";
         sectionOrder.style.display = "none";
         sectionConfig.style.display = "none";
+        sectionCustomer.style.display = "none";
+        sectionCustomerDetail.style.display = "none";
+        sectionCustomerEdit.style.display = "none";
+        sectionNews.style.display = "none";
     }
 
     // Click menu
@@ -544,6 +1168,10 @@
             if(targetId === "config") sectionConfig.style.display = "block";
             if(targetId === "product") sectionProduct.style.display = "block";
             if(targetId === "order") sectionOrder.style.display = "block";
+            if (targetId === "customer") sectionCustomer.style.display = "block";
+            if (targetId === "news") {
+                showNewsDefault();
+            }
         });
     });
 
@@ -579,6 +1207,207 @@
         sectionProduct.style.display = "block";
         formInline.reset();
     });
+    // Click nút "Xem"
+    document.querySelectorAll(".customer-table__view").forEach(btn => {
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            sectionCustomerDetail.style.display = "block";
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    // Click nút "Đóng"
+    const btnBackCustomer = document.querySelector(
+        "#customer-detail .btn--default-color"
+    );
+
+    if (btnBackCustomer) {
+        btnBackCustomer.addEventListener("click", () => {
+            sectionCustomerDetail.style.display = "none";
+            sectionCustomer.style.display = "block";
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+    // SỬA KHÁCH HÀNG
+    document.querySelectorAll(".customer-table__edit").forEach(btn => {
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            sectionCustomerEdit.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+    function hideCustomerEdit() {
+        hideAllSections();
+        sectionCustomer.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    // Ẩn tất cả section News
+    function hideAllNewsSections() {
+        Object.values(newsSections).forEach(sec => sec.style.display = "none");
+        newsMenuButtons.forEach(btn => btn.classList.remove("active"));
+    }
+
+    // Mặc định show Slide khi vào News
+    function showNewsDefault() {
+        sectionNews.style.display = "block";
+        hideAllNewsSections();
+        newsSections["news-slide"].style.display = "block";
+        document.querySelector(".news-menu__btn[data-target='news-slide']").classList.add("active");
+    }
+
+    // Click menu sidebar trong News
+    newsMenuButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-target");
+            hideAllNewsSections();
+            if(newsSections[targetId]) newsSections[targetId].style.display = "block";
+            btn.classList.add("active");
+        });
+    });
+    function hideAllDetailSections() {
+        sectionSlideDetail.style.display = "none";
+        sectionBlogDetail.style.display = "none";
+        sectionSlideEdit.style.display = "none";
+        sectionBlogEdit.style.display = "none";
+    }
+    // === Xem chi tiết Slide ===
+    document.querySelectorAll("#news-slide .news-table__view").forEach(btn => {
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            hideAllDetailSections();
+            sectionSlideDetail.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    // === Xem chi tiết Blog ===
+    document.querySelectorAll("#news-blog .news-table__view").forEach(btn => {
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            hideAllDetailSections();
+            sectionBlogDetail.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    // === Sửa Slide/Blog ===
+    document.querySelectorAll(".news-table__edit").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const parentTable = btn.closest(".news-table");
+            hideAllSections();
+            hideAllDetailSections();
+            if (parentTable.id === "news-slide") sectionSlideEdit.style.display = "block";
+            if (parentTable.id === "news-blog") sectionBlogEdit.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    function showNewsWithTab(tabId) {
+        sectionNews.style.display = "block";
+
+        hideAllNewsSections();
+
+        if (newsSections[tabId]) {
+            newsSections[tabId].style.display = "block";
+            document
+                .querySelector(`.news-menu__btn[data-target='${tabId}']`)
+                .classList.add("active");
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // === Nút đóng chi tiết Slide/Blog ===
+    function hideSlideDetail() {
+        sectionSlideDetail.style.display = "none";
+        showNewsWithTab("news-slide");
+    }
+
+    function hideBlogDetail() {
+        sectionBlogDetail.style.display = "none";
+        showNewsWithTab("news-blog");
+    }
+
+    // === Nút hủy Slide/Blog Edit ===
+    function hideSlideEdit() {
+        sectionSlideEdit.style.display = "none";
+        showNewsWithTab("news-slide");
+    }
+
+    function hideBlogEdit() {
+        sectionBlogEdit.style.display = "none";
+        showNewsWithTab("news-blog");
+    }
+    function hideAllNewsViews() {
+        sectionSlide.style.display = "none";
+        sectionBlog.style.display  = "none";
+
+        sectionSlideAdd.style.display = "none";
+        sectionBlogAdd.style.display  = "none";
+
+        sectionSlideDetail.style.display = "none";
+        sectionBlogDetail.style.display  = "none";
+        sectionSlideEdit.style.display   = "none";
+        sectionBlogEdit.style.display    = "none";
+
+        newsMenuButtons.forEach(btn => btn.classList.remove("active"));
+    }
+    if (btnAddSlide) {
+        btnAddSlide.addEventListener("click", () => {
+            hideAllSections();          // ẩn toàn bộ layout khác
+            hideAllNewsViews();         // ẩn giao diện news con
+
+            sectionNews.style.display = "block";
+            sectionSlideAdd.style.display = "block";
+
+            document
+                .querySelector(".news-menu__btn[data-target='news-slide']")
+                .classList.add("active");
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+    if (btnAddBlog) {
+        btnAddBlog.addEventListener("click", () => {
+            hideAllSections();
+            hideAllNewsViews();
+
+            sectionNews.style.display = "block";
+            sectionBlogAdd.style.display = "block";
+
+            document
+                .querySelector(".news-menu__btn[data-target='news-blog']")
+                .classList.add("active");
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+    function hideSlideAdd() {
+        hideAllNewsViews();
+        sectionNews.style.display = "block";
+        sectionSlide.style.display = "block";
+
+        document
+            .querySelector(".news-menu__btn[data-target='news-slide']")
+            .classList.add("active");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function hideBlogAdd() {
+        hideAllNewsViews();
+        sectionNews.style.display = "block";
+        sectionBlog.style.display = "block";
+
+        document
+            .querySelector(".news-menu__btn[data-target='news-blog']")
+            .classList.add("active");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
