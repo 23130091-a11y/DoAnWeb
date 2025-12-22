@@ -43,7 +43,7 @@
         </div>
 
         <div class="login-container">
-            <form class="login-form" action="login" method="post" onsubmit="return validateForm()" >
+            <form class="login-form" action="login" method="post" >
                 <h3>Đăng nhập</h3>
                 <!-- Thông báo lỗi -->
                 <c:if test="${not empty error}">

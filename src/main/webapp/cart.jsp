@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -179,7 +179,9 @@
                         <div class="header-cart__scale header-cart__scale--fade-product">
                             <!-- Khi không có sản phẩm: header-cart__scale--empty -->
                             <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
-                            <span class="header-cart__notice">3</span>
+                            <span class="header-cart__notice">
+                                ${sessionScope.cart.totalQuantity}
+                            </span>
                             <div class="cart-list cart-list--no-cart">
                                 <!-- Chưa đăng nhập:  cart-list--no-cart -->
                                 <!-- <img src="./assets/img/no-cart_img.png" alt="" class="header-cart__img">

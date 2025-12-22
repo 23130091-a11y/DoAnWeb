@@ -5,8 +5,8 @@
   Time: 3:05 CH
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -194,7 +194,7 @@
                                 <!-- Một khách hàng -->
                                 <article class="customer-table__row">
                                     <div class="customer-table__cell">
-                                        <img src="assets/img/avatar5.jpg" class="customer-table__img" alt="">
+                                        <img src="assets/img/avatar5.png" class="customer-table__img" alt="">
                                     </div>
 
                                     <div class="customer-table__cell">

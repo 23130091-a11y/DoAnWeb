@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="en">
 
 <head>
@@ -299,6 +300,7 @@
                     </figure>
 
                     <!-- Content Details -->
+                    <c:set var="product" value="${product}" />
                     <div class="content-details">
                         <h1 class="content-details__heading">
                             Quạt tích điện Makita làm mát cực nhanh, pin dung lượng lớn, QUẠT + 1 PIN + 1 SẠC
@@ -366,7 +368,8 @@
                         </div>
 
                         <div class="content-details__act">
-                            <button class="content-details__cart-btn btn">
+                            <button class="content-details__cart-btn btn"
+                                    onclick="window.location.href='add-cart?productId=${product.id}&quantity=1'">
                                 <i class="fa-solid fa-cart-plus content-details__cart-icon"></i>
                                 Thêm vào giỏ hàng
                             </button>
