@@ -16,12 +16,12 @@ public class ListProductController extends HttpServlet {
         ProductService productService = new ProductService();
         List<Product> list = productService.getListProduct();
         request.setAttribute("list", list);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+
     }
 }
 

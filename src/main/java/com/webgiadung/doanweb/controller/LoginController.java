@@ -12,7 +12,7 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     @Override
@@ -26,10 +26,10 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("USER_LOGIN", user); // lưu cả user
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("list-product"); //
         } else {
             request.setAttribute("error", "Sai email hoặc mật khẩu");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 }

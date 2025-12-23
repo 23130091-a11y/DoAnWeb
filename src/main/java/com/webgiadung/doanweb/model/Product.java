@@ -6,7 +6,7 @@ public class Product implements Serializable {
    private int id;
    private String name;
    private String img;
-   private double price_first;
+   private double priceFirst;
    private double discount;
    private double price;
    private int status;
@@ -17,7 +17,7 @@ public class Product implements Serializable {
         this.id = id;
         this.name = name;
         this.img = img;
-        this.price_first = price_first;
+        this.priceFirst = price_first;
         this.discount = discount;
         this.price = price;
         this.status = status;
@@ -47,12 +47,12 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public double getPrice_first() {
-        return price_first;
+    public double getPriceFirst() {
+        return priceFirst;
     }
 
-    public void setPrice_first(double price_first) {
-        this.price_first = price_first;
+    public void setPriceFirst(double priceFirst) {
+        this.priceFirst = priceFirst;
     }
 
     public String getImg() {
@@ -85,7 +85,7 @@ public class Product implements Serializable {
                 "id: " + id +
                 ", name: '" + name + '\'' +
                 ", img: '" + img + '\'' +
-                ", price_first: " + price_first +
+                ", price_first: " + priceFirst +
                 ", discount: " + discount +
                 ", price: " + price +
                 ", status: " + status +

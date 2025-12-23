@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="DoAnWeb:war" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6ce9ba27-d2cb-432d-8844-263b7313160e" name="Changes" comment="Sửa lỗi chạy được db, làm chức năng đăng nhập, logout chưa xong">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/cart/AddCart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/cart/DeleteCart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Cart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/CartItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ListProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ListProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/LogoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/LogoutController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/account.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/account.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/blog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/blog.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/checkout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/checkout.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/slide.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/slide.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/controller/ListProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/controller/ListProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/controller/LogoutController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/controller/LogoutController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/AuthDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/AuthDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/ProductDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/ProductDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/services/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/services/AuthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/services/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/services/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/account.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/account.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/admin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/blog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/blog.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/cart.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/cart.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/checkout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/checkout.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/product.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/product.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/register.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/search.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/slide.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/slide.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/controller/ListProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/controller/ListProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/controller/LogoutController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/controller/LogoutController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/AuthDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/AuthDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/ProductDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/ProductDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/services/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/services/AuthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/services/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/services/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jsp File" />
+        <option value="Class" />
+        <option value="Servlet" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;23130091-a11y&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/23130091-a11y/DoAnWeb.git&quot;,
+    &quot;accountId&quot;: &quot;46b41889-ad49-43c1-8c87-70d8c6bebf78&quot;
+  }
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="C:\Maven\apache-maven-3.9.11" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+        &quot;customColor&quot;: &quot;&quot;,
+        &quot;associatedIndex&quot;: 3
+        }</component>
+  <component name="ProjectId" id="36VTVy7TPo3LYaLCClsRhywPONQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.BaseDao$DBProperties.executor&quot;: &quot;Coverage&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Maven.DoAnWeb [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DoAnWeb [install].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 11.0.14.executor&quot;: &quot;Run&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.112.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.webgiadung.doanweb.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DoAnLapTrinh\DoAnWeb\src\main" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+          <value>
+            <map>
+              <entry key="Tomcat 11.0.14" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 11.0.14">
+    <configuration name="BaseDao$DBProperties" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.webgiadung.doanweb.dao.BaseDao$DBProperties" />
+      <module name="DoAnWeb" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.webgiadung.doanweb.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.webgiadung.doanweb.dao.Test" />
+      <module name="DoAnWeb" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.webgiadung.doanweb.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 11.0.14" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.14" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="DoAnWeb:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/DoAnWeb" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="6354cef0-5b36-4960-8663-c3b752ead312" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="49982" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="DoAnWeb:war" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.BaseDao$DBProperties" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Tomcat Server.Tomcat 11.0.14" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6ce9ba27-d2cb-432d-8844-263b7313160e" name="Changes" comment="" />
+      <created>1765090769324</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765090769324</updated>
+      <workItem from="1765090772006" duration="605000" />
+      <workItem from="1765091393744" duration="678000" />
+      <workItem from="1765094464272" duration="767000" />
+      <workItem from="1765100949079" duration="2267000" />
+      <workItem from="1765175373279" duration="13098000" />
+      <workItem from="1765194684862" duration="12008000" />
+      <workItem from="1765532480916" duration="4567000" />
+      <workItem from="1765550047637" duration="5933000" />
+      <workItem from="1765560013484" duration="2198000" />
+      <workItem from="1765581455070" duration="1169000" />
+      <workItem from="1765582878296" duration="264000" />
+      <workItem from="1765584867301" duration="811000" />
+      <workItem from="1765588533496" duration="754000" />
+      <workItem from="1765597626712" duration="606000" />
+      <workItem from="1765604816695" duration="64000" />
+      <workItem from="1765699280824" duration="662000" />
+      <workItem from="1765712570067" duration="9142000" />
+      <workItem from="1765807680156" duration="9233000" />
+      <workItem from="1765894369796" duration="416000" />
+      <workItem from="1765983277003" duration="783000" />
+      <workItem from="1766014872707" duration="609000" />
+      <workItem from="1766319917165" duration="5974000" />
+      <workItem from="1766378872635" duration="8722000" />
+      <workItem from="1766389901520" duration="319000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/index.jsp</url>
+          <line>154</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DoAnWeb$BaseDao_DBProperties.ic" NAME="BaseDao$DBProperties Coverage Results" MODIFIED="1765282209857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.webgiadung.doanweb.dao.*</FILTER>
+    </SUITE>
+  </component>
+</project>

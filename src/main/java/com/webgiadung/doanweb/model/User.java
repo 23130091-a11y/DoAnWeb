@@ -1,8 +1,9 @@
 package com.webgiadung.doanweb.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class User {
+public class User implements Serializable {
     private int id;
     private String name;
     private String email;
