@@ -12,3 +12,9 @@ out/
 # OS
 .DS_Store
 Thumbs.db
+
+echo ".idea/" >> .gitignore
+echo "target/" >> .gitignore
+echo "*.class" >> .gitignore
+echo "*.war" >> .gitignore
+echo ".DS_Store" >> .gitignore
