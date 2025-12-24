@@ -10,7 +10,7 @@ public class User implements Serializable {
     private String password;
     private String address;
     private String avatar;
-    private int phone;
+    private String phone;
     private int status;
     private LocalDate createdAt;
     private LocalDate updatedAt;
@@ -18,7 +18,7 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(int id, String name, String email, String password, String address, String avatar, int phone, int status, LocalDate createdAt, LocalDate updatedAt, int role) {
+    public User(int id, String name, String email, String password, String address, String avatar, String phone, int status, LocalDate createdAt, LocalDate updatedAt, int role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -80,11 +80,11 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
