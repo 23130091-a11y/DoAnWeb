@@ -22,19 +22,19 @@
 
 <body>
 
-    <header class="main-header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.jsp">
-                    <img src="assets/img/logo.png" alt="Logo Gia Dụng Online">
-                </a>
-                <h1>Đăng nhập</h1>
-            </div>
-            <div class="support-link">
-                <a href="#">Bạn cần giúp đỡ?</a>
-            </div>
+<header class="main-header">
+    <div class="container">
+        <div class="logo">
+            <a href="index.jsp">
+                <img src="assets/img/logo.png" alt="Logo Gia Dụng Online">
+            </a>
+            <h1>Đăng nhập</h1>
         </div>
-    </header>
+        <div class="support-link">
+            <a href="#">Bạn cần giúp đỡ?</a>
+        </div>
+    </div>
+</header>
 
 
     <main class="main-content">
