@@ -10,14 +10,14 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public abstract class BaseDao {
-    private Jdbi jdbi;
+    private static Jdbi jdbi;
 
-    protected Jdbi get(){
+    protected static Jdbi get(){
         if(jdbi==null) connect();
         return jdbi;
     }
 
-    private void connect(){
+    private static void connect(){
         MysqlDataSource dataSource=new MysqlDataSource();
         System.out.println("jdbi:mysql://"+DBProperties.host+":"+DBProperties.port+"/"+DBProperties.dbname);
         dataSource.setURL("jdbc:mysql://" + DBProperties.host + ":" + DBProperties.port + "/" + DBProperties.dbname);
