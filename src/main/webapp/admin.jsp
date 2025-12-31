@@ -7,6 +7,7 @@
 --%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -976,142 +977,86 @@
 
                         <div class="order-table">
 
-                            <div class="order-table__header">
-                                <h3 class="order-table__heading">Danh sách đơn hàng</h3>
-                                <button class="btn btn--default-color order-table__btn">Xóa các mục đã chọn</button>
-                            </div>
+                            <!-- Form tìm kiếm -->
+                            <form action="<c:url value='/order-search'/>" method="get">
+                                <div class="order-table__filter">
+                                    <div class="order-table__filter-label">
+                                        Điều kiện lọc
+                                        <i class="order-table__filter-icon fa-solid fa-caret-down"></i>
+                                    </div>
 
-                            <!-- Filter -->
-                            <div class="order-table__filter">
-                                <div class="order-table__filter-label">
-                                    Điều kiện lọc
-                                    <i class="order-table__filter-icon fa-solid fa-caret-down"></i>
+                                    <input type="text"
+                                           name="keyword"
+                                           class="order-table__search"
+                                           placeholder="Nhập mã đơn hoặc tên khách"
+                                           value="${keyword}">
+
+                                    <button type="submit"
+                                            class="btn btn--default-color order-table__search-btn">
+                                        Tìm kiếm
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Form xóa -->
+                            <form id="deleteOrdersForm" action="<c:url value='/order-delete'/>" method="post">
+                                <div class="order-table__header">
+                                    <h3 class="order-table__heading">Danh sách đơn hàng</h3>
+                                    <!-- Nút xóa phải nằm trong form này -->
+                                    <button type="submit" class="btn btn--default-color order-table__btn">Xóa các mục đã chọn</button>
                                 </div>
 
-                                <input type="text"
-                                       class="order-table__search"
-                                       placeholder="Nhập từ khóa tìm kiếm">
+                                <div class="order-table__inner">
 
-                                <button class="btn btn--default-color order-table__search-btn">Tìm kiếm</button>
-                            </div>
-
-                            <!-- Table -->
-                            <div class="order-table__inner">
-
-                                <!-- Header -->
-                                <div class="order-table__row">
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
+                                    <!-- Header -->
+                                    <div class="order-table__row">
+                                        <div class="order-table__check">
+                                            <input type="checkbox" id="selectAll" class="order-table__checkbox">
+                                        </div>
+                                        <div class="order-table__cell">Mã</div>
+                                        <div class="order-table__cell">Khách hàng</div>
+                                        <div class="order-table__cell">Trạng thái</div>
+                                        <div class="order-table__cell">Thanh toán</div>
+                                        <div class="order-table__cell">Ngày tạo</div>
+                                        <div class="order-table__cell">Tổng tiền</div>
                                     </div>
 
-                                    <div class="order-table__cell">Mã</div>
-                                    <div class="order-table__cell">Khách hàng</div>
-                                    <div class="order-table__cell">Trạng thái</div>
-                                    <div class="order-table__cell">Thanh toán</div>
-                                    <div class="order-table__cell">Ngày tạo</div>
-                                    <div class="order-table__cell">Tổng tiền</div>
+                                    <!-- Row -->
+                                    <c:forEach var="order" items="${orders}">
+                                        <article class="order-table__row ${order.rowClass}">
+                                            <div class="order-table__check">
+                                                <input type="checkbox" name="orderIds" value="${order.id}" class="order-table__checkbox">
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <a href="#!" class="order-table__text order-table__link">${order.id}</a>
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <span class="order-table__text">${order.customer_name}</span>
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <span class="order-table__status ${order.statusTransportClass}">
+                                                        ${order.statusTransportText}
+                                                </span>
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <span class="order-table__status ${order.statusPaymentClass}">
+                                                        ${order.statusPaymentText}
+                                                </span>
+                                            </div>
+
+                                            <div class="order-table__cell">${order.created_at}</div>
+
+                                            <div class="order-table__cell">${order.total_price}đ</div>
+                                        </article>
+                                    </c:forEach>
                                 </div>
-
-                                <!-- Row -->
-                                <article class="order-table__row">
-
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <a class="order-table__text order-table__link">#123456</a>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__text">anhaiti</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__status">Đơn hàng mới</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__payment order-table__payment--pending">Chưa thanh toán</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__date">30/11/2020</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__total">3.700.000đ</span>
-                                    </div>
-
-                                </article>
-
-                                <!-- Row -->
-                                <article class="order-table__row">
-
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <a class="order-table__text order-table__link">#123456</a>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__text">anhaiti</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__status order-table__status--completed">Hoàn thành</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__payment order-table__payment--pending">Chưa thanh toán</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__date">30/11/2020</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__total">3.700.000đ</span>
-                                    </div>
-
-                                </article>
-
-                                <!-- Row -->
-                                <article class="order-table__row order-table__row--cancelled">
-
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <a class="order-table__text order-table__link">#123456</a>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__text">anhaiti</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__status order-table__status--cancelled">Hủy đơn hàng</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__payment order-table__payment--paid">Đã thanh toán</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__date">30/11/2020</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__total">3.700.000đ</span>
-                                    </div>
-
-                                </article>
-                            </div>
+                            </form>
                         </div>
+
                     </section>
                 </div>
             </div>
@@ -1119,6 +1064,7 @@
     </div>
 </main>
 </body>
+
 <script>
     const sectionConfig = document.getElementById("config");
     const sectionProduct = document.getElementById("product");
@@ -1411,6 +1357,7 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const quill = new Quill('#editor', {
@@ -1430,5 +1377,8 @@
         quill.setText('Nội dung');
     });
 </script>
+
+<!-- Link JS -->
+<script src="assets/js/script.js"></script>
 
 </html>
