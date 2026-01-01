@@ -18,3 +18,4 @@ echo "target/" >> .gitignore
 echo "*.class" >> .gitignore
 echo "*.war" >> .gitignore
 echo ".DS_Store" >> .gitignore
+echo .idea/workspace.xml>> .gitignore

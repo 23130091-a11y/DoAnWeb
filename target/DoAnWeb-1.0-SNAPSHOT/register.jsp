@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/register.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,18 +38,44 @@
         <div class="banner-section"></div>
 
         <div class="login-container">
-            <form class="login-form">
-                <h3>Đăng ký</h3>
-                <input type="text" placeholder="Email" required>
-                <input type="text" placeholder="Số điện thoại" required>
-                <input type="password" placeholder="Mật khẩu" required>
-                <input type="password" placeholder="Nhập lại mật khẩu" required>
+            <form class="login-form" action="${pageContext.request.contextPath}/register" method="post">
+            <h3>Đăng ký</h3>
+
+                <input type="text"
+                       name="email"
+                       placeholder="Email"
+                       required>
+
+                <input type="text"
+                       name="phone"
+                       placeholder="Số điện thoại"
+                       required>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Mật khẩu"
+                       required>
+
+                <input type="password"
+                       name="repassword"
+                       placeholder="Nhập lại mật khẩu"
+                       required>
 
                 <button type="submit" class="btn-login">ĐĂNG KÝ</button>
+
+                <%-- HIỂN THỊ LỖI --%>
+                <% if (request.getAttribute("error") != null) { %>
+                <p style="color:red; margin-top:10px;">
+                    <%= request.getAttribute("error") %>
+                </p>
+                <% } %>
+
                 <div class="register-link">
-                    <span>Đã có tài khoản?</span> <a href="login.jsp">Đăng nhập</a>
+                    <span>Đã có tài khoản?</span>
+                    <a href="login.jsp">Đăng nhập</a>
                 </div>
             </form>
+
         </div>
     </main>
     <footer id="footer" class="footer">

@@ -7,6 +7,8 @@
 --%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -86,10 +88,12 @@
 
                 <div class="col l-10 m-12 c-12">
                     <section id="config" class="manage-detail">
-                        <h2 class="manage__heading">Cấu hình hệ thống</h2>
+                        <h2 class="manage__heading">Cấu hình hệ thống Bán hàng</h2>
 
                         <div class="config-box">
                             <form class="config-form">
+
+                                <h3 class="config-sub-heading">🌐 Cấu hình chung</h3>
 
                                 <div class="config-group">
                                     <label class="config-label">Tên website</label>
@@ -99,38 +103,98 @@
                                 <div class="config-group">
                                     <label class="config-label">Logo website</label>
                                     <input type="file" class="config-input">
+                                    <small class="config-note">Logo này cũng sẽ được dùng làm Favicon nếu không có tùy chọn riêng.</small>
                                 </div>
 
                                 <div class="config-group">
                                     <label class="config-label">Email liên hệ</label>
-                                    <input type="email" class="config-input" placeholder="contact@gmail.com">
+                                    <input type="email" class="config-input" placeholder="contact@example.com">
                                 </div>
 
                                 <div class="config-group">
-                                    <label class="config-label">Số điện thoại</label>
+                                    <label class="config-label">Số điện thoại Hotline</label>
                                     <input type="text" class="config-input" placeholder="0123 456 789">
                                 </div>
 
                                 <div class="config-group">
-                                    <label class="config-label">Địa chỉ</label>
-                                    <input type="text" class="config-input" placeholder="Địa chỉ cửa hàng">
+                                    <label class="config-label">Địa chỉ Trụ sở/Cửa hàng</label>
+                                    <input type="text" class="config-input" placeholder="Địa chỉ chi tiết">
                                 </div>
 
                                 <div class="config-group">
                                     <label class="config-label">Mô tả website</label>
                                     <textarea class="config-textarea" rows="4"
-                                              placeholder="Mô tả ngắn về website"></textarea>
+                                              placeholder="Mô tả ngắn về website, hiển thị ở chân trang và giới thiệu"></textarea>
                                 </div>
 
                                 <div class="config-group">
-                                    <label class="config-label">Nội dung footer</label>
+                                    <label class="config-label">Nội dung Footer (Chân trang)</label>
                                     <textarea class="config-textarea" rows="3"
-                                              placeholder="Bản quyền, thông tin công ty"></textarea>
+                                              placeholder="Bản quyền, thông tin công ty, liên kết nhanh..."></textarea>
+                                </div>
+
+                                <hr class="config-divider">
+
+                                <h3 class="config-sub-heading">💰 Cấu hình Thanh toán & Vận chuyển</h3>
+
+                                <div class="config-group">
+                                    <label class="config-label">Tiền tệ mặc định</label>
+                                    <select class="config-input">
+                                        <option value="VND">VND (Việt Nam Đồng)</option>
+                                        <option value="USD">USD (Đô la Mỹ)</option>
+                                        <option value="EUR">EUR (Euro)</option>
+                                    </select>
+                                </div>
+
+                                <div class="config-group config-group--checkbox">
+                                    <label class="config-label">Kích hoạt thanh toán COD (Thanh toán khi nhận hàng)</label>
+                                    <input type="checkbox" id="enable_cod" checked>
+                                    <label for="enable_cod" class="checkbox-toggle"></label>
+                                </div>
+
+                                <div class="config-group config-group--checkbox">
+                                    <label class="config-label">Kích hoạt thanh toán Online (VNPay, Momo...)</label>
+                                    <input type="checkbox" id="enable_online_payment">
+                                    <label for="enable_online_payment" class="checkbox-toggle"></label>
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Phí vận chuyển mặc định (Đơn hàng dưới ngưỡng)</label>
+                                    <input type="number" class="config-input" placeholder="Ví dụ: 30000" min="0">
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Ngưỡng miễn phí vận chuyển (VNĐ)</label>
+                                    <input type="number" class="config-input" placeholder="Ví dụ: 500000" min="0">
+                                    <small class="config-note">Đơn hàng đạt ngưỡng này sẽ được miễn phí vận chuyển.</small>
+                                </div>
+
+                                <hr class="config-divider">
+
+                                <h3 class="config-sub-heading">🔍 Cấu hình SEO</h3>
+
+                                <div class="config-group">
+                                    <label class="config-label">Tiêu đề SEO mặc định</label>
+                                    <input type="text" class="config-input" placeholder="Tiêu đề trang chủ">
+                                    <small class="config-note">Tối đa 60 ký tự.</small>
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Mô tả SEO mặc định</label>
+                                    <textarea class="config-textarea" rows="3"
+                                              placeholder="Mô tả cho công cụ tìm kiếm"></textarea>
+                                    <small class="config-note">Tối đa 160 ký tự.</small>
+                                </div>
+
+                                <div class="config-group">
+                                    <label class="config-label">Mã Google Analytics/Google Tag Manager</label>
+                                    <input type="text" class="config-input" placeholder="GTM-XXXXXX hoặc UA-XXXXXX">
+                                    <small class="config-note">Dùng để theo dõi truy cập và hành vi người dùng.</small>
                                 </div>
 
                                 <div class="config-actions">
                                     <button type="submit" class="btn btn--default-color">
-                                        Lưu cấu hình
+                                        Lưu tất cả cấu hình
                                     </button>
                                 </div>
 
@@ -141,9 +205,13 @@
                         <h2 class="manage__heading">Khách hàng</h2>
 
                         <div class="customer-table">
-                            <div class="news-search">
-                                <input type="text" placeholder="Tìm kiếm..." class="news-search__input" id="searchSlide">
-                            </div>
+                            <form class="news-search" method="get"
+                                  action="${pageContext.request.contextPath}/admin/customers#customer">
+                                <input type="text" name="q" value="${q}"
+                                       placeholder="Tìm theo tên/email/sđt..."
+                                       class="news-search__input">
+                            </form>
+
 
                             <!-- Bảng khách hàng -->
                             <div class="customer-table__inner">
@@ -159,69 +227,51 @@
                                     <div class="customer-table__cell">Xóa</div>
                                 </div>
 
-                                <!-- Một khách hàng -->
-                                <article class="customer-table__row">
-                                    <div class="customer-table__cell">
-                                        <img src="assets/img/avatar4.jpg" class="customer-table__img" alt="">
-                                    </div>
+                                <c:forEach var="u" items="${customers}">
+                                    <article class="customer-table__row"
+                                             data-id="${u.id}"
+                                             data-name="${u.name}"
+                                             data-email="${u.email}"
+                                             data-phone="${u.phone}"
+                                             data-address="${u.address}"
+                                             data-role="${u.role}"
+                                             data-status="${u.status}">
+                                        <div class="customer-table__cell">
+                                            <img src="assets/img/avatar5.png" class="customer-table__img" alt="">
+                                        </div>
 
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">Nguyễn Văn A</span>
-                                    </div>
+                                        <div class="customer-table__cell">
+                                            <span class="customer-table__text">${u.name}</span>
+                                        </div>
 
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">vana@example.com</span>
-                                    </div>
+                                        <div class="customer-table__cell">
+                                            <span class="customer-table__text">${u.email}</span>
+                                        </div>
 
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">Hà Nội</span>
-                                    </div>
+                                        <div class="customer-table__cell">
+                                            <span class="customer-table__text">${u.address}</span>
+                                        </div>
 
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__view">Xem</button>
-                                    </div>
+                                        <div class="customer-table__cell">
+                                            <button type="button" class="customer-table__view">Xem</button>
+                                        </div>
 
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__edit">Sửa</button>
-                                    </div>
+                                        <div class="customer-table__cell">
+                                            <button type="button" class="customer-table__edit">Sửa</button>
+                                        </div>
 
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__delete">Xóa</button>
-                                    </div>
+                                        <div class="customer-table__cell">
+                                            <!-- XÓA phải là FORM POST -->
+                                            <form method="post" action="${pageContext.request.contextPath}/admin/customers"
+                                                  onsubmit="return confirm('Xóa (khóa) khách hàng này?');">
+                                                <input type="hidden" name="action" value="delete">
+                                                <input type="hidden" name="id" value="${u.id}">
+                                                <button type="submit" class="customer-table__delete">Xóa</button>
+                                            </form>
+                                        </div>
+                                    </article>
+                                </c:forEach>
 
-                                </article>
-
-                                <!-- Một khách hàng -->
-                                <article class="customer-table__row">
-                                    <div class="customer-table__cell">
-                                        <img src="assets/img/avatar5.png" class="customer-table__img" alt="">
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">Trần Thị B</span>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">tranb@example.com</span>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">TP. HCM</span>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__view">Xem</button>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__edit">Sửa</button>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__delete">Xóa</button>
-                                    </div>
-
-                                </article>
 
                             </div>
                         </div>
@@ -234,7 +284,8 @@
                             <!-- Avatar -->
                             <div class="customer-detail__avatar">
                                 <img src="assets/img/avatar5.png" alt="Avatar">
-                                <span class="customer-detail__status online">Đang đăng nhập</span>
+                                <span class="customer-detail__status online" id="cd_status">Đang hoạt động</span>
+
                                 <!-- <span class="customer-detail__status offline">Đã đăng xuất</span> -->
                             </div>
 
@@ -242,12 +293,12 @@
                             <div class="customer-detail__info">
                                 <div class="customer-detail__row">
                                     <span class="label">Tên:</span>
-                                    <span class="value">Nguyễn Văn A</span>
+                                    <span class="value" id="cd_name"></span>
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Email:</span>
-                                    <span class="value">vana@example.com</span>
+                                    <span class="value" id="cd_email"></span>
                                 </div>
 
                                 <div class="customer-detail__row">
@@ -257,22 +308,22 @@
 
                                 <div class="customer-detail__row">
                                     <span class="label">Số điện thoại:</span>
-                                    <span class="value">0123 456 789</span>
+                                    <span class="value" id="cd_phone"></span>
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Địa chỉ:</span>
-                                    <span class="value">Hà Nội</span>
+                                    <span class="value" id="cd_address"></span>
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Ngày tạo:</span>
-                                    <span class="value">01/12/2025</span>
+                                    <span class="value" id="cd_created"></span>
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Ngày cập nhật:</span>
-                                    <span class="value">10/12/2025</span>
+                                    <span class="value" id="cd_updated"></span>
                                 </div>
                             </div>
                         </div>
@@ -296,30 +347,54 @@
                             </div>
 
                             <!-- Form thông tin -->
-                            <form class="customer-detail__info" id="customerEditForm">
+                            <form class="customer-detail__info" id="customerEditForm"
+                                  method="post" action="${pageContext.request.contextPath}/admin/customers">
+                                <input type="hidden" name="action" value="update">
+                                <input type="hidden" name="id" id="ce_id">
+
                                 <div class="customer-detail__row">
                                     <label class="label">Tên:</label>
-                                    <input type="text" class="input" value="Nguyễn Văn A">
+                                    <input type="text" class="input" name="name" id="ce_name">
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Email:</label>
-                                    <input type="email" class="input" value="vana@example.com">
+                                    <input type="email" class="input" name="email" id="ce_email">
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Password:</label>
-                                    <input type="password" class="input" placeholder="Nhập mật khẩu mới">
+                                    <input type="password" class="input" name="password" id="ce_password" placeholder="Nhập mật khẩu mới (nếu đổi)">
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Số điện thoại:</label>
-                                    <input type="text" class="input" value="0123 456 789">
+                                    <input type="text" class="input" name="phone" id="ce_phone">
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Địa chỉ:</label>
-                                    <input type="text" class="input" value="Hà Nội">
+                                    <input type="text" class="input" name="address" id="ce_address">
+
+                                </div>
+                                <div class="customer-detail__row">
+                                    <label class="label">Role:</label>
+                                    <select class="input" name="role" id="ce_role">
+                                        <option value="0">USER</option>
+                                        <option value="1">ADMIN</option>
+                                    </select>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                    <label class="label">Trạng thái:</label>
+                                    <select class="input" name="status" id="ce_status">
+                                        <option value="1">Hoạt động</option>
+                                        <option value="0">Khóa</option>
+                                    </select>
                                 </div>
 
                                 <div class="customer-detail__row">
@@ -1367,6 +1442,82 @@
         // Gán nội dung khởi tạo
         quill.setText('Nội dung');
     });
+    // dùng chung với script hiện tại trong admin.jsp (đã có hideAllSections & sectionCustomer...)
+    function hideCustomerDetail() {
+        hideAllSections();
+        sectionCustomer.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Đổ dữ liệu vào #customer-detail
+    function fillCustomerDetail(row) {
+        document.getElementById("cd_name").textContent = row.dataset.name || "";
+        document.getElementById("cd_email").textContent = row.dataset.email || "";
+        document.getElementById("cd_phone").textContent = row.dataset.phone || "";
+        document.getElementById("cd_address").textContent = row.dataset.address || "";
+
+        // nếu bạn chưa có created/updated từ DB thì cứ để "-"
+        const created = row.dataset.created || "-";
+        const updated = row.dataset.updated || "-";
+        const cdCreated = document.getElementById("cd_created");
+        const cdUpdated = document.getElementById("cd_updated");
+        if (cdCreated) cdCreated.textContent = created;
+        if (cdUpdated) cdUpdated.textContent = updated;
+
+        const stEl = document.getElementById("cd_status");
+        const active = row.dataset.status === "1";
+        if (stEl) {
+            stEl.textContent = active ? "Đang hoạt động" : "Đã khóa";
+            stEl.classList.toggle("online", active);
+            stEl.classList.toggle("offline", !active);
+        }
+    }
+
+    // Đổ dữ liệu vào #customer-edit
+    function fillCustomerEdit(row) {
+        document.getElementById("ce_id").value = row.dataset.id || "";
+        document.getElementById("ce_name").value = row.dataset.name || "";
+        document.getElementById("ce_email").value = row.dataset.email || "";
+        document.getElementById("ce_phone").value = row.dataset.phone || "";
+        document.getElementById("ce_address").value = row.dataset.address || "";
+        document.getElementById("ce_role").value = row.dataset.role || "0";
+        document.getElementById("ce_status").value = row.dataset.status || "1";
+
+        const pwd = document.getElementById("ce_password");
+        if (pwd) pwd.value = ""; // không auto fill password
+    }
+
+    document.addEventListener("click", (e) => {
+        const viewBtn = e.target.closest(".customer-table__view");
+        const editBtn = e.target.closest(".customer-table__edit");
+        if (!viewBtn && !editBtn) return;
+
+        const row = e.target.closest(".customer-table__row");
+        if (!row) return;
+
+        if (viewBtn) {
+            fillCustomerDetail(row);
+            hideAllSections();
+            sectionCustomerDetail.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        if (editBtn) {
+            fillCustomerEdit(row);
+            hideAllSections();
+            sectionCustomerEdit.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    });
+
+    // Khi vào /admin/customers#customer thì tự show đúng tab Customer
+    document.addEventListener("DOMContentLoaded", () => {
+        if (location.hash === "#customer") {
+            hideAllSections();
+            sectionCustomer.style.display = "block";
+        }
+    });
+
 </script>
 
 </html>

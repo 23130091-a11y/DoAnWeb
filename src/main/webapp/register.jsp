@@ -38,8 +38,8 @@
         <div class="banner-section"></div>
 
         <div class="login-container">
-            <form class="login-form" action="register" method="post">
-                <h3>Đăng ký</h3>
+            <form class="login-form" action="${pageContext.request.contextPath}/register" method="post">
+            <h3>Đăng ký</h3>
 
                 <input type="text"
                        name="email"
