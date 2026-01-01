@@ -1,6 +1,5 @@
 package com.webgiadung.doanweb.dao;
 
-import com.webgiadung.doanweb.model.Product;
 import com.webgiadung.doanweb.model.Slide;
 import org.jdbi.v3.core.Jdbi;
 

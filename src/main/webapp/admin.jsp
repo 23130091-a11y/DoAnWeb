@@ -7,6 +7,7 @@
 --%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -801,317 +802,553 @@
 
                     <section id="product" class="manage-detail">
                         <h2 class="manage__heading">Sản phẩm</h2>
+                        <div class="product-menu">
+                            <button class="product-menu__btn active" data-target="product-list">Danh mục sản phẩm</button>
+                            <button class="product-menu__btn" data-target="product-event">Sự kiện giảm giá</button>
+                        </div>
+                        <div class="product-layout">
+                            <aside class="product-sidebar">
+                                <h3 class="product-sidebar__heading">Danh mục</h3>
+                                <ul class="product-sidebar__list">
+                                    <li class="product-sidebar__item product-sidebar__item--active">
+                                        <a href="#!" class="product-sidebar__link">Gia dụng - Nhà cửa</a>
+                                        <ul class="product-sub">
+                                            <li class="product-sub__item">
+                                                <a href="#!" class="product-sub__link active">Đồ dùng nhà bếp</a>
+                                            </li>
+                                            <li class="product-sub__item">
+                                                <a href="#!" class="product-sub__link">Dụng cụ làm vườn</a>
+                                            </li>
+                                            <li class="product-sub__item">
+                                                <a href="#!" class="product-sub__link">Vệ sinh nhà cửa</a>
+                                            </li>
+                                        </ul>
+                                    </li>
 
-                        <!-- Header bảng -->
-                        <div class="product-table">
-                            <div class="product-table__header">
-                                <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
-                            </div>
+                                    <li class="product-sidebar__item">
+                                        <a href="#!" class="product-sidebar__link">Phụ kiện ô tô</a>
+                                        <ul class="product-sub">
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Bảng số điện thoại trên ô tô</a></li>
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Túi đựng đồ, thùng đựng đồ ô tô</a></li>
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Bạt che nắng, tấm chắn nắng ô tô</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="product-sidebar__item">
+                                        <a href="#!" class="product-sidebar__link">Thời trang</a>
+                                        <ul class="product-sub">
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Thời trang nam</a></li>
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Thời trang nữ</a></li>
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Phụ kiện thời trang</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="product-sidebar__item">
+                                        <a href="#!" class="product-sidebar__link">Âm thanh - Camera</a>
+                                        <ul class="product-sub">
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Camera, Máy ảnh</a></li>
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Tai nghe</a></li>
+                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Loa - Phụ kiện loa</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </aside>
 
-                            <!-- Bảng sản phẩm -->
-                            <div class="product-table__inner">
+                            <div class="product-main-content">
+                                <div class="product-table">
+                                    <div class="product-table__header">
+                                        <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
+                                    </div>
 
-                                <!-- Hàng tiêu đề -->
-                                <div class="product-table__row">
-                                    <div class="product-table__cell">Ảnh</div>
-                                    <div class="product-table__cell">Tên sản phẩm</div>
-                                    <div class="product-table__cell">Ngày tạo</div>
-                                    <div class="product-table__cell">Ngày cập nhật</div>
-                                    <div class="product-table__cell">Copy</div>
-                                    <div class="product-table__cell">Sửa</div>
-                                    <div class="product-table__cell">Xóa</div>
+                                    <!-- Bảng sản phẩm -->
+                                    <div class="product-table__inner">
+
+                                        <!-- Hàng tiêu đề -->
+                                        <div class="product-table__row">
+                                            <div class="product-table__cell">Ảnh</div>
+                                            <div class="product-table__cell">Tên sản phẩm</div>
+                                            <div class="product-table__cell">Post</div>
+                                            <div class="product-table__cell">Giá</div>
+                                            <div class="product-table__cell">Xem</div>
+                                            <div class="product-table__cell">Sửa</div>
+                                            <div class="product-table__cell">Xóa</div>
+                                        </div>
+
+                                        <!-- Một sản phẩm -->
+                                        <article class="product-table__row">
+                                            <div class="product-table__cell">
+                                                <img src="assets/img/binhxit.png" alt="" class="product-table__img">
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <span class="product-table__text">Sản phẩm ABC</span>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <input type="checkbox" class="product-table__checkbox" checked>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <span class="product-table__text">500.000đ</span>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <button class="product-table__view">Xem</button>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <button class="product-table__edit">Sửa</button>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <button class="product-table__delete">Xóa</button>
+                                            </div>
+                                        </article>
+
+                                        <!-- Một sản phẩm -->
+                                        <article class="product-table__row">
+                                            <div class="product-table__cell">
+                                                <img src="assets/img/binhxit.png" alt="" class="product-table__img">
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <span class="product-table__text">Sản phẩm ABC</span>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <input type="checkbox" class="product-table__checkbox" checked>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <span class="product-table__text">500.000đ</span>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <button class="product-table__view">Xem</button>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <button class="product-table__edit">Sửa</button>
+                                            </div>
+                                            <div class="product-table__cell">
+                                                <button class="product-table__delete">Xóa</button>
+                                            </div>
+                                        </article>
+
+
+                                    </div>
                                 </div>
-
-                                <!-- Một sản phẩm -->
-                                <article class="product-table__row">
-
-                                    <div class="product-table__cell">
-                                        <img src="assets/img/binhxit.png" alt="" class="product-table__img">
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">Sản phẩm ABC</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">20/11/2025</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">21/11/2025</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Copy</button>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Sửa</button>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Xóa</button>
-                                    </div>
-
-                                </article>
-
-                                <!-- Một sản phẩm -->
-                                <article class="product-table__row">
-
-                                    <div class="product-table__cell">
-                                        <img src="assets/img/binhxit.png" alt="" class="product-table__img">
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">Sản phẩm ABC</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">20/11/2025</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">21/11/2025</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Copy</button>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Sửa</button>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Xóa</button>
-                                    </div>
-
-                                </article>
-
-                                <!-- Một sản phẩm -->
-                                <article class="product-table__row">
-
-                                    <div class="product-table__cell">
-                                        <img src="assets/img/binhxit.png" alt="" class="product-table__img">
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">Sản phẩm ABC</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">20/11/2025</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <span class="product-table__text">21/11/2025</span>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Copy</button>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Sửa</button>
-                                    </div>
-
-                                    <div class="product-table__cell">
-                                        <button class="product-table__edit">Xóa</button>
-                                    </div>
-
-                                </article>
                             </div>
                         </div>
-                    </section>
 
+                    </section>
                     <section id="add-product" class="manage-detail" style="display:none;">
-                        <h2 class="manage__heading">Thêm sản phẩm</h2>
+                        <h2 class="manage__heading">Thêm sản phẩm mới</h2>
 
                         <div class="product-table">
                             <div class="product-table__header">
-                                <button type="submit" class="product-table__save">
+                                <button type="submit" form="addProductFormInline" class="product-table__save">
                                     <i class="fa-solid fa-floppy-disk"></i>
                                 </button>
                             </div>
 
                             <div class="product-table__inner">
-                                <form id="addProductFormInline" class="add-product-form">
+                                <form id="addProductFormInline"
+                                      class="add-product-form"
+                                      method="POST"
+                                      action="api/add-product.php"
+                                      enctype="multipart/form-data">
 
-                                    <!-- Tên sản phẩm -->
-                                    <div class="add-product-form__field">
-                                        <label for="productNameInline" class="add-product-form__label">Tên sản phẩm:</label>
-                                        <input type="text" id="productNameInline" name="productName" class="add-product-form__input" required>
+                                    <div class="add-product-form__row">
+                                        <div class="add-product-form__field">
+                                            <label class="add-product-form__label">Tên sản phẩm:</label>
+                                            <input type="text" name="productName" class="add-product-form__input" required>
+                                        </div>
+                                        <div class="add-product-form__field">
+                                            <label class="add-product-form__label">Giá sản phẩm:</label>
+                                            <input type="number" name="productPrice" class="add-product-form__input" required>
+                                        </div>
+                                        <div class="add-product-form__field">
+                                            <label class="add-product-form__label">Số lượng:</label>
+                                            <input type="number" name="productStock" class="add-product-form__input" required>
+                                        </div>
                                     </div>
 
-                                    <!-- Giá sản phẩm -->
-                                    <div class="add-product-form__field">
-                                        <label for="productPriceInline" class="add-product-form__label">Giá sản phẩm:</label>
-                                        <input type="text" id="productPriceInline" name="productPrice" class="add-product-form__input" required>
+                                    <div class="add-product-form__row" style="align-items: center;">
+                                        <div class="add-product-form__field" style="flex: 1;">
+                                            <label class="add-product-form__label">Ảnh đại diện:</label>
+                                            <input type="file" name="productImage" class="add-product-form__input" accept="image/*" required>
+                                        </div>
+                                        <div class="add-product-form__field" style="width: 100px;">
+                                            <label class="add-product-form__label">Post ngay:</label>
+                                            <input type="checkbox" name="isPost" value="1" class="product-table__checkbox" style="width: 20px; height: 20px;">
+                                        </div>
                                     </div>
 
-                                    <!-- Ảnh đại diện -->
                                     <div class="add-product-form__field">
-                                        <label for="productImageInline" class="add-product-form__label">Ảnh đại diện:</label>
-                                        <input type="file" id="productImageInline" name="productImage" class="add-product-form__input" accept="image/*" required>
+                                        <label class="add-product-form__label">Nhãn hiệu:</label>
+                                        <select name="brandID" class="add-product-form__input" id="brandSelect" required>
+                                            <option value="">-- Chọn thương hiệu --</option>
+                                            <option value="1">Samsung</option> <option value="add-new">+ Thêm nhãn hiệu mới</option>
+                                        </select>
                                     </div>
 
-                                    <!-- Thư viện ảnh -->
                                     <div class="add-product-form__field">
-                                        <label for="productGalleryInline" class="add-product-form__label">Thư viện ảnh:</label>
-                                        <input type="file" id="productGalleryInline" name="productGallery[]" class="add-product-form__input" accept="image/*" multiple>
+                                        <label class="add-product-form__label">Từ khóa (Tag):</label>
+                                        <select name="tagID" class="add-product-form__input" id="tagSelect">
+                                            <option value="">-- Chọn từ khóa --</option>
+                                            <option value="1">Gia dụng</option>
+                                            <option value="add-new">+ Thêm từ khóa mới</option>
+                                        </select>
                                     </div>
 
-                                    <!-- Mô tả sản phẩm -->
-                                    <div class="add-product-form__field">
-                                        <label for="productDescInline" class="add-product-form__label">Mô tả sản phẩm:</label>
-                                        <!-- Create the editor container -->
-                                        <div id="editor" style="min-height: 200px;"></div>
+                                    <div class="add-product-form__section">
+                                        <label class="add-product-form__label">Mô tả sản phẩm:</label>
+                                        <div class="add-product-input-group">
+                                            <input type="text" id="descTitle" placeholder="Tiêu đề mô tả" class="add-product-form__input">
+                                            <textarea id="descContent" placeholder="Nội dung mô tả" class="add-product-form__input"></textarea>
+                                            <button type="button" class="bton btn--primary" onclick="addDescription()">Thêm mô tả</button>
+                                        </div>
+                                        <div id="descriptionList" class="added-items-list"></div>
+                                    </div>
+
+                                    <div class="add-product-form__section">
+                                        <label class="add-product-form__label">Chi tiết sản phẩm (Ảnh & Nội dung):</label>
+                                        <div class="add-product-input-group">
+                                            <input type="file" id="detailImg" class="add-product-form__input">
+                                            <input type="text" id="detailTitle" placeholder="Tiêu đề chi tiết" class="add-product-form__input">
+                                            <textarea id="detailContent" placeholder="Nội dung chi tiết" class="add-product-form__input"></textarea>
+                                            <button type="button" class="bton btn--primary" onclick="addDetail()">Thêm chi tiết</button>
+                                        </div>
+                                        <div id="detailList" class="added-items-list"></div>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
                     </section>
+                    <div id="brandModal" class="admin-modal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+                        <div class="admin-modal__content" style="background: #fff; padding: 20px; border-radius: 8px; width: 400px;">
+                            <h3>Thêm Nhãn Hiệu Mới</h3>
+                            <form id="addBrandFormQuick">
+                                <input type="text" name="brandName" placeholder="Tên nhãn hiệu" class="add-product-form__input" required style="width: 100%; margin-bottom: 10px;">
+                                <input type="text" name="brandCountry" placeholder="Quốc gia" class="add-product-form__input" style="width: 100%; margin-bottom: 10px;">
+                                <input type="file" name="brandLogo" accept="image/*" class="add-product-form__input" style="width: 100%; margin-bottom: 10px;">
+                                <div class="admin-modal__actions" style="display: flex; justify-content: flex-end; gap: 10px;">
+                                    <button type="button" class="bton btn--primary" onclick="closeModal('brandModal')">Hủy</button>
+                                    <button type="button" class="bton btn--primary" onclick="saveNewBrand()">Lưu nhãn hiệu</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
+                    <div id="tagModal" class="admin-modal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+                        <div class="admin-modal__content" style="background: #fff; padding: 20px; border-radius: 8px; width: 400px;">
+                            <h3>Thêm Từ Khóa Mới</h3>
+                            <form id="addTagFormQuick">
+                                <input type="text" id="newTagName" name="tagName" placeholder="Tên từ khóa" class="add-product-form__input" required style="width: 100%; margin-bottom: 10px;">
+                                <textarea id="newTagDesc" name="tagDesc" placeholder="Mô tả từ khóa" class="add-product-form__input" style="width: 100%; margin-bottom: 10px;"></textarea>
+                                <div class="admin-modal__actions" style="display: flex; justify-content: flex-end; gap: 10px;">
+                                    <button type="button" class="bton btn--primary" onclick="closeModal('tagModal')">Hủy</button>
+                                    <button type="button" class="bton btn--primary" onclick="saveNewTag()">Lưu từ khóa</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="viewProductModal" class="admin-modal">
+                        <div class="admin-modal__content admin-modal__content--large">
+                            <div class="modal-header">
+                                <h3 class="manage__heading">Chi tiết sản phẩm</h3>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="view-grid">
+                                    <div class="view-col">
+                                        <div class="view-image-box">
+                                            <img id="v-image" src="assets/img/binhxit.png" alt="Ảnh sản phẩm" class="view-img-main">
+                                        </div>
+                                        <div class="view-time">
+                                            <p><strong>Ngày tạo:</strong> <span id="v-createdAt">10/10/2025</span></p>
+                                            <p><strong>Cập nhật:</strong> <span id="v-updatedAt">15/10/2025</span></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="view-col">
+                                        <h2 id="v-name" class="view-product-title">Sản phẩm ABC</h2>
+
+                                        <div class="view-info-group">
+                                            <p><strong>Nhãn hiệu:</strong> <span class="badge" id="v-brand">Samsung</span></p>
+                                            <p><strong>Từ khóa:</strong> <span class="badge badge--tag" id="v-tags">Đồ dùng vệ sinh</span></p>
+                                        </div>
+
+                                        <div class="view-price-card">
+                                            <div class="price-item">
+                                                <span>Giá gốc:</span>
+                                                <del id="v-oldPrice">600.000đ</del>
+                                            </div>
+                                            <div class="price-item">
+                                                <span>Giảm giá:</span>
+                                                <span class="text-discount">-<span id="v-discount">10</span>%</span>
+                                            </div>
+                                            <div class="price-item price-item--main">
+                                                <span>Giá mới:</span>
+                                                <span id="v-newPrice" class="text-price">540.000đ</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="view-inventory">
+                                            <p><strong>Số lượng còn lại:</strong> <span id="v-stock">50</span></p>
+                                            <p><strong>Số lượng đã bán:</strong> <span id="v-sold">12</span></p>
+                                            <p><strong>Trạng thái Post:</strong>
+                                                <input type="checkbox" id="v-isPost" class="product-table__checkbox" checked disabled>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="view-section">
+                                    <h4 class="view-section-title">Mô tả sản phẩm</h4>
+                                    <div id="v-descriptionList" class="view-list">
+                                        <div class="view-text-item">
+                                            <h5>Tiêu đề mô tả (VD: Chất liệu)</h5>
+                                            <p>Nội dung mô tả chi tiết về sản phẩm...</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="view-section">
+                                    <h4 class="view-section-title">Chi tiết kỹ thuật</h4>
+                                    <div id="v-detailList" class="view-detail-grid">
+                                        <div class="view-detail-card">
+                                            <img src="assets/img/binhxit.png" alt="Detail">
+                                            <div class="view-detail-info">
+                                                <h5>Tiêu đề chi tiết</h5>
+                                                <p>Nội dung chi tiết đi kèm ảnh...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="v-detailList" class="view-detail-grid">
+                                        <div class="view-detail-card">
+                                            <img src="assets/img/binhxit.png" alt="Detail">
+                                            <div class="view-detail-info">
+                                                <h5>Tiêu đề chi tiết</h5>
+                                                <p>Nội dung chi tiết đi kèm ảnh...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product-view-footer">
+                                <button type="button" class="btn btn--primary btn--back-rect" onclick="backToList()">
+                                    Quay lại
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="editProductPage" class="admin-content-page" style="display: none;">
+                        <div class="admin-modal__content--large">
+                            <div class="modal-header">
+                                <h3 class="manage__heading">Chỉnh sửa sản phẩm</h3>
+                            </div>
+
+                            <div class="modal-body">
+                                <form id="editProductForm">
+                                    <div class="view-grid">
+                                        <div class="view-col">
+                                            <div class="view-image-box">
+                                                <img id="edit-v-image" src="assets/img/binhxit.png" alt="Ảnh sản phẩm" class="view-img-main">
+                                                <div class="upload-action">
+                                                    <label for="input-file-edit" class="btn-upload">
+                                                        <i class="fa-solid fa-camera"></i> Thay đổi ảnh
+                                                    </label>
+                                                    <input type="file" id="input-file-edit" hidden>
+                                                </div>
+                                            </div>
+                                            <div class="view-time">
+                                                <p><strong>Ngày tạo:</strong> <span>10/10/2025</span></p>
+                                                <p><strong>Lần cuối:</strong> <span>Vừa xong</span></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="view-col">
+                                            <div class="edit-info-list">
+                                                <div class="info-row">
+                                                    <label class="info-label">Tên sản phẩm:</label>
+                                                    <input type="text" id="edit-name" class="form-input primary-focus" value="Sản phẩm ABC">
+                                                </div>
+
+                                                <div class="info-row">
+                                                    <label class="info-label">Nhãn hiệu:</label>
+                                                    <select id="edit-brand" class="form-input">
+                                                        <option value="samsung">Samsung</option>
+                                                        <option value="apple">Apple</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="info-row">
+                                                    <label class="info-label">Từ khóa (Tags):</label>
+                                                    <select id="edit-tags" class="form-input">
+                                                        <option value="gia-dung">Gia dụng</option>
+                                                        <option value="dien-tu">Điện tử</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="view-price-card">
+                                                    <div class="price-edit-row">
+                                                        <label class="price-label">Giá gốc (đ):</label>
+                                                        <input type="number" id="edit-oldPrice" class="form-input-small" value="600000">
+                                                    </div>
+                                                    <div class="price-edit-row">
+                                                        <label class="price-label">Giảm giá (%):</label>
+                                                        <input type="number" id="edit-discount" class="form-input-small" value="10">
+                                                    </div>
+                                                    <div class="price-edit-row">
+                                                        <label class="price-label primary-text">Giá mới (đ):</label>
+                                                        <input type="number" id="edit-newPrice" class="form-input-small price-edit-input" value="540000">
+                                                    </div>
+                                                </div>
+
+                                                <div class="view-inventory" style="margin-top: 20px; border-top: 1px dashed #ddd; padding-top: 15px;">
+                                                    <div class="inventory-row">
+                                                        <div class="info-row no-border">
+                                                            <label class="info-label">Kho hàng:</label>
+                                                            <input type="number" id="edit-stock" class="form-input-small" style="width: 80px;" value="50">
+                                                        </div>
+                                                        <div class="info-row no-border">
+                                                            <label class="info-label">Đã bán:</label>
+                                                            <input type="number" id="edit-sold" class="form-input-small" style="width: 80px;" value="12">
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-row no-border mt-10">
+                                                        <label class="info-label">Trạng thái Post:</label>
+                                                        <input type="checkbox" id="edit-isPost" class="product-table__checkbox" style="width: 20px; height: 20px;" checked>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="view-section">
+                                        <h4 class="view-section-title">Mô tả sản phẩm</h4>
+                                        <div id="edit-v-descriptionList" class="edit-mode-list">
+                                            <div class="edit-item-box">
+                                                <input type="text" class="form-input edit-sub-title" value="Chất liệu" placeholder="Tiêu đề">
+                                                <textarea class="form-textarea" rows="2" placeholder="Nội dung mô tả..."></textarea>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-add-more">+ Thêm dòng mô tả</button>
+                                    </div>
+
+                                    <div class="view-section">
+                                        <h4 class="view-section-title">Chi tiết sản phẩm</h4>
+                                        <div id="edit-v-detailList" class="edit-mode-list">
+                                            <div class="edit-detail-card">
+                                                <div class="edit-card-img">
+                                                    <img src="assets/img/binhxit.png" alt="Detail">
+                                                    <label class="change-img-mini"><i class="fa-solid fa-camera"></i> <input type="file" hidden></label>
+                                                </div>
+                                                <div class="view-detail-info">
+                                                    <input type="text" class="form-input edit-sub-title" value="Đặc điểm nổi bật" placeholder="Tiêu đề">
+                                                    <textarea class="form-textarea" rows="3" placeholder="Nội dung chi tiết..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="edit-v-detailList" class="edit-mode-list">
+                                            <div class="edit-detail-card">
+                                                <div class="edit-card-img">
+                                                    <img src="assets/img/binhxit.png" alt="Detail">
+                                                    <label class="change-img-mini"><i class="fa-solid fa-camera"></i> <input type="file" hidden></label>
+                                                </div>
+                                                <div class="view-detail-info">
+                                                    <input type="text" class="form-input edit-sub-title" value="Đặc điểm nổi bật" placeholder="Tiêu đề">
+                                                    <textarea class="form-textarea" rows="3" placeholder="Nội dung chi tiết..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-add-more">+ Thêm khối chi tiết</button>
+                                    </div>
+
+                                    <div class="product-view-footer">
+                                        <button type="button" class="bton btn-cancel" onclick="backFromEdit()">Hủy bỏ</button>
+                                        <button type="submit" class="bton btn--primary btn--back-rect">Lưu thay đổi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     <section id="order" class="manage-detail">
                         <h2 class="manage__heading">Đơn hàng</h2>
 
                         <div class="order-table">
 
-                            <div class="order-table__header">
-                                <h3 class="order-table__heading">Danh sách đơn hàng</h3>
-                                <button class="btn btn--default-color order-table__btn">Xóa các mục đã chọn</button>
-                            </div>
+                            <!-- Form tìm kiếm -->
+                            <form action="<c:url value='/order-search'/>" method="get">
+                                <div class="order-table__filter">
+                                    <div class="order-table__filter-label">
+                                        Điều kiện lọc
+                                        <i class="order-table__filter-icon fa-solid fa-caret-down"></i>
+                                    </div>
 
-                            <!-- Filter -->
-                            <div class="order-table__filter">
-                                <div class="order-table__filter-label">
-                                    Điều kiện lọc
-                                    <i class="order-table__filter-icon fa-solid fa-caret-down"></i>
+                                    <input type="text"
+                                           name="keyword"
+                                           class="order-table__search"
+                                           placeholder="Nhập mã đơn hoặc tên khách"
+                                           value="${keyword}">
+
+                                    <button type="submit"
+                                            class="btn btn--default-color order-table__search-btn">
+                                        Tìm kiếm
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Form xóa -->
+                            <form id="deleteOrdersForm" action="<c:url value='/order-delete'/>" method="post">
+                                <div class="order-table__header">
+                                    <h3 class="order-table__heading">Danh sách đơn hàng</h3>
+                                    <!-- Nút xóa phải nằm trong form này -->
+                                    <button type="submit" class="btn btn--default-color order-table__btn">Xóa các mục đã chọn</button>
                                 </div>
 
-                                <input type="text"
-                                       class="order-table__search"
-                                       placeholder="Nhập từ khóa tìm kiếm">
+                                <div class="order-table__inner">
 
-                                <button class="btn btn--default-color order-table__search-btn">Tìm kiếm</button>
-                            </div>
-
-                            <!-- Table -->
-                            <div class="order-table__inner">
-
-                                <!-- Header -->
-                                <div class="order-table__row">
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
+                                    <!-- Header -->
+                                    <div class="order-table__row">
+                                        <div class="order-table__check">
+                                            <input type="checkbox" id="selectAll" class="order-table__checkbox">
+                                        </div>
+                                        <div class="order-table__cell">Mã</div>
+                                        <div class="order-table__cell">Khách hàng</div>
+                                        <div class="order-table__cell">Trạng thái</div>
+                                        <div class="order-table__cell">Thanh toán</div>
+                                        <div class="order-table__cell">Ngày tạo</div>
+                                        <div class="order-table__cell">Tổng tiền</div>
                                     </div>
 
-                                    <div class="order-table__cell">Mã</div>
-                                    <div class="order-table__cell">Khách hàng</div>
-                                    <div class="order-table__cell">Trạng thái</div>
-                                    <div class="order-table__cell">Thanh toán</div>
-                                    <div class="order-table__cell">Ngày tạo</div>
-                                    <div class="order-table__cell">Tổng tiền</div>
+                                    <!-- Row -->
+                                    <c:forEach var="order" items="${orders}">
+                                        <article class="order-table__row ${order.rowClass}">
+                                            <div class="order-table__check">
+                                                <input type="checkbox" name="orderIds" value="${order.id}" class="order-table__checkbox">
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <a href="#!" class="order-table__text order-table__link">${order.id}</a>
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <span class="order-table__text">${order.customer_name}</span>
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <span class="order-table__status ${order.statusTransportClass}">
+                                                        ${order.statusTransportText}
+                                                </span>
+                                            </div>
+
+                                            <div class="order-table__cell">
+                                                <span class="order-table__status ${order.statusPaymentClass}">
+                                                        ${order.statusPaymentText}
+                                                </span>
+                                            </div>
+
+                                            <div class="order-table__cell">${order.created_at}</div>
+
+                                            <div class="order-table__cell">${order.total_price}đ</div>
+                                        </article>
+                                    </c:forEach>
                                 </div>
-
-                                <!-- Row -->
-                                <article class="order-table__row">
-
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <a class="order-table__text order-table__link">#123456</a>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__text">anhaiti</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__status">Đơn hàng mới</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__payment order-table__payment--pending">Chưa thanh toán</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__date">30/11/2020</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__total">3.700.000đ</span>
-                                    </div>
-
-                                </article>
-
-                                <!-- Row -->
-                                <article class="order-table__row">
-
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <a class="order-table__text order-table__link">#123456</a>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__text">anhaiti</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__status order-table__status--completed">Hoàn thành</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__payment order-table__payment--pending">Chưa thanh toán</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__date">30/11/2020</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__total">3.700.000đ</span>
-                                    </div>
-
-                                </article>
-
-                                <!-- Row -->
-                                <article class="order-table__row order-table__row--cancelled">
-
-                                    <div class="order-table__check">
-                                        <input type="checkbox" class="order-table__checkbox">
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <a class="order-table__text order-table__link">#123456</a>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__text">anhaiti</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__status order-table__status--cancelled">Hủy đơn hàng</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__payment order-table__payment--paid">Đã thanh toán</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__date">30/11/2020</span>
-                                    </div>
-
-                                    <div class="order-table__cell">
-                                        <span class="order-table__total">3.700.000đ</span>
-                                    </div>
-
-                                </article>
-                            </div>
+                            </form>
                         </div>
+
                     </section>
                 </div>
             </div>
@@ -1119,6 +1356,7 @@
     </div>
 </main>
 </body>
+
 <script>
     const sectionConfig = document.getElementById("config");
     const sectionProduct = document.getElementById("product");
@@ -1139,6 +1377,15 @@
     const sectionBlogAdd  = document.getElementById("add-blog");
     const btnAddSlide = document.querySelector("#news-slide .add-table__btn");
     const btnAddBlog  = document.querySelector("#news-blog .add-table__btn");
+    const productMenuButtons = document.querySelectorAll(".product-menu__btn");
+    const sectionProductDetail = document.getElementById("viewProductModal");
+    const sectionProductEdit = document.getElementById("editProductPage");
+    const productContents = {
+        "product-list": document.getElementById("product-list"),
+        "product-event": document.getElementById("product-event")
+    };
+    const sidebarItems = document.querySelectorAll(".product-sidebar__item");
+    const sidebarSubLinks = document.querySelectorAll(".product-sub__link");
 
     const newsSections = {
         "news-slide": document.getElementById("news-slide"),
@@ -1157,6 +1404,8 @@
         sectionCustomerDetail.style.display = "none";
         sectionCustomerEdit.style.display = "none";
         sectionNews.style.display = "none";
+        sectionProductDetail.style.display = "none";
+        sectionProductEdit.style.display = "none";
     }
 
     // Click menu
@@ -1174,7 +1423,78 @@
             }
         });
     });
+    productMenuButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-target");
 
+            // Ẩn các content trong product
+            Object.values(productContents).forEach(content => {
+                if(content) content.style.display = "none";
+            });
+            productMenuButtons.forEach(b => b.classList.remove("active"));
+
+            if(productContents[targetId]) {
+                productContents[targetId].style.display = "block";
+            }
+            btn.classList.add("active");
+        });
+    });
+
+    sidebarItems.forEach(item => {
+        const parentLink = item.querySelector(".product-sidebar__link");
+
+        parentLink.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const isActive = item.classList.contains("active") || item.classList.contains("product-sidebar__item--active");
+
+            sidebarItems.forEach(i => {
+                i.classList.remove("active");
+                i.classList.remove("product-sidebar__item--active");
+
+
+                const childLinks = i.querySelectorAll(".product-sub__link");
+                childLinks.forEach(link => link.classList.remove("active"));
+            });
+
+            if (!isActive) {
+
+                item.classList.add("active");
+
+                const firstSub = item.querySelector(".product-sub__link");
+                if (firstSub) {
+                    firstSub.classList.add("active");
+                }
+            } else {
+                console.log("Đã đóng menu");
+            }
+        });
+    });
+
+
+    sidebarSubLinks.forEach(sub => {
+        sub.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            sidebarSubLinks.forEach(s => s.classList.remove("active"));
+
+            sub.classList.add("active");
+        });
+    });
+
+    function initProductDefault() {
+        Object.values(productContents).forEach(c => { if(c) c.style.display = "none"; });
+        productContents["product-list"].style.display = "block";
+        productMenuButtons.forEach(b => b.classList.remove("active"));
+        document.querySelector(".product-menu__btn[data-target='product-list']").classList.add("active");
+
+        sidebarItems.forEach(i => i.classList.remove("active"));
+        sidebarSubLinks.forEach(s => s.classList.remove("active"));
+
+        if(sidebarItems[0]) sidebarItems[0].classList.add("active");
+        if(sidebarSubLinks[0]) sidebarSubLinks[0].classList.add("active");
+    }
     // Click "Thêm sản phẩm"
     btnAdd.addEventListener("click", () => {
         hideAllSections();       // ẩn tất cả trước
@@ -1191,7 +1511,66 @@
         sectionAdd.style.display = "none";
         sectionProduct.style.display = "block";
     });
+    //  Gán sự kiện cho các nút "Xem" trong bảng sản phẩm
+    document.querySelectorAll(".product-table__row .product-table__view").forEach(btn => {
+        if (btn.textContent.trim() === "Xem") {
+            btn.addEventListener("click", function() {
+                hideAllSections();
 
+                sectionProductDetail.style.display = "block";
+                sectionProductDetail.style.position = "static";
+                sectionProductDetail.style.backgroundColor = "transparent";
+                sectionProductDetail.style.padding = "0";
+
+                window.scrollTo({ top: 0, behavior: "smooth" });
+
+            });
+        }
+    });
+
+
+    document.querySelectorAll(".product-table__row .product-table__edit").forEach(btn => {
+        if (btn.textContent.trim() === "Sửa") {
+            btn.addEventListener("click", function() {
+                hideAllSections(); // Bước này sẽ ẩn trang Product (Danh sách)
+
+                sectionProductEdit.style.display = "block"; // Hiện trang Edit
+                sectionProductEdit.style.position = "static";
+                sectionProductEdit.style.backgroundColor = "transparent";
+                sectionProductEdit.style.padding = "0";
+
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+    });
+
+    function backToList() {
+        sectionProductDetail.style.display = "none";
+        sectionProduct.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Hàm quay lại cho trang SỬA sản phẩm
+    function backFromEdit() {
+        // Ẩn trang Edit
+        sectionProductEdit.style.display = "none";
+        // Hiện lại trang danh sách
+        sectionProduct.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Hàm Đóng dùng chung (CHỈ GIỮ LẠI 1 HÀM NÀY)
+    function closeModal(id) {
+        if (id === 'viewProductModal') {
+            backToList();
+        } else if (id === 'editProductPage') {
+            backFromEdit();
+        } else {
+            // Xử lý cho các modal khác nếu có (như brandModal, tagModal)
+            const modal = document.getElementById(id);
+            if (modal) modal.style.display = "none";
+        }
+    }
     // Xử lý submit form
     const formInline = document.getElementById("addProductFormInline");
     formInline.addEventListener("submit", (e) => {
@@ -1356,8 +1735,8 @@
     }
     if (btnAddSlide) {
         btnAddSlide.addEventListener("click", () => {
-            hideAllSections();          // ẩn toàn bộ layout khác
-            hideAllNewsViews();         // ẩn giao diện news con
+            hideAllSections();
+            hideAllNewsViews();
 
             sectionNews.style.display = "block";
             sectionSlideAdd.style.display = "block";
@@ -1407,10 +1786,25 @@
 
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
+    document.getElementById('brandSelect').addEventListener('change', function() {
+        if (this.value === 'add-new') {
+            openModal('brandModal');
+            this.value = "";
+        }
+    });
+
+    document.getElementById('tagSelect').addEventListener('change', function() {
+        if (this.value === 'add-new') {
+            openModal('tagModal');
+            this.value = "";
+        }
+    });
+
 
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const quill = new Quill('#editor', {
@@ -1429,6 +1823,90 @@
         // Gán nội dung khởi tạo
         quill.setText('Nội dung');
     });
+    // --- XỬ LÝ HIỂN THỊ CỬA SỔ NHẬP (MODAL) ---
+
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.style.display = 'flex'; // Hiển thị modal
+        }
+    }
+
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.style.display = 'none'; // Ẩn modal
+        }
+        // Khi đóng, reset lại thanh chọn về mặc định để tránh bị kẹt ở chữ "Thêm mới"
+        if (id === 'brandModal') document.getElementById('brandSelect').value = '';
+        if (id === 'tagModal') document.getElementById('tagSelect').value = '';
+    }
+
+    // 3. Lắng nghe sự kiện thay đổi trên các thẻ Select
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Kiểm tra chọn nhãn hiệu
+        const brandSelect = document.getElementById('brandSelect');
+        if (brandSelect) {
+            brandSelect.addEventListener('change', function() {
+                if (this.value === 'add-new') {
+                    openModal('brandModal');
+                }
+            });
+        }
+
+        // Kiểm tra chọn từ khóa
+        const tagSelect = document.getElementById('tagSelect');
+        if (tagSelect) {
+            tagSelect.addEventListener('change', function() {
+                if (this.value === 'add-new') {
+                    openModal('tagModal');
+                }
+            });
+        }
+    });
+
+    // --- CHỨC NĂNG HIỂN THỊ CỬA SỔ (MODAL) ---
+
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "flex";
+        }
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.getElementById('brandSelect').addEventListener('change', function() {
+        if (this.value === 'add-new') {
+            openModal('brandModal');
+            // QUAN TRỌNG: Reset giá trị về trống ngay lập tức
+            // để lần sau chọn lại "add-new" nó vẫn tính là có sự thay đổi (change)
+            this.value = "";
+        }
+    });
+
+    document.getElementById('tagSelect').addEventListener('change', function() {
+        if (this.value === 'add-new') {
+            openModal('tagModal');
+            this.value = "";
+        }
+    });
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('admin-modal')) {
+            event.target.style.display = "none";
+        }
+    }
+
 </script>
+
+<!-- Link JS -->
+<script src="assets/js/script.js"></script>
 
 </html>
