@@ -56,6 +56,9 @@ public class RegisterController extends HttpServlet {
         authDao.register(user);
 
         // 6. Chuyển sang login
-        response.sendRedirect("/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/login");
+        return;
+
+
     }
 }
