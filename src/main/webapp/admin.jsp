@@ -800,13 +800,13 @@
                         </div>
                     </section>
 
-                    <section id="product" class="manage-detail">
+                    <section id="product" class="manage-detail" style="display: none;">
                         <h2 class="manage__heading">Sản phẩm</h2>
                         <div class="product-menu">
                             <button class="product-menu__btn active" data-target="product-list">Danh mục sản phẩm</button>
                             <button class="product-menu__btn" data-target="product-event">Sự kiện giảm giá</button>
                         </div>
-                        <div class="product-layout">
+                            <div class="product-layout">
                             <aside class="product-sidebar">
                                 <h3 class="product-sidebar__heading">Danh mục</h3>
                                 <ul class="product-sidebar__list">
@@ -853,6 +853,7 @@
                             </aside>
 
                             <div class="product-main-content">
+                                <div id="product-list-section">
                                 <div class="product-table">
                                     <div class="product-table__header">
                                         <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
@@ -925,9 +926,452 @@
 
                                     </div>
                                 </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="product-event-section" style="display: none;">
+                            <div class="event-manager">
+                                <div class="event-header">
+                                    <button class="btn btn--default-color event-header__btn">Thêm sự kiện giảm giá</button>
+                                </div>
+                                <div class="event-search">
+                                    <div class="event-search__wrapper">
+                                        <input type="text" class="event-search__input" placeholder="Tìm kiếm tên sự kiện hoặc mức giảm giá...">
+                                        <button class="event-search__btn">
+                                            <i class="fas fa-search"></i> Tìm kiếm
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="event-table">
+                                    <div class="event-table__row event-table__row--header">
+                                        <div class="event-table__cell event-col-name">Tên sự kiện</div>
+                                        <div class="event-table__cell event-col-discount">Giảm giá</div>
+                                        <div class="event-table__cell event-col-date">Ngày bắt đầu</div>
+                                        <div class="event-table__cell event-col-date">Ngày kết thúc</div>
+                                        <div class="event-table__cell event-col-action">Xem</div>
+                                        <div class="event-table__cell event-col-action">Sửa</div>
+                                        <div class="event-table__cell event-col-action">Xóa</div>
+                                    </div>
+
+                                    <article class="event-table__row">
+                                        <div class="event-table__cell event-col-name">
+                                            <span class="event-table__text event-table__text--bold">Chương trình Sale Hè 2026</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-discount">
+                                            <span class="event-table__text event-table__text--red">-25%</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-date">
+                                            <span class="event-table__text">15/06/2026</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-date">
+                                            <span class="event-table__text">30/06/2026</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-action">
+                                            <button class="event-btn-view">Xem</button>
+                                        </div>
+                                        <div class="event-table__cell event-col-action">
+                                            <button class="event-btn-edit">Sửa</button>
+                                        </div>
+                                        <div class="event-table__cell event-col-action">
+                                            <button class="event-btn-delete">Xóa</button>
+                                        </div>
+                                    </article>
+
+                                    <article class="event-table__row">
+                                        <div class="event-table__cell event-col-name">
+                                            <span class="event-table__text event-table__text--bold">Đồng giá khai trương</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-discount">
+                                            <span class="event-table__text event-table__text--red">99.000đ</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-date">
+                                            <span class="event-table__text">01/01/2026</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-date">
+                                            <span class="event-table__text">05/01/2026</span>
+                                        </div>
+                                        <div class="event-table__cell event-col-action">
+                                            <button class="event-btn-view">Xem</button>
+                                        </div>
+                                        <div class="event-table__cell event-col-action">
+                                            <button class="event-btn-edit">Sửa</button>
+                                        </div>
+                                        <div class="event-table__cell event-col-action">
+                                            <button class="event-btn-delete">Xóa</button>
+                                        </div>
+                                    </article>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="add-event-page" class="manage-detail" style="display: none;">
+                        <h2 class="manage__heading">Thêm sự kiện giảm giá mới</h2>
+
+                        <div class="event-card">
+                            <div class="event-card__header">
+                                <button type="submit" form="addEventForm" class="event-btn event-btn--save">
+                                    <i class="fa-solid fa-floppy-disk"></i> Lưu sự kiện
+                                </button>
+                            </div>
+
+                            <div class="event-card__body">
+                                <form id="addEventForm" class="event-form">
+                                    <div class="event-form__group">
+                                        <label class="event-form__label">Tên sự kiện:</label>
+                                        <input type="text" name="eventName" class="event-form__input" placeholder="Ví dụ: Sale Hè Rực Rỡ" required>
+                                    </div>
+
+                                    <div class="event-form__row">
+                                        <div class="event-form__group">
+                                            <label class="event-form__label">Loại giảm giá:</label>
+                                            <select name="discountType" id="discountType" class="event-form__input">
+                                                <option value="percentage">Giảm theo phần trăm (%)</option>
+                                                <option value="amount">Giảm theo số tiền (đ)</option>
+                                            </select>
+                                        </div>
+                                        <div class="event-form__group">
+                                            <label class="event-form__label">Mức giảm:</label>
+                                            <div class="event-form__input-wrapper">
+                                                <input type="number" name="discountValue" class="event-form__input" placeholder="0" required>
+                                                <span id="discountUnit" class="event-form__unit">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="event-form__row">
+                                        <div class="event-form__group">
+                                            <label class="event-form__label">Ngày bắt đầu:</label>
+                                            <input type="date" name="startDate" class="event-form__input" required>
+                                        </div>
+                                        <div class="event-form__group">
+                                            <label class="event-form__label">Ngày kết thúc:</label>
+                                            <input type="date" name="endDate" class="event-form__input" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="event-form__group">
+                                        <label class="event-form__label">Mô tả sự kiện:</label>
+                                        <textarea name="eventDesc" class="event-form__input event-form__input--textarea" rows="3" placeholder="Mô tả ngắn gọn chương trình..."></textarea>
+                                    </div>
+
+                                    <div class="event-form__group">
+                                        <label class="event-form__label">Chọn Slide cho sự kiện:</label>
+                                        <div class="event-select" id="eventSlideSelect">
+                                            <div class="event-select__selected">-- Không hiển thị lên Slide --</div>
+                                            <div class="event-select__options">
+                                                <div class="event-option" data-value="none">
+                                                    <span>Không hiển thị lên Slide</span>
+                                                </div>
+                                                <div class="event-option" data-value="home-main">
+                                                    <img src="assets/img/slide-main-thumb.png" alt="" class="event-option__img">
+                                                    <div class="event-option__content">
+                                                        <strong class="event-option__title">Slide chính</strong>
+                                                        <span class="event-option__desc">- Banner lớn trang chủ (1200x400)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="event-option" data-value="home-sub">
+                                                    <img src="assets/img/slide-sub-thumb.png" alt="" class="event-option__img">
+                                                    <div class="event-option__content">
+                                                        <strong class="event-option__title">Banner phụ</strong>
+                                                        <span class="event-option__desc">- Banner nhỏ bên phải (400x200)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="eventSlideTarget" id="eventSlideTargetHidden" value="none">
+                                    </div>
+                                    <label class="event-form__label">Phạm vi áp dụng giảm giá:</label>
+                                    <div class="event-form__apply-type">
+
+                                        <div class="event-form__apply-row">
+                                            <label class="event-radio">
+                                                <input type="radio" name="applyScope" value="all" checked>
+                                                <span>Tất cả sản phẩm</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="event-form__apply-row">
+                                            <label class="event-radio">
+                                                <input type="radio" name="applyScope" value="category">
+                                                <span>Theo danh mục</span>
+                                            </label>
+
+                                            <div id="scopeCategory" class="event-scope-box" style="display: none;">
+                                                <div class="category-select-wrapper">
+                                                    <select name="applyCategories" class="event-form__input">
+                                                        <option value="">-- Chọn một danh mục --</option>
+                                                        <option value="1">Gia dụng - Nhà cửa</option>
+                                                        <option value="2">Phụ kiện ô tô</option>
+                                                        <option value="3">Thời trang</option>
+                                                        <option value="4">Âm thanh - Camera</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="event-form__apply-row">
+                                            <label class="event-radio">
+                                                <input type="radio" name="applyScope" value="specific">
+                                                <span>Sản phẩm cụ thể</span>
+                                            </label>
+
+                                            <div id="scopeSpecific" class="event-scope-box" style="display: none;">
+                                                <div class="event-search-mini">
+                                                    <div class="event-search-wrapper">
+                                                        <input type="text" id="productSearchEvent" class="event-form__input" placeholder="Nhập tên sản phẩm để lọc...">
+                                                        <button type="button" class="event-search-btn"><i class="fas fa-search"></i></button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="event-product-select">
+                                                    <div class="event-product-table">
+                                                        <div class="event-product-table__header">
+                                                            <div class="col-check">Chọn</div>
+                                                            <div class="col-img">Ảnh</div>
+                                                            <div class="col-name">Tên sản phẩm</div>
+                                                            <div class="col-price">Giá</div>
+                                                            <div class="col-cat">Danh mục</div>
+                                                        </div>
+                                                        <div class="event-product-table__body" id="eventProductList">
+                                                            <div class="event-product-item">
+                                                                <div class="col-check"><input type="checkbox" name="selectedProducts[]" value="101"></div>
+                                                                <div class="col-img"><img src="assets/img/binhxit.png" alt=""></div>
+                                                                <div class="col-name">Bình xịt bọt tuyết siêu sạch</div>
+                                                                <div class="col-price">150.000đ</div>
+                                                                <div class="col-cat">Gia dụng</div>
+                                                            </div>
+                                                            <div class="event-product-item">
+                                                                <div class="col-check"><input type="checkbox" name="selectedProducts[]" value="102"></div>
+                                                                <div class="col-img"><img src="assets/img/camera.png" alt=""></div>
+                                                                <div class="col-name">Camera hành trình 4K</div>
+                                                                <div class="col-price">1.200.000đ</div>
+                                                                <div class="col-cat">Phụ kiện ô tô</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="event-card__footer">
+                                <button type="button" class="bton btn--primary event-btn--cancel" onclick="backToEventList()">Hủy bỏ</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="view-event-page" class="ev-container" style="display: none;">
+                        <div class="ev-header">
+                            <h2 class="ev-title">Chi tiết chương trình</h2>
+                        </div>
+
+                        <div class="ev-card">
+                            <div class="ev-grid">
+                                <div class="ev-group ev-col-2">
+                                    <label class="ev-label">Tên sự kiện</label>
+                                    <div class="ev-view-box ev-view-box--bold" id="view-eventName">Sale Tết Nguyên Đán 2026</div>
+                                </div>
+
+                                <div class="ev-group">
+                                    <label class="ev-label">Loại giảm giá</label>
+                                    <div class="ev-view-box" id="view-discountType">Phần trăm (%)</div>
+                                </div>
+
+                                <div class="ev-group">
+                                    <label class="ev-label">Mức giảm</label>
+                                    <div class="ev-view-box ev-view-box--red" id="view-discountValue">20%</div>
+                                </div>
+
+                                <div class="ev-group">
+                                    <label class="ev-label">Ngày bắt đầu</label>
+                                    <div class="ev-view-box" id="view-startDate">01/01/2026</div>
+                                </div>
+
+                                <div class="ev-group">
+                                    <label class="ev-label">Ngày kết thúc</label>
+                                    <div class="ev-view-box" id="view-endDate">15/01/2026</div>
+                                </div>
+                                <div class="ev-group">
+                                    <label class="ev-label">Mô tả</label>
+                                    <div class="ev-view-box ev-view-box" id="view-descrip">Chương trình khuyến mãi Tết Nguyên Đán 2026.</div>
+                                </div>
+                                <div class="ev-group ev-col-2">
+                                    <label class="ev-label">Phạm vi áp dụng</label>
+                                    <div class="ev-view-box">Sản phẩm cụ thể</div>
+                                </div>
+                            </div>
+
+                            <div class="ev-scope-result">
+                                <div class="ev-divider"></div>
+                                <label class="ev-label">Sản phẩm đã áp dụng</label>
+                                <div class="ev-table-wrapper">
+                                    <table class="ev-table">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th >Ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá gốc</th>
+                                            <th>Danh mục</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="viewSelectedProductList">
+                                        <tr>
+                                            <td><input type="checkbox" class="ev-checkbox--yellow" checked disabled></td>
+                                            <td><img src="assets/img/binhxit.png" alt=""></td>
+                                            <td>Bình xịt bọt tuyết siêu sạch</td>
+                                            <td>150.000đ</td>
+                                            <td>Gia dụng</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
+                        <div class="ev-footer">
+                            <button class="ev-btn ev-btn--outline" onclick="backToEventList()">Quay lại danh sách</button>
+                        </div>
+                    </section>
+
+                    <section id="edit-event-page" class="ev-container" style="display: none;">
+                        <div class="ev-header">
+                            <h2 class="ev-title">Cập nhật sự kiện</h2>
+                            <button class="ev-btn ev-btn--blue" onclick="backToEventList()">
+                                <i class="fa-solid fa-check"></i> Lưu thay đổi
+                            </button>
+                        </div>
+
+                        <div class="ev-card">
+                            <form id="editEventForm">
+                                <div class="ev-grid">
+                                    <div class="ev-group ev-col-2">
+                                        <label class="ev-label">Tên sự kiện</label>
+                                        <input type="text" class="ev-input" id="edit-eventName" value="Sale Tết Nguyên Đán 2026">
+                                    </div>
+
+                                    <div class="ev-group">
+                                        <label class="ev-label">Loại giảm giá</label>
+                                        <select class="ev-input" id="edit-discountType">
+                                            <option value="percentage">Phần trăm (%)</option>
+                                            <option value="amount">Số tiền cố định (đ)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="ev-group">
+                                        <label class="ev-label">Mức giảm</label>
+                                        <input type="number" class="ev-input" id="edit-discountValue" value="20">
+                                    </div>
+
+                                    <div class="ev-group">
+                                        <label class="ev-label">Ngày bắt đầu</label>
+                                        <input type="date" class="ev-input" id="edit-startDate" value="2026-01-01">
+                                    </div>
+
+                                    <div class="ev-group">
+                                        <label class="ev-label">Ngày kết thúc</label>
+                                        <input type="date" class="ev-input" id="edit-endDate" value="2026-01-15">
+                                    </div>
+
+                                    <div class="ev-group ev-col-2">
+                                        <label class="ev-label">Mô tả sự kiện</label>
+                                        <textarea class="ev-input" id="edit-eventDesc" rows="3" style="height: auto;">Chương trình khuyến mãi lớn nhất đầu năm dành cho mọi khách hàng khi mua sắm các thiết bị gia dụng và phụ kiện ô tô.</textarea>
+                                    </div>
+
+                                    <div class="ev-group ev-col-2">
+                                        <label class="ev-label">Chọn Slide cho sự kiện</label>
+
+                                        <div class="ev-slide-sel" id="editEventSlideSelect">
+                                            <div class="ev-slide-sel__selected">
+                                                <div class="ev-slide-opt">
+                                                    <img src="assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
+                                                    <div class="ev-slide-opt__content">
+                                                        <strong class="ev-slide-opt__title">Slide chính</strong>
+                                                        <span class="ev-slide-opt__desc">- Banner lớn trang chủ</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="ev-slide-sel__options" style="display: none;">
+                                                <div class="ev-slide-opt" data-value="none">
+                                                    <div class="ev-slide-opt__content">
+                                                        <strong class="ev-slide-opt__title">Không hiển thị lên Slide</strong>
+                                                    </div>
+                                                </div>
+                                                <div class="ev-slide-opt" data-value="home-main">
+                                                    <img src="assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
+                                                    <div class="ev-slide-opt__content">
+                                                        <strong class="ev-slide-opt__title">Slide chính</strong>
+                                                        <span class="ev-slide-opt__desc">- Banner lớn trang chủ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="ev-slide-opt" data-value="home-sub">
+                                                    <img src="assets/img/slide-sub-thumb.png" alt="" class="ev-slide-opt__img">
+                                                    <div class="ev-slide-opt__content">
+                                                        <strong class="ev-slide-opt__title">Banner phụ</strong>
+                                                        <span class="ev-slide-opt__desc">- Banner nhỏ bên phải</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="editEventSlideTargetHidden" value="home-main">
+                                    </div>
+                                    <div class="ev-group ev-col-2">
+                                        <label class="ev-label">Phạm vi áp dụng giảm giá</label>
+                                        <div class="ev-radio-group">
+                                            <label class="ev-radio">
+                                                <input type="radio" name="editApplyScope" value="all" checked>
+                                                <span class="ev-radio-mark"></span> <span>Tất cả sản phẩm</span>
+                                            </label>
+                                            <label class="ev-radio">
+                                                <input type="radio" name="editApplyScope" value="category">
+                                                <span class="ev-radio-mark"></span> <span>Theo danh mục</span>
+                                            </label>
+                                            <label class="ev-radio">
+                                                <input type="radio" name="editApplyScope" value="specific">
+                                                <span class="ev-radio-mark"></span> <span>Sản phẩm cụ thể</span>
+                                            </label>
+                                        </div>
+
+                                        <div id="editScopeCategory" class="ev-scope-box" style="display: none; margin-top: 15px;">
+                                            <select class="ev-input" id="editApplyCategories">
+                                                <option value="">-- Chọn một danh mục --</option>
+                                                <option value="1">Gia dụng - Nhà cửa</option>
+                                                <option value="2">Phụ kiện ô tô</option>
+                                            </select>
+                                        </div>
+
+                                        <div id="editScopeSpecific" class="ev-scope-box" style="display: none; margin-top: 15px;">
+                                            <div class="ev-search-bar" style="max-width: 100%; margin-bottom: 10px;">
+                                                <input type="text" id="editProductSearch" class="ev-input" placeholder="Tìm sản phẩm để cập nhật...">
+                                            </div>
+                                            <div class="ev-table-wrapper">
+                                                <table class="ev-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th >Chọn</th>
+                                                        <th >Ảnh</th>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Giá</th>
+                                                        <th>Danh mục</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="editEventProductList">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="ev-footer">
+                            <button class="ev-btn ev-btn--outline" onclick="backToEventList()">Hủy bỏ</button>
+                        </div>
                     </section>
                     <section id="add-product" class="manage-detail" style="display:none;">
                         <h2 class="manage__heading">Thêm sản phẩm mới</h2>
@@ -1013,6 +1457,7 @@
                                 </form>
                             </div>
                         </div>
+
                     </section>
                     <div id="brandModal" class="admin-modal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
                         <div class="admin-modal__content" style="background: #fff; padding: 20px; border-radius: 8px; width: 400px;">
@@ -1264,6 +1709,7 @@
                             </div>
                         </div>
                     </div>
+
                     <section id="order" class="manage-detail">
                         <h2 class="manage__heading">Đơn hàng</h2>
 
@@ -1380,12 +1826,27 @@
     const productMenuButtons = document.querySelectorAll(".product-menu__btn");
     const sectionProductDetail = document.getElementById("viewProductModal");
     const sectionProductEdit = document.getElementById("editProductPage");
-    const productContents = {
-        "product-list": document.getElementById("product-list"),
-        "product-event": document.getElementById("product-event")
-    };
+    const sectionProductList = document.getElementById("product-list-section");
+    const sectionProductEvent = document.getElementById("product-event-section");
+    const sectionEventAdd = document.getElementById("add-event-page");
+    const btnAddEventTrigger = document.querySelector(".event-header__btn");
+
+    const slideSelect = document.getElementById('eventSlideSelect');
+    const selectedBox = slideSelect.querySelector('.event-select__selected');
+    const optionsBox = slideSelect.querySelector('.event-select__options');
+    const hiddenInput = document.getElementById('eventSlideTargetHidden');
+    const options = slideSelect.querySelectorAll('.event-option')
+    const uploadGroup = document.getElementById('eventUploadGroup');
+    const editScopeRadios = document.querySelectorAll('input[name="editApplyScope"]');
+    const editBoxCategory = document.getElementById('editScopeCategory');
+    const editBoxSpecific = document.getElementById('editScopeSpecific');
+    const sectionEventView = document.getElementById("view-event-page");
+    const sectionEventEdit = document.getElementById("edit-event-page");
+    const editSlideSelect = document.getElementById('editEventSlideSelect');
     const sidebarItems = document.querySelectorAll(".product-sidebar__item");
     const sidebarSubLinks = document.querySelectorAll(".product-sub__link");
+
+
 
     const newsSections = {
         "news-slide": document.getElementById("news-slide"),
@@ -1406,6 +1867,11 @@
         sectionNews.style.display = "none";
         sectionProductDetail.style.display = "none";
         sectionProductEdit.style.display = "none";
+        sectionProductEvent.style.display = "none";
+        sectionEventAdd.style.display = "none";
+        sectionEventView.style.display = "none";
+        sectionEventEdit.style.display = "none";
+
     }
 
     // Click menu
@@ -1494,6 +1960,198 @@
 
         if(sidebarItems[0]) sidebarItems[0].classList.add("active");
         if(sidebarSubLinks[0]) sidebarSubLinks[0].classList.add("active");
+    }
+    productMenuButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            productMenuButtons.forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+
+            const target = this.getAttribute("data-target");
+
+            if (target === "product-list") {
+
+                sectionProductList.style.display = "block";
+                sectionProductEvent.style.display = "none";
+                document.querySelector(".product-sidebar").style.display = "block";
+            }
+            else if (target === "product-event") {
+
+                sectionProductList.style.display = "none";
+                sectionProductEvent.style.display = "block";
+                document.querySelector(".product-sidebar").style.display = "none";
+            }
+        });
+    });
+    // 1. Khi bấm nút "Thêm sự kiện giảm giá" (Nút xanh ở trang quản lý sự kiện)
+    if (btnAddEventTrigger) {
+        btnAddEventTrigger.addEventListener("click", () => {
+            hideAllSections();
+            sectionEventAdd.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+
+    function backToEventList() {
+        // Ẩn trang thêm sự kiện
+        sectionEventAdd.style.display = "none";
+
+        // Hiển thị lại trang Sản phẩm (cha)
+        sectionProduct.style.display = "block";
+
+        // Kích hoạt hiển thị Tab Sự kiện bên trong trang Sản phẩm
+        sectionProductEvent.style.display = "block";
+        sectionProductList.style.display = "none";
+        sectionEventView.style.display = "none";
+        sectionEventEdit.style.display = "none";
+
+        // Ẩn sidebar vì trang sự kiện của bạn không dùng sidebar
+        const sidebar = document.querySelector(".product-sidebar");
+        if (sidebar) sidebar.style.display = "none";
+
+        // Cập nhật trạng thái Active cho menu con
+        productMenuButtons.forEach(btn => {
+            if (btn.getAttribute("data-target") === "product-event") {
+                btn.classList.add("active");
+            } else {
+                btn.classList.remove("active");
+            }
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // 3. Xử lý Radio "Phạm vi áp dụng" để ẩn hiện nội dung theo dòng
+    const scopeRadios = document.querySelectorAll('input[name="applyScope"]');
+    const boxCategory = document.getElementById('scopeCategory');
+    const boxSpecific = document.getElementById('scopeSpecific');
+
+    scopeRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const val = e.target.value;
+
+            // Ẩn tất cả trước
+            boxCategory.style.display = "none";
+            boxSpecific.style.display = "none";
+
+            // Hiện theo lựa chọn
+            if (val === "category") {
+                boxCategory.style.display = "block";
+            } else if (val === "specific") {
+                boxSpecific.style.display = "block";
+            }
+        });
+    });
+    // --- XỬ LÝ CHỌN SLIDE CHO SỰ KIỆN ---
+    if (slideSelect) {
+
+        selectedBox.addEventListener('click', (e) => {
+            e.stopPropagation();
+            slideSelect.classList.toggle('active');
+
+            if (slideSelect.classList.contains('active')) {
+                optionsBox.style.display = 'block';
+            } else {
+                optionsBox.style.display = 'none';
+            }
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                const val = option.getAttribute('data-value')
+                selectedBox.innerHTML = option.innerHTML;
+
+                hiddenInput.value = val;
+
+                slideSelect.classList.remove('active');
+                optionsBox.style.display = 'none';
+            });
+        });
+
+        document.addEventListener('click', () => {
+            if (slideSelect.classList.contains('active')) {
+                slideSelect.classList.remove('active');
+                optionsBox.style.display = 'none';
+            }
+        });
+    }
+    editScopeRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            editBoxCategory.style.display = (e.target.value === "category") ? "block" : "none";
+            editBoxSpecific.style.display = (e.target.value === "specific") ? "block" : "none";
+        });
+    });
+    document.querySelectorAll(".event-table__row .event-col-action:nth-child(5)").forEach(btn => {
+
+        btn.addEventListener("click", function() {
+            hideAllSections();
+
+
+            if (sectionEventView) {
+                sectionEventView.style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    });
+
+    // Chức năng Sửa sự kiện
+    document.querySelectorAll(".event-table__row .event-col-action:nth-child(6)").forEach(btn => {
+        // Tìm cột Sửa (thường là cột thứ 6 trong hàng)
+        btn.addEventListener("click", function() {
+            hideAllSections();
+
+            if (sectionEventEdit) {
+                sectionEventEdit.style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    });
+    if (editSlideSelect) {
+        const editSelectedBox = editSlideSelect.querySelector('.ev-slide-sel__selected');
+        const editOptionsBox = editSlideSelect.querySelector('.ev-slide-sel__options');
+        const editHiddenInput = document.getElementById('editEventSlideTargetHidden');
+        const editOptions = editSlideSelect.querySelectorAll('.ev-slide-opt');
+
+        // Click vào hộp đã chọn để sổ menu ra hoặc đóng lại
+        editSelectedBox.addEventListener('click', (e) => {
+            e.stopPropagation(); // Ngăn sự kiện nổi bọt lên document
+
+            // Đóng các dropdown khác nếu có (tùy chọn)
+            const isOpen = editOptionsBox.style.display === 'block';
+            editOptionsBox.style.display = isOpen ? 'none' : 'block';
+            editSlideSelect.classList.toggle('active', !isOpen);
+        });
+
+        // Click chọn từng Option
+        editOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                // Lấy giá trị data-value
+                const val = option.getAttribute('data-value');
+                if (val === null) return; // Bỏ qua nếu click trúng phần header không có value
+
+                // Cập nhật giao diện của hộp "Đã chọn" (Copy toàn bộ nội dung HTML của option vào hộp chính)
+                editSelectedBox.innerHTML = option.innerHTML;
+
+                // Cập nhật giá trị vào input hidden để gửi đi khi lưu form
+                editHiddenInput.value = val;
+
+                // Đóng menu sổ xuống
+                editOptionsBox.style.display = 'none';
+                editSlideSelect.classList.remove('active');
+
+                console.log("Đã chọn slide:", val);
+            });
+        });
+
+        document.addEventListener('click', () => {
+            if (editOptionsBox.style.display === 'block') {
+                editOptionsBox.style.display = 'none';
+                editSlideSelect.classList.remove('active');
+            }
+        });
     }
     // Click "Thêm sản phẩm"
     btnAdd.addEventListener("click", () => {
