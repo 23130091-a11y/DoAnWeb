@@ -26,7 +26,7 @@ public class AddCart extends HttpServlet {
         if(product != null) {
             cart.addItem(product, quantity);
             session.setAttribute("cart", cart);
-            response.sendRedirect("list-product");
+            response.sendRedirect("product-detail?id=" + productId); //
             return;
         }
         request.setAttribute("msg", "Product not found");

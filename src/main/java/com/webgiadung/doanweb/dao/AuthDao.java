@@ -47,18 +47,24 @@ public class AuthDao extends BaseDao {
 
         return get().withHandle(h -> {
             if (kw.isEmpty()) {
-                return h.createQuery("SELECT * FROM users ORDER BY id DESC")
+                return h.createQuery(
+                                "SELECT id, name, email, CAST(phone AS CHAR) AS phone, address, avatar, status, role " +
+                                        "FROM users ORDER BY id DESC"
+                        )
                         .mapToBean(User.class)
                         .list();
             }
+
             return h.createQuery(
-                            "SELECT * FROM users " +
-                                    "WHERE name LIKE :kw OR email LIKE :kw OR phone LIKE :kw " +
+                            "SELECT id, name, email, CAST(phone AS CHAR) AS phone, address, avatar, status, role " +
+                                    "FROM users " +
+                                    "WHERE name LIKE :kw OR email LIKE :kw OR CAST(phone AS CHAR) LIKE :kw " +
                                     "ORDER BY id DESC"
                     )
                     .bind("kw", "%" + kw + "%")
                     .mapToBean(User.class)
                     .list();
+
         });
     }
 
@@ -78,6 +84,18 @@ public class AuthDao extends BaseDao {
                                 "UPDATE users SET " +
                                         "name=:name, email=:email, phone=:phone, address=:address, " +
                                         "role=:role, status=:status " +
+                                        "WHERE id=:id"
+                        )
+                        .bindBean(u)
+                        .execute()
+        );
+    }
+    public void adminUpdateUserWithPassword(User u) {
+        get().useHandle(h ->
+                h.createUpdate(
+                                "UPDATE users SET " +
+                                        "name=:name, email=:email, phone=:phone, address=:address, " +
+                                        "role=:role, status=:status, password=:password " +
                                         "WHERE id=:id"
                         )
                         .bindBean(u)

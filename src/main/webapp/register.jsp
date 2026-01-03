@@ -72,7 +72,9 @@
 
                 <div class="register-link">
                     <span>Đã có tài khoản?</span>
-                    <a href="login.jsp">Đăng nhập</a>
+                    <a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
+
+
                 </div>
             </form>
 

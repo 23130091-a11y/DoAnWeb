@@ -354,12 +354,14 @@
                             <i class="fa-solid fa-chevron-right navigation__icon"></i>
                         </div>
                         <figure class="hero">
-                                <div id="slider" >
-                                    <a class="slide" href="slide.jsp" style="background-image:url('assets/img/hero_slide-01.jpg')">
+                            <div id="slider">
+                                <c:forEach var="slide" items="${slides}">
+                                    <a class="slide"
+                                       href="slide.jsp?id=${slide.id}"
+                                       style="background-image: url('${slide.avatar}')">
                                     </a>
-                                    <a class="slide" style="background-image:url('assets/img/hero_slide-02.jpg')">
-                                    </a>
-                                </div>
+                                </c:forEach>
+                            </div>
                         </figure>
                     </div>
                 </div>
