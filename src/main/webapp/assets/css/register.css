@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
     color: #333;
     background-color: #f7f7f7;
     font-size: 1.6rem !important;
@@ -41,7 +41,11 @@ a {
     color: var(--text-color, #333) !important;
     white-space: nowrap;
 }
-
+.support-link a {
+    color: #FF8C00;
+    text-decoration: none;
+    font-size: 1.6rem;
+}
 /* --- NỘI DUNG CHÍNH --- */
 .main-content {
     position: relative;
