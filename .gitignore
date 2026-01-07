@@ -1,8 +1,8 @@
-# IntelliJ / IDEA
+# IntelliJ / IDEA / SmartTomcat
 .idea/
 *.iml
 out/
-
+.smarttomcat/
 # Maven
 target/
 *.war
