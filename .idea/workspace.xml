@@ -9,29 +9,80 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1706999-d271-476f-ab28-7132b7618225" name="Changes" comment="Merge branch 'main' of https://github.com/23130091-a11y/DoAnWeb into 23130005_BuiThiPhuongAnh&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+    <list default="true" id="e4d6602b-ce38-4ef2-a53c-c6a2c0148892" name="Changes" comment="Merge branch 'main' of https://github.com/23130091-a11y/DoAnWeb into 23130005_BuiThiPhuongAnh&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/AdminCustomerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/Categories.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Brands.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Categories.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Discounts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Keywords.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/ProductDescriptions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/ProductDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/verify.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/verify.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT.war" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/AuthDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/BaseDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/ProductDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/dao/Test.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/Product.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/model/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/com/webgiadung/doanweb/services/AuthService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/WEB-INF/classes/db.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/admin.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/DoAnWeb-1.0-SNAPSHOT/register.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/AuthDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao$DBProperties.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/BaseDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/ProductDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/dao/Test.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/Product.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/model/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/webgiadung/doanweb/services/AuthService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/db.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/AuthDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/AuthDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/register.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/register.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/register.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/register.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Bui-Thi-Phuong-Anh&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Bui-Thi-Phuong-Anh"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/23130091-a11y/DoAnWeb.git&quot;,
-    &quot;accountId&quot;: &quot;928dfe79-bfbf-4237-a649-71782bb85879&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/23130091-a11y/DoAnWeb.git",
+    "accountId": "928dfe79-bfbf-4237-a649-71782bb85879"
   }
-}</component>
+}]]></component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -39,31 +90,32 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="37eFAKlwp4ImJ23f6OF0TgL84tG" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="37vsBWShqGBRuDOeV3l3pSUuwdu" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 11.0.142.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;23130005__BuiThiPhuongAnh&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Tomcat Server.Tomcat 11.0.142.executor": "Run",
+    "git-widget-placeholder": "Merging 23130005__BuiThiPhuongAnh",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationStatuses">
       <map>
@@ -88,7 +140,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="5a8e4e27-622c-4ebe-9a9f-6038b3c3909e" />
+        <option name="BASE_DIRECTORY_NAME" value="9b128061-406c-420b-bfc4-c87be131bbd9" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -96,7 +148,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="51553" />
+        <option name="DEBUG_PORT" value="59418" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -176,15 +228,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f1706999-d271-476f-ab28-7132b7618225" name="Changes" comment="Merge branch 'main' of https://github.com/23130091-a11y/DoAnWeb into 23130005_BuiThiPhuongAnh&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
-      <created>1767255487817</created>
+      <changelist id="e4d6602b-ce38-4ef2-a53c-c6a2c0148892" name="Changes" comment="Merge branch 'main' of https://github.com/23130091-a11y/DoAnWeb into 23130005_BuiThiPhuongAnh&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+      <created>1767794747297</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1767255487817</updated>
-      <workItem from="1767255491638" duration="7284000" />
-      <workItem from="1767271347028" duration="19847000" />
-      <workItem from="1767362010636" duration="21828000" />
-      <workItem from="1767446842884" duration="13016000" />
+      <updated>1767794747297</updated>
+      <workItem from="1767794750306" duration="3621000" />
     </task>
     <servers />
   </component>

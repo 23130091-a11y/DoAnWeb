@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +32,7 @@
     <link rel="stylesheet" href="assets/css/grid.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/admin.css?v=2">
+    <link rel="stylesheet" href="assets/css/admin.css?v=7">
     <!-- Include stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
@@ -73,7 +75,11 @@
                             <li class="manage-nav__item">
                                 <a href="#news" class="manage-nav__link">Tin tức</a>
                             </li>
-                            <li class="manage-nav__item"><a href="#customer" class="manage-nav__link">Khách hàng</a></li>
+                            <li class="manage-nav__item">
+                                <a href="#customer" class="manage-nav__link">Khách hàng</a>
+
+                            </li>
+
                             <li class="manage-nav__item">
                                 <a href="#product" class="manage-nav__link manage-nav__link--active">Sản phẩm</a>
                             </li>
@@ -204,9 +210,14 @@
                         <h2 class="manage__heading">Khách hàng</h2>
 
                         <div class="customer-table">
-                            <div class="news-search">
-                                <input type="text" placeholder="Tìm kiếm..." class="news-search__input" id="searchSlide">
-                            </div>
+                            <form class="news-search" method="get"
+                                  action="${pageContext.request.contextPath}/admin/customers">
+                                <input type="text" name="q"
+                                       value="${q}"
+                                       placeholder="Tìm kiếm (tên/email/sđt)..."
+                                       class="news-search__input">
+                            </form>
+
 
                             <!-- Bảng khách hàng -->
                             <div class="customer-table__inner">
@@ -223,68 +234,83 @@
                                 </div>
 
                                 <!-- Một khách hàng -->
-                                <article class="customer-table__row">
-                                    <div class="customer-table__cell">
-                                        <img src="assets/img/avatar4.jpg" class="customer-table__img" alt="">
-                                    </div>
+                                <c:choose>
+                                    <c:when test="${empty users}">
+                                        <article class="customer-table__row">
+                                            <div class="customer-table__cell" style="grid-column: 1 / -1;">
+                                                <span class="customer-table__text">Không có khách hàng.</span>
+                                            </div>
+                                        </article>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach var="u" items="${users}">
+                                            <article class="customer-table__row ${u.status == 0 ? 'is-locked' : ''}">
+                                                <div class="customer-table__cell">
+                                                    <c:choose>
+                                                        <c:when test="${empty u.avatar}">
+                                                            <img src="assets/img/avatar-default.png" class="customer-table__img" alt="">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <img src="<c:out value='${u.avatar}'/>" class="customer-table__img" alt="">
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
 
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">Nguyễn Văn A</span>
-                                    </div>
+                                                <div class="customer-table__cell">
+                                                    <span class="customer-table__text"><c:out value="${u.name}"/></span>
+                                                </div>
 
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">vana@example.com</span>
-                                    </div>
+                                                <div class="customer-table__cell">
+                                                    <span class="customer-table__text"><c:out value="${u.email}"/></span>
+                                                </div>
 
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">Hà Nội</span>
-                                    </div>
+                                                <div class="customer-table__cell">
+                                                    <span class="customer-table__text"><c:out value="${empty u.address ? '-' : u.address}"/></span>
+                                                </div>
 
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__view">Xem</button>
-                                    </div>
+                                                <div class="customer-table__cell">
+                                                    <button type="button"
+                                                            class="customer-table__view"
+                                                            data-id="${u.id}"
+                                                            data-name="${fn:escapeXml(u.name)}"
+                                                            data-email="${fn:escapeXml(u.email)}"
+                                                            data-phone="${fn:escapeXml(u.phone)}"
+                                                            data-address="${fn:escapeXml(u.address)}"
+                                                            data-avatar="${fn:escapeXml(u.avatar)}"
+                                                            data-role="${u.role}"
+                                                            data-status="${u.status}">
+                                                        Xem
+                                                    </button>
+                                                </div>
 
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__edit">Sửa</button>
-                                    </div>
+                                                <div class="customer-table__cell">
+                                                    <button type="button"
+                                                            class="customer-table__edit"
+                                                            data-id="${u.id}"
+                                                            data-name="${fn:escapeXml(u.name)}"
+                                                            data-email="${fn:escapeXml(u.email)}"
+                                                            data-phone="${fn:escapeXml(u.phone)}"
+                                                            data-address="${fn:escapeXml(u.address)}"
+                                                            data-avatar="${fn:escapeXml(u.avatar)}"
+                                                            data-role="${u.role}"
+                                                            data-status="${u.status}">
+                                                        Sửa
+                                                    </button>
+                                                </div>
 
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__delete">Xóa</button>
-                                    </div>
+                                                <div class="customer-table__cell">
+                                                    <form method="post"
+                                                          action="${pageContext.request.contextPath}/admin/customers/lock"
+                                                          onsubmit="return confirm('Khóa/Xóa khách hàng này? (status sẽ chuyển về 0)');">
+                                                        <input type="hidden" name="id" value="${u.id}">
+                                                        <button type="submit" class="customer-table__delete">Xóa</button>
+                                                    </form>
+                                                </div>
+                                            </article>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
 
-                                </article>
-
-                                <!-- Một khách hàng -->
-                                <article class="customer-table__row">
-                                    <div class="customer-table__cell">
-                                        <img src="assets/img/avatar5.png" class="customer-table__img" alt="">
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">Trần Thị B</span>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">tranb@example.com</span>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <span class="customer-table__text">TP. HCM</span>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__view">Xem</button>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__edit">Sửa</button>
-                                    </div>
-
-                                    <div class="customer-table__cell">
-                                        <button class="customer-table__delete">Xóa</button>
-                                    </div>
-
-                                </article>
 
                             </div>
                         </div>
@@ -296,46 +322,46 @@
                         <div class="customer-detail__card">
                             <!-- Avatar -->
                             <div class="customer-detail__avatar">
-                                <img src="assets/img/avatar5.png" alt="Avatar">
-                                <span class="customer-detail__status online">Đang đăng nhập</span>
-                                <!-- <span class="customer-detail__status offline">Đã đăng xuất</span> -->
+                                <img id="customerDetailAvatar" src="assets/img/avatar-default.png" alt="Avatar">
+                                <span id="customerDetailStatus" class="customer-detail__status online">Hoạt động</span>
+
                             </div>
 
                             <!-- Thông tin -->
                             <div class="customer-detail__info">
                                 <div class="customer-detail__row">
                                     <span class="label">Tên:</span>
-                                    <span class="value">Nguyễn Văn A</span>
+                                    <span class="value" id="customerDetailName"></span>
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Email:</span>
-                                    <span class="value">vana@example.com</span>
+                                    <span class="value" id="customerDetailEmail"></span>
+
                                 </div>
 
-                                <div class="customer-detail__row">
-                                    <span class="label">Password:</span>
-                                    <span class="value">********</span>
-                                </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Số điện thoại:</span>
-                                    <span class="value">0123 456 789</span>
+                                    <span class="value" id="customerDetailPhone"></span>
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Địa chỉ:</span>
-                                    <span class="value">Hà Nội</span>
+                                    <span class="value" id="customerDetailAddress"></span>
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Ngày tạo:</span>
-                                    <span class="value">01/12/2025</span>
+                                    <span class="value">X/X/X</span>
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <span class="label">Ngày cập nhật:</span>
-                                    <span class="value">10/12/2025</span>
+                                    <span class="value">X/X/x</span>
                                 </div>
                             </div>
                         </div>
@@ -359,30 +385,41 @@
                             </div>
 
                             <!-- Form thông tin -->
-                            <form class="customer-detail__info" id="customerEditForm">
+                            <form class="customer-detail__info"
+                                  id="customerEditForm"
+                                  method="post"
+                                  action="${pageContext.request.contextPath}/admin/customers/update">
+                                <input type="hidden" name="id" id="editId">
+
+
                                 <div class="customer-detail__row">
                                     <label class="label">Tên:</label>
-                                    <input type="text" class="input" value="Nguyễn Văn A">
+                                    <input type="text" class="input" name="name" id="editName" required>
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Email:</label>
-                                    <input type="email" class="input" value="vana@example.com">
+                                    <input type="email" class="input" name="email" id="editEmail" required>
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Password:</label>
-                                    <input type="password" class="input" placeholder="Nhập mật khẩu mới">
+                                    <input type="password" class="input" name="password" id="editPassword" placeholder="Bỏ trống nếu không đổi">
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Số điện thoại:</label>
-                                    <input type="text" class="input" value="0123 456 789">
+                                    <input type="text" class="input" name="phone" id="editPhone">
+
                                 </div>
 
                                 <div class="customer-detail__row">
                                     <label class="label">Địa chỉ:</label>
-                                    <input type="text" class="input" value="Hà Nội">
+                                    <input type="text" class="input" name="address" id="editAddress">
+
                                 </div>
 
                                 <div class="customer-detail__row">
@@ -800,7 +837,7 @@
                         </div>
                     </section>
 
-                    <section id="product" class="manage-detail" style="display: none;">
+                    <section id="product" class="manage-detail" style="display:none;">
                         <h2 class="manage__heading">Sản phẩm</h2>
                         <div class="product-menu">
                             <button class="product-menu__btn active" data-target="product-list">Danh mục sản phẩm</button>
@@ -855,6 +892,12 @@
                             <div class="product-main-content">
                                 <div id="product-list-section">
                                 <div class="product-table">
+                                    <div class="product-search__wrapper">
+                                        <input type="text" class="product-search__input" placeholder="Tìm tên sản phẩm hoặc từ khóa...">
+                                        <button class="product-search__btn">
+                                            <i class="fas fa-search"></i> Search
+                                        </button>
+                                    </div>
                                     <div class="product-table__header">
                                         <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
                                     </div>
@@ -946,6 +989,7 @@
                                     <div class="event-table__row event-table__row--header">
                                         <div class="event-table__cell event-col-name">Tên sự kiện</div>
                                         <div class="event-table__cell event-col-discount">Giảm giá</div>
+                                        <div class="event-table__cell event-col-post">Post</div>
                                         <div class="event-table__cell event-col-date">Ngày bắt đầu</div>
                                         <div class="event-table__cell event-col-date">Ngày kết thúc</div>
                                         <div class="event-table__cell event-col-action">Xem</div>
@@ -960,6 +1004,7 @@
                                         <div class="event-table__cell event-col-discount">
                                             <span class="event-table__text event-table__text--red">-25%</span>
                                         </div>
+                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
                                         <div class="event-table__cell event-col-date">
                                             <span class="event-table__text">15/06/2026</span>
                                         </div>
@@ -984,6 +1029,7 @@
                                         <div class="event-table__cell event-col-discount">
                                             <span class="event-table__text event-table__text--red">99.000đ</span>
                                         </div>
+                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
                                         <div class="event-table__cell event-col-date">
                                             <span class="event-table__text">01/01/2026</span>
                                         </div>
