@@ -11,8 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f1706999-d271-476f-ab28-7132b7618225" name="Changes" comment="Merge branch 'main' of https://github.com/23130091-a11y/DoAnWeb into 23130005_BuiThiPhuongAnh&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/admin.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +184,7 @@
       <workItem from="1767255491638" duration="7284000" />
       <workItem from="1767271347028" duration="19847000" />
       <workItem from="1767362010636" duration="21828000" />
-      <workItem from="1767446842884" duration="2037000" />
+      <workItem from="1767446842884" duration="13016000" />
     </task>
     <servers />
   </component>
