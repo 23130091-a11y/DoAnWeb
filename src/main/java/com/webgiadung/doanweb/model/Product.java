@@ -1,34 +1,42 @@
 package com.webgiadung.doanweb.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class Product implements Serializable {
-   private int id;
-   private String name;
-   private String img;
-   private double priceFirst;
-   private double discount;
-   private double price;
-   private int status;
+    private int id;
+    private String name;
+    private String image;         // Lưu đường dẫn ảnh chính
+    private double firstPrice;    // Giá gốc ban đầu
+    private int discountsId;  // Khóa ngoại liên kết bảng giảm giá
+    private double totalPrice;    // Giá sau khi đã tính giảm giá
+    private int categoriesId; // Khóa ngoại liên kết danh mục
+    private int brandsId;     // Khóa ngoại liên kết thương hiệu
+    private int keywordsId;   // Khóa ngoại liên kết từ khóa tìm kiếm
+    private int post;         // Trạng thái hiển thị (ví dụ: 0: Ẩn, 1: Hiện)
+    private int quantity;     // Số lượng trong kho
+    private int quantitySaled;// Số lượng đã bán
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    public Product() {
 
-    public Product() {}
+    }
 
-    public Product(int id, String name, String img, double price_first, double discount, double price, int status) {
+    public Product(int id, String name, String image, double firstPrice, double totalPrice, int discountsId, int categoriesId, int brandsId, int keywordsId, int post, int quantity, int quantitySaled, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
-        this.img = img;
-        this.priceFirst = price_first;
-        this.discount = discount;
-        this.price = price;
-        this.status = status;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+        this.image = image;
+        this.firstPrice = firstPrice;
+        this.totalPrice = totalPrice;
+        this.discountsId = discountsId;
+        this.categoriesId = categoriesId;
+        this.brandsId = brandsId;
+        this.keywordsId = keywordsId;
+        this.post = post;
+        this.quantity = quantity;
+        this.quantitySaled = quantitySaled;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public int getId() {
@@ -47,48 +55,103 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public double getPriceFirst() {
-        return priceFirst;
+    public String getImage() {
+        return image;
     }
 
-    public void setPriceFirst(double priceFirst) {
-        this.priceFirst = priceFirst;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getImg() {
-        return img;
+    public int getDiscountsId() {
+        return discountsId;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setDiscountsId(int discountsId) {
+        this.discountsId = discountsId;
     }
 
-    public double getDiscount() {
-        return discount;
+    public double getFirstPrice() {
+        return firstPrice;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
+    public void setFirstPrice(double firstPrice) {
+        this.firstPrice = firstPrice;
     }
 
-    public int getStatus() {
-        return status;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getCategoriesId() {
+        return categoriesId;
+    }
+
+    public void setCategoriesId(int categoriesId) {
+        this.categoriesId = categoriesId;
+    }
+
+    public int getBrandsId() {
+        return brandsId;
+    }
+
+    public void setBrandsId(int brandsId) {
+        this.brandsId = brandsId;
+    }
+
+    public int getKeywordsId() {
+        return keywordsId;
+    }
+
+    public void setKeywordsId(int keywordsId) {
+        this.keywordsId = keywordsId;
+    }
+
+    public int getPost() {
+        return post;
+    }
+
+    public void setPost(int post) {
+        this.post = post;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getQuantitySaled() {
+        return quantitySaled;
+    }
+
+    public void setQuantitySaled(int quantitySaled) {
+        this.quantitySaled = quantitySaled;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id: " + id +
-                ", name: '" + name + '\'' +
-                ", img: '" + img + '\'' +
-                ", price_first: " + priceFirst +
-                ", discount: " + discount +
-                ", price: " + price +
-                ", status: " + status +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", firstPrice=" + firstPrice +
+                ", discountsId=" + discountsId +
+                ", totalPrice=" + totalPrice +
+                ", categoriesId=" + categoriesId +
+                ", brandsId=" + brandsId +
+                ", keywordsId=" + keywordsId +
+                ", post=" + post +
+                ", quantity=" + quantity +
+                ", quantitySaled=" + quantitySaled +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

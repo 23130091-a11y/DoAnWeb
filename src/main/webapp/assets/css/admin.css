@@ -79,6 +79,28 @@
 }
 
 /* Bảng sản phẩm */
+.product-search__wrapper {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 10px;
+}
+
+.product-search__btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 15px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.product-search__wrapper .product-search__input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    padding: 8px 12px;
+    outline: none;
+}
 .product-menu {
     display: flex;
     gap: 10px;
@@ -791,50 +813,47 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .event-table__row {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 120px 125px 75px 80px 80px;
+    grid-template-columns: 300px 110px 100px 130px 130px 65px 65px 65px;
+    width: 100%;
+    grid-auto-flow: column;
     border: 1px solid #ccc;
-    align-items: center;
+    box-sizing: border-box;
 }
-
 
 .event-table__row + .event-table__row {
     border-top: none;
 }
 
 .event-table__row:first-child {
-    background-color: var(--primary-color);
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    background-color: var(--primary-color, #007bff);
     font-weight: 700;
 }
 
 .event-table__row:first-child .event-table__cell {
     color: #ffffff;
 }
-.event-table__row:last-child {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-}
 
-.event-table__cell {
-    padding: 10px;
-    font-size: 1.4rem;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid #eee;
-}
 
+.event-col-name {
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+.event-col-post{
+    margin-left: 30px;
+}
 .event-table__cell:last-child {
     border-right: none;
 }
 
-.event-table__text {
-    color: #444;
+.event-col-action button {
+    padding: 2px 6px;
+    font-size: 1.2rem;
+    width: 90%;
 }
 
 .event-table__text--bold {
@@ -908,12 +927,7 @@
     color: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-.event-table__row {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 120px 125px 75px 80px 80px;
-    border: 1px solid #ccc;
-    align-items: stretch;
-}
+
 
 .event-table__row:first-child .event-table__cell {
     color: #ffffff;

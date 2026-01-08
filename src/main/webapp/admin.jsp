@@ -827,7 +827,7 @@
                         </div>
                     </section>
 
-                    <section id="product" class="manage-detail" style="display: none;">
+                    <section id="product" class="manage-detail" style="display:none;">
                         <h2 class="manage__heading">Sản phẩm</h2>
                         <div class="product-menu">
                             <button class="product-menu__btn active" data-target="product-list">Danh mục sản phẩm</button>
@@ -882,6 +882,12 @@
                             <div class="product-main-content">
                                 <div id="product-list-section">
                                 <div class="product-table">
+                                    <div class="product-search__wrapper">
+                                        <input type="text" class="product-search__input" placeholder="Tìm tên sản phẩm hoặc từ khóa...">
+                                        <button class="product-search__btn">
+                                            <i class="fas fa-search"></i> Search
+                                        </button>
+                                    </div>
                                     <div class="product-table__header">
                                         <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
                                     </div>
@@ -973,6 +979,7 @@
                                     <div class="event-table__row event-table__row--header">
                                         <div class="event-table__cell event-col-name">Tên sự kiện</div>
                                         <div class="event-table__cell event-col-discount">Giảm giá</div>
+                                        <div class="event-table__cell event-col-post">Post</div>
                                         <div class="event-table__cell event-col-date">Ngày bắt đầu</div>
                                         <div class="event-table__cell event-col-date">Ngày kết thúc</div>
                                         <div class="event-table__cell event-col-action">Xem</div>
@@ -987,6 +994,7 @@
                                         <div class="event-table__cell event-col-discount">
                                             <span class="event-table__text event-table__text--red">-25%</span>
                                         </div>
+                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
                                         <div class="event-table__cell event-col-date">
                                             <span class="event-table__text">15/06/2026</span>
                                         </div>
@@ -1011,6 +1019,7 @@
                                         <div class="event-table__cell event-col-discount">
                                             <span class="event-table__text event-table__text--red">99.000đ</span>
                                         </div>
+                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
                                         <div class="event-table__cell event-col-date">
                                             <span class="event-table__text">01/01/2026</span>
                                         </div>
@@ -1921,22 +1930,18 @@ window.addEventListener("DOMContentLoaded", () => {
     // Click menu
     menuLinks.forEach(link => {
         link.addEventListener("click", function(e) {
-            const href = this.getAttribute("href");
-
-            // Nếu là link thật (vd: /admin/customers) => cho đi bình thường để controller nạp DB
-            if (!href || !href.startsWith("#")) return;
-
             e.preventDefault();
-            const targetId = href.replace("#", "");
-            hideAllSections();
+            const targetId = this.getAttribute("href").replace("#","");
+            hideAllSections(); // ẩn tất cả trước
             if(targetId === "config") sectionConfig.style.display = "block";
             if(targetId === "product") sectionProduct.style.display = "block";
             if(targetId === "order") sectionOrder.style.display = "block";
             if (targetId === "customer") sectionCustomer.style.display = "block";
-            if (targetId === "news") showNewsDefault();
+            if (targetId === "news") {
+                showNewsDefault();
+            }
         });
     });
-
     productMenuButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const targetId = btn.getAttribute("data-target");
@@ -2307,85 +2312,57 @@ window.addEventListener("DOMContentLoaded", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-    // ================== KHÁCH HÀNG (CUSTOMER) ==================
-
-
-    function normalizeRole(role) {
-        return String(role) === "1" ? "Admin" : "Customer";
-    }
-
-    function setStatusBadge(el, status) {
-        if (!el) return;
-        const active = String(status) === "1";
-        el.textContent = active ? "Hoạt động" : "Khóa";
-        el.classList.remove("online", "offline");
-        el.classList.add(active ? "online" : "offline");
-    }
-
-    function setAvatar(imgEl, avatar) {
-        if (!imgEl) return;
-        const src = (avatar && avatar.trim() !== "") ? avatar : "assets/img/avatar-default.png";
-        imgEl.setAttribute("src", src);
-    }
-
-    function showCustomerDetailFromDataset(ds) {
-        hideAllSections();
-        sectionCustomerDetail.style.display = "block";
-
-        document.getElementById("customerDetailId").textContent = ds.id || "";
-        document.getElementById("customerDetailName").textContent = ds.name || "";
-        document.getElementById("customerDetailEmail").textContent = ds.email || "";
-        document.getElementById("customerDetailPhone").textContent = ds.phone || "";
-        document.getElementById("customerDetailAddress").textContent = ds.address || "";
-        document.getElementById("customerDetailRole").textContent = normalizeRole(ds.role);
-
-        setAvatar(document.getElementById("customerDetailAvatar"), ds.avatar);
-        setStatusBadge(document.getElementById("customerDetailStatus"), ds.status);
-        document.getElementById("customerDetailCreatedAt").textContent = ds.createdAt || "";
-        document.getElementById("customerDetailUpdatedAt").textContent = ds.updatedAt || "";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function showCustomerEditFromDataset(ds) {
-        hideAllSections();
-        sectionCustomerEdit.style.display = "block";
-
-        document.getElementById("editId").value = ds.id || "";
-        document.getElementById("editName").value = ds.name || "";
-        document.getElementById("editEmail").value = ds.email || "";
-        document.getElementById("editPhone").value = ds.phone || "";
-        document.getElementById("editAddress").value = ds.address || "";
-        document.getElementById("editPassword").value = "";
-
-        const roleSel = document.getElementById("editRole");
-        if (roleSel) roleSel.value = (ds.role == null ? "0" : String(ds.role));
-
-        const statusSel = document.getElementById("editStatus");
-        if (statusSel) statusSel.value = (ds.status == null ? "1" : String(ds.status));
-
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    document.querySelectorAll(".customer-table__view").forEach(btn => {
-        btn.addEventListener("click", () => showCustomerDetailFromDataset(btn.dataset));
-    });
-
+    // SỬA KHÁCH HÀNG
     document.querySelectorAll(".customer-table__edit").forEach(btn => {
-        btn.addEventListener("click", () => showCustomerEditFromDataset(btn.dataset));
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            sectionCustomerEdit.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
     });
-
-    function hideCustomerDetail() {
-        hideAllSections();
-        sectionCustomer.style.display = "block";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
     function hideCustomerEdit() {
         hideAllSections();
         sectionCustomer.style.display = "block";
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
+    // Ẩn tất cả section News
+    function hideAllNewsSections() {
+        Object.values(newsSections).forEach(sec => sec.style.display = "none");
+        newsMenuButtons.forEach(btn => btn.classList.remove("active"));
+    }
 
+    // Mặc định show Slide khi vào News
+    function showNewsDefault() {
+        sectionNews.style.display = "block";
+        hideAllNewsSections();
+        newsSections["news-slide"].style.display = "block";
+        document.querySelector(".news-menu__btn[data-target='news-slide']").classList.add("active");
+    }
+
+    // Click menu sidebar trong News
+    newsMenuButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-target");
+            hideAllNewsSections();
+            if(newsSections[targetId]) newsSections[targetId].style.display = "block";
+            btn.classList.add("active");
+        });
+    });
+    function hideAllDetailSections() {
+        sectionSlideDetail.style.display = "none";
+        sectionBlogDetail.style.display = "none";
+        sectionSlideEdit.style.display = "none";
+        sectionBlogEdit.style.display = "none";
+    }
+    // === Xem chi tiết Slide ===
+    document.querySelectorAll("#news-slide .news-table__view").forEach(btn => {
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            hideAllDetailSections();
+            sectionSlideDetail.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
 
     // === Xem chi tiết Blog ===
     document.querySelectorAll("#news-blog .news-table__view").forEach(btn => {
