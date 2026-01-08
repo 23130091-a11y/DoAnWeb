@@ -48,7 +48,8 @@ public class AuthDao extends BaseDao {
         return get().withHandle(h -> {
             if (kw.isEmpty()) {
                 return h.createQuery(
-                                "SELECT id, name, email, CAST(phone AS CHAR) AS phone, address, avatar, status, role " +
+                                "SELECT id, name, email, CAST(phone AS CHAR) AS phone, address, avatar, status, role, " +
+                                        "DATE(created_at) AS createdAt, DATE(updated_at) AS updatedAt " +
                                         "FROM users ORDER BY id DESC"
                         )
                         .mapToBean(User.class)
@@ -56,7 +57,8 @@ public class AuthDao extends BaseDao {
             }
 
             return h.createQuery(
-                            "SELECT id, name, email, CAST(phone AS CHAR) AS phone, address, avatar, status, role " +
+                            "SELECT id, name, email, CAST(phone AS CHAR) AS phone, address, avatar, status, role, " +
+                                    "DATE(created_at) AS createdAt, DATE(updated_at) AS updatedAt " +
                                     "FROM users " +
                                     "WHERE name LIKE :kw OR email LIKE :kw OR CAST(phone AS CHAR) LIKE :kw " +
                                     "ORDER BY id DESC"
@@ -64,19 +66,24 @@ public class AuthDao extends BaseDao {
                     .bind("kw", "%" + kw + "%")
                     .mapToBean(User.class)
                     .list();
-
         });
     }
 
+
     public User findUserById(int id) {
         return get().withHandle(h ->
-                h.createQuery("SELECT * FROM users WHERE id = :id")
+                h.createQuery(
+                                "SELECT id, name, email, CAST(phone AS CHAR) AS phone, address, avatar, status, role, " +
+                                        "DATE(created_at) AS createdAt, DATE(updated_at) AS updatedAt " +
+                                        "FROM users WHERE id = :id"
+                        )
                         .bind("id", id)
                         .mapToBean(User.class)
                         .findOne()
                         .orElse(null)
         );
     }
+
 
     public void adminUpdateUser(User u) {
         get().useHandle(h ->

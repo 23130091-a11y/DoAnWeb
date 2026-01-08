@@ -17,7 +17,7 @@
     <title>Trang admin</title>
 
     <!-- Link Reset CSS -->
-    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset.css">
     <!-- Link font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,10 +29,10 @@
           integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link CSS -->
-    <link rel="stylesheet" href="assets/css/grid.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/admin.css?v=7">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/grid.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css?v=99">
     <!-- Include stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
@@ -206,69 +206,52 @@
                             </form>
                         </div>
                     </section>
-                    <section id="customer" class="manage-detail">
-                        <h2 class="manage__heading">Khách hàng</h2>
+                    <section id="customer" class="admin-section">
+                        <div class="section-header">
+                            <h2>Khách hàng</h2>
 
-                        <div class="customer-table">
-                            <form class="news-search" method="get"
-                                  action="${pageContext.request.contextPath}/admin/customers">
-                                <input type="text" name="q"
-                                       value="${q}"
-                                       placeholder="Tìm kiếm (tên/email/sđt)..."
-                                       class="news-search__input">
+                            <!-- Search -->
+                            <form class="customer-search" method="get" action="${pageContext.request.contextPath}/admin/customers">
+                                <input type="text" name="q" placeholder="Tìm kiếm (tên/email/sđt)..." value="${param.q}">
+                                <button type="submit">Tìm</button>
                             </form>
+                        </div>
 
-
-                            <!-- Bảng khách hàng -->
-                            <div class="customer-table__inner">
-
-                                <!-- Hàng tiêu đề -->
-                                <div class="customer-table__row">
-                                    <div class="customer-table__cell">Avatar</div>
-                                    <div class="customer-table__cell">Tên</div>
-                                    <div class="customer-table__cell">Email</div>
-                                    <div class="customer-table__cell">Địa chỉ</div>
-                                    <div class="customer-table__cell">Xem</div>
-                                    <div class="customer-table__cell">Sửa</div>
-                                    <div class="customer-table__cell">Xóa</div>
-                                </div>
-
-                                <!-- Một khách hàng -->
+                        <div class="customer-table-wrap">
+                            <table class="customer-table">
+                                <thead>
+                                <tr>
+                                    <th>Avatar</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Xem</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 <c:choose>
                                     <c:when test="${empty users}">
-                                        <article class="customer-table__row">
-                                            <div class="customer-table__cell" style="grid-column: 1 / -1;">
-                                                <span class="customer-table__text">Không có khách hàng.</span>
-                                            </div>
-                                        </article>
+                                        <tr>
+                                            <td colspan="7" style="text-align:center;padding:14px;">Không có khách hàng.</td>
+                                        </tr>
                                     </c:when>
                                     <c:otherwise>
                                         <c:forEach var="u" items="${users}">
-                                            <article class="customer-table__row ${u.status == 0 ? 'is-locked' : ''}">
-                                                <div class="customer-table__cell">
-                                                    <c:choose>
-                                                        <c:when test="${empty u.avatar}">
-                                                            <img src="assets/img/avatar-default.png" class="customer-table__img" alt="">
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <img src="<c:out value='${u.avatar}'/>" class="customer-table__img" alt="">
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
+                                            <tr>
+                                               <td>
+                                                 <img class="customer-table__img customer-avatar"
+                                                      src="${pageContext.request.contextPath}/${empty u.avatar ? 'assets/img/default-avatar.png' : u.avatar}"
+                                                      alt="avatar"
+                                                      onerror="this.src='${pageContext.request.contextPath}/assets/img/default-avatar.png'">
+                                               </td>
+                                                <td>${fn:escapeXml(u.name)}</td>
+                                                <td>${fn:escapeXml(u.email)}</td>
+                                                <td>${fn:escapeXml(u.address)}</td>
 
-                                                <div class="customer-table__cell">
-                                                    <span class="customer-table__text"><c:out value="${u.name}"/></span>
-                                                </div>
-
-                                                <div class="customer-table__cell">
-                                                    <span class="customer-table__text"><c:out value="${u.email}"/></span>
-                                                </div>
-
-                                                <div class="customer-table__cell">
-                                                    <span class="customer-table__text"><c:out value="${empty u.address ? '-' : u.address}"/></span>
-                                                </div>
-
-                                                <div class="customer-table__cell">
+                                                <!-- Xem -->
+                                                <td>
                                                     <button type="button"
                                                             class="customer-table__view"
                                                             data-id="${u.id}"
@@ -276,14 +259,16 @@
                                                             data-email="${fn:escapeXml(u.email)}"
                                                             data-phone="${fn:escapeXml(u.phone)}"
                                                             data-address="${fn:escapeXml(u.address)}"
-                                                            data-avatar="${fn:escapeXml(u.avatar)}"
                                                             data-role="${u.role}"
-                                                            data-status="${u.status}">
+                                                            data-status="${u.status}"
+                                                            data-created="${u.createdAt}"
+                                                            data-updated="${u.updatedAt}">
                                                         Xem
                                                     </button>
-                                                </div>
+                                                </td>
 
-                                                <div class="customer-table__cell">
+                                                <!-- Sửa -->
+                                                <td>
                                                     <button type="button"
                                                             class="customer-table__edit"
                                                             data-id="${u.id}"
@@ -291,30 +276,35 @@
                                                             data-email="${fn:escapeXml(u.email)}"
                                                             data-phone="${fn:escapeXml(u.phone)}"
                                                             data-address="${fn:escapeXml(u.address)}"
-                                                            data-avatar="${fn:escapeXml(u.avatar)}"
                                                             data-role="${u.role}"
                                                             data-status="${u.status}">
                                                         Sửa
                                                     </button>
-                                                </div>
+                                                </td>
 
-                                                <div class="customer-table__cell">
-                                                    <form method="post"
-                                                          action="${pageContext.request.contextPath}/admin/customers/lock"
-                                                          onsubmit="return confirm('Khóa/Xóa khách hàng này? (status sẽ chuyển về 0)');">
+                                                <!-- Xóa/Khóa -->
+                                                <td>
+                                                    <form method="post" action="${pageContext.request.contextPath}/admin/customers/delete"
+                                                          onsubmit="return confirm('Khóa khách hàng này?');">
                                                         <input type="hidden" name="id" value="${u.id}">
                                                         <button type="submit" class="customer-table__delete">Xóa</button>
                                                     </form>
-                                                </div>
-                                            </article>
+                                                </td>
+                                            </tr>
                                         </c:forEach>
                                     </c:otherwise>
                                 </c:choose>
-
-
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
+
+                        <!-- DETAIL -->
+
+
+                        <!-- EDIT FORM -->
+
                     </section>
+
                     <!-- Chi tiết khách hàng -->
                     <section id="customer-detail" class="customer-detail hidden">
                         <h2 class="manage__heading">Chi tiết khách hàng</h2>
@@ -356,12 +346,12 @@
 
                                 <div class="customer-detail__row">
                                     <span class="label">Ngày tạo:</span>
-                                    <span class="value">X/X/X</span>
+                                    <span class="value" id="customerDetailCreatedAt">-</span>
                                 </div>
 
                                 <div class="customer-detail__row">
-                                    <span class="label">Ngày cập nhật:</span>
-                                    <span class="value">X/X/x</span>
+                                   <span class="label">Ngày cập nhật:</span>
+                                   <span class="value" id="customerDetailUpdatedAt">-</span>
                                 </div>
                             </div>
                         </div>
@@ -380,7 +370,7 @@
                         <div class="customer-detail__card">
                             <!-- Avatar -->
                             <div class="customer-detail__avatar">
-                                <img src="assets/img/avatar4.jpg" alt="Avatar">
+                                <img src="${pageContext.request.contextPath}/assets/img/avatar4.jpg" alt="Avatar">
                                 <span class="customer-detail__status online">Đang hoạt động</span>
                             </div>
 
@@ -482,7 +472,7 @@
 
                                 <!-- Dữ liệu mẫu -->
                                 <article class="news-table__row">
-                                    <div class="news-table__cell"><img src="assets/img/hero_slide-01.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell"><img src="${pageContext.request.contextPath}/assets/img/hero_slide-01.jpg" class="news-table__img" alt=""></div>
                                     <div class="news-table__cell">Slide khuyến mãi 12.12</div>
                                     <div class="news-table__cell"><span class="status status--active">Đang post</span></div>
                                     <div class="news-table__cell">01/12/2025</div>
@@ -494,7 +484,7 @@
                                 </article>
 
                                 <article class="news-table__row">
-                                    <div class="news-table__cell"><img src="assets/img/hero_slide-02.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell"><img src="${pageContext.request.contextPath}/assets/img/hero_slide-02.jpg" class="news-table__img" alt=""></div>
                                     <div class="news-table__cell">Slide Black Friday</div>
                                     <div class="news-table__cell"><span class="status status--inactive">Chưa post</span></div>
                                     <div class="news-table__cell">15/11/2025</div>
@@ -533,7 +523,7 @@
 
                                 <!-- Dữ liệu mẫu -->
                                 <article class="news-table__row">
-                                    <div class="news-table__cell"><img src="assets/img/blog1.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell"><img src="${pageContext.request.contextPath}/assets/img/blog1.jpg" class="news-table__img" alt=""></div>
                                     <div class="news-table__cell">Ra mắt sản phẩm mới 2025</div>
                                     <div class="news-table__cell"><span class="status status--active">Đang post</span></div>
                                     <div class="news-table__cell">05/12/2025</div>
@@ -545,7 +535,7 @@
                                 </article>
 
                                 <article class="news-table__row">
-                                    <div class="news-table__cell"><img src="assets/img/blog2.jpg" class="news-table__img" alt=""></div>
+                                    <div class="news-table__cell"><img src="${pageContext.request.contextPath}/assets/img/blog2.jpg" class="news-table__img" alt=""></div>
                                     <div class="news-table__cell">Cập nhật chương trình ưu đãi</div>
                                     <div class="news-table__cell"><span class="status status--inactive">Chưa post</span></div>
                                     <div class="news-table__cell">20/11/2025</div>
@@ -565,7 +555,7 @@
                         <div class="slide-detail__card">
                             <!-- Hình Slide -->
                             <div class="slide-detail__image">
-                                <img src="assets/img/hero_slide-01.jpg" alt="Slide Image">
+                                <img src="${pageContext.request.contextPath}/assets/img/hero_slide-01.jpg" alt="Slide Image">
                                 <span class="slide-detail__status active">Đang post</span>
                             </div>
 
@@ -607,7 +597,7 @@
                         <div class="blog-detail__card">
                             <!-- Hình Blog -->
                             <div class="blog-detail__image">
-                                <img src="assets/img/blog1.jpg" alt="Blog Image">
+                                <img src="${pageContext.request.contextPath}/assets/img/blog1.jpg" alt="Blog Image">
                                 <span class="blog-detail__status active">Đang post</span>
                             </div>
 
@@ -648,7 +638,7 @@
                         <div class="slide-detail__card">
                             <!-- Hình Slide -->
                             <div class="slide-detail__image">
-                                <img src="assets/img/slide1.jpg" alt="Slide Image">
+                                <img src="${pageContext.request.contextPath}/assets/img/slide1.jpg" alt="Slide Image">
                                 <span class="slide-detail__status active">Đang post</span>
                             </div>
 
@@ -698,7 +688,7 @@
                         <div class="blog-detail__card">
                             <!-- Hình Blog -->
                             <div class="blog-detail__image">
-                                <img src="assets/img/blog1.jpg" alt="Blog Image">
+                                <img src="${pageContext.request.contextPath}/assets/img/blog1.jpg" alt="Blog Image">
                                 <span class="blog-detail__status active">Đang post</span>
                             </div>
 
@@ -919,7 +909,7 @@
                                         <!-- Một sản phẩm -->
                                         <article class="product-table__row">
                                             <div class="product-table__cell">
-                                                <img src="assets/img/binhxit.png" alt="" class="product-table__img">
+                                                <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="" class="product-table__img">
                                             </div>
                                             <div class="product-table__cell">
                                                 <span class="product-table__text">Sản phẩm ABC</span>
@@ -944,7 +934,7 @@
                                         <!-- Một sản phẩm -->
                                         <article class="product-table__row">
                                             <div class="product-table__cell">
-                                                <img src="assets/img/binhxit.png" alt="" class="product-table__img">
+                                                <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="" class="product-table__img">
                                             </div>
                                             <div class="product-table__cell">
                                                 <span class="product-table__text">Sản phẩm ABC</span>
@@ -1110,14 +1100,14 @@
                                                     <span>Không hiển thị lên Slide</span>
                                                 </div>
                                                 <div class="event-option" data-value="home-main">
-                                                    <img src="assets/img/slide-main-thumb.png" alt="" class="event-option__img">
+                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-main-thumb.png" alt="" class="event-option__img">
                                                     <div class="event-option__content">
                                                         <strong class="event-option__title">Slide chính</strong>
                                                         <span class="event-option__desc">- Banner lớn trang chủ (1200x400)</span>
                                                     </div>
                                                 </div>
                                                 <div class="event-option" data-value="home-sub">
-                                                    <img src="assets/img/slide-sub-thumb.png" alt="" class="event-option__img">
+                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-sub-thumb.png" alt="" class="event-option__img">
                                                     <div class="event-option__content">
                                                         <strong class="event-option__title">Banner phụ</strong>
                                                         <span class="event-option__desc">- Banner nhỏ bên phải (400x200)</span>
@@ -1182,14 +1172,14 @@
                                                         <div class="event-product-table__body" id="eventProductList">
                                                             <div class="event-product-item">
                                                                 <div class="col-check"><input type="checkbox" name="selectedProducts[]" value="101"></div>
-                                                                <div class="col-img"><img src="assets/img/binhxit.png" alt=""></div>
+                                                                <div class="col-img"><img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt=""></div>
                                                                 <div class="col-name">Bình xịt bọt tuyết siêu sạch</div>
                                                                 <div class="col-price">150.000đ</div>
                                                                 <div class="col-cat">Gia dụng</div>
                                                             </div>
                                                             <div class="event-product-item">
                                                                 <div class="col-check"><input type="checkbox" name="selectedProducts[]" value="102"></div>
-                                                                <div class="col-img"><img src="assets/img/camera.png" alt=""></div>
+                                                                <div class="col-img"><img src="${pageContext.request.contextPath}/assets/img/camera.png" alt=""></div>
                                                                 <div class="col-name">Camera hành trình 4K</div>
                                                                 <div class="col-price">1.200.000đ</div>
                                                                 <div class="col-cat">Phụ kiện ô tô</div>
@@ -1267,7 +1257,7 @@
                                         <tbody id="viewSelectedProductList">
                                         <tr>
                                             <td><input type="checkbox" class="ev-checkbox--yellow" checked disabled></td>
-                                            <td><img src="assets/img/binhxit.png" alt=""></td>
+                                            <td><img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt=""></td>
                                             <td>Bình xịt bọt tuyết siêu sạch</td>
                                             <td>150.000đ</td>
                                             <td>Gia dụng</td>
@@ -1333,7 +1323,7 @@
                                         <div class="ev-slide-sel" id="editEventSlideSelect">
                                             <div class="ev-slide-sel__selected">
                                                 <div class="ev-slide-opt">
-                                                    <img src="assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
+                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
                                                     <div class="ev-slide-opt__content">
                                                         <strong class="ev-slide-opt__title">Slide chính</strong>
                                                         <span class="ev-slide-opt__desc">- Banner lớn trang chủ</span>
@@ -1348,14 +1338,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="ev-slide-opt" data-value="home-main">
-                                                    <img src="assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
+                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
                                                     <div class="ev-slide-opt__content">
                                                         <strong class="ev-slide-opt__title">Slide chính</strong>
                                                         <span class="ev-slide-opt__desc">- Banner lớn trang chủ</span>
                                                     </div>
                                                 </div>
                                                 <div class="ev-slide-opt" data-value="home-sub">
-                                                    <img src="assets/img/slide-sub-thumb.png" alt="" class="ev-slide-opt__img">
+                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-sub-thumb.png" alt="" class="ev-slide-opt__img">
                                                     <div class="ev-slide-opt__content">
                                                         <strong class="ev-slide-opt__title">Banner phụ</strong>
                                                         <span class="ev-slide-opt__desc">- Banner nhỏ bên phải</span>
@@ -1598,7 +1588,7 @@
                                     <h4 class="view-section-title">Chi tiết kỹ thuật</h4>
                                     <div id="v-detailList" class="view-detail-grid">
                                         <div class="view-detail-card">
-                                            <img src="assets/img/binhxit.png" alt="Detail">
+                                            <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
                                             <div class="view-detail-info">
                                                 <h5>Tiêu đề chi tiết</h5>
                                                 <p>Nội dung chi tiết đi kèm ảnh...</p>
@@ -1607,7 +1597,7 @@
                                     </div>
                                     <div id="v-detailList" class="view-detail-grid">
                                         <div class="view-detail-card">
-                                            <img src="assets/img/binhxit.png" alt="Detail">
+                                            <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
                                             <div class="view-detail-info">
                                                 <h5>Tiêu đề chi tiết</h5>
                                                 <p>Nội dung chi tiết đi kèm ảnh...</p>
@@ -1723,7 +1713,7 @@
                                         <div id="edit-v-detailList" class="edit-mode-list">
                                             <div class="edit-detail-card">
                                                 <div class="edit-card-img">
-                                                    <img src="assets/img/binhxit.png" alt="Detail">
+                                                    <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
                                                     <label class="change-img-mini"><i class="fa-solid fa-camera"></i> <input type="file" hidden></label>
                                                 </div>
                                                 <div class="view-detail-info">
@@ -1735,7 +1725,7 @@
                                         <div id="edit-v-detailList" class="edit-mode-list">
                                             <div class="edit-detail-card">
                                                 <div class="edit-card-img">
-                                                    <img src="assets/img/binhxit.png" alt="Detail">
+                                                    <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
                                                     <label class="change-img-mini"><i class="fa-solid fa-camera"></i> <input type="file" hidden></label>
                                                 </div>
                                                 <div class="view-detail-info">
@@ -1919,7 +1909,24 @@
         sectionEventEdit.style.display = "none";
 
     }
+// Mở đúng tab theo controller
+const serverTab = "${tab}"; // controller đang set "customers"
 
+window.addEventListener("DOMContentLoaded", () => {
+    if (!serverTab) return; // nếu không có tab thì thôi
+
+    hideAllSections();
+
+    if (serverTab === "customers") {
+        sectionCustomer.style.display = "block";
+    } else if (serverTab === "product") {
+        sectionProduct.style.display = "block";
+    } else if (serverTab === "order") {
+        sectionOrder.style.display = "block";
+    } else {
+        sectionConfig.style.display = "block";
+    }
+});
     // Click menu
     menuLinks.forEach(link => {
         link.addEventListener("click", function(e) {
@@ -2290,15 +2297,7 @@
         sectionProduct.style.display = "block";
         formInline.reset();
     });
-    // Click nút "Xem"
-    document.querySelectorAll(".customer-table__view").forEach(btn => {
-        btn.addEventListener("click", () => {
-            hideAllSections();
-            sectionCustomerDetail.style.display = "block";
 
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    });
 
     // Click nút "Đóng"
     const btnBackCustomer = document.querySelector(
@@ -2611,6 +2610,6 @@
 </script>
 
 <!-- Link JS -->
-<script src="assets/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 
 </html>

@@ -21,8 +21,16 @@ public class AdminCustomerController extends HttpServlet {
     private boolean isAdmin(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) return false;
-        User u = (User) session.getAttribute("user");
-        return u != null && u.getRole() == 1;
+
+        Object obj = session.getAttribute("USER_LOGIN");
+        if (!(obj instanceof User)) {
+            obj = session.getAttribute("user");
+        }
+
+        if (!(obj instanceof User)) return false;
+
+        User u = (User) obj;
+        return u.getRole() == 1;
     }
 
     @Override
