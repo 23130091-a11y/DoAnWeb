@@ -2362,4 +2362,113 @@ input[type="checkbox"]:checked + .checkbox-toggle::after {
 .add-slide-form__input:focus {
     border: 1px solid #666;
 }
+/* ================= CUSTOMER (TABLE LAYOUT) ================= */
 
+.section-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.customer-search{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.customer-search input{
+    height:36px;
+    padding:0 10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+    min-width:260px;
+}
+
+.customer-search button{
+    height:36px;
+    padding:0 14px;
+    border:none;
+    border-radius:6px;
+    background:var(--primary-color);
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.customer-table-wrap{
+    width:100%;
+    overflow:auto;
+}
+
+.customer-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    overflow:hidden; /* nếu browser hỗ trợ */
+}
+
+.customer-table thead th{
+    background:var(--primary-color);
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+    padding:12px 10px;
+    text-align:left;
+    white-space:nowrap;
+}
+
+.customer-table tbody td{
+    padding:12px 10px;
+    border-top:1px solid #eee;
+    font-size:14px;
+    color:var(--text-color);
+    vertical-align:middle;
+}
+
+.customer-table tbody tr:hover{
+    background:#fafafa;
+}
+
+/* Avatar */
+.customer-avatar,
+.customer-table__img{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #ddd;
+    display:block;
+}
+
+/* Canh giữa 3 cột action */
+.customer-table th:nth-last-child(-n+3),
+.customer-table td:nth-last-child(-n+3){
+    text-align:center;
+    width:80px;
+}
+
+/* Buttons action */
+.customer-table__view,
+.customer-table__edit,
+.customer-table__delete{
+    border:none;
+    background:transparent;
+    color:#E06A1C;
+    cursor:pointer;
+    font-weight:600;
+    padding:6px 10px;
+    border-radius:6px;
+    transition:0.15s ease;
+}
+
+.customer-table__view:hover,
+.customer-table__edit:hover,
+.customer-table__delete:hover{
+    background:var(--soft-color);
+    color:#fff;
+}
