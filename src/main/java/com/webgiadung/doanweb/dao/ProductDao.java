@@ -110,4 +110,18 @@ public class ProductDao extends BaseDao {
             return product;
         });
     }
+    public int insert(Product p) {
+        return get().withHandle(h -> {
+            return h.createUpdate(
+                            "INSERT INTO products (name, image, price_total, " +
+                                    "brands_id, keywords_id, post, quantity, created_at, updated_at) " +
+                                    "VALUES (:name, :image, :totalPrice, " +
+                                    ":brandsId, :keywordsId, :post, :quantity, NOW(), NOW())"
+                    )
+                    .bindBean(p)
+                    .executeAndReturnGeneratedKeys("id")
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
 }

@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css?v=99">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css?v=33">
     <!-- Include stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
@@ -1595,8 +1595,8 @@
 
                         <div class="product-table">
                             <div class="product-table__header">
-                                <button type="submit" form="addProductFormInline" class="product-table__save">
-                                    <i class="fa-solid fa-floppy-disk"></i>
+                                <button type="button" onclick="saveFullProduct()" class="product-table__save">
+                                    <i class="fa-solid fa-floppy-disk"></i> Lưu sản phẩm
                                 </button>
                             </div>
 
@@ -1604,7 +1604,7 @@
                                 <form id="addProductFormInline"
                                       class="add-product-form"
                                       method="POST"
-                                      action="api/add-product.php"
+                                      action="api/add-product"
                                       enctype="multipart/form-data">
 
                                     <div class="add-product-form__row">
@@ -1636,20 +1636,18 @@
                                     <div class="add-product-form__field">
                                         <label class="add-product-form__label">Nhãn hiệu:</label>
                                         <select name="brandID" class="add-product-form__input" id="brandSelect" required>
-                                            <option value="">-- Chọn thương hiệu --</option>
-                                            <option value="1">Samsung</option> <option value="add-new">+ Thêm nhãn hiệu mới</option>
+                                            <option value="">-- Đang tải dữ liệu... --</option>
+                                            <option value="add-new">+ Thêm nhãn hiệu mới</option>
                                         </select>
                                     </div>
 
                                     <div class="add-product-form__field">
                                         <label class="add-product-form__label">Từ khóa (Tag):</label>
                                         <select name="tagID" class="add-product-form__input" id="tagSelect">
-                                            <option value="">-- Chọn từ khóa --</option>
-                                            <option value="1">Gia dụng</option>
+                                            <option value="">-- Đang tải dữ liệu... --</option>
                                             <option value="add-new">+ Thêm từ khóa mới</option>
                                         </select>
                                     </div>
-
                                     <div class="add-product-form__section">
                                         <label class="add-product-form__label">Mô tả sản phẩm:</label>
                                         <div class="add-product-input-group">
@@ -1674,8 +1672,8 @@
                                 </form>
                             </div>
                         </div>
-
                     </section>
+
                     <div id="brandModal" class="admin-modal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
                         <div class="admin-modal__content" style="background: #fff; padding: 20px; border-radius: 8px; width: 400px;">
                             <h3>Thêm Nhãn Hiệu Mới</h3>
@@ -2790,50 +2788,347 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </script>
 
-<!-- Xóa hết các item -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Lấy checkbox "Select All"
-        const selectAll = document.getElementById("selectAll");
-
-        // Lấy tất cả checkbox đơn hàng bên dưới
-        const tableContainer = document.querySelector(".order-table__inner");
-
-        // Hàm lấy tất cả checkbox con (không tính checkbox trên cùng)
-        function getChildCheckboxes() {
-            return tableContainer.querySelectorAll(".order-table__checkbox:not(#selectAll)");
-        }
-
-        // Khi tick checkbox trên cùng
-        selectAll.addEventListener("change", function() {
-            const childCheckboxes = getChildCheckboxes();
-            childCheckboxes.forEach(cb => cb.checked = selectAll.checked);
-        });
-
-        // Nếu muốn, khi tick/untick tất cả con, checkbox "selectAll" tự cập nhật
-        tableContainer.addEventListener("change", function(e) {
-            if(e.target.classList.contains("order-table__checkbox") && e.target !== selectAll) {
-                const childCheckboxes = getChildCheckboxes();
-                selectAll.checked = Array.from(childCheckboxes).every(cb => cb.checked);
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
             }
         });
 
-        // Xử lý submit form xóa (nếu muốn dùng AJAX)
-        const deleteForm = document.getElementById("deleteOrdersForm");
-        deleteForm.addEventListener("submit", function(e){
-            // Nếu muốn submit bình thường thì không cần preventDefault
-            // e.preventDefault();
-            // const formData = new FormData(this);
-            // fetch(this.action, { method: 'POST', body: formData })
-            //     .then(res => res.text())
-            //     .then(data => tableContainer.innerHTML = data)
-            //     .catch(err => console.error(err));
-        });
+        // Gán nội dung khởi tạo
+        quill.setText('Nội dung');
     });
-</script>
+    // --- XỬ LÝ HIỂN THỊ CỬA SỔ NHẬP (MODAL) ---
 
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.style.display = 'flex'; // Hiển thị modal
+        }
+    }
+
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.style.display = 'none'; // Ẩn modal
+        }
+        // Khi đóng, reset lại thanh chọn về mặc định để tránh bị kẹt ở chữ "Thêm mới"
+        if (id === 'brandModal') document.getElementById('brandSelect').value = '';
+        if (id === 'tagModal') document.getElementById('tagSelect').value = '';
+    }
+
+    // 3. Lắng nghe sự kiện thay đổi trên các thẻ Select
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Kiểm tra chọn nhãn hiệu
+        const brandSelect = document.getElementById('brandSelect');
+        if (brandSelect) {
+            brandSelect.addEventListener('change', function() {
+                if (this.value === 'add-new') {
+                    openModal('brandModal');
+                }
+            });
+        }
+
+        // Kiểm tra chọn từ khóa
+        const tagSelect = document.getElementById('tagSelect');
+        if (tagSelect) {
+            tagSelect.addEventListener('change', function() {
+                if (this.value === 'add-new') {
+                    openModal('tagModal');
+                }
+            });
+        }
+    });
+
+    // --- CHỨC NĂNG HIỂN THỊ CỬA SỔ (MODAL) ---
+
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "flex";
+        }
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    document.getElementById('brandSelect').addEventListener('change', function() {
+        if (this.value === 'add-new') {
+            openModal('brandModal');
+            // QUAN TRỌNG: Reset giá trị về trống ngay lập tức
+            // để lần sau chọn lại "add-new" nó vẫn tính là có sự thay đổi (change)
+            this.value = "";
+        }
+    });
+
+    document.getElementById('tagSelect').addEventListener('change', function() {
+        if (this.value === 'add-new') {
+            openModal('tagModal');
+            this.value = "";
+        }
+    });
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('admin-modal')) {
+            event.target.style.display = "none";
+        }
+    }
+
+    function saveNewBrand() {
+        const form = document.getElementById('addBrandFormQuick');
+        // Kiểm tra xem form có tồn tại không
+        if(!form) return;
+
+        const formData = new FormData(form);
+
+        // Lưu ý: fetch phải trỏ đúng URL (thêm / nếu cần thiết)
+        fetch('api/add-brands', {
+            method: 'POST',
+            body: formData // FormData tự động đặt Header là multipart/form-data
+        })
+            .then(response => {
+                if (!response.ok) throw new Error("Mạng có vấn đề hoặc Server lỗi");
+                return response.json();
+            })
+            .then(data => {
+                // Kiểm tra đúng thuộc tính "status" trả về từ Java
+                if (data.status === "success") {
+                    const select = document.getElementById('brandSelect');
+                    if (select) {
+                        const newOption = new Option(data.brandName, data.brandID, true, true);
+                        // Thêm vào trước option cuối cùng (thường là nút "Thêm mới...")
+                        select.add(newOption, select.options[select.length - 1]);
+                    }
+
+                    closeModal('brandModal');
+                    form.reset();
+                    alert("Thêm nhãn hiệu thành công!");
+                } else {
+                    // Nếu Java trả về resultId <= 0, nó sẽ rơi vào đây
+                    alert("Không thể lưu: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Lỗi kết nối server!");
+            });
+    }
+    // 2. Chức năng lưu Từ khóa (Tag/Keyword)
+    function saveNewTag() {
+        const tagName = document.getElementById('newTagName').value;
+        const tagDesc = document.getElementById('newTagDesc').value;
+
+        if (!tagName) {
+            alert("Vui lòng nhập tên từ khóa");
+            return;
+        }
+
+        // Gửi dữ liệu dưới dạng URLSearchParams hoặc JSON
+        const params = new URLSearchParams();
+        params.append('tagName', tagName);
+        params.append('tagDesc', tagDesc);
+
+        fetch('api/add-tag', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    // Thêm option mới vào select Tag và chọn nó
+                    const select = document.getElementById('tagSelect');
+                    const newOption = new Option(tagName, data.tagID, true, true);
+                    select.add(newOption, select.options[select.length - 1]);
+
+                    closeModal('tagModal');
+                    document.getElementById('addTagFormQuick').reset();
+                    alert("Thêm từ khóa thành công!");
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    // --- QUẢN LÝ MÔ TẢ (DESCRIPTIONS) ---
+    function addDescription() {
+        const title = document.getElementById('descTitle').value;
+        const content = document.getElementById('descContent').value;
+
+        if (!title || !content) {
+            alert("Vui lòng nhập đầy đủ tiêu đề và nội dung mô tả!");
+            return;
+        }
+
+        const list = document.getElementById('descriptionList');
+        const itemIdx = list.children.length;
+
+        const html = '<div class="added-item" id="desc-item-' + itemIdx + '">' +
+            '<span><strong>' + title + ':</strong> ' + content + '</span>' +
+            '<input type="hidden" name="descTitles[]" value="' + title + '">' +
+            '<input type="hidden" name="descContents[]" value="' + content + '">' +
+            '<button type="button" onclick="removeItem(\'desc-item-' + itemIdx + '\')" class="btn-remove">Xóa</button>' +
+            '</div>';
+        list.insertAdjacentHTML('beforeend', html);
+
+        // Xóa trống input sau khi thêm
+        document.getElementById('descTitle').value = '';
+        document.getElementById('descContent').value = '';
+    }
+
+    // --- QUẢN LÝ CHI TIẾT (DETAILS - CÓ ẢNH) ---
+    function addDetail() {
+        const fileInput = document.getElementById('detailImg');
+        const title = document.getElementById('detailTitle').value;
+        const content = document.getElementById('detailContent').value;
+
+        if (!fileInput.files[0] || !title) {
+            alert("Vui lòng chọn ảnh và nhập tiêu đề chi tiết!");
+            return;
+        }
+
+        const list = document.getElementById('detailList');
+        const itemIdx = list.children.length;
+
+        // Tạo bản sao của file input để gửi đi (vì file input gốc sẽ bị xóa)
+        const newFileInput = fileInput.cloneNode();
+        newFileInput.style.display = 'none';
+        newFileInput.name = "detImages[]";
+
+        const html = `
+    <div class="added-item" id="det-item-\${itemIdx}">
+        <span><strong></strong> (Đã chọn ảnh)</span>
+        <span><strong>\${title}:</strong> \${content}</span>
+        <input type="hidden" name="detTitles[]" value="\${title}">
+        <input type="hidden" name="detContents[]" value="\${content}">
+        <button type="button" onclick="removeItem('det-item-\${itemIdx}')" class="btn-remove">Xóa</button>
+    </div>
+`;
+
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html;
+        const itemDiv = wrapper.firstElementChild;
+        itemDiv.appendChild(newFileInput); // Chèn file vào div để submit cùng form
+        list.appendChild(itemDiv);
+
+        // Reset input
+        fileInput.value = '';
+        document.getElementById('detailTitle').value = '';
+        document.getElementById('detailContent').value = '';
+    }
+
+    function removeItem(id) {
+        document.getElementById(id).remove();
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lưu ý: bỏ dấu '/' ở đầu nếu file JS chạy từ trang cùng cấp thư mục api
+        fetchData('/DoAnWeb/api/brands', 'brandSelect', '-- Chọn nhãn hiệu --');
+        fetchData('/DoAnWeb/api/keywords', 'tagSelect', '-- Chọn từ khóa --');
+    });
+
+    function fetchData(url, selectId, defaultText) {
+        const selectElem = document.getElementById(selectId);
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+                return response.json();
+            })
+            .then(data => {
+                // Xóa nội dung cũ (giữ lại option thêm mới nếu cần)
+                selectElem.innerHTML = `<option value="">${defaultText}</option>`;
+
+                data.forEach(item => {
+                    let opt = document.createElement('option');
+                    opt.value = item.id;
+                    opt.textContent = item.name;
+                    selectElem.appendChild(opt);
+                });
+
+                // Thêm lại nút thêm mới vào cuối
+                let addNewOpt = document.createElement('option');
+                addNewOpt.value = "add-new";
+                addNewOpt.textContent = "+ Thêm mới";
+                selectElem.appendChild(addNewOpt);
+            })
+            .catch(error => {
+                console.error('Lỗi:', error);
+                selectElem.innerHTML = `<option value="">Lỗi tải dữ liệu (404/500)</option>`;
+            });
+    }
+    // Khai báo biến quill ở phạm vi global hoặc đảm bảo truy cập được trong hàm
+    let quill;
+
+    async function saveFullProduct() {
+        const form = document.getElementById('addProductFormInline');
+        if (!form || !form.reportValidity()) return;
+
+        // 1. Thu thập ID từ các thẻ Select
+        const brandID = document.getElementById('brandSelect').value;
+        const tagID = document.getElementById('tagSelect').value;
+
+        if (!brandID || brandID === 'add-new' || !tagID || tagID === 'add-new') {
+            alert("Vui lòng chọn Nhãn hiệu và Từ khóa hợp lệ!");
+            return;
+        }
+
+        // 2. Tạo đối tượng FormData từ Form chính
+        const formData = new FormData(form);
+
+        // 3. Xử lý logic Checkbox (1 nếu chọn, 0 nếu không)
+        // Giả sử checkbox của bạn có id là 'postStatus' hoặc 'isPost'
+        const postCheckbox = document.getElementById('postStatus'); // Thay ID tương ứng của bạn
+        const isPostValue = (postCheckbox && postCheckbox.checked) ? "1" : "0";
+        formData.set('postStatus', isPostValue);
+
+        // 4. Ép ID Brand và Keyword vào dữ liệu gửi đi
+        formData.set('brandID', brandID);
+        formData.set('tagID', tagID);
+
+        // 5. Lấy nội dung từ Quill Editor (Nếu bạn dùng mô tả dài)
+        const editorContent = document.querySelector('#editor .ql-editor');
+        if (editorContent) {
+            formData.append('productFullDescription', editorContent.innerHTML);
+        }
+
+        // Gửi dữ liệu qua API
+        console.log("Đang tiến hành lưu sản phẩm và dữ liệu liên quan...");
+
+        try {
+            const response = await fetch('/DoAnWeb/api/add-product', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.status === "success") {
+                alert("Lưu sản phẩm, mô tả và chi tiết thành công!");
+                window.location.reload(); // Tải lại trang hoặc chuyển hướng
+            } else {
+                alert("Lỗi từ server: " + result.message);
+            }
+        } catch (error) {
+            console.error("Chi tiết lỗi:", error);
+            // Hiển thị thông báo cụ thể hơn thay vì chỉ "Không thể kết nối"
+            alert("Lỗi hệ thống: " + error.message);
+        }
+    }
+</script>
 
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
-
 </html>
