@@ -1259,7 +1259,33 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+.added-items-list {
+    margin-top: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
 
+.added-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.btn-remove {
+    background: var(--soft-color);
+    color: white;
+    border: none;
+    padding: 2px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-remove:hover {
+    background: var(--primary-color);
+}
 /* Ô nhập liệu (Trang Sửa) */
 .ev-input {
     width: 100%;
