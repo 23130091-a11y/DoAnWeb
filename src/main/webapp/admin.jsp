@@ -93,119 +93,300 @@
 
                 <div class="col l-10 m-12 c-12">
                     <section id="config" class="manage-detail">
-                        <h2 class="manage__heading">Cấu hình hệ thống Bán hàng</h2>
+                        <h2 class="manage__heading">Cấu hình hệ thống</h2>
 
-                        <div class="config-box">
-                            <form class="config-form">
+                        <div class="config-card">
+                            <div class="config-card__header">
+                                <div>
+                                    <h3 class="config-title">Thiết lập cửa hàng</h3>
+                                    <p class="config-subtitle">
+                                        Cấu hình các thông tin hiển thị ngoài trang chủ, header/footer và các chế độ hệ thống.
+                                    </p>
+                                </div>
+                            </div>
 
-                                <h3 class="config-sub-heading">🌐 Cấu hình chung</h3>
+                            <!-- Lưu ý: hiện form này mới là UI. Khi bạn làm backend thì đổi action thành URL controller của bạn. -->
+                            <form class="config-form-ui" method="post" action="#">
+                                <!-- 1) THÔNG TIN CỬA HÀNG -->
+                                <div class="config-block">
+                                    <h4 class="config-block__title">Thông tin cửa hàng</h4>
 
-                                <div class="config-group">
-                                    <label class="config-label">Tên website</label>
-                                    <input type="text" class="config-input" placeholder="Nhập tên website">
+                                    <div class="config-grid">
+                                        <div class="config-field">
+                                            <label class="config-label">Tên cửa hàng</label>
+                                            <input class="config-input" type="text" name="storeName" placeholder="VD: WebGiaDung" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Slogan</label>
+                                            <input class="config-input" type="text" name="slogan" placeholder="VD: Đồ gia dụng chính hãng - Giá tốt" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Hotline</label>
+                                            <input class="config-input" type="text" name="hotline" placeholder="VD: 0909 000 000" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Email hỗ trợ</label>
+                                            <input class="config-input" type="email" name="email" placeholder="support@tenweb.com" />
+                                        </div>
+
+                                        <div class="config-field config-col-2">
+                                            <label class="config-label">Địa chỉ cửa hàng</label>
+                                            <input class="config-input" type="text" name="address" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Giờ làm việc</label>
+                                            <input class="config-input" type="text" name="openHours" placeholder="VD: 08:00 - 22:00 (T2 - CN)" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Bản đồ (Google Map Embed link)</label>
+                                            <input class="config-input" type="text" name="mapEmbed" placeholder="Dán link embed (nếu có)" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Logo</label>
+                                            <input class="config-input" type="file" name="logo" />
+                                            <span class="config-note">Gợi ý: PNG nền trong.</span>
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Favicon</label>
+                                            <input class="config-input" type="file" name="favicon" />
+                                            <span class="config-note">Gợi ý: 32x32, PNG/ICO.</span>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="config-group">
-                                    <label class="config-label">Logo website</label>
-                                    <input type="file" class="config-input">
-                                    <small class="config-note">Logo này cũng sẽ được dùng làm Favicon nếu không có tùy chọn riêng.</small>
+                                <div class="config-divider-ui"></div>
+
+                                <!-- 2) THÔNG TIN DOANH NGHIỆP -->
+                                <div class="config-block">
+                                    <h4 class="config-block__title">Thông tin doanh nghiệp</h4>
+
+                                    <div class="config-grid">
+                                        <div class="config-field">
+                                            <label class="config-label">Tên công ty / Hộ kinh doanh</label>
+                                            <input class="config-input" type="text" name="companyName" placeholder="VD: CÔNG TY TNHH ABC" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Mã số thuế</label>
+                                            <input class="config-input" type="text" name="taxCode" placeholder="VD: 031xxxxxxx" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Người đại diện</label>
+                                            <input class="config-input" type="text" name="legalRep" placeholder="VD: Nguyễn Văn A" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Email nhận hóa đơn</label>
+                                            <input class="config-input" type="email" name="invoiceEmail" placeholder="invoice@tenweb.com" />
+                                        </div>
+
+                                        <div class="config-field config-col-2">
+                                            <label class="config-label">Chính sách đổi trả (ngắn)</label>
+                                            <textarea class="config-input config-textarea" name="returnPolicy" placeholder="VD: Đổi trả trong 7 ngày nếu sản phẩm lỗi do NSX..."></textarea>
+                                        </div>
+
+                                        <div class="config-field config-col-2">
+                                            <label class="config-label">Chính sách bảo hành (ngắn)</label>
+                                            <textarea class="config-input config-textarea" name="warrantyPolicy" placeholder="VD: Bảo hành 12 tháng, hỗ trợ đổi mới trong 7 ngày..."></textarea>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="config-group">
-                                    <label class="config-label">Email liên hệ</label>
-                                    <input type="email" class="config-input" placeholder="contact@example.com">
+                                <div class="config-divider-ui"></div>
+
+                                <!-- 3) BÁN HÀNG & ĐƠN HÀNG -->
+                                <div class="config-block">
+                                    <h4 class="config-block__title">Bán hàng &amp; đơn hàng</h4>
+
+                                    <div class="config-grid">
+                                        <div class="config-field">
+                                            <label class="config-label">VAT (%)</label>
+                                            <input class="config-input" type="number" name="vatRate" min="0" max="20" step="0.5" placeholder="VD: 10" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Cảnh báo tồn kho &lt;=</label>
+                                            <input class="config-input" type="number" name="lowStockThreshold" min="0" step="1" placeholder="VD: 5" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Tự hủy đơn chờ thanh toán (giờ)</label>
+                                            <input class="config-input" type="number" name="autoCancelHours" min="0" step="1" placeholder="VD: 24" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Cho phép mua không cần đăng nhập</label>
+                                            <select class="config-input" name="guestCheckout">
+                                                <option value="1">Bật</option>
+                                                <option value="0">Tắt</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="config-toggles">
+                                        <label class="toggle">
+                                            <input type="checkbox" name="allowRegister" checked>
+                                            <span class="toggle-ui"></span>
+                                            <span class="toggle-text">
+                                                <b>Cho phép đăng ký</b>
+                                                <small>Bật/tắt chức năng tạo tài khoản.</small>
+                                            </span>
+                                        </label>
+
+                                        <label class="toggle">
+                                            <input type="checkbox" name="autoConfirmOrder">
+                                            <span class="toggle-ui"></span>
+                                            <span class="toggle-text">
+                                                <b>Tự động xác nhận đơn</b>
+                                                <small>Chỉ nên bật khi quy trình đã ổn định.</small>
+                                            </span>
+                                        </label>
+                                    </div>
                                 </div>
 
-                                <div class="config-group">
-                                    <label class="config-label">Số điện thoại Hotline</label>
-                                    <input type="text" class="config-input" placeholder="0123 456 789">
+                                <div class="config-divider-ui"></div>
+
+                                <!-- 4) THANH TOÁN & VẬN CHUYỂN -->
+                                <div class="config-block">
+                                    <h4 class="config-block__title">Thanh toán &amp; vận chuyển</h4>
+
+                                    <div class="config-grid">
+                                        <div class="config-field">
+                                            <label class="config-label">Phí ship mặc định (VNĐ)</label>
+                                            <input class="config-input" type="number" name="shippingFee" min="0" step="1000" placeholder="VD: 30000" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Miễn phí ship từ (VNĐ)</label>
+                                            <input class="config-input" type="number" name="freeShipFrom" min="0" step="1000" placeholder="VD: 399000" />
+                                        </div>
+
+                                        <div class="config-field config-col-2">
+                                            <label class="config-label">Ghi chú vận chuyển</label>
+                                            <input class="config-input" type="text" name="shippingNote" placeholder="VD: Giao hàng 1-3 ngày, nội thành nhanh hơn..." />
+                                        </div>
+                                    </div>
+
+                                    <div class="config-toggles">
+                                        <label class="toggle">
+                                            <input type="checkbox" name="payCOD" checked>
+                                            <span class="toggle-ui"></span>
+                                            <span class="toggle-text">
+                                                <b>Thanh toán COD</b>
+                                                <small>Nhận hàng rồi thanh toán.</small>
+                                            </span>
+                                        </label>
+
+                                        <label class="toggle">
+                                            <input type="checkbox" name="payBank">
+                                            <span class="toggle-ui"></span>
+                                            <span class="toggle-text">
+                                                <b>Chuyển khoản ngân hàng</b>
+                                                <small>Hiển thị thông tin tài khoản khi đặt hàng.</small>
+                                            </span>
+                                        </label>
+
+                                        <label class="toggle">
+                                            <input type="checkbox" name="payOnline">
+                                            <span class="toggle-ui"></span>
+                                            <span class="toggle-text">
+                                                <b>Thanh toán online</b>
+                                                <small>VNPAY/Momo... (khi bạn tích hợp).</small>
+                                            </span>
+                                        </label>
+                                    </div>
                                 </div>
 
-                                <div class="config-group">
-                                    <label class="config-label">Địa chỉ Trụ sở/Cửa hàng</label>
-                                    <input type="text" class="config-input" placeholder="Địa chỉ chi tiết">
+                                <div class="config-divider-ui"></div>
+
+                                <!-- 5) SEO -->
+                                <div class="config-block">
+                                    <h4 class="config-block__title">SEO</h4>
+
+                                    <div class="config-grid">
+                                        <div class="config-field config-col-2">
+                                            <label class="config-label">Meta title</label>
+                                            <input class="config-input" type="text" name="metaTitle" placeholder="VD: Đồ gia dụng chính hãng | WebGiaDung" />
+                                        </div>
+
+                                        <div class="config-field config-col-2">
+                                            <label class="config-label">Meta description</label>
+                                            <textarea class="config-input config-textarea" name="metaDesc" placeholder="Mô tả ngắn cho Google (tầm 120-160 ký tự)"></textarea>
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Google Analytics ID</label>
+                                            <input class="config-input" type="text" name="gaId" placeholder="VD: G-XXXXXXXXXX" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Google Tag Manager ID</label>
+                                            <input class="config-input" type="text" name="gtmId" placeholder="VD: GTM-XXXXXXX" />
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="config-group">
-                                    <label class="config-label">Mô tả website</label>
-                                    <textarea class="config-textarea" rows="4"
-                                              placeholder="Mô tả ngắn về website, hiển thị ở chân trang và giới thiệu"></textarea>
+                                <div class="config-divider-ui"></div>
+
+                                <!-- 6) GIAO DIỆN -->
+                                <div class="config-block">
+                                    <h4 class="config-block__title">Giao diện</h4>
+
+                                    <div class="config-grid">
+                                        <div class="config-field">
+                                            <label class="config-label">Màu chính (primary)</label>
+                                            <input class="config-input" type="text" name="primaryColor" placeholder="VD: #f6a500" />
+                                        </div>
+
+                                        <div class="config-field">
+                                            <label class="config-label">Màu phụ (soft)</label>
+                                            <input class="config-input" type="text" name="softColor" placeholder="VD: #E06A1C" />
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="config-group">
-                                    <label class="config-label">Nội dung Footer (Chân trang)</label>
-                                    <textarea class="config-textarea" rows="3"
-                                              placeholder="Bản quyền, thông tin công ty, liên kết nhanh..."></textarea>
+                                <div class="config-divider-ui"></div>
+
+                                <!-- 7) CHẾ ĐỘ HỆ THỐNG -->
+                                <div class="config-block">
+                                    <h4 class="config-block__title">Chế độ hệ thống</h4>
+
+                                    <div class="config-toggles">
+                                        <label class="toggle">
+                                            <input type="checkbox" name="maintenance">
+                                            <span class="toggle-ui"></span>
+                                            <span class="toggle-text">
+                                                <b>Bảo trì</b>
+                                                <small>Khóa người dùng truy cập ngoài trang.</small>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <div class="config-grid" style="margin-top:12px;">
+                                        <div class="config-field config-col-2">
+                                            <label class="config-label">Thông báo bảo trì</label>
+                                            <textarea class="config-input config-textarea" name="maintenanceMsg" placeholder="VD: Website đang bảo trì, vui lòng quay lại sau."></textarea>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <hr class="config-divider">
-
-                                <h3 class="config-sub-heading">💰 Cấu hình Thanh toán & Vận chuyển</h3>
-
-                                <div class="config-group">
-                                    <label class="config-label">Tiền tệ mặc định</label>
-                                    <select class="config-input">
-                                        <option value="VND">VND (Việt Nam Đồng)</option>
-                                        <option value="USD">USD (Đô la Mỹ)</option>
-                                        <option value="EUR">EUR (Euro)</option>
-                                    </select>
+                                <div class="config-actions-ui">
+                                    <button type="submit" class="btn-ui btn-ui--primary">Lưu cấu hình</button>
+                                    <button type="reset" class="btn-ui btn-ui--ghost">Đặt lại</button>
                                 </div>
-
-                                <div class="config-group config-group--checkbox">
-                                    <label class="config-label">Kích hoạt thanh toán COD (Thanh toán khi nhận hàng)</label>
-                                    <input type="checkbox" id="enable_cod" checked>
-                                    <label for="enable_cod" class="checkbox-toggle"></label>
-                                </div>
-
-                                <div class="config-group config-group--checkbox">
-                                    <label class="config-label">Kích hoạt thanh toán Online (VNPay, Momo...)</label>
-                                    <input type="checkbox" id="enable_online_payment">
-                                    <label for="enable_online_payment" class="checkbox-toggle"></label>
-                                </div>
-
-                                <div class="config-group">
-                                    <label class="config-label">Phí vận chuyển mặc định (Đơn hàng dưới ngưỡng)</label>
-                                    <input type="number" class="config-input" placeholder="Ví dụ: 30000" min="0">
-                                </div>
-
-                                <div class="config-group">
-                                    <label class="config-label">Ngưỡng miễn phí vận chuyển (VNĐ)</label>
-                                    <input type="number" class="config-input" placeholder="Ví dụ: 500000" min="0">
-                                    <small class="config-note">Đơn hàng đạt ngưỡng này sẽ được miễn phí vận chuyển.</small>
-                                </div>
-
-                                <hr class="config-divider">
-
-                                <h3 class="config-sub-heading">🔍 Cấu hình SEO</h3>
-
-                                <div class="config-group">
-                                    <label class="config-label">Tiêu đề SEO mặc định</label>
-                                    <input type="text" class="config-input" placeholder="Tiêu đề trang chủ">
-                                    <small class="config-note">Tối đa 60 ký tự.</small>
-                                </div>
-
-                                <div class="config-group">
-                                    <label class="config-label">Mô tả SEO mặc định</label>
-                                    <textarea class="config-textarea" rows="3"
-                                              placeholder="Mô tả cho công cụ tìm kiếm"></textarea>
-                                    <small class="config-note">Tối đa 160 ký tự.</small>
-                                </div>
-
-                                <div class="config-group">
-                                    <label class="config-label">Mã Google Analytics/Google Tag Manager</label>
-                                    <input type="text" class="config-input" placeholder="GTM-XXXXXX hoặc UA-XXXXXX">
-                                    <small class="config-note">Dùng để theo dõi truy cập và hành vi người dùng.</small>
-                                </div>
-
-                                <div class="config-actions">
-                                    <button type="submit" class="btn btn--default-color">
-                                        Lưu tất cả cấu hình
-                                    </button>
-                                </div>
-
                             </form>
                         </div>
                     </section>
+
+
                     <section id="customer" class="admin-section">
                         <div class="section-header">
                             <h2>Khách hàng</h2>
