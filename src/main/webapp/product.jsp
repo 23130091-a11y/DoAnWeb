@@ -167,93 +167,65 @@
                             <span class="header-search__text">Tìm kiếm</span>
                         </button>
                     </div>
+
                     <div class="header-cart">
                         <div class="header-cart__scale header-cart__scale--fade-product">
-                            <!-- Khi không có sản phẩm: header-cart__scale--empty -->
-                            <a href="cart.jsp">
+                            <c:set var="cart" value="${sessionScope.cart}" />
+                            <!-- Icon cart -->
+                            <a href="cart">
                                 <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
+                                <span class="header-cart__notice">
+                                    <c:choose>
+                                        <c:when test="${not empty cart}">${cart.totalQuantity}</c:when>
+                                        <c:otherwise>0</c:otherwise>
+                                    </c:choose>
+                                </span>
                             </a>
-                            <span class="header-cart__notice">3</span>
-                            <div class="cart-list cart-list--no-cart">
-                                <!-- Chưa đăng nhập:  cart-list--no-cart -->
-                                <!-- <img src="./assets/img/no-cart_img.png" alt="" class="header-cart__img"> -->
-                                <!-- <span class="header-cart__msg">Chưa có sản phẩm</span> -->
-                                <!-- Có sản phẩm -->
-                                <div class="cart-list__wrap">
-                                    <h3 class="cart-list__header">
-                                        Sản phẩm đã thêm
-                                    </h3>
-                                    <ul class="cart-list__list">
-                                        <a href="cart.jsp">
-                                            <li class="cart-list__item">
-                                                <img src="assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
-                                                <section class="cart-list__body">
-                                                    <div class="cart-list__info">
-                                                        <h4 class="cart-list__heading">Gương để bàn bông hoa Gương để
-                                                            bàn bông hoa Gương để bàn bông hoa</h4>
-                                                        <div class="cart-list__price-wrap">
-                                                            <span class="cart-list__price">19.300đ</span>
-                                                            <span class="cart-list__multiply">x</span>
-                                                            <span class="cart-list__qnt">1</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="cart-list__desc">
-                                                        <span class="cart-list__product-cate">
-                                                            Phân loại: Gương
-                                                        </span>
-                                                        <span class="cart-list__remove">Xóa</span>
-                                                    </div>
-                                                </section>
-                                            </li>
-                                        </a>
-                                        <a href="cart.jsp">
-                                            <li class="cart-list__item">
-                                                <img src="../assets/img/add-cart-02.jpeg" alt="" class="cart-list__img">
-                                                <section class="cart-list__body">
-                                                    <div class="cart-list__info">
-                                                        <h4 class="cart-list__heading">Đĩa Sứ Tròn 8.5inch CHIBI</h4>
-                                                        <div class="cart-list__price-wrap">
-                                                            <span class="cart-list__price">44.500đ</span>
-                                                            <span class="cart-list__multiply">x</span>
-                                                            <span class="cart-list__qnt">1</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="cart-list__desc">
-                                                        <span class="cart-list__product-cate">
-                                                            Phân loại: Hàng sứ - Thủy tinh
-                                                        </span>
-                                                        <span class="cart-list__remove">Xóa</span>
-                                                    </div>
-                                                </section>
-                                            </li>
-                                        </a>
-                                        <a href="cart.jsp">
-                                            <li class="cart-list__item">
-                                                <img src="assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
-                                                <section class="cart-list__body">
-                                                    <div class="cart-list__info">
-                                                        <h4 class="cart-list__heading">Gạt Tàn BRUNSWICK YG8005</h4>
-                                                        <div class="cart-list__price-wrap">
-                                                            <span class="cart-list__price">8.300đ</span>
-                                                            <span class="cart-list__multiply">x</span>
-                                                            <span class="cart-list__qnt">1</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="cart-list__desc">
-                                                        <span class="cart-list__product-cate">
-                                                            Phân loại: Hàng sứ - Thủy tinh
-                                                        </span>
-                                                        <span class="cart-list__remove">Xóa</span>
-                                                    </div>
-                                                </section>
-                                            </li>
-                                        </a>
-                                    </ul>
-                                    <a href="#" class="cart-list__view btn btn--default-color" onclick="window.location.href='cart.html'">Xem giỏ hàng</a>
-                                </div>
+
+                            <!-- Dropdown cart -->
+                            <div class="cart-list">
+                                <c:choose>
+                                    <c:when test="${not empty cart}">
+                                        <div class="cart-list__wrap">
+                                            <h3 class="cart-list__header">Sản phẩm đã thêm</h3>
+                                            <ul class="cart-list__list">
+                                                <c:forEach items="${cart.items}" var="item">
+                                                    <li class="cart-list__item">
+                                                        <img src="${item.product.image}" alt="${item.product.name}" class="cart-list__img">
+                                                        <section class="cart-list__body">
+                                                            <div class="cart-list__info">
+                                                                <h4 class="cart-list__heading">${item.product.name}</h4>
+                                                                <div class="cart-list__price-wrap">
+                                                                    <!---->
+                                                                    <span class="cart-list__old-price">${item.originalPrice} đ</span>
+                                                                    <span class="cart-list__multiply">x</span>
+                                                                    <span class="cart-list__qnt">${item.quantity}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="cart-list__desc">
+                                                                <span class="cart-list__product-cate">
+                                                                    Phân loại: ${item.product.categoriesId}
+                                                                </span>
+                                                                <a href="delete-cart?id=${item.product.id}" class="cart-list__remove">Xóa</a>
+                                                            </div>
+                                                        </section>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                            <a href="cart" class="cart-list__view btn btn--default-color">Xem giỏ hàng</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="cart-list--no-cart">
+                                            <img src="assets/img/no-cart_img.png" alt="" class="header-cart__img">
+                                            <span class="header-cart__msg">Chưa có sản phẩm</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
+
                     <div class="header-hotline">
                         <i class="header-hotline__icon fa-solid fa-phone-volume"></i>
                         <div>
@@ -267,96 +239,91 @@
     </header>
 
     <main class="main">
+        <c:set var="product" value="${product}" />
         <!-- product-details -->
         <div class="product-details">
             <div class="grid wide">
                 <div class="navigation nav-product">
-                    <a href="#!" class="navigation__link">Trang chủ</a>
-                    <i class="fa-solid fa-chevron-right navigation__icon navigation__icon--active"></i>
-                    <a href="#!" class="navigation__link navigation__link--active">Quạt tích điện Makita</a>
-                    <i class="fa-solid fa-chevron-right navigation__icon"></i>
+                    <a href="<c:url value='/'/>" class="navigation__link">Trang chủ</a>
+                    <c:forEach items="${parentCategories}" var="parent">
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <a href="#!" class="navigation__link">${parent.name}</a>
+                    </c:forEach>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <a href="#!" class="navigation__link">${category.name}</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <a href="#!" class="navigation__link--active">${product.name}</a>
                 </div>
+
                 <div class="product-details__inner">
                     <!-- Media Details -->
                     <figure class="media-details">
-                        <img src="assets/img/details-img.jpg" alt="Product Image" class="media-details__img">
+                        <img src="${product.image}" alt="${product.name}" class="media-details__img">
                         <div class="more-details">
-                            <button class="more-details__thumb">
-                                <img class="more-details__img" src="assets/img/details-img.jpg" alt="">
-                            </button>
-                            <button class="more-details__thumb">
-                                <img class="more-details__img" src="assets/img/detail-01.jpg" alt="">
-                            </button>
-                            <button class="more-details__thumb">
-                                <img class="more-details__img" src="assets/img/detail-02.jpg" alt="">
-                            </button>
-                            <button class="more-details__thumb">
-                                <img class="more-details__img" src="assets/img/detail-03.jpg" alt="">
-                            </button>
-                            <button class="more-details__thumb">
-                                <img class="more-details__img" src="assets/img/detail-04.jpg" alt="">
-                            </button>
+                            <c:forEach items="${product.images}" var="img">
+                                <button class="more-details__thumb">
+                                    <img class="more-details__img" src="${img.path}" alt="${product.name}">
+                                </button>
+                            </c:forEach>
                         </div>
                     </figure>
 
                     <!-- Content Details -->
-                    <c:set var="product" value="${product}" />
                     <div class="content-details">
                         <h1 class="content-details__heading">
-                            Quạt tích điện Makita làm mát cực nhanh, pin dung lượng lớn, QUẠT + 1 PIN + 1 SẠC
+                            ${product.name}
                         </h1>
+                        <!-- Rating & Sold -->
                         <div class="content-details__review-wrap">
                             <div class="content-feedback">
-                                <span class="content-feedback__level">4.9</span>
+                                <span class="content-feedback__level">${product.rating}</span>
                                 <div class="rating">
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star"></i>
+                                    <c:forEach begin="1" end="5" var="i">
+                                        <c:choose>
+                                            <c:when test="${i <= product.ratingInt}">
+                                                <i class="fa-solid fa-star rating__star rating__star--gold"></i>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <i class="fa-solid fa-star rating__star"></i>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
                                 </div>
                             </div>
                             <div class="content-details__separate"></div>
                             <div class="content-sold">
                                 <span class="content-sold__text">Đã bán</span>
-                                <span class="content-feedback__level">1,2k</span>
+                                <span class="content-feedback__level">${product.quantitySaled}k</span>
                             </div>
                         </div>
 
                         <div class="content-details__desc-wrap">
                             <span class="content-details__desc">Giá</span>
-                            <span class="content-details__price">378.000 đ</span>
+                            <span class="content-details__price">${product.totalPrice} đ</span>
                         </div>
 
-                        <div class="content-details__desc-wrap">
-                            <span class="content-details__desc">Trọng lượng</span>
-                            <span class="content-details__info">1.8kg</span>
-                        </div>
-
-                        <div class="content-details__desc-wrap">
-                            <span class="content-details__desc">Chất liệu</span>
-                            <span class="content-details__info">Kim loại sơn tĩnh điện</span>
-                        </div>
-
-                        <div class="content-details__desc-wrap">
-                            <span class="content-details__desc">Công dụng</span>
-                            <span class="content-details__info">Quạt làm mát</span>
-                        </div>
-
-                        <div class="content-details__desc-wrap content-details__option">
-                            <span class="content-details__desc">Loại</span>
-                            <div class="group-option">
-                                <label class="radio" for="1pin">
-                                    <input type="radio" name="type" id="1pin" value="QUẠT + 1 PIN + 1 SẠC" />
-                                    QUẠT + 1 PIN + 1 SẠC
-                                </label>
-
-                                <label class="radio" for="2pin">
-                                    <input type="radio" name="type" id="2pin" value="QUẠT + 2 PIN + 1 SẠC" />
-                                    QUẠT + 2 PIN + 1 SẠC
-                                </label>
+                        <!-- Attributes -->
+                        <c:forEach items="${product.attributes}" var="attr">
+                            <div class="content-details__desc-wrap">
+                                <span class="content-details__desc">${attr.attrName}</span>
+                                <span class="content-details__info">${attr.attrValue}</span>
                             </div>
-                        </div>
+                        </c:forEach>
+
+                        <!-- Options -->
+                        <c:if test="${not empty product.options}">
+                            <div class="content-details__desc-wrap content-details__option">
+                                <span class="content-details__desc">Tùy chọn</span>
+                                <div class="group-option">
+                                    <c:forEach items="${product.options}" var="opt">
+                                        <label class="radio" for="opt${opt.id}">
+                                            <input type="radio" name="type" id="opt${opt.id}" value="${opt.optionValue}" />
+                                                ${opt.optionName}
+                                        </label>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </c:if>
 
                         <div class="content-details__desc-wrap content-details__option">
                             <span class="content-details__desc">Số lượng</span>
@@ -374,7 +341,7 @@
                                 Thêm vào giỏ hàng
                             </button>
                             <button class="content-details__buy btn btn--default-color"
-                                onclick="window.location.href='checkout.html'">Mua ngay</button>
+                                onclick="window.location.href='checkout.jsp'">Mua ngay</button>
                         </div>
 
                         <div class="content-details__trp">
@@ -767,6 +734,43 @@
         </div>
     </footer>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const quantityContainers = document.querySelectorAll(".content-quantity");
+
+        quantityContainers.forEach(container => {
+            const minusBtn = container.querySelector(".content-quantity__btn:first-child");
+            const plusBtn = container.querySelector(".content-quantity__btn:last-child");
+            const numberSpan = container.querySelector(".content-quantity__number");
+
+            let quantity = parseInt(numberSpan.textContent);
+
+            // Hàm update nút disable
+            const updateButtons = () => {
+                minusBtn.classList.toggle("content-quantity__btn--disable", quantity <= 1);
+            }
+
+            // Click +
+            plusBtn.addEventListener("click", () => {
+                quantity++;
+                numberSpan.textContent = quantity;
+                updateButtons();
+            });
+
+            // Click -
+            minusBtn.addEventListener("click", () => {
+                if (quantity > 1) {
+                    quantity--;
+                    numberSpan.textContent = quantity;
+                    updateButtons();
+                }
+            });
+
+            updateButtons(); // khởi tạo trạng thái nút
+        });
+    });
+</script>
 
 <!-- Link JS -->
 <script src="assets/js/script.js"></script>

@@ -2609,6 +2609,49 @@ window.addEventListener("DOMContentLoaded", () => {
 
 </script>
 
+<!-- Xóa hết các item -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lấy checkbox "Select All"
+        const selectAll = document.getElementById("selectAll");
+
+        // Lấy tất cả checkbox đơn hàng bên dưới
+        const tableContainer = document.querySelector(".order-table__inner");
+
+        // Hàm lấy tất cả checkbox con (không tính checkbox trên cùng)
+        function getChildCheckboxes() {
+            return tableContainer.querySelectorAll(".order-table__checkbox:not(#selectAll)");
+        }
+
+        // Khi tick checkbox trên cùng
+        selectAll.addEventListener("change", function() {
+            const childCheckboxes = getChildCheckboxes();
+            childCheckboxes.forEach(cb => cb.checked = selectAll.checked);
+        });
+
+        // Nếu muốn, khi tick/untick tất cả con, checkbox "selectAll" tự cập nhật
+        tableContainer.addEventListener("change", function(e) {
+            if(e.target.classList.contains("order-table__checkbox") && e.target !== selectAll) {
+                const childCheckboxes = getChildCheckboxes();
+                selectAll.checked = Array.from(childCheckboxes).every(cb => cb.checked);
+            }
+        });
+
+        // Xử lý submit form xóa (nếu muốn dùng AJAX)
+        const deleteForm = document.getElementById("deleteOrdersForm");
+        deleteForm.addEventListener("submit", function(e){
+            // Nếu muốn submit bình thường thì không cần preventDefault
+            // e.preventDefault();
+            // const formData = new FormData(this);
+            // fetch(this.action, { method: 'POST', body: formData })
+            //     .then(res => res.text())
+            //     .then(data => tableContainer.innerHTML = data)
+            //     .catch(err => console.error(err));
+        });
+    });
+</script>
+
+
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 

@@ -15,10 +15,14 @@ public class Cart implements Serializable {
 
     public void addItem(Product product, int quantity) {
         if(quantity <= 0) quantity = 1;
-        if(get(product.getId()) != null) {
-            data.get(product.getId()).upQuantity(quantity);
+
+        double discountPrice = product.getTotalPrice(); // giá sau giảm
+
+        CartItem existing = data.get(product.getId());
+        if (existing != null) {
+            existing.upQuantity(quantity);
         } else {
-            data.put(product.getId(), new CartItem(product, quantity, product.getPrice()));
+            data.put(product.getId(), new CartItem(product, quantity, discountPrice));
         }
     }
 
@@ -58,7 +62,7 @@ public class Cart implements Serializable {
     public double getTotalPrice() {
         return getItems()
                 .stream()
-                .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                .mapToDouble(CartItem::getTotalPrice)
                 .sum();
     }
 

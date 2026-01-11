@@ -376,17 +376,17 @@
                     <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                         <div class="product-list">
-                            <c:forEach items="${list}" var="p" >
+                            <c:forEach items="${list}" var="p">
                                 <div class="product-card">
                                 <a href="product?id=${p.id}">
-                                    <img src="${p.img}" alt="${p.name}">
+                                    <img src="${p.image}" alt="${p.name}">
                                 </a>
 
                                 <a href="product?id=${p.id}">
                                     <p>${p.name}</p>
                                 </a>
 
-                                <span class="price">${p.price}đ</span>
+                                <span class="price">${p.totalPrice}đ</span>
 
                                 <div class="bottom">
                                     <div class="star"><i class="fa-solid fa-star"></i> 5</div>

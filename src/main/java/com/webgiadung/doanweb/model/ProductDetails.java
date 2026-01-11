@@ -1,8 +1,9 @@
 package com.webgiadung.doanweb.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ProductDetails {
+public class ProductDetails implements Serializable {
     private int id;
     private String image;       // Lưu đường dẫn ảnh hoặc tên file (URL/path)
     private String title;

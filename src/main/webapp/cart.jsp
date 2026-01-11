@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -273,6 +274,7 @@
         <div class="grid wide">
             <div class="cart-container">
                 <!-- Header -->
+                <c:set var="cart" value="${sessionScope.cart}" />
                 <div class="cart-header flex">
                     <div class="colum product-col">Sản phẩm</div>
                     <div class="colum price-col">Đơn giá</div>
@@ -280,279 +282,58 @@
                     <div class="colum total-col">Số tiền</div>
                     <div class="colum action-col">Thao tác</div>
                 </div>
-                <!-- cart list product -->
-                <div class="shop-block">
-                    <div class="shop-title flex">
-                        <input type="checkbox" class="shop-checkbox">
-                        <span class="date-add">8/9/2025</span>
-                    </div>
-
-                    <div class="cart-item flex">
-                        <div class="colum product-col flex">
-                            <input type="checkbox" class="item-checkbox">
-                            <a><img src="assets/img/add-cart-01.jpeg" alt=""></a>
-                            <a>
-                                <div class="item-info">
-                                    <p>Gương để bàn bông hoa Gương để bàn
-                                        bông hoa Gương để bàn bông hoa</p>
-                                </div>
-                            </a>
+                <!-- cart list product theo ngày -->
+                <c:forEach var="entry" items="${itemsByDate}">
+                    <div class="shop-block">
+                        <div class="shop-title flex">
+                            <input type="checkbox" class="shop-checkbox">
+                            <span class="date-add">${entry.key}</span>
                         </div>
-                        <div class="colum price-col">
-                            <div class="price-wrapper ">
-                                <div class="old-price-box">
-                                    <span class="old-price">22700đ</span>
-                                    <div class="price-discount">Discount 15%</div>
+                        <!-- Cart Items -->
+                        <c:forEach var="item" items="${entry.value}">
+                            <div class="cart-item flex">
+                                <div class="colum product-col flex">
+                                    <input type="checkbox" class="item-checkbox">
+                                    <a><img src="${item.product.image}" alt="${item.product.name}"></a>
+                                    <a>
+                                        <div class="item-info">
+                                            <p>${item.product.name}</p>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="new-price-box">
-                                    <div class="new-price-row">
-                                        <span class="new-price">19300đ</span>
-                                        <span class="currency">đ</span>
+                                <div class="colum price-col">
+                                    <div class="price-wrapper ">
+                                        <div class="old-price-box">
+                                            <span class="old-price">${item.originalPrice} đ</span>
+                                            <div class="price-discount">Discount </div>
+                                        </div>
+                                        <div class="new-price-box">
+                                            <div class="new-price-row">
+                                                <span class="new-price">${item.discountPrice}</span>
+                                                <span class="currency">đ</span>
+                                            </div>
+                                            <div class="price-note">Đã cập nhật</div>
+                                        </div>
                                     </div>
-                                    <div class="price-note">Đã cập nhật</div>
+                                </div>
+                                <!-- Quantity -->
+                                <div class="colum qty-col item-qty">
+                                    <button type="button">-</button>
+                                    <input class="text" type="text" value="${item.quantity}">
+                                    <button type="button">+</button>
+                                </div>
+                                <!-- Total -->
+                                <span class="colum total-col">${item.totalPrice}
+                                            <span class="currency">đ</span>
+                                        </span>
+                                <!-- Action -->
+                                <div class="colum action-col">
+                                    <a href="delete-cart?id=${item.product.id}" class="item-delete">Xóa</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="colum qty-col item-qty">
-                            <button type="button">-</button>
-                            <input class="text" type="text" value="1">
-                            <button type="button">+</button>
-                        </div>
-                        <span class="colum total-col">120525
-                            <span class="currency">đ</span>
-                        </span>
-
-                        <div class="colum action-col"><button type="button" class="item-delete">Xóa</button></div>
+                        </c:forEach>
                     </div>
-
-                    <div class="cart-item flex">
-                        <div class="col product-col flex">
-                            <input type="checkbox" class="item-checkbox">
-                            <a><img src="assets/img/add-cart-02.jpeg" alt=""></a>
-                            <a>
-                                <div class="item-info">
-                                    <p>Đĩa Sứ Tròn 8.5inch CHIBI</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="colum price-col">
-                            <div class="price-wrapper">
-                                <div class="old-price-box">
-                                    <span class="old-price">49500đ</span>
-                                    <div class="price-discount">Discount 10%</div>
-                                </div>
-                                <div class="new-price-box">
-                                    <div class="new-price-row">
-                                        <span class="new-price">44500</span>
-                                        <span class="currency">đ</span>
-                                    </div>
-                                    <div class="price-note">Đã cập nhật</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="colum qty-col item-qty">
-                            <button type="button">-</button>
-                            <input class="text" type="text" value="1">
-                            <button type="button">+</button>
-                        </div>
-                        <span class="colum total-col">200000
-                            <span class="currency">đ</span>
-                        </span>
-                        <div class="colum action-col"><button type="button" class="item-delete">Xóa</button></div>
-                    </div>
-                    <div class="cart-item flex">
-                        <div class="colum product-col flex">
-                            <input type="checkbox" class="item-checkbox">
-                            <a><img src="assets/img/add-cart-03.jpeg" alt=""></a>
-                            <a>
-                                <div class="item-info">
-                                    <p>Gạt Tàn BRUNSWICK YG8005</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="colum price-col">
-                            <div class="price-wrapper">
-                                <div class="old-price-box">
-                                    <span class="old-price">58000đ</span>
-                                    <div class="price-discount">Discount 15%</div>
-                                </div>
-                                <div class="new-price-box">
-                                    <div class="new-price-row">
-                                        <span class="new-price">50000đ</span>
-                                        <span class="currency">đ</span>
-                                    </div>
-                                    <div class="price-note">Đã cập nhật</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="colum qty-col item-qty">
-                            <button type="button">-</button>
-                            <input class="text" type="text" value="1">
-                            <button type="button">+</button>
-                        </div>
-                        <span class="colum total-col">110500
-                            <span class="currency">đ</span>
-                        </span>
-                        <div class="colum action-col"><button type="button" class="item-delete">Xóa</button></div>
-                    </div>
-                </div>
-
-                <div class="shop-block">
-                    <div class="shop-title flex">
-                        <input type="checkbox" class="shop-checkbox">
-                        <span class="date-add">12/9/2025</span>
-                    </div>
-
-                    <div class="cart-item flex">
-                        <div class="col product-col flex">
-                            <input type="checkbox" class="item-checkbox">
-                            <a><img src="assets/img/maylambap.jpg" alt=""></a>
-                            <a>
-                                <div class="item-info">
-                                    <p>Máy làm bắp rang bơ sokany RH-288 cao cấp</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="colum price-col">
-                            <div class="price-wrapper">
-                                <div class="old-price-box">
-                                    <span class="old-price">362250đ</span>
-                                    <div class="price-discount">Discount 15%</div>
-                                </div>
-                                <div class="new-price-box">
-                                    <div class="new-price-row">
-                                        <span class="new-price">315000</span>
-                                        <span class="currency">đ</span>
-                                    </div>
-                                    <div class="price-note">Đã cập nhật</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="colum qty-col item-qty">
-                            <button type="button">-</button>
-                            <input class="text" type="text" value="1">
-                            <button type="button">+</button>
-                        </div>
-                        <span class="colum total-col">315000
-                            <span class="currency">đ</span>
-                        </span>
-                        <div class="colum action-col"><button type="button" class="item-delete">Xóa</button></div>
-                    </div>
-
-                    <div class="cart-item flex">
-                        <div class="colum product-col flex">
-                            <input type="checkbox" class="item-checkbox">
-                            <a><img src="assets/img/maysaysinhto.jpg" alt=""></a>
-                            <a>
-                                <div class="item-info">
-                                    <p>Máy xay sinh tố 2 cối cao cấp Shake'n Take</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="colum price-col">
-                            <div class="price-wrapper">
-                                <div class="old-price-box">
-                                    <span class="old-price">157500đ</span>
-                                    <div class="price-discount">Discount 5%</div>
-                                </div>
-                                <div class="new-price-box">
-                                    <div class="new-price-row">
-                                        <span class="new-price">150000</span>
-                                        <span class="currency">đ</span>
-                                    </div>
-                                    <div class="price-note">Đã cập nhật</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="colum qty-col item-qty">
-                            <button type="button">-</button>
-                            <input class="text" type="text" value="1">
-                            <button type="button">+</button>
-                        </div>
-                        <span class="colum total-col">56.050
-                            <span class="currency">đ</span>
-                        </span>
-                        <div class="colum action-col"><button type="button" class="item-delete">Xóa</button></div>
-                    </div>
-                </div>
-                <div class="shop-block">
-                    <div class="shop-title flex">
-                        <input type="checkbox" class="shop-checkbox">
-                        <span class="date-add">15/10/2025</span>
-                    </div>
-
-                    <div class="cart-item flex">
-                        <div class="colum product-col flex">
-                            <input type="checkbox" class="item-checkbox">
-                            <a><img src="assets/img/thapdungbia.jpg" alt=""></a>
-                            <a>
-                                <div class="item-info">
-                                    <p>Tháp đựng bia rượu, hoa quả cao cấp</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="colum price-col">
-                            <div class="price-wrapper">
-                                <div class="old-price-box">
-                                    <span class="old-price">360000đ</span>
-                                    <div class="price-discount">Discount 20%</div>
-                                </div>
-                                <div class="new-price-box">
-                                    <div class="new-price-row">
-                                        <span class="new-price">300000</span>
-                                        <span class="currency">đ</span>
-                                    </div>
-                                    <div class="price-note">Đã cập nhật</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="colum qty-col item-qty">
-                            <button type="button">-</button>
-                            <input class="text" type="text" value="1">
-                            <button type="button">+</button>
-                        </div>
-                        <span class="colum total-col">300000
-                            <span class="currency">đ</span>
-                        </span>
-                        <div class="colum action-col"><button type="button" class="item-delete">Xóa</button></div>
-                    </div>
-
-                    <div class="cart-item flex">
-                        <div class="colum product-col flex">
-                            <input type="checkbox" class="item-checkbox">
-                            <a><img src="assets/img/cantieuly.jpg" alt=""></a>
-                            <a>
-                                <div class="item-info">
-                                    <p>Cân Tiểu Ly Điện Tử 50g độ chính xác 0.001g</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="colum price-col">
-                            <div class="price-wrapper">
-                                <div class="old-price-box">
-                                    <span class="old-price">275000đ</span>
-                                    <div class="price-discount">Discount 10%</div>
-                                </div>
-                                <div class="new-price-box">
-                                    <div class="new-price-row">
-                                        <span class="new-price">250000</span>
-                                        <span class="currency">đ</span>
-                                    </div>
-                                    <div class="price-note">Đã cập nhật</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="colum qty-col item-qty">
-                            <button type="button">-</button>
-                            <input class="text" type="text" value="1">
-                            <button type="button">+</button>
-                        </div>
-                        <span class="colum total-col">250000
-                            <span class="currency">đ</span>
-                        </span>
-                        <div class="colum action-col"><button type="button" class="item-delete">Xóa</button></div>
-                    </div>
-                </div>
+                </c:forEach>
                 <!-- Footer -->
                 <div class="cart-footer flex">
                     <input type="checkbox" class="select-all-footer"> Chọn tất cả
@@ -560,7 +341,7 @@
                     <button type="button" class="footer-btn">Lưu vào mục yêu thích</button>
 
                     <div class="cart-summary">
-                        Tổng cộng (<span class="total-items">0</span> sản phẩm): <span class="total-price">0đ</span>
+                        Tổng cộng (<span class="total-items">${cart.totalQuantity}</span> sản phẩm): <span class="total-price">${cart.totalPrice} đ</span>
                     </div>
 
                     <button type="button" class="buy-btn" onclick="window.location.href='checkout.jsp'">Thanh
@@ -570,6 +351,7 @@
                     Không có sản phẩm nào trong giỏ hàng
                 </p>
             </div>
+
             <div class="featured-list">
                 <section class="featured">
                     <h2>Có thể bạn cũng thích</h2>

@@ -1,8 +1,9 @@
 package com.webgiadung.doanweb.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ProductDescriptions {
+public class ProductDescriptions implements Serializable {
     private int id;
     private String title;
     private String description;

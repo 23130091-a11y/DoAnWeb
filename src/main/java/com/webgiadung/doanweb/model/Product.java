@@ -2,6 +2,8 @@ package com.webgiadung.doanweb.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Product implements Serializable {
     private int id;
@@ -18,8 +20,23 @@ public class Product implements Serializable {
     private int quantitySaled;// Số lượng đã bán
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    public Product() {
 
+    // Liên kết các bảng phụ
+    private List<ProductAttribute> attributes;  // Thông số động
+    private List<ProductOption> options;        // Tùy chọn
+    private List<ProductImage> images;          // Ảnh phụ
+    private List<ProductReview> reviews;        // Đánh giá
+
+    public double getRating() {
+        if (reviews == null || reviews.isEmpty()) return 0.0;
+        return reviews.stream().mapToDouble(ProductReview::getRating).average().orElse(0.0);
+    }
+
+    public int getRatingInt() {
+        return (int) Math.round(getRating()); // làm tròn để hiển thị sao
+    }
+
+    public Product() {
     }
 
     public Product(int id, String name, String image, double firstPrice, double totalPrice, int discountsId, int categoriesId, int brandsId, int keywordsId, int post, int quantity, int quantitySaled, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -37,6 +54,10 @@ public class Product implements Serializable {
         this.quantitySaled = quantitySaled;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.attributes = new ArrayList<>();
+        this.options = new ArrayList<>();
+        this.images = new ArrayList<>();
+        this.reviews = new ArrayList<>();
     }
 
     public int getId() {
@@ -133,6 +154,54 @@ public class Product implements Serializable {
 
     public void setQuantitySaled(int quantitySaled) {
         this.quantitySaled = quantitySaled;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<ProductAttribute> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<ProductAttribute> attributes) {
+        this.attributes = attributes;
+    }
+
+    public List<ProductOption> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<ProductOption> options) {
+        this.options = options;
+    }
+
+    public List<ProductImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ProductImage> images) {
+        this.images = images;
+    }
+
+    public List<ProductReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ProductReview> reviews) {
+        this.reviews = reviews;
     }
 
     @Override

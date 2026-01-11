@@ -1,8 +1,9 @@
 package com.webgiadung.doanweb.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Slide {
+public class Slide implements Serializable {
 
     private String id;
     private String name;
