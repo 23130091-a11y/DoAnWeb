@@ -1,8 +1,10 @@
 package com.webgiadung.doanweb.controller;
 
 import com.webgiadung.doanweb.dao.AuthDao;
+import com.webgiadung.doanweb.dao.EmailVerificationDao;
 import com.webgiadung.doanweb.model.User;
 
+import com.webgiadung.doanweb.services.EmailService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -50,14 +52,42 @@ public class RegisterController extends HttpServlet {
         user.setPassword(password);
         user.setPhone(phone);
         user.setRole(0);   // USER
-        user.setStatus(1);// ACTIVE
+        user.setStatus(0);// chưa xác thực
 
         // 5. Lưu DB
         authDao.register(user);
 
-        // 6. Chuyển sang login
-        response.sendRedirect(request.getContextPath() + "/login");
-        return;
+        // ===== THÊM PHẦN NÀY =====
+
+        // 6. Tạo token
+        String token = java.util.UUID.randomUUID().toString();
+
+        // 7. Lưu token
+        EmailVerificationDao evDao = new EmailVerificationDao();
+        evDao.saveToken(email, token);
+
+        // 8. Tạo link xác nhận
+        String verifyLink =
+                request.getScheme() + "://" +
+                        request.getServerName() + ":" +
+                        request.getServerPort() +
+                        request.getContextPath() +
+                        "/verify?token=" + token;
+
+        // 9. Gửi mail
+        EmailService emailService = new EmailService();
+        emailService.sendVerifyEmail(email, verifyLink);
+
+        // 10. Thông báo
+        response.sendRedirect(
+                request.getContextPath() + "/login.jsp?msg=verify"
+        );
+
+//        response.sendRedirect(request.getContextPath() + "/login.jsp");
+
+//        // 6. Chuyển sang login
+//        response.sendRedirect(request.getContextPath() + "/login");
+//        return;
 
 
     }

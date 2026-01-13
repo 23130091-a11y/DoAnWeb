@@ -119,4 +119,13 @@ public class AuthDao extends BaseDao {
         );
     }
 
+    public void activateUser(String email) {
+        get().useHandle(h ->
+                h.createUpdate(
+                                "UPDATE users SET status = 1 WHERE email = :email"
+                        )
+                        .bind("email", email)
+                        .execute()
+        );
+    }
 }

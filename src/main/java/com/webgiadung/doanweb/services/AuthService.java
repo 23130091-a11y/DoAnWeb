@@ -15,4 +15,21 @@ public class AuthService {
         }
         return null;
     }
+
+    public User loginWithGoogle(String email, String name) {
+        // Check user trong DB bằng phương thức AuthDao có sẵn
+        User user = authDao.getUserByEmail(email);
+        if (user != null) {
+            return user; // User đã có → đăng nhập bình thường
+        } else {
+            // User chưa có → tạo mới
+            User newUser = new User();
+            newUser.setEmail(email);
+            newUser.setName(name); // set tên
+            newUser.setRole(0);    // 0 = user thường
+            newUser.setStatus(1);  // 1 = active
+            authDao.register(newUser); // dùng register() thay vì save()
+            return newUser;
+        }
+    }
 }
