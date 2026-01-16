@@ -42,9 +42,26 @@
         <div class="banner-section">
         </div>
 
+        <div>
+            <a href="https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=http://localhost:8080/DoAnWeb/login-google&response_type=code
+		   &client_id=your-client-key&approval_prompt=force">Login with Google</a>
+        </div>
+
         <div class="login-container">
             <form class="login-form" action="login" method="post" >
                 <h3>Đăng nhập</h3>
+
+                <!-- Xác nhận -->
+                <% if ("verify".equals(request.getParameter("msg"))) { %>
+                <div style="color: green; margin-bottom: 10px;">
+                    Đăng ký thành công! Vui lòng kiểm tra email để xác nhận tài khoản.
+                </div>
+                <% } %>
+
+                <c:if test="${not empty error}">
+                    <div class="text-danger mb-1">${error}</div>
+                </c:if>
+
                 <!-- Thông báo lỗi -->
                 <c:if test="${not empty error}">
                     <div class="text-danger mb-1">${error}</div>

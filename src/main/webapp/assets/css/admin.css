@@ -2572,3 +2572,27 @@
     background:var(--soft-color);
     color:#fff;
 }
+
+/* Nút chuyển đổi trạng thái */
+/* ===== OVERRIDE BUTTON ADMIN ===== */
+.btn {
+    --height: 30px;
+    min-width: 90px;
+}
+    /* ===== NÚT BẤM ĐƯỢC ===== */
+.btn.btn--default-color {
+    background-color: #E06A1C;
+    color: #ffffff;
+}
+
+.btn.btn--default-color:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+/* ===== NÚT KHÔNG BẤM ĐƯỢC ===== */
+.btn:disabled {
+    background-color: #d1d5db !important; /* xám nhạt */
+    color: #6b7280 !important;            /* chữ xám đậm */
+    cursor: not-allowed;
+    opacity: 1; /* tránh bị nhạt quá */
+}

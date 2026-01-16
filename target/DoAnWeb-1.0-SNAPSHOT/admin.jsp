@@ -1989,16 +1989,90 @@
                                                 <span class="order-table__text">${order.customer_name}</span>
                                             </div>
 
+                                            <!-- ===== TRẠNG THÁI ĐƠN HÀNG ===== -->
                                             <div class="order-table__cell">
+
+                                                <!-- Hiển thị -->
                                                 <span class="order-table__status ${order.statusTransportClass}">
                                                         ${order.statusTransportText}
                                                 </span>
+
+                                                <!-- Điều khiển -->
+                                                <form action="<c:url value='order-update-status'/>"
+                                                      method="post"
+                                                      style="margin-top:6px">
+
+                                                    <input type="hidden" name="orderId" value="${order.id}">
+                                                    <input type="hidden" name="type" value="transport">
+
+                                                    <select name="status"
+                                                        ${order.status_transport == 1 || order.status_transport == 2
+                                                                ? 'disabled' : ''}>
+
+                                                        <option value="0"
+                                                            ${order.status_transport == 0 ? 'selected' : ''}>
+                                                            Đơn hàng mới
+                                                        </option>
+
+                                                        <option value="1"
+                                                            ${order.status_transport == 1 ? 'selected' : ''}>
+                                                            Hoàn thành
+                                                        </option>
+
+                                                        <option value="2"
+                                                            ${order.status_transport == 2 ? 'selected' : ''}>
+                                                            Hủy đơn
+                                                        </option>
+
+                                                    </select>
+
+                                                    <button type="submit"
+                                                            class="btn btn--default-color"
+                                                        ${order.status_transport == 1 || order.status_transport == 2
+                                                                ? 'disabled' : ''}>
+                                                        Lưu
+                                                    </button>
+                                                </form>
                                             </div>
 
+
+                                            <!-- ===== TRẠNG THÁI THANH TOÁN ===== -->
                                             <div class="order-table__cell">
+
+                                                <!-- Hiển thị -->
                                                 <span class="order-table__status ${order.statusPaymentClass}">
                                                         ${order.statusPaymentText}
                                                 </span>
+
+                                                <!-- Điều khiển -->
+                                                <form action="<c:url value='order-update-status'/>"
+                                                      method="post"
+                                                      style="margin-top:6px">
+
+                                                    <input type="hidden" name="orderId" value="${order.id}">
+                                                    <input type="hidden" name="type" value="payment">
+
+                                                    <select name="status"
+                                                        ${order.status_payment == 1 ? 'disabled' : ''}>
+
+                                                        <option value="0"
+                                                            ${order.status_payment == 0 ? 'selected' : ''}>
+                                                            Chưa thanh toán
+                                                        </option>
+
+                                                        <option value="1"
+                                                            ${order.status_payment == 1 ? 'selected' : ''}>
+                                                            Đã thanh toán
+                                                        </option>
+
+                                                    </select>
+
+                                                    <button type="submit"
+                                                            class="btn btn--default-color"
+                                                        ${order.status_payment == 1 ? 'disabled' : ''}>
+                                                        Lưu
+                                                    </button>
+                                                </form>
                                             </div>
 
                                             <div class="order-table__cell">${order.created_at}</div>

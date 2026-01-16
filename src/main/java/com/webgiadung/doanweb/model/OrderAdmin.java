@@ -7,7 +7,7 @@ public class OrderAdmin implements Serializable {
     private int id;                  // Mã đơn
     private int user_id;             // Mã khách
     private String customer_name;    // Tên khách
-    private int status_transport;    // Trạng thái đơn hàng (0=Mới,1=Đang giao,2=Hoàn thành,3=Hủy)
+    private int status_transport;    // Trạng thái đơn hàng (0=Mới,1=Hoàn thành,2=Hủy)
     private int status_payment;      // Trạng thái thanh toán (0=Chưa thanh toán,1=Đã thanh toán)
     private Timestamp created_at;    // Ngày tạo
     private double total_price;      // Tổng tiền đơn

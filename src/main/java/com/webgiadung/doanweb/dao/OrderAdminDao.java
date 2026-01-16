@@ -79,4 +79,26 @@ public class OrderAdminDao extends BaseDao {
                         .execute()
         );
     }
+
+    public void updateStatusTransport(int orderId, int statusTransport) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate(
+                                "UPDATE orders SET status_transport = :status WHERE id = :id"
+                        )
+                        .bind("status", statusTransport)
+                        .bind("id", orderId)
+                        .execute()
+        );
+    }
+
+    public void updateStatusPayment(int orderId, int statusPayment) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate(
+                                "UPDATE orders SET status_payment = :status WHERE id = :id"
+                        )
+                        .bind("status", statusPayment)
+                        .bind("id", orderId)
+                        .execute()
+        );
+    }
 }
