@@ -1,6 +1,6 @@
 package com.webgiadung.doanweb.controller.admin;
 
-import com.webgiadung.doanweb.model.FileUtil; // Đảm bảo import đúng package của FileUtil
+import com.webgiadung.doanweb.model.FileUtil;
 import com.webgiadung.doanweb.model.Product;
 import com.webgiadung.doanweb.model.ProductDescriptions;
 import com.webgiadung.doanweb.model.ProductDetails;
@@ -36,19 +36,23 @@ public class AddProductController extends HttpServlet {
             // --- 1. ĐỌC DỮ LIỆU CƠ BẢN ---
             String brandIdRaw = req.getParameter("brandID");
             String tagIdRaw = req.getParameter("tagID");
+            String cateIdRaw = req.getParameter("cateID"); // <--- MỚI THÊM: Lấy chuỗi ID danh mục
             String postStatusRaw = req.getParameter("postStatus");
 
-            // Kiểm tra null để tránh NumberFormatException
-            if (brandIdRaw == null || tagIdRaw == null || req.getParameter("productPrice") == null) {
-                resp.getWriter().write("{\"status\":\"error\", \"message\":\"Thiếu dữ liệu bắt buộc\"}");
+            if (brandIdRaw == null || tagIdRaw == null || cateIdRaw == null || req.getParameter("productPrice") == null) {
+                resp.getWriter().write("{\"status\":\"error\", \"message\":\"Thiếu dữ liệu bắt buộc (Nhãn hiệu, Tag, Danh mục hoặc Giá)\"}");
                 return;
             }
 
             Product p = new Product();
             p.setName(req.getParameter("productName"));
             p.setTotalPrice(Double.parseDouble(req.getParameter("productPrice")));
+
+            // Set ID các khóa ngoại
             p.setBrandsId(Integer.parseInt(brandIdRaw));
             p.setKeywordsId(Integer.parseInt(tagIdRaw));
+            p.setCategoriesId(Integer.parseInt(cateIdRaw));
+
             p.setQuantity(Integer.parseInt(req.getParameter("productStock")));
             p.setPost("1".equals(postStatusRaw) ? 1 : 0);
 
