@@ -1629,7 +1629,7 @@
                                         </div>
                                         <div class="add-product-form__field" style="width: 100px;">
                                             <label class="add-product-form__label">Post ngay:</label>
-                                            <input type="checkbox" name="isPost" value="1" class="product-table__checkbox" style="width: 20px; height: 20px;">
+                                            <input type="checkbox" id="postStatus" name="isPost" value="1" class="product-table__checkbox" style="width: 20px; height: 20px;">
                                         </div>
                                     </div>
 
@@ -1646,6 +1646,13 @@
                                         <select name="tagID" class="add-product-form__input" id="tagSelect">
                                             <option value="">-- Đang tải dữ liệu... --</option>
                                             <option value="add-new">+ Thêm từ khóa mới</option>
+                                        </select>
+                                    </div>
+                                    <div class="add-product-form__field">
+                                        <label class="add-product-form__label">Danh mục:</label>
+                                        <select name="cateID" class="add-product-form__input" id="cateSelect">
+                                            <option value="">-- Đang tải dữ liệu... --</option>
+                                            <option value="add-new">+ Thêm danh mục mới</option>
                                         </select>
                                     </div>
                                     <div class="add-product-form__section">
@@ -1698,6 +1705,19 @@
                                 <div class="admin-modal__actions" style="display: flex; justify-content: flex-end; gap: 10px;">
                                     <button type="button" class="bton btn--primary" onclick="closeModal('tagModal')">Hủy</button>
                                     <button type="button" class="bton btn--primary" onclick="saveNewTag()">Lưu từ khóa</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="cateModal" class="admin-modal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+                        <div class="admin-modal__content" style="background: #fff; padding: 20px; border-radius: 8px; width: 400px;">
+                            <h3>Thêm Danh mục Mới</h3>
+                            <form id="addCateFormQuick">
+                                <input type="text" id="newCateName" name="cateName" placeholder="Tên danh mục" class="add-product-form__input" required style="width: 100%; margin-bottom: 10px;">
+                                <textarea id="newCateDesc" name="cateDesc" placeholder="Mô tả danh mục" class="add-product-form__input" style="width: 100%; margin-bottom: 10px;"></textarea>
+                                <div class="admin-cate__actions" style="display: flex; justify-content: flex-end; gap: 10px;">
+                                    <button type="button" class="bton btn--primary" onclick="closeModal('cateModal')">Hủy</button>
+                                    <button type="button" class="bton btn--primary" onclick="saveNewCategory()">Lưu từ khóa</button>
                                 </div>
                             </form>
                         </div>
@@ -2755,15 +2775,21 @@ window.addEventListener("DOMContentLoaded", () => {
             this.value = "";
         }
     });
-
+    document.getElementById('cateSelect').addEventListener('change', function() {
+        if (this.value === 'add-new') {
+            openModal('cateModal');
+            this.value = "";
+        }
+    });
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
-
 <script>
+    // Khai báo biến global để tránh lỗi truy cập
+    let quill;
+
     document.addEventListener("DOMContentLoaded", function() {
-        const quill = new Quill('#editor', {
+        quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
                 toolbar: [
@@ -2779,6 +2805,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Gán nội dung khởi tạo
         quill.setText('Nội dung');
     });
+
     // --- XỬ LÝ HIỂN THỊ CỬA SỔ NHẬP (MODAL) ---
 
     function openModal(id) {
@@ -2796,63 +2823,10 @@ window.addEventListener("DOMContentLoaded", () => {
         // Khi đóng, reset lại thanh chọn về mặc định để tránh bị kẹt ở chữ "Thêm mới"
         if (id === 'brandModal') document.getElementById('brandSelect').value = '';
         if (id === 'tagModal') document.getElementById('tagSelect').value = '';
+
+        // <--- MỚI THÊM: Reset select danh mục khi đóng modal
+        if (id === 'cateModal') document.getElementById('cateSelect').value = '';
     }
-
-    // 3. Lắng nghe sự kiện thay đổi trên các thẻ Select
-    document.addEventListener('DOMContentLoaded', function() {
-
-        // Kiểm tra chọn nhãn hiệu
-        const brandSelect = document.getElementById('brandSelect');
-        if (brandSelect) {
-            brandSelect.addEventListener('change', function() {
-                if (this.value === 'add-new') {
-                    openModal('brandModal');
-                }
-            });
-        }
-
-        // Kiểm tra chọn từ khóa
-        const tagSelect = document.getElementById('tagSelect');
-        if (tagSelect) {
-            tagSelect.addEventListener('change', function() {
-                if (this.value === 'add-new') {
-                    openModal('tagModal');
-                }
-            });
-        }
-    });
-
-    // --- CHỨC NĂNG HIỂN THỊ CỬA SỔ (MODAL) ---
-
-    function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "flex";
-        }
-    }
-
-    function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    document.getElementById('brandSelect').addEventListener('change', function() {
-        if (this.value === 'add-new') {
-            openModal('brandModal');
-            // QUAN TRỌNG: Reset giá trị về trống ngay lập tức
-            // để lần sau chọn lại "add-new" nó vẫn tính là có sự thay đổi (change)
-            this.value = "";
-        }
-    });
-
-    document.getElementById('tagSelect').addEventListener('change', function() {
-        if (this.value === 'add-new') {
-            openModal('tagModal');
-            this.value = "";
-        }
-    });
 
     window.onclick = function(event) {
         if (event.target.classList.contains('admin-modal')) {
@@ -2860,130 +2834,26 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const quill = new Quill('#editor', {
-            theme: 'snow',
-            modules: {
-                toolbar: [
-                    [{ header: [1, 2, 3, false] }],
-                    ['bold', 'italic', 'underline', 'strike'],
-                    [{ list: 'ordered' }, { list: 'bullet' }],
-                    ['link', 'image'],
-                    ['clean']
-                ]
-            }
-        });
-
-        // Gán nội dung khởi tạo
-        quill.setText('Nội dung');
-    });
-    // --- XỬ LÝ HIỂN THỊ CỬA SỔ NHẬP (MODAL) ---
-
-    function openModal(id) {
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.style.display = 'flex'; // Hiển thị modal
-        }
-    }
-
-    function closeModal(id) {
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.style.display = 'none'; // Ẩn modal
-        }
-        // Khi đóng, reset lại thanh chọn về mặc định để tránh bị kẹt ở chữ "Thêm mới"
-        if (id === 'brandModal') document.getElementById('brandSelect').value = '';
-        if (id === 'tagModal') document.getElementById('tagSelect').value = '';
-    }
-
-    // 3. Lắng nghe sự kiện thay đổi trên các thẻ Select
-    document.addEventListener('DOMContentLoaded', function() {
-
-        // Kiểm tra chọn nhãn hiệu
-        const brandSelect = document.getElementById('brandSelect');
-        if (brandSelect) {
-            brandSelect.addEventListener('change', function() {
-                if (this.value === 'add-new') {
-                    openModal('brandModal');
-                }
-            });
-        }
-
-        // Kiểm tra chọn từ khóa
-        const tagSelect = document.getElementById('tagSelect');
-        if (tagSelect) {
-            tagSelect.addEventListener('change', function() {
-                if (this.value === 'add-new') {
-                    openModal('tagModal');
-                }
-            });
-        }
-    });
-
-    // --- CHỨC NĂNG HIỂN THỊ CỬA SỔ (MODAL) ---
-
-    function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "flex";
-        }
-    }
-
-    function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    document.getElementById('brandSelect').addEventListener('change', function() {
-        if (this.value === 'add-new') {
-            openModal('brandModal');
-            // QUAN TRỌNG: Reset giá trị về trống ngay lập tức
-            // để lần sau chọn lại "add-new" nó vẫn tính là có sự thay đổi (change)
-            this.value = "";
-        }
-    });
-
-    document.getElementById('tagSelect').addEventListener('change', function() {
-        if (this.value === 'add-new') {
-            openModal('tagModal');
-            this.value = "";
-        }
-    });
-
-    window.onclick = function(event) {
-        if (event.target.classList.contains('admin-modal')) {
-            event.target.style.display = "none";
-        }
-    }
-
+    // 1. Chức năng lưu Nhãn hiệu (Brand)
     function saveNewBrand() {
         const form = document.getElementById('addBrandFormQuick');
-        // Kiểm tra xem form có tồn tại không
         if(!form) return;
 
         const formData = new FormData(form);
 
-        // Lưu ý: fetch phải trỏ đúng URL (thêm / nếu cần thiết)
         fetch('api/add-brands', {
             method: 'POST',
-            body: formData // FormData tự động đặt Header là multipart/form-data
+            body: formData
         })
             .then(response => {
                 if (!response.ok) throw new Error("Mạng có vấn đề hoặc Server lỗi");
                 return response.json();
             })
             .then(data => {
-                // Kiểm tra đúng thuộc tính "status" trả về từ Java
                 if (data.status === "success") {
                     const select = document.getElementById('brandSelect');
                     if (select) {
                         const newOption = new Option(data.brandName, data.brandID, true, true);
-                        // Thêm vào trước option cuối cùng (thường là nút "Thêm mới...")
                         select.add(newOption, select.options[select.length - 1]);
                     }
 
@@ -2991,7 +2861,6 @@ window.addEventListener("DOMContentLoaded", () => {
                     form.reset();
                     alert("Thêm nhãn hiệu thành công!");
                 } else {
-                    // Nếu Java trả về resultId <= 0, nó sẽ rơi vào đây
                     alert("Không thể lưu: " + data.message);
                 }
             })
@@ -3000,6 +2869,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 alert("Lỗi kết nối server!");
             });
     }
+
     // 2. Chức năng lưu Từ khóa (Tag/Keyword)
     function saveNewTag() {
         const tagName = document.getElementById('newTagName').value;
@@ -3010,7 +2880,6 @@ window.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Gửi dữ liệu dưới dạng URLSearchParams hoặc JSON
         const params = new URLSearchParams();
         params.append('tagName', tagName);
         params.append('tagDesc', tagDesc);
@@ -3023,7 +2892,6 @@ window.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success") {
-                    // Thêm option mới vào select Tag và chọn nó
                     const select = document.getElementById('tagSelect');
                     const newOption = new Option(tagName, data.tagID, true, true);
                     select.add(newOption, select.options[select.length - 1]);
@@ -3037,6 +2905,40 @@ window.addEventListener("DOMContentLoaded", () => {
             })
             .catch(error => console.error('Error:', error));
     }
+
+    // 3. Chức năng lưu Danh mục (Category) <--- MỚI THÊM: Code giống hệt Brand
+    function saveNewCategory() {
+        const cateName = document.getElementById('newCateName').value;
+        const cateDesc = document.getElementById('newCateDesc').value;
+
+        const params = new URLSearchParams();
+        params.append('cateName', cateName);
+        params.append('cateDesc', cateDesc);
+
+        fetch('api/add-category', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    const select = document.getElementById('cateSelect');
+                    // Server trả về cateName, cateID
+                    const newOption = new Option(data.cateName, data.cateID, true, true);
+                    select.add(newOption, select.options[select.length - 1]);
+
+                    closeModal('cateModal');
+                    // Reset form
+                    document.getElementById('addCateFormQuick').reset();
+                    alert("Thêm danh mục thành công!");
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
     // --- QUẢN LÝ MÔ TẢ (DESCRIPTIONS) ---
     function addDescription() {
         const title = document.getElementById('descTitle').value;
@@ -3058,7 +2960,6 @@ window.addEventListener("DOMContentLoaded", () => {
             '</div>';
         list.insertAdjacentHTML('beforeend', html);
 
-        // Xóa trống input sau khi thêm
         document.getElementById('descTitle').value = '';
         document.getElementById('descContent').value = '';
     }
@@ -3077,7 +2978,6 @@ window.addEventListener("DOMContentLoaded", () => {
         const list = document.getElementById('detailList');
         const itemIdx = list.children.length;
 
-        // Tạo bản sao của file input để gửi đi (vì file input gốc sẽ bị xóa)
         const newFileInput = fileInput.cloneNode();
         newFileInput.style.display = 'none';
         newFileInput.name = "detImages[]";
@@ -3095,10 +2995,9 @@ window.addEventListener("DOMContentLoaded", () => {
         const wrapper = document.createElement('div');
         wrapper.innerHTML = html;
         const itemDiv = wrapper.firstElementChild;
-        itemDiv.appendChild(newFileInput); // Chèn file vào div để submit cùng form
+        itemDiv.appendChild(newFileInput);
         list.appendChild(itemDiv);
 
-        // Reset input
         fileInput.value = '';
         document.getElementById('detailTitle').value = '';
         document.getElementById('detailContent').value = '';
@@ -3107,10 +3006,12 @@ window.addEventListener("DOMContentLoaded", () => {
     function removeItem(id) {
         document.getElementById(id).remove();
     }
+
     document.addEventListener("DOMContentLoaded", function() {
         // Lưu ý: bỏ dấu '/' ở đầu nếu file JS chạy từ trang cùng cấp thư mục api
         fetchData('/DoAnWeb/api/brands', 'brandSelect', '-- Chọn nhãn hiệu --');
         fetchData('/DoAnWeb/api/keywords', 'tagSelect', '-- Chọn từ khóa --');
+        fetchData('/DoAnWeb/api/categories', 'cateSelect', '-- Chọn danh mục --');
     });
 
     function fetchData(url, selectId, defaultText) {
@@ -3122,7 +3023,6 @@ window.addEventListener("DOMContentLoaded", () => {
                 return response.json();
             })
             .then(data => {
-                // Xóa nội dung cũ (giữ lại option thêm mới nếu cần)
                 selectElem.innerHTML = `<option value="">${defaultText}</option>`;
 
                 data.forEach(item => {
@@ -3132,7 +3032,6 @@ window.addEventListener("DOMContentLoaded", () => {
                     selectElem.appendChild(opt);
                 });
 
-                // Thêm lại nút thêm mới vào cuối
                 let addNewOpt = document.createElement('option');
                 addNewOpt.value = "add-new";
                 addNewOpt.textContent = "+ Thêm mới";
@@ -3143,8 +3042,6 @@ window.addEventListener("DOMContentLoaded", () => {
                 selectElem.innerHTML = `<option value="">Lỗi tải dữ liệu (404/500)</option>`;
             });
     }
-    // Khai báo biến quill ở phạm vi global hoặc đảm bảo truy cập được trong hàm
-    let quill;
 
     async function saveFullProduct() {
         const form = document.getElementById('addProductFormInline');
@@ -3153,26 +3050,30 @@ window.addEventListener("DOMContentLoaded", () => {
         // 1. Thu thập ID từ các thẻ Select
         const brandID = document.getElementById('brandSelect').value;
         const tagID = document.getElementById('tagSelect').value;
+        const cateID = document.getElementById('cateSelect').value; // <--- MỚI THÊM: Lấy ID danh mục
 
-        if (!brandID || brandID === 'add-new' || !tagID || tagID === 'add-new') {
-            alert("Vui lòng chọn Nhãn hiệu và Từ khóa hợp lệ!");
+        // Validate thêm cateID
+        if (!brandID || brandID === 'add-new' ||
+            !tagID || tagID === 'add-new' ||
+            !cateID || cateID === 'add-new') { // <--- MỚI THÊM
+            alert("Vui lòng chọn Nhãn hiệu, Danh mục và Từ khóa hợp lệ!");
             return;
         }
 
         // 2. Tạo đối tượng FormData từ Form chính
         const formData = new FormData(form);
 
-        // 3. Xử lý logic Checkbox (1 nếu chọn, 0 nếu không)
-        // Giả sử checkbox của bạn có id là 'postStatus' hoặc 'isPost'
-        const postCheckbox = document.getElementById('postStatus'); // Thay ID tương ứng của bạn
+        // 3. Xử lý logic Checkbox
+        const postCheckbox = document.getElementById('postStatus');
         const isPostValue = (postCheckbox && postCheckbox.checked) ? "1" : "0";
         formData.set('postStatus', isPostValue);
 
-        // 4. Ép ID Brand và Keyword vào dữ liệu gửi đi
+        // 4. Ép ID Brand, Tag, Category vào dữ liệu gửi đi
         formData.set('brandID', brandID);
         formData.set('tagID', tagID);
+        formData.set('cateID', cateID);
 
-        // 5. Lấy nội dung từ Quill Editor (Nếu bạn dùng mô tả dài)
+        // 5. Lấy nội dung từ Quill Editor
         const editorContent = document.querySelector('#editor .ql-editor');
         if (editorContent) {
             formData.append('productFullDescription', editorContent.innerHTML);
@@ -3191,13 +3092,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
             if (result.status === "success") {
                 alert("Lưu sản phẩm, mô tả và chi tiết thành công!");
-                window.location.reload(); // Tải lại trang hoặc chuyển hướng
+                window.location.reload();
             } else {
                 alert("Lỗi từ server: " + result.message);
             }
         } catch (error) {
             console.error("Chi tiết lỗi:", error);
-            // Hiển thị thông báo cụ thể hơn thay vì chỉ "Không thể kết nối"
             alert("Lỗi hệ thống: " + error.message);
         }
     }
