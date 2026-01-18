@@ -124,4 +124,32 @@ public class ProductDao extends BaseDao {
                     .one();
         });
     }
+
+    public List<Product> searchByName(String keyword) {
+        return get().withHandle(h ->
+                h.createQuery("""
+            SELECT
+                id,
+                name,
+                image,
+                price_first AS firstPrice,
+                price_total AS totalPrice,
+                discounts_id AS discountsId,
+                categories_id AS categoriesId,
+                brands_id AS brandsId,
+                keywords_id AS keywordsId,
+                post,
+                quantity,
+                quantity_saled AS quantitySaled,
+                created_at AS createdAt,
+                updated_at AS updatedAt
+            FROM products
+            WHERE post = 1
+            AND name LIKE :keyword
+        """)
+                        .bind("keyword", "%" + keyword + "%")
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
 }

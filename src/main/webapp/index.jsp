@@ -194,26 +194,43 @@
                     <a href="/" class="logo">
                         <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                     </a>
-                    <div class="header-search">
+
+                    <!-- Thay toàn bộ header search bằng -->
+                    <form action="search-product" method="get" class="header-search">
                         <div class="header-search__wrap">
-                            <input type="text" class="header-search__input" placeholder="Bạn cần tìm kiếm sản phẩm gì?">
+                            <input
+                                    type="text"
+                                    name="keyword"
+                                    class="header-search__input"
+                                    placeholder="Bạn cần tìm kiếm sản phẩm gì?"
+                                    value="${param.keyword}"
+                                    required
+                            >
+
+                            <!-- Search history giữ nguyên (HTML) -->
                             <div class="search-history">
                                 <h3 class="search-history__heading">Lịch sử tìm kiếm</h3>
                                 <ul class="search-history__list">
                                     <li class="search-history__item">
-                                        <a href="#!" class="search-history__link">Tủ lạnh aqua 90l</a>
+                                        <a href="search?keyword=Tủ lạnh aqua 90l" class="search-history__link">
+                                            Tủ lạnh aqua 90l
+                                        </a>
                                     </li>
                                     <li class="search-history__item">
-                                        <a href="#!" class="search-history__link">Thuốc diệt chuột</a>
+                                        <a href="search?keyword=Thuốc diệt chuột" class="search-history__link">
+                                            Thuốc diệt chuột
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <button class="header-search__btn btn btn--default-color"  onclick="window.location.href='search.jsp'">
+
+                        <button type="submit" class="header-search__btn btn btn--default-color">
                             <i class="header-search__icon fa-solid fa-magnifying-glass"></i>
                             <span class="header-search__text">Tìm kiếm</span>
                         </button>
-                    </div>
+                    </form>
+
                     <div class="header-cart">
                         <div class="header-cart__scale header-cart__scale--fade-product header-cart__scale--empty">
                             <!-- Khi không có sản phẩm: header-cart__scale--empty -->
