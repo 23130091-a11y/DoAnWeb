@@ -16,18 +16,25 @@ public class CategoriesService {
         return categoriesDao.getAllCategories();
     }
 
-    public List<Categories> getParentChain(int categoriesId) {
-        return categoriesDao.getParentChain(categoriesId);
+
+    public List<Categories> getCategoriesParent() {
+        return categoriesDao.getCategoriesParent();
     }
+
+    public List<Categories> getCategoriesByParentId(int parentId) {
+        return categoriesDao.getCategoriesByParentId(parentId);
+    }
+
+    // --------------------------------
+
     public int insertCategory(String name, String description) {
-        // BƯỚC 1: Kiểm tra trùng tên
         Categories exist = categoriesDao.findByName(name);
 
         if (exist != null) {
-            return 0; // Trả về 0 để báo hiệu là tên đã tồn tại (hoặc ném Exception tùy bạn)
+            return 0;
         }
 
-        // BƯỚC 2: Nếu chưa tồn tại thì mới thêm
+        // BƯỚC 2: Nếu chưa tồn tại thì thêm mới
         return categoriesDao.insertCategory(name, description);
     }
 }

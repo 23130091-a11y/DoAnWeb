@@ -31,17 +31,29 @@ public class CategoriesDao extends BaseDao {
                         .orElse(null)
         );
     }
-
-    // Lấy chuỗi danh mục cha đầy đủ
-    public List<Categories> getParentChain(int categoryId) {
-        List<Categories> chain = new java.util.ArrayList<>();
-        Categories current = getCategory(categoryId);
-        while (current != null && current.getParentId() != 0) {
-            Categories parent = getCategory(current.getParentId());
-            if(parent != null) chain.add(0, parent); // thêm đầu danh sách
-            current = parent;
-        }
-        return chain;
+    public List<Categories> getCategoriesParent() {
+        return get().withHandle(h ->
+                h.createQuery("""
+                    SELECT *
+                    FROM categories
+                    WHERE parent_id IS NULL
+                """)
+                        .mapToBean(Categories.class)
+                        .list()
+        );
+    }
+    // Lấy danh sách danh mục con theo parent_id
+    public List<Categories> getCategoriesByParentId(int parentId) {
+        return get().withHandle(h ->
+                h.createQuery("""
+                    SELECT *
+                    FROM categories
+                    WHERE parent_id = :parentId
+                """)
+                        .bind("parentId", parentId)
+                        .mapToBean(Categories.class)
+                        .list()
+        );
     }
     public Categories findByName(String name) {
         // Giả sử bạn dùng JDBI giống như ProductDao
