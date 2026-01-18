@@ -8,3 +8,4 @@ target/
 # Compiled files
 *.class
 *.war
+out/
