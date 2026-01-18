@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="en">
 
 <head>
@@ -447,306 +448,30 @@
                         <section class="product-search-list">
                             <div class="search-header">
                                 <p>Kết quả tìm kiếm:</p>
-                                <div class="word-search">Đồ dùng nhà bếp</div>
+                                <div class="word-search">${keyword}</div>
                             </div>
                             <div class="row-list row small-gutter">
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/vienvesinh.jpg" alt=""></a>
-                                        <a>
-                                            <p>Combo 12 viên vệ sinh lồng máy giặt, diệt khuẩn tiện lợi</p>
-                                        </a>
-                                        <span class="price">99.000đ</span>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.8</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/moilua.jpg" alt=""></a>
-                                        <a>
-                                            <p>Dụng cụ mồi lửa bếp gas bằng tia điện cán dài</p>
-                                        </a>
-                                        <span class="price">119.000đ</span>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 3.6</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/luoicatco.png" alt=""></a>
-                                        <a>
-                                            <p>Lưỡi cắt cỏ tận gốc 5 cánh thiết kế thông minh an toàn tiện lợi</p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">250.000đ</span>
-                                                <div class="discount-badge">Giảm 15%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">212.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.5</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/keochuot.jpg" alt=""></a>
-                                        <a>
-                                            <p>(Combo 5 miếng) Keo bẫy chuột siêu dính sạch sẽ, an toàn cho gia đình</p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">110.000đ</span>
-                                                <div class="discount-badge">Giảm 10%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">99.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.2</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
 
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/nhang.png" alt=""></a>
-                                        <a>
-                                            <p>Set 50 Nhang ngải cứu đuổi muỗi hương nhẹ dễ chịu kèm đế gỗ</p>
-                                        </a>
-                                        <span class="price">134.000đ</span>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 5</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <c:if test="${empty products}">
+                                    <p style="padding:20px">Không tìm thấy sản phẩm phù hợp</p>
+                                </c:if>
 
+                                <c:forEach items="${products}" var="p">
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a><img src="assets/img/quatsac.png" alt=""></a>
+                                        <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
                                         <a>
-                                            <p>Quạt sạc mini pin trâu 20000mah hiện đại dùng được lâu dài
-                                            </p>
+                                            <p>${p.name}</p>
                                         </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">653.000đ</span>
-                                                <div class="discount-badge">Giảm 20%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">522.000đ</span>
-                                            </div>
-                                        </div>
+                                        <span class="price">${p.totalPrice}đ</span>
                                         <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 3.7</div>
+                                            <div class="star"><i class="fa-solid fa-star"></i> ${p.rating}</div>
                                             <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
                                                 thích</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/binhxit.png" alt=""></a>
-                                        <a>
-                                            <p>Bình xịt diệt bọ rệp, mạt bụi thảo mộc thiên nhiên an toàn 330ml</p>
-                                        </a>
-                                        <span class="price">112.000đ</span>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.6</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/chotkhoa.jpg" alt=""></a>
-                                        <a>
-                                            <p>Chốt khóa cửa hợp kim núm vặn xoay bền chắc, chống trộm, 42*30mm dày 13mm
-                                            </p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">90.000đ</span>
-                                                <div class="discount-badge">Giảm 5%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">85.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.2</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/maymay.jpg" alt=""></a>
-                                        <a>
-                                            <p>Máy may mini gia đình có vắt sổ đa năng tích hợp 12 kiểu may</p>
-                                            </p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">422.000đ</span>
-                                                <div class="discount-badge">Giảm 15%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">358.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.8</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/voboc.jpg" alt=""></a>
-                                        <a>
-                                            <p>Vỏ bọc yên xe máy chống thấm nước siêu bền</p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">123.000đ</span>
-                                                <div class="discount-badge">Giảm 10%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">110.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.5</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/tuivai.jpg" alt=""></a>
-                                        <a>
-                                            <p>Túi vải khung thép xếp gọn quần áo, chăn màn chống ẩm mốc, Dung tích 78L:
-                                                50x40x33cm </p>
-                                        </a>
-                                        <span class="price">113.000đ</span>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 3.7</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/thuockep.jpg" alt=""></a>
-                                        <a>
-                                            <p>Thước kẹp điện tử Syntek 150mm màn hình LCD sắc nét</p>
-                                        </a>
-                                        <span class="price">248.000đ</span>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 3.6</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/candien.jpg" alt=""></a>
-                                        <a>
-                                            <p>Cân điện tử thông minh Xiaomi Smart Scale Gen 2</p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">337.000đ</span>
-                                                <div class="discount-badge">Giảm 25%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">252.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.5</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/denhoc.jpg" alt=""></a>
-                                        <a>
-                                            <p>Đèn bàn học bóng LED chống cận bảo vệ mắt, Thân đèn</p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">202.000đ</span>
-                                                <div class="discount-badge">Giảm 15%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">171.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 4.9</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col l-2-4 m-4 c-6">
-                                    <div class="product-card">
-                                        <a><img src="assets/img/mayhutbui.jpg" alt=""></a>
-                                        <a>
-                                            <p>Máy hút bụi cầm tay không dây đa năng, nhỏ gọn, lực hút mạnh</p>
-                                        </a>
-                                        <div class="price-discount">
-                                            <div class="price-top">
-                                                <span class="old-price">552.000đ</span>
-                                                <div class="discount-badge">Giảm 20%</div>
-                                            </div>
-                                            <div class="price-bottom">
-                                                <span class="new-price">441.000đ</span>
-                                            </div>
-                                        </div>
-                                        <div class="bottom">
-                                            <div class="star"><i class="fa-solid fa-star"></i> 5</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
+                                </c:forEach>
                             </div>
                         </section>
                     </div>
