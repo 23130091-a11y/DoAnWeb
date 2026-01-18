@@ -10,10 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d6602b-ce38-4ef2-a53c-c6a2c0148892" name="Changes" comment="Làm xử lý gửi mail đến khách hàng đã đăng ký web của minh, lấy tên miền của Hạnh đã mua làm tài khoản gửi mail - push lại lỗi xác thực tài khoản github và lộ secret key">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/CategoriesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/CategoriesDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/CategoriesDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/CategoriesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/CategoriesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/BrandOptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/BrandOptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/CategoriesOptionController.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,7 +324,7 @@
       <workItem from="1768547760755" duration="4001000" />
       <workItem from="1768577859564" duration="14966000" />
       <workItem from="1768741415975" duration="4497000" />
-      <workItem from="1768750152458" duration="3260000" />
+      <workItem from="1768750152458" duration="4758000" />
     </task>
     <servers />
   </component>
