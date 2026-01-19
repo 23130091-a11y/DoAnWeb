@@ -1,7 +1,9 @@
 package com.webgiadung.doanweb.services;
 
 import com.sendgrid.*;
-
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 public class EmailService {
 
     private static final String API_KEY = "api-key";

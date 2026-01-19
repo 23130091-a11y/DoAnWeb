@@ -7,6 +7,8 @@
 --%>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html lang="en">
 
 <head>
@@ -145,16 +147,16 @@
                         <span class="navbar-user__name">anhaiti</span>
                         <ul class="navbar-user__menu">
                             <li class="navbar-user__item">
-                                <a href="account.html#info" class="navbar-user__link">Tài khoản của tôi</a>
+                                <a href="account.jsp#info" class="navbar-user__link">Tài khoản của tôi</a>
                             </li>
                             <li class="navbar-user__item">
-                                <a href="account.html#favorite-product" class="navbar-user__link">Yêu thích</a>
+                                <a href="account.jsp#favorite-product" class="navbar-user__link">Yêu thích</a>
                             </li>
                             <li class="navbar-user__item">
-                                <a href="account.html#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
+                                <a href="account.jsp#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
                             </li>
                             <li class="navbar-user__item navbar-user__item--separate">
-                                <a href="login.html" class="navbar-user__link">Đăng xuất</a>
+                                <a href="login.jsp" class="navbar-user__link">Đăng xuất</a>
                             </li>
                         </ul>
                     </div>
@@ -188,7 +190,7 @@
                 <div class="header-cart">
                     <div class="header-cart__scale header-cart__scale--fade-product">
                         <!-- Khi không có sản phẩm: header-cart__scale--empty -->
-                        <a href="cart.html">
+                        <a href="cart.jsp">
                             <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                         </a>
                         <span class="header-cart__notice">3</span>
@@ -202,7 +204,7 @@
                                     Sản phẩm đã thêm
                                 </h3>
                                 <ul class="cart-list__list">
-                                    <a href="cart.html">
+                                    <a href="cart.jsp">
                                         <li class="cart-list__item">
                                             <img src="assets/img/add-cart-01.jpeg" alt="" class="cart-list__img">
                                             <section class="cart-list__body">
@@ -224,7 +226,7 @@
                                             </section>
                                         </li>
                                     </a>
-                                    <a href="cart.html">
+                                    <a href="cart.jsp">
                                         <li class="cart-list__item">
                                             <img src="../assets/img/add-cart-02.jpeg" alt="" class="cart-list__img">
                                             <section class="cart-list__body">
@@ -245,7 +247,7 @@
                                             </section>
                                         </li>
                                     </a>
-                                    <a href="cart.html">
+                                    <a href="cart.jsp">
                                         <li class="cart-list__item">
                                             <img src="assets/img/add-cart-03.jpeg" alt="" class="cart-list__img">
                                             <section class="cart-list__body">
@@ -268,7 +270,7 @@
                                     </a>
                                 </ul>
                                 <a href="#" class="cart-list__view btn btn--default-color"
-                                   onclick="window.location.href='cart.html'">Xem giỏ hàng</a>
+                                   onclick="window.location.href='cart.jsp'">Xem giỏ hàng</a>
                             </div>
                         </div>
                     </div>
@@ -427,108 +429,38 @@
                         </form>
                     </section>
 
-                    <section id="orders-all" class="account__content">
-                        <h2 class="account__heading">Tất cả đơn hàng</h2>
-                        <div class="order-list">
+                    <section class="account-section__content" id="orders-all">
+                      <c:forEach var="o" items="${orders}">
+                        <article class="order-item">
+                          <header class="order-item__header">
+                            <div>
+                              <div>Mã đơn: #${o.id}</div>
+                              <div>Ngày đặt: <fmt:formatDate value="${o.created_at}" pattern="dd/MM/yyyy HH:mm"/></div>
+                            </div>
+                          </header>
 
-                            <article class="order-item">
-                                <header class="order-item__header">
-                                    <div class="order-item__info">
-                                        <span class="order-item__id">Mã đơn: #123456</span>
-                                        <span class="order-item__date">Ngày đặt: 10/11/2025</span>
-                                    </div>
-                                    <span class="order-item__status order-item__status--processing">Đang xử
-                                            lý</span>
-                                </header>
-                                <section class="order-item__body">
-                                    <div class="order-product">
-                                        <img src="assets/img/notify-img-01.png" alt="Túi đựng quần áo"
-                                             class="order-product__img">
-                                        <div class="order-product__info">
-                                            <h4 class="order-product__name">Tặng ngay 1 túi đựng quần áo, chăn ga
-                                            </h4>
-                                            <span class="order-product__quantity">x 1</span>
-                                        </div>
-                                        <div class="order-product__price-wrap">
-                                            <span class="order-product__original-price">25.000đ</span>
-                                            <span class="order-product__final-price">19.300đ</span>
-                                        </div>
-                                    </div>
-                                </section>
-                                <footer class="order-item__footer">
-                                    <div class="order-item__total">
-                                        <span class="order-item__total-label">Thành tiền:</span>
-                                        <span class="order-item__total-price">19.300đ</span>
-                                    </div>
-                                    <button type="button" class="order-item__action-btn">Hủy đơn</button>
-                                </footer>
-                            </article>
+                          <section class="order-item__body">
+                            <c:forEach var="it" items="${orderItemsMap[o.id]}">
+                              <div class="order-product">
+                                <div class="order-product__info">
+                                  <h4 class="order-product__name">${it.product_name}</h4>
+                                  <span class="order-product__quantity">x ${it.quantity}</span>
+                                </div>
+                                <div class="order-product__price-wrap">
+                                  <span class="order-product__final-price">${it.total_price}đ</span>
+                                </div>
+                              </div>
+                            </c:forEach>
+                          </section>
 
-                            <article class="order-item">
-                                <header class="order-item__header">
-                                    <div class="order-item__info">
-                                        <span class="order-item__id">Mã đơn: #123455</span>
-                                        <span class="order-item__date">Ngày đặt: 08/11/2025</span>
-                                    </div>
-                                    <span class="order-item__status order-item__status--delivered">Đã giao</span>
-                                </header>
-                                <section class="order-item__body">
-                                    <div class="order-product">
-                                        <img src="assets/img/notify-img-02.jpg" alt="Viên vệ sinh"
-                                             class="order-product__img">
-                                        <div class="order-product__info">
-                                            <h4 class="order-product__name">Combo 12 viên vệ sinh lồng máy giặt</h4>
-                                            <span class="order-product__quantity">x 2</span>
-                                        </div>
-                                        <div class="order-product__price-wrap">
-                                            <span class="order-product__original-price">50.000đ</span>
-                                            <span class="order-product__final-price">44.500đ</span>
-                                        </div>
-                                    </div>
-                                </section>
-                                <footer class="order-item__footer">
-                                    <div class="order-item__total">
-                                        <span class="order-item__total-label">Thành tiền:</span>
-                                        <span class="order-item__total-price">44.500đ</span>
-                                    </div>
-                                    <button type="button"
-                                            class="order-item__action-btn order-item__action-btn--primary">Mua
-                                        lại</button>
-                                </footer>
-                            </article>
-
-                            <article class="order-item">
-                                <header class="order-item__header">
-                                    <div class="order-item__info">
-                                        <span class="order-item__id">Mã đơn: #123454</span>
-                                        <span class="order-item__date">Ngày đặt: 01/11/2025</span>
-                                    </div>
-                                    <span class="order-item__status order-item__status--cancelled">Đã hủy</span>
-                                </header>
-                                <section class="order-item__body">
-                                    <div class="order-product">
-                                        <img src="https://pos.nvncdn.com/e8033b-157317/ps/20251029_JExQSE5UKT.jpeg?v=1761702921"
-                                             alt="Đĩa sứ" class="order-product__img">
-                                        <div class="order-product__info">
-                                            <h4 class="order-product__name">Đĩa Sứ Tròn 8.5inch CHIBI</h4>
-                                            <span class="order-product__quantity">x 1</span>
-                                        </div>
-                                        <div class="order-product__price-wrap">
-                                            <span class="order-product__final-price">44.500đ</span>
-                                        </div>
-                                    </div>
-                                </section>
-                                <footer class="order-item__footer">
-                                    <div class="order-item__total">
-                                        <span class="order-item__total-label">Thành tiền:</span>
-                                        <span class="order-item__total-price">44.500đ</span>
-                                    </div>
-                                    <button type="button"
-                                            class="order-item__action-btn order-item__action-btn--primary">Mua
-                                        lại</button>
-                                </footer>
-                            </article>
-                        </div>
+                          <footer class="order-item__footer">
+                            <div class="order-item__total">
+                              <span>Thành tiền:</span>
+                              <span class="order-item__total-price">${o.total_price}đ</span>
+                            </div>
+                          </footer>
+                        </article>
+                      </c:forEach>
                     </section>
 
                     <section id="orders-processing" class="account__content">
@@ -988,5 +920,11 @@
 </body>
 <!-- Link JS -->
 <script src="assets/js/script.js"></script>
-
+<script>
+  const tab = new URLSearchParams(location.search).get("tab");
+  if (tab === "orders") {
+    const el = document.getElementById("orders-all");
+    if (el) el.scrollIntoView({behavior:"smooth"});
+  }
+</script>
 </html>
