@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html lang="en">
 
 <head>
@@ -154,7 +156,7 @@
 
     <main class="main" style="background-color: #f5f5f5; padding-top: 20px;">
         <div class="grid wide">
-
+<form action="${pageContext.request.contextPath}/checkout" method="post">
             <div class="row">
 
                 <div class="col l-8 m-12 c-12">
@@ -225,7 +227,9 @@
 
                     <section class="checkout-section note-section">
                         <h2 class="section-title">Ghi chú đơn hàng (Tùy chọn)</h2>
-                        <textarea id="note" rows="2" placeholder="Ví dụ: Giao ngoài giờ hành chính..."></textarea>
+                        <textarea id="note" name="note" rows="2" placeholder="Ví dụ: Giao ngoài giờ hành chính..."></textarea>
+
+
                     </section>
                 </div>
 
@@ -234,31 +238,47 @@
                         <h2 class="section-title">Tóm tắt Đơn hàng</h2>
 
                         <div class="product-list-summary">
-                            <div class="summary-product-item">
-                                <img src="assets/img/loadeban.jpg" alt="Loa để bàn mini" class="summary-thumb">
-                                <div class="summary-product-details">
-                                    <p class="summary-product-name">Loa để bàn mini nhỏ gọn...</p>
-                                    <span class="summary-quantity">SL: 1</span>
-                                </div>
-                                <span class="summary-price">162.000đ</span>
-                            </div>
-                            <div class="summary-product-item">
-                                <img src="assets/img/maylamtoc.png" alt="Máy làm tóc 3 trong 1" class="summary-thumb">
-                                <div class="summary-product-details">
-                                    <p class="summary-product-name">Máy làm tóc đa năng 3 trong 1...</p>
-                                    <span class="summary-quantity">SL: 1</span>
-                                </div>
-                                <span class="summary-price">266.000đ</span>
-                            </div>
+                            <c:choose>
+                                <c:when test="${empty items}">
+                                    <p style="padding:12px 0;">Giỏ hàng trống. Vui lòng quay lại giỏ hàng.</p>
+                                    <a class="btn btn--default-color" href="${pageContext.request.contextPath}/cart">Về giỏ hàng</a>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <c:forEach var="item" items="${items}">
+                                        <div class="summary-product-item">
+
+                                            <%-- Ảnh: nhớ thêm contextPath để khỏi lỗi đường dẫn --%>
+                                            <img
+                                                src="${pageContext.request.contextPath}/${item.product.image}"
+                                                alt="${item.product.name}"
+                                                class="summary-thumb"
+                                                onerror="this.src='${pageContext.request.contextPath}/assets/img/no-image.png';"
+                                            >
+
+                                            <div class="summary-product-details">
+                                                <p class="summary-product-name">${item.product.name}</p>
+                                                <span class="summary-quantity">SL: ${item.quantity}</span>
+                                            </div>
+
+                                            <span class="summary-price">
+                                                <fmt:formatNumber value="${item.totalPrice}" type="number" />đ
+                                            </span>
+                                        </div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
 
+
                         <div class="summary-line">
-                            <span>Tạm tính (2 SP):</span>
-                            <span>428.000đ</span>
+                            <span>Tạm tính (${totalQuantity} SP):</span>
+                            <span><fmt:formatNumber value="${totalPrice}" type="number" />đ</span>
                         </div>
+                        <c:set var="ship" value="25000" />
                         <div class="summary-line">
                             <span>Phí vận chuyển:</span>
-                            <span class="shipping-cost">25.000đ</span>
+                            <span class="shipping-cost"><fmt:formatNumber value="${ship}" type="number" />đ</span>
                         </div>
                         <div class="summary-line coupon">
                             <span>Mã giảm giá:</span>
@@ -267,14 +287,17 @@
 
                         <div class="summary-total-final">
                             <span>TỔNG THANH TOÁN:</span>
-                            <span class="final-price">403.000đ</span>
+                            <span class="final-price">
+                                <fmt:formatNumber value="${totalPrice + ship}" type="number" />đ
+                            </span>
                         </div>
 
-                        <button class="btn btn--primary btn-place-order"  onclick="window.location.href='account.html#orders-all'">ĐẶT HÀNG</button>
+                        <button type="submit" class="btn btn--primary btn-place-order">ĐẶT HÀNG</button>
 
                     </section>
                 </div>
             </div>
+            </form>
         </div>
     </main>
 

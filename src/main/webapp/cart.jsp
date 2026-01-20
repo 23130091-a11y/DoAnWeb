@@ -344,8 +344,10 @@
                         Tổng cộng (<span class="total-items">${cart.totalQuantity}</span> sản phẩm): <span class="total-price">${cart.totalPrice} đ</span>
                     </div>
 
-                    <button type="button" class="buy-btn" onclick="window.location.href='checkout.jsp'">Thanh
-                        toán</button>
+                    <button type="button" class="buy-btn"
+                            onclick="window.location.href='${pageContext.request.contextPath}/checkout'">
+                      Thanh toán
+                    </button>
                 </div>
                 <p class="empty-message">
                     Không có sản phẩm nào trong giỏ hàng
