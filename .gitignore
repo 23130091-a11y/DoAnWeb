@@ -1,19 +1,11 @@
-# IntelliJ / IDEA / SmartTomcat
-.idea/
-*.iml
-out/
-.smarttomcat/
 # Maven
 target/
-*.war
 
-# Java
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Compiled files
 *.class
-
-# Logs
-*.log
-
-# OS
-.DS_Store
-Thumbs.db
-.idea/workspace.xml
+*.war
+out/

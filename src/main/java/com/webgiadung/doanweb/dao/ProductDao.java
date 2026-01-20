@@ -114,14 +114,42 @@ public class ProductDao extends BaseDao {
         return get().withHandle(h -> {
             return h.createUpdate(
                             "INSERT INTO products (name, image, price_total, " +
-                                    "brands_id, keywords_id, post, quantity, created_at, updated_at) " +
+                                    "brands_id, keywords_id, categories_id, post, quantity, created_at, updated_at) " +
                                     "VALUES (:name, :image, :totalPrice, " +
-                                    ":brandsId, :keywordsId, :post, :quantity, NOW(), NOW())"
+                                    ":brandsId, :keywordsId, :categoriesId, :post, :quantity, NOW(), NOW())"
                     )
                     .bindBean(p)
                     .executeAndReturnGeneratedKeys("id")
                     .mapTo(Integer.class)
                     .one();
         });
+    }
+
+    public List<Product> searchByName(String keyword) {
+        return get().withHandle(h ->
+                h.createQuery("""
+            SELECT
+                id,
+                name,
+                image,
+                price_first AS firstPrice,
+                price_total AS totalPrice,
+                discounts_id AS discountsId,
+                categories_id AS categoriesId,
+                brands_id AS brandsId,
+                keywords_id AS keywordsId,
+                post,
+                quantity,
+                quantity_saled AS quantitySaled,
+                created_at AS createdAt,
+                updated_at AS updatedAt
+            FROM products
+            WHERE post = 1
+            AND name LIKE :keyword
+        """)
+                        .bind("keyword", "%" + keyword + "%")
+                        .mapToBean(Product.class)
+                        .list()
+        );
     }
 }
