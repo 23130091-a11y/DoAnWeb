@@ -54,6 +54,7 @@
     font-size: 1.4rem;
     color: var(--text-color);
     transition: 0.2s ease;
+
 }
 
 .manage-nav__link::after {
@@ -2584,10 +2585,10 @@
     opacity: 0.9;
 }
 
-/* ===== NÚT KHÔNG BẤM ĐƯỢC ===== */
+/*NÚT KHÔNG BẤM ĐƯỢC */
 .btn:disabled {
-    background-color: #d1d5db !important; /* xám nhạt */
-    color: #6b7280 !important;            /* chữ xám đậm */
+    background-color: #d1d5db !important;
+    color: #6b7280 !important;
     cursor: not-allowed;
-    opacity: 1; /* tránh bị nhạt quá */
+    opacity: 1;
 }
