@@ -42,12 +42,19 @@
         <div class="banner-section">
         </div>
 
-        <div>
-            <a href="https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=http://localhost:8080/DoAnWeb/login-google&response_type=code
-		   &client_id=your-client-key&approval_prompt=force">Login with Google</a>
-        </div>
-
         <div class="login-container">
+            <!-- Login Google -->
+            <div class="social-login">
+                <a class="btn-google" href="https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=http://localhost:8080/DoAnWeb/login-google&response_type=code
+		   &client_id=your-client-key&approval_prompt=force">
+                    <i class="fa-brands fa-google"></i>
+                    Đăng nhập với Google
+                </a>
+            </div>
+            <div class="divider">
+                <span>hoặc</span>
+            </div>
+            <!-- Login thường -->
             <form class="login-form" action="login" method="post" >
                 <h3>Đăng nhập</h3>
 
@@ -57,10 +64,6 @@
                     Đăng ký thành công! Vui lòng kiểm tra email để xác nhận tài khoản.
                 </div>
                 <% } %>
-
-                <c:if test="${not empty error}">
-                    <div class="text-danger mb-1">${error}</div>
-                </c:if>
 
                 <!-- Thông báo lỗi -->
                 <c:if test="${not empty error}">

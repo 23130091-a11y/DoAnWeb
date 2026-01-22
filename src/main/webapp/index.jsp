@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -393,7 +394,7 @@
                     <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                         <div class="product-list">
-                            <c:forEach items="${list}" var="p">
+                            <c:forEach items="${featuredProducts}" var="p">
                                 <div class="product-card">
                                 <a href="product?id=${p.id}">
                                     <img src="${p.image}" alt="${p.name}">
@@ -403,10 +404,12 @@
                                     <p>${p.name}</p>
                                 </a>
 
-                                <span class="price">${p.totalPrice}đ</span>
+                                    <span class="price">
+                                        <fmt:formatNumber value="${p.totalPrice}" type="number"/>đ
+                                    </span>
 
                                 <div class="bottom">
-                                    <div class="star"><i class="fa-solid fa-star"></i> 5</div>
+                                    <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
                                     <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
                                 </div>
                             </div>
@@ -419,143 +422,27 @@
                     <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
-                        <div class="product-card">
-                            <a><img src="assets/img/bochuyendoi.jpg" alt=""></a>
-                            <a>
-                                <p>Bộ chuyển đổi CarPlay không dây 2in1 cho xe hơi hiện đại</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">385.000đ</span>
-                                    <div class="discount-badge">Giảm 15%</div>
+                        <c:forEach items="${promotionProducts}" var="p">
+                            <div class="product-card">
+                                <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                                <a href="product?id=${p.id}">
+                                    <p>${p.name}</p>
+                                </a>
+                                <div class="price-discount">
+                                    <div class="price-top">
+                                        <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                        <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                    </div>
+                                    <div class="price-bottom">
+                                        <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                    </div>
                                 </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">327.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i>3.3</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/khan.jpg" alt=""></a>
-                            <a>
-                                <p>Khăn lau xe ô tô chuyên dụng mềm mịn và thấm hút tốt, Loại 35cm x 35cm</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">110.000đ</span>
-                                    <div class="discount-badge">Giảm 10%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">99.000đ</span>
+                                <div class="bottom">
+                                    <div class="star"><i class="fa-solid fa-star"></i>${p.ratingAvg}</div>
+                                    <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
                                 </div>
                             </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/chaixit.jpg" alt=""></a>
-                            <a>
-                                <p>Chai xịt rệp giường, mạt bụi hiệu quả an toàn</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">185.000đ</span>
-                                    <div class="discount-badge">Giảm 20%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">148.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.4</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/ghe.jpg" alt=""></a>
-                            <a>
-                                <p>Gối tựa lưng cao su non giúp thư giãn dành cho dân văn phòng, Màu đen</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">420.000đ</span>
-                                    <div class="discount-badge">Giảm 15%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">375.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.3</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/giado.jpg" alt=""></a>
-                            <a>
-                                <p>Giá đỡ chuyển đổi máy cầm tay thành máy bàn chuyên dụng, đa năng và an toàn khi thao
-                                    tác
-                                </p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">390.000đ</span>
-                                    <div class="discount-badge">Giảm 20%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">312.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 3.6</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/thuphatamthnah.png" alt=""></a>
-                            <a>
-                                <p>Bộ thu phát âm thanh không dây truyền tín hiệu mạnh, kết nối đa thiết bị, Bộ thu phát
-                                    âm
-                                    thanh NFC BT200</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">500.000đ</span>
-                                    <div class="discount-badge">Giảm 25%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">375.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.8</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/vali.jpg" alt=""></a>
-                            <a>
-                                <p>Vali nhựa Immax X11 24inch</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">330.000đ</span>
-                                    <div class="discount-badge">Giảm 10%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">297.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.3</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </section>
 
@@ -565,123 +452,19 @@
                     <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
-                        <div class="product-card">
-                            <a><img src="assets/img/denhoc.jpg" alt=""></a>
-                            <a>
-                                <p>Đèn học chống cận cao cấp 3 chế độ sáng, bật tắt cảm ứng tiện lợi, Loại 6000mah (gồm
-                                    cả
-                                    củ sạc)</p>
+                        <c:forEach items="${suggestedProducts}" var="p">
+                            <div class="product-card">
+                            <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                            <a href="product?id=${p.id}">
+                                <p>${p.name}</p>
                             </a>
-                            <span class="price">187.000đ</span>
+                            <span class="price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
                             <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4</div>
+                                <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
                                 <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
                             </div>
                         </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/loadeban.jpg" alt=""></a>
-                            <a>
-                                <p>Loa để bàn mini nhỏ gọn âm thanh vượt trội</p>
-                            </a>
-                            <span class="price">162.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 3</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <a><img src="assets/img/maylamtoc.png" alt=""></a>
-                            <a>
-                                <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
-                            </a>
-                            <span class="price">266.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.4</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/thuphatamthnah.png" alt=""></a>
-                            <a>
-                                <p>Bộ thu phát âm thanh không dây truyền tín hiệu mạnh, kết nối đa thiết bị, Bộ thu phát
-                                    âm
-                                    thanh NFC BT200</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">418.000đ</span>
-                                    <div class="discount-badge">Giảm 20%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">335.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.6</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/fan.jpg" alt=""></a>
-                            <a>
-                                <p>Quạt đôi mini xoay 360 độ 12V-24V tiện ích trên ô tô </p>
-                            </a>
-                            <span class="price">118.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 5</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/ghe.jpg" alt=""></a>
-                            <a>
-                                <p>Gối tựa lưng cao su non giúp thư giãn dành cho dân văn phòng, Màu đen</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">418.000đ</span>
-                                    <div class="discount-badge">Giảm 20%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">335.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 3</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/maylamtoc.png" alt=""></a>
-                            <a>
-                                <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
-                            </a>
-                            <span class="price">266.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 3.5</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/khan.jpg" alt=""></a>
-                            <a>
-                                <p>Khăn lau xe ô tô chuyên dụng mềm mịn và thấm hút tốt, Loại 35cm x 35cm</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">418.000đ</span>
-                                    <div class="discount-badge">Giảm 20%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">335.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.2</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </section>
                 <!-- Sản phẩm giới hạn -->
@@ -690,129 +473,28 @@
                     <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
-                        <div class="product-card">
-                            <a><img src="assets/img/tuixach.jpg" alt=""></a>
-                            <a>
-                                <p>Túi xách Reeyee RY302B/G 2 trong 1</p>
+                        <c:forEach items="${limitedProducts}" var="p">
+                            <div class="product-card">
+                                <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                            <a href="product?id=${p.id}">
+                                <p>${p.name}</p>
                             </a>
                             <div class="price-discount">
                                 <div class="price-top">
-                                    <span class="old-price">1.120.000đ</span>
-                                    <div class="discount-badge">Giảm 25%</div>
+                                    <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                    <div class="discount-badge">Giảm ${p.discountPercent}%</div>
                                 </div>
                                 <div class="price-bottom">
-                                    <span class="new-price">840.000đ</span>
+                                    <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
                                 </div>
                             </div>
                             <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.1</div>
+                                <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
                                 <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
                                     thích</button>
                             </div>
                         </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/amthuoc.jpg" alt=""></a>
-                            <a>
-                                <p>Ấm sắc thuốc bắc tự động chất liệu gốm sứ cao cấp tự ngắt điện an toàn</p>
-                            </a>
-                            <span class="price">223.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 3.6</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <a><img src="assets/img/mayxay.jpg" alt=""></a>
-                            <a>
-                                <p>Máy xay đa năng cầm tay 6 lưỡi cối thủy tinh chịu nhiệt</p>
-                            </a>
-                            <span class="price">260.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.9</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/thotkinh.jpg" alt=""></a>
-                            <a>
-                                <p>Thớt kính cường lực chống rơi vỡ siêu bền
-                                </p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">138.000đ</span>
-                                    <div class="discount-badge">Giảm 10%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">124.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.7</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/bodungcu.jpg" alt=""></a>
-                            <a>
-                                <p>Bộ dụng cụ cắt, thái, gọt, nạo, bào sợi rau củ quả đa năng 14 trong 1 tiện lợi</p>
-                            </a>
-                            <span class="price">170.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.5</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/bogoui.jpg" alt=""></a>
-                            <a>
-                                <p>Bộ gối tựa đầu, gối tựa lưng massage 6 chế độ chất lượng cao</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">624.000đ</span>
-                                    <div class="discount-badge">Giảm 30%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">436.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/maylamtoc.png" alt=""></a>
-                            <a>
-                                <p>Máy làm tóc đa năng 3 trong 1 uốn, là, ép kiểu Hàn Quốc, Màu đen</p>
-                            </a>
-                            <span class="price">266.000đ</span>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 4.2</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
-                        <div class="product-card">
-                            <a><img src="assets/img/donghodientu.jpg" alt=""></a>
-                            <a>
-                                <p>Đồng hồ điện tử đeo tay chống nước thời trang siêu bền</p>
-                            </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price">260.000đ</span>
-                                    <div class="discount-badge">Giảm 20%</div>
-                                </div>
-                                <div class="price-bottom">
-                                    <span class="new-price">312.000đ</span>
-                                </div>
-                            </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> 5</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </section>
             </div>
