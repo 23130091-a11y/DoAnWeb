@@ -30,7 +30,7 @@ public class ProductController extends HttpServlet {
         Categories category = cService.getCategory(p.getCategoriesId());
 
         // Lấy các parent category
-        List<Categories> parentCategories = cService.getParentChain(p.getCategoriesId());
+        List<Categories> parentCategories = cService.getCategoriesByParentId(p.getCategoriesId());
 
         request.setAttribute("product", p);
         request.setAttribute("category", category);

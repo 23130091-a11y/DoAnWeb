@@ -261,7 +261,7 @@
     border-top: none;
 }
 
-.product-table__row:first-child {
+.table-header {
     background-color: var(--primary-color);
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -282,11 +282,6 @@
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--white-color);
-}
-
-.product-table__cell:first-child {
-    border-left: none;
-    padding: 5px;
 }
 
 .product-table__img {

@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css?v=33">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css?v=100">
     <!-- Include stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
@@ -1015,51 +1015,14 @@ SD
                             <button class="product-menu__btn" data-target="product-event">Sự kiện giảm giá</button>
                         </div>
                             <div class="product-layout">
-                            <aside class="product-sidebar">
-                                <h3 class="product-sidebar__heading">Danh mục</h3>
-                                <ul class="product-sidebar__list">
-                                    <li class="product-sidebar__item product-sidebar__item--active">
-                                        <a href="#!" class="product-sidebar__link">Gia dụng - Nhà cửa</a>
-                                        <ul class="product-sub">
-                                            <li class="product-sub__item">
-                                                <a href="#!" class="product-sub__link active">Đồ dùng nhà bếp</a>
-                                            </li>
-                                            <li class="product-sub__item">
-                                                <a href="#!" class="product-sub__link">Dụng cụ làm vườn</a>
-                                            </li>
-                                            <li class="product-sub__item">
-                                                <a href="#!" class="product-sub__link">Vệ sinh nhà cửa</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="product-sidebar__item">
-                                        <a href="#!" class="product-sidebar__link">Phụ kiện ô tô</a>
-                                        <ul class="product-sub">
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Bảng số điện thoại trên ô tô</a></li>
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Túi đựng đồ, thùng đựng đồ ô tô</a></li>
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Bạt che nắng, tấm chắn nắng ô tô</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="product-sidebar__item">
-                                        <a href="#!" class="product-sidebar__link">Thời trang</a>
-                                        <ul class="product-sub">
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Thời trang nam</a></li>
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Thời trang nữ</a></li>
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Phụ kiện thời trang</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="product-sidebar__item">
-                                        <a href="#!" class="product-sidebar__link">Âm thanh - Camera</a>
-                                        <ul class="product-sub">
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Camera, Máy ảnh</a></li>
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Tai nghe</a></li>
-                                            <li class="product-sub__item"><a href="#!" class="product-sub__link">Loa - Phụ kiện loa</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </aside>
-
+                                <aside class="product-sidebar">
+                                    <h3 class="product-sidebar__heading">Danh mục</h3>
+                                    <ul class="product-sidebar__list" id="category-list">
+                                        <li class="product-sidebar__item">
+                                            <a href="#!" class="product-sidebar__link">Đang tải...</a>
+                                        </li>
+                                    </ul>
+                                </aside>
                             <div class="product-main-content">
                                 <div id="product-list-section">
                                 <div class="product-table">
@@ -1072,71 +1035,20 @@ SD
                                     <div class="product-table__header">
                                         <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
                                     </div>
-
-                                    <!-- Bảng sản phẩm -->
                                     <div class="product-table__inner">
 
-                                        <!-- Hàng tiêu đề -->
-                                        <div class="product-table__row">
+                                        <div class="product-table__row table-header">
                                             <div class="product-table__cell">Ảnh</div>
                                             <div class="product-table__cell">Tên sản phẩm</div>
-                                            <div class="product-table__cell">Post</div>
-                                            <div class="product-table__cell">Giá</div>
+                                            <div class="product-table__cell">Post</div> <div class="product-table__cell">Giá</div>
                                             <div class="product-table__cell">Xem</div>
                                             <div class="product-table__cell">Sửa</div>
                                             <div class="product-table__cell">Xóa</div>
                                         </div>
 
-                                        <!-- Một sản phẩm -->
-                                        <article class="product-table__row">
-                                            <div class="product-table__cell">
-                                                <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="" class="product-table__img">
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <span class="product-table__text">Sản phẩm ABC</span>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <input type="checkbox" class="product-table__checkbox" checked>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <span class="product-table__text">500.000đ</span>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <button class="product-table__view">Xem</button>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <button class="product-table__edit">Sửa</button>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <button class="product-table__delete">Xóa</button>
-                                            </div>
-                                        </article>
-
-                                        <!-- Một sản phẩm -->
-                                        <article class="product-table__row">
-                                            <div class="product-table__cell">
-                                                <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="" class="product-table__img">
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <span class="product-table__text">Sản phẩm ABC</span>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <input type="checkbox" class="product-table__checkbox" checked>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <span class="product-table__text">500.000đ</span>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <button class="product-table__view">Xem</button>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <button class="product-table__edit">Sửa</button>
-                                            </div>
-                                            <div class="product-table__cell">
-                                                <button class="product-table__delete">Xóa</button>
-                                            </div>
-                                        </article>
-
+                                        <div id="product-list-container">
+                                            <div style="text-align: center; padding: 20px;">Đang tải dữ liệu...</div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -3102,7 +3014,176 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 </script>
+<script>
+    // Khai báo biến toàn cục để dùng chung
+    var contextPath = '${pageContext.request.contextPath}';
 
+    document.addEventListener("DOMContentLoaded", function () {
+        // 1. Tải danh mục bên trái
+        fetch(contextPath + '/api/categories-list')
+            .then(res => res.json())
+            .then(data => renderCategoriesExact(data))
+            .catch(err => console.error(err));
+
+        // 2. Tải mặc định tất cả sản phẩm khi mới vào trang (cateId = 0)
+        loadProducts(0);
+    });
+
+    // --- HÀM 1: TẢI SẢN PHẨM TỪ API ---
+    function loadProducts(cateId) {
+        // Gọi API Controller bạn vừa viết: /api/products-by-category
+        fetch(contextPath + '/api/products-by-category?cateId=' + cateId)
+            .then(res => res.json())
+            .then(data => {
+                renderProductTable(data);
+            })
+            .catch(err => {
+                console.error('Lỗi tải sản phẩm:', err);
+            });
+    }
+
+    // --- HÀM 2: VẼ HTML SẢN PHẨM (THEO MẪU BẠN GỬI) ---
+    function renderProductTable(products) {
+        var container = document.getElementById('product-list-container');
+        if (!container) return;
+
+        // Kiểm tra nếu không có sản phẩm
+        if (!products || products.length === 0) {
+            container.innerHTML = '<p style="padding:20px; text-align:center;">Không có sản phẩm nào.</p>';
+            return;
+        }
+
+        var html = '';
+
+        products.forEach(function(p) {
+            // 1. Xử lý giá tiền
+            var formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price);
+
+            // 2. Xử lý đường dẫn ảnh
+            var imgUrl = contextPath + '/assets/img/products/' + p.image;
+
+            // 3. XỬ LÝ CHECKBOX (MỚI THÊM)
+            // Nếu p.post bằng 1 thì biến checkStatus là 'checked', ngược lại là rỗng
+            var checkStatus = (p.post == 1) ? 'checked' : '';
+
+            // 4. TẠO HTML
+            html += '<article class="product-table__row">';
+
+            // Cột Ảnh
+            html += '    <div class="product-table__cell">';
+            html += '        <img src="' + imgUrl + '" alt="" class="product-table__img">';
+            html += '    </div>';
+
+            // Cột Tên
+            html += '    <div class="product-table__cell">';
+            html += '        <span class="product-table__text">' + p.name + '</span>';
+            html += '    </div>';
+
+            // Cột Checkbox (ĐÃ SỬA)
+            // Thêm biến checkStatus vào trong thẻ input
+            html += '    <div class="product-table__cell">';
+            html += '        <input type="checkbox" class="product-table__checkbox" value="' + p.id + '" ' + checkStatus + '>';
+            html += '    </div>';
+
+            // Cột Giá
+            html += '    <div class="product-table__cell">';
+            html += '        <span class="product-table__text">' + formattedPrice + '</span>';
+            html += '    </div>';
+
+            // Cột Button Xem
+            html += '    <div class="product-table__cell">';
+            html += '        <button class="product-table__view" onclick="viewProduct(' + p.id + ')">Xem</button>';
+            html += '    </div>';
+
+            // Cột Button Sửa
+            html += '    <div class="product-table__cell">';
+            html += '        <button class="product-table__edit" onclick="editProduct(' + p.id + ')">Sửa</button>';
+            html += '    </div>';
+
+            // Cột Button Xóa
+            html += '    <div class="product-table__cell">';
+            html += '        <button class="product-table__delete" onclick="deleteProduct(' + p.id + ')">Xóa</button>';
+            html += '    </div>';
+
+            html += '</article>';
+        });
+
+        container.innerHTML = html;
+    }
+
+    // --- HÀM 3: VẼ MENU SIDEBAR (ĐÃ CẬP NHẬT ONCLICK) ---
+    function renderCategoriesExact(list) {
+        var container = document.getElementById('category-list');
+        if (!container) return;
+
+        var html = '';
+
+        list.forEach(function(parent) {
+            var hasChild = parent.children && parent.children.length > 0;
+
+            // HTML CHO MENU CON
+            var subHtml = '';
+            if (hasChild) {
+                subHtml += '<ul class="product-sub" style="display: none;">';
+                parent.children.forEach(function(child) {
+                    // QUAN TRỌNG: Sửa href thành javascript:void(0) và thêm onclick loadProducts
+                    subHtml += '<li class="product-sub__item">';
+                    subHtml +=    '<a href="javascript:void(0)" onclick="loadProducts(' + child.id + ')" class="product-sub__link">';
+                    subHtml +=       child.name;
+                    subHtml +=    '</a>';
+                    subHtml += '</li>';
+                });
+                subHtml += '</ul>';
+            }
+
+            // HTML CHO MENU CHA
+            // Nếu cha không có con -> click vào cha cũng load sản phẩm
+            // Nếu cha có con -> click vào cha chỉ để xổ menu con (logic Accordion)
+            var parentOnClick = hasChild ? '' : 'onclick="loadProducts(' + parent.id + ')"';
+            var parentHref = 'javascript:void(0)';
+
+            html += '<li class="product-sidebar__item">';
+            html +=    '<a href="' + parentHref + '" ' + parentOnClick + ' class="product-sidebar__link">';
+            html +=       parent.name;
+            html +=    '</a>';
+            html +=    subHtml;
+            html += '</li>';
+        });
+
+        container.innerHTML = html;
+        initAccordion();
+    }
+
+    // --- HÀM 4: ACCORDION (GIỮ NGUYÊN) ---
+    function initAccordion() {
+        var links = document.querySelectorAll('.product-sidebar__item > .product-sidebar__link');
+        links.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var subMenu = this.nextElementSibling;
+                if (subMenu && subMenu.classList.contains('product-sub')) {
+                    e.preventDefault();
+                    if (subMenu.style.display === 'none' || subMenu.style.display === '') {
+                        subMenu.style.display = 'block';
+                        this.parentElement.classList.add('product-sidebar__item--active');
+                    } else {
+                        subMenu.style.display = 'none';
+                        this.parentElement.classList.remove('product-sidebar__item--active');
+                    }
+                }
+            });
+        });
+    }
+
+    // Các hàm placeholder cho nút bấm (bạn tự viết logic sau)
+    function viewProduct(id) { console.log("Xem " + id); }
+    function editProduct(id) { console.log("Sửa " + id); }
+    function deleteProduct(id) {
+        if(confirm('Bạn có chắc muốn xóa?')) {
+            console.log("Xóa " + id);
+            // Gọi API xóa ở đây...
+        }
+    }
+</script>
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </html>
