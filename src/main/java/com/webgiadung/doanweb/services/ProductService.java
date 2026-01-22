@@ -49,4 +49,12 @@ public class ProductService {
     public List<ProductDetails> getDetailsByProduct(int productId) {
         return detailDao.findByProductId(productId);
     }
+    public List<Product> getProductsByCategory(int categoryId) {
+        return pdao.getByCategoryId(categoryId);
+    }
+
+    // Tìm kiếm sản phẩm theo tên (dựa trên hàm searchByName trong DAO)
+    public List<Product> searchProductByName(String keyword) {
+        return pdao.searchByName(keyword);
+    }
 }

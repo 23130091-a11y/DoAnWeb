@@ -10,10 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4d6602b-ce38-4ef2-a53c-c6a2c0148892" name="Changes" comment="Làm xử lý gửi mail đến khách hàng đã đăng ký web của minh, lấy tên miền của Hạnh đã mua làm tài khoản gửi mail - push lại lỗi xác thực tài khoản github và lộ secret key">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/CategoriesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/CategoriesOptionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/ProductListByCategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/BrandOptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/BrandOptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/controller/admin/CategoriesOptionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/dao/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webgiadung/doanweb/services/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/admin.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
