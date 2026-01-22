@@ -24,6 +24,22 @@ public class ListProductController extends HttpServlet {
         request.setAttribute("list", list);
         request.setAttribute("slides", slides);
 
+        // LOAD CÁC LOẠI SẢN PHẨM
+        request.setAttribute("featuredProducts",
+                productService.getFeaturedProducts());
+
+        request.setAttribute("promotionProducts",
+                productService.getPromotionProducts());
+
+        request.setAttribute("suggestedProducts",
+                productService.getSuggestedProducts());
+
+        request.setAttribute("limitedProducts",
+                productService.getLimitedProducts());
+
+        request.setAttribute("newProducts",
+                productService.getNewProducts());
+
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

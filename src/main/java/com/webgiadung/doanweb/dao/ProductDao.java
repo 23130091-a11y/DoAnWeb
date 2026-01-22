@@ -152,29 +152,193 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
-    public List<Product> getByCategoryId(int categoryId) {
+
+    private static final String BASE_SELECT = """
+    SELECT
+        p.id,
+        p.name,
+        p.image,
+        p.price_first AS firstPrice,
+        p.price_total AS totalPrice,
+        p.discounts_id AS discountsId,
+        p.categories_id AS categoriesId,
+        p.brands_id AS brandsId,
+        p.keywords_id AS keywordsId,
+        p.post,
+        p.quantity,
+        p.quantity_saled AS quantitySaled,
+        p.created_at AS createdAt,
+        p.updated_at AS updatedAt,
+        IFNULL(ROUND(AVG(pr.rating), 1), 0.0) AS ratingAvg
+    FROM products p
+    LEFT JOIN product_reviews pr ON p.id = pr.product_id
+    WHERE p.post = 1
+    GROUP BY
+        p.id, p.name, p.image, p.price_first, p.price_total,
+        p.discounts_id, p.categories_id, p.brands_id,
+        p.keywords_id, p.post, p.quantity,
+        p.quantity_saled, p.created_at, p.updated_at
+""";
+
+    private static final String PROMOTION_SELECT = """
+    SELECT
+        p.id,
+        p.name,
+        p.image,
+        p.price_first AS firstPrice,
+
+        -- Giá sau giảm
+        CASE
+            WHEN d.type_discount = 'percentage'
+                THEN ROUND(p.price_first * (1 - d.discount / 100), 0)
+            WHEN d.type_discount = 'fixed'
+                THEN GREATEST(p.price_first - d.discount, 0)
+            ELSE
+                p.price_first
+        END AS totalPrice,
+
+        p.discounts_id AS discountsId,
+        d.discount AS discountPercent,
+        d.type_discount AS discountType,
+
+        IFNULL(ROUND(AVG(pr.rating), 1), 0.0) AS ratingAvg
+
+    FROM products p
+    JOIN discounts d ON p.discounts_id = d.id
+    LEFT JOIN product_reviews pr ON p.id = pr.product_id
+
+    WHERE p.post = 1
+      AND NOW() BETWEEN d.start_date AND d.end_date
+
+    GROUP BY
+        p.id,
+        p.name,
+        p.image,
+        p.price_first,
+        p.discounts_id,
+        d.discount,
+        d.type_discount
+""";
+
+    private static final String SUGGESTED_SELECT = """
+    SELECT
+        p.id,
+        p.name,
+        p.image,
+        p.price_first AS firstPrice,
+        p.price_total AS totalPrice,
+        p.discounts_id AS discountsId,
+        p.quantity_saled AS quantitySaled,
+        ROUND(AVG(pr.rating), 1) AS ratingAvg
+
+    FROM products p
+    JOIN product_reviews pr ON p.id = pr.product_id
+
+    WHERE p.post = 1
+      AND p.quantity_saled > 0
+
+    GROUP BY p.id
+
+    HAVING AVG(pr.rating) >= 4.0
+
+    ORDER BY p.quantity_saled DESC, ratingAvg DESC
+
+    LIMIT 8
+""";
+
+    private static final String LIMITED_DISCOUNT_SELECT = """
+    SELECT
+        p.id,
+        p.name,
+        p.image,
+        p.price_first AS firstPrice,
+
+        -- Giá sau giảm
+        CASE
+            WHEN d.type_discount = 'percentage'
+                THEN ROUND(p.price_first * (1 - d.discount / 100), 0)
+            WHEN d.type_discount = 'fixed'
+                THEN GREATEST(p.price_first - d.discount, 0)
+            ELSE
+                p.price_first
+        END AS totalPrice,
+
+        p.quantity,
+        p.quantity_saled AS quantitySaled,
+
+        d.discount AS discountPercent,
+        d.type_discount AS discountType,
+
+        IFNULL(ROUND(AVG(pr.rating), 1), 0.0) AS ratingAvg
+
+    FROM products p
+    JOIN discounts d ON p.discounts_id = d.id
+    LEFT JOIN product_reviews pr ON p.id = pr.product_id
+
+    WHERE p.post = 1
+      AND p.quantity > 0
+      AND p.quantity <= 5
+      AND NOW() BETWEEN d.start_date AND d.end_date
+
+    GROUP BY
+        p.id,
+        p.name,
+        p.image,
+        p.price_first,
+        p.quantity,
+        p.quantity_saled,
+        d.discount,
+        d.type_discount
+
+    ORDER BY p.quantity ASC, p.quantity_saled DESC
+
+    LIMIT 8
+""";
+
+    public List<Product> getFeaturedProducts() {
         return get().withHandle(h ->
-                h.createQuery("""
-                    SELECT
-                        id,
-                        name,
-                        image,
-                        price_first AS firstPrice,
-                        price_total AS totalPrice,
-                        discounts_id AS discountsId,
-                        categories_id AS categoriesId,
-                        brands_id AS brandsId,
-                        keywords_id AS keywordsId,
-                        post,
-                        quantity,
-                        quantity_saled AS quantitySaled,
-                        created_at AS createdAt,
-                        updated_at AS updatedAt
-                    FROM products
-                    WHERE categories_id = :categoryId
-                    AND post = 1
-                """)
-                        .bind("categoryId", categoryId)
+                h.createQuery(BASE_SELECT + """
+            ORDER BY p.quantity_saled DESC
+            LIMIT 8
+        """)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public List<Product> getPromotionProducts() {
+        return get().withHandle(h ->
+                h.createQuery(PROMOTION_SELECT + """
+                ORDER BY p.created_at DESC
+                LIMIT 8
+            """)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public List<Product> getSuggestedProducts() {
+        return get().withHandle(h ->
+                h.createQuery(SUGGESTED_SELECT)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public List<Product> getLimitedProducts() {
+        return get().withHandle(h ->
+                h.createQuery(LIMITED_DISCOUNT_SELECT)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public List<Product> getNewProducts() {
+        return get().withHandle(h ->
+                h.createQuery(BASE_SELECT + """
+            ORDER BY p.created_at DESC
+            LIMIT 8
+        """)
                         .mapToBean(Product.class)
                         .list()
         );
