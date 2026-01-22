@@ -76,7 +76,7 @@
                                 <a href="#news" class="manage-nav__link">Tin tức</a>
                             </li>
                             <li class="manage-nav__item">
-                                <a href="#customer" class="manage-nav__link">Khách hàng</a>
+                                <a href="${pageContext.request.contextPath}/admin/customers" class="manage-nav__link">Khách hàng</a>
 
                             </li>
 
@@ -385,7 +385,7 @@
                             </form>
                         </div>
                     </section>
-SD
+
 
                     <section id="customer" class="admin-section">
                         <div class="section-header">
@@ -2202,17 +2202,18 @@ window.addEventListener("DOMContentLoaded", () => {
 });
     // Click menu
     menuLinks.forEach(link => {
-        link.addEventListener("click", function(e) {
+        link.addEventListener("click", function (e) {
+            const href = this.getAttribute("href") || "";
+            if (!href.startsWith("#")) return;
             e.preventDefault();
-            const targetId = this.getAttribute("href").replace("#","");
+            const targetId = href.substring(1);
             hideAllSections(); // ẩn tất cả trước
-            if(targetId === "config") sectionConfig.style.display = "block";
-            if(targetId === "product") sectionProduct.style.display = "block";
-            if(targetId === "order") sectionOrder.style.display = "block";
+
+            if (targetId === "config") sectionConfig.style.display = "block";
+            if (targetId === "product") sectionProduct.style.display = "block";
+            if (targetId === "order") sectionOrder.style.display = "block";
             if (targetId === "customer") sectionCustomer.style.display = "block";
-            if (targetId === "news") {
-                showNewsDefault();
-            }
+            if (targetId === "news") showNewsDefault();
         });
     });
     productMenuButtons.forEach(btn => {
