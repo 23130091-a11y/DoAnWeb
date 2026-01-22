@@ -5,9 +5,10 @@ import com.webgiadung.doanweb.model.User;
 import java.util.List;
 public class AuthDao extends BaseDao {
     public User getUserByEmail(String email) {
+        String e = (email == null) ? "" : email.trim().toLowerCase();
         return get().withHandle(h ->
-                h.createQuery("SELECT * FROM users WHERE email = :email")
-                        .bind("email", email)
+                h.createQuery("SELECT * FROM users WHERE LOWER(email) = :email")
+                        .bind("email", e)
                         .mapToBean(User.class)
                         .findOne()
                         .orElse(null)
@@ -16,17 +17,33 @@ public class AuthDao extends BaseDao {
 
     // Check email tồn tại
     public boolean checkEmailExists(String email) {
+        String e = (email == null) ? "" : email.trim().toLowerCase();
+
         return get().withHandle(h ->
-                h.createQuery("SELECT id FROM users WHERE email = :email")
-                        .bind("email", email)
+                h.createQuery("SELECT COUNT(*) FROM users WHERE LOWER(email) = :email")
+                        .bind("email", e)
                         .mapTo(Integer.class)
-                        .findOne()
-                        .isPresent()
+                        .one() > 0
         );
     }
+    // Check số điện thoại tồn tại
+    public boolean checkPhoneExists(String phone) {
+        String p = (phone == null) ? "" : phone.trim();
 
+        return get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM users WHERE phone = :phone")
+                        .bind("phone", p)
+                        .mapTo(Integer.class)
+                        .one() > 0
+        );
+    }
     // Đăng ký user
     public void register(User user) {
+        String email = (user.getEmail() == null) ? null : user.getEmail().trim().toLowerCase();
+        String phone = (user.getPhone() == null) ? null : user.getPhone().trim();
+        user.setEmail(email);
+        user.setPhone(phone);
+
         get().useHandle(h ->
                 h.createUpdate(
                                 "INSERT INTO users (email, password, phone, role, status) " +
@@ -120,12 +137,36 @@ public class AuthDao extends BaseDao {
     }
 
     public void activateUser(String email) {
+        String e = (email == null) ? "" : email.trim().toLowerCase();
         get().useHandle(h ->
-                h.createUpdate(
-                                "UPDATE users SET status = 1 WHERE email = :email"
-                        )
-                        .bind("email", email)
+                h.createUpdate("UPDATE users SET status = 1 WHERE LOWER(email) = :email")
+                        .bind("email", e)
                         .execute()
+        );
+    }
+    // Check email tồn tại nhưng loại trừ 1 id (dùng khi admin update)
+    public boolean checkEmailExistsExceptId(String email, int id) {
+        String e = (email == null) ? "" : email.trim().toLowerCase();
+        return get().withHandle(h ->
+                h.createQuery("SELECT id FROM users WHERE LOWER(email)=:email AND id <> :id")
+                        .bind("email", e)
+                        .bind("id", id)
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .isPresent()
+        );
+    }
+
+    // Check phone tồn tại nhưng loại trừ 1 id (dùng khi admin update)
+    public boolean checkPhoneExistsExceptId(String phone, int id) {
+        String p = (phone == null) ? "" : phone.trim();
+        return get().withHandle(h ->
+                h.createQuery("SELECT id FROM users WHERE phone=:phone AND id <> :id")
+                        .bind("phone", p)
+                        .bind("id", id)
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .isPresent()
         );
     }
 }

@@ -38,32 +38,40 @@
         <div class="banner-section"></div>
 
         <div class="login-container">
-            <form class="login-form" action="${pageContext.request.contextPath}/register" method="post">
-            <h3>Đăng ký</h3>
+            <form id="registerForm" class="login-form"
+                  action="${pageContext.request.contextPath}/register" method="post"novalidate>
+                <h3>Đăng ký</h3>
+
+                <!-- lỗi client-side -->
+                <p id="clientError" style="color:#d93025; margin-top:10px;"></p>
 
                 <input type="text"
+                       id="email"
                        name="email"
                        placeholder="Email"
                        required>
 
                 <input type="text"
+                       id="phone"
                        name="phone"
                        placeholder="Số điện thoại"
                        required>
 
                 <input type="password"
+                       id="password"
                        name="password"
                        placeholder="Mật khẩu"
                        required>
 
                 <input type="password"
+                       id="repassword"
                        name="repassword"
                        placeholder="Nhập lại mật khẩu"
                        required>
 
                 <button type="submit" class="btn-login">ĐĂNG KÝ</button>
 
-                <%-- HIỂN THỊ LỖI --%>
+                <%-- HIỂN THỊ LỖI server-side --%>
                 <% if (request.getAttribute("error") != null) { %>
                 <p style="color:red; margin-top:10px;">
                     <%= request.getAttribute("error") %>
@@ -73,8 +81,6 @@
                 <div class="register-link">
                     <span>Đã có tài khoản?</span>
                     <a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
-
-
                 </div>
             </form>
 
@@ -223,7 +229,62 @@
             </div>
         </div>
     </footer>
+    <script src="assets/js/script.js"></script>
+    <script>
+    (function () {
+      const form = document.getElementById("registerForm");
+      if (!form) return;
+
+      const emailEl = document.getElementById("email");
+      const phoneEl = document.getElementById("phone");
+      const passEl  = document.getElementById("password");
+      const repEl   = document.getElementById("repassword");
+      const errEl   = document.getElementById("clientError");
+
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const PHONE_RE = /^0\d{9,10}$/; // 10-11 số, bắt đầu 0
+
+      function show(msg){ errEl.textContent = msg || ""; }
+
+      form.addEventListener("submit", function(e){
+        show("");
+
+        const email = (emailEl.value || "").trim();
+        const phone = (phoneEl.value || "").trim();
+        const pass  = passEl.value || "";
+        const rep   = repEl.value || "";
+
+        if (!email || !phone || !pass || !rep) {
+          e.preventDefault();
+          show("Vui lòng nhập đầy đủ thông tin.");
+          return;
+        }
+
+        if (!EMAIL_RE.test(email)) {
+          e.preventDefault();
+          show("Email không đúng định dạng.");
+          return;
+        }
+
+        if (!PHONE_RE.test(phone)) {
+          e.preventDefault();
+          show("Số điện thoại không hợp lệ (bắt đầu 0, 10-11 chữ số).");
+          return;
+        }
+
+        if (pass.length < 6) {
+          e.preventDefault();
+          show("Mật khẩu tối thiểu 6 ký tự.");
+          return;
+        }
+
+        if (pass !== rep) {
+          e.preventDefault();
+          show("Mật khẩu nhập lại không khớp.");
+        }
+      });
+    })();
+    </script>
 </body>
-<script src="assets/js/script.js"></script>
 
 </html>
