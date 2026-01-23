@@ -28,4 +28,36 @@ public class ProductDescriptionsDao extends BaseDao {
                         .list()
         );
     }
+    public boolean update(ProductDescriptions desc) {
+        return get().withHandle(h ->
+                h.createUpdate("UPDATE products_description " +
+                                "SET title = :title, description = :description, updated_at = NOW() " +
+                                "WHERE id = :id")
+                        .bind("id", desc.getId())
+                        .bind("title", desc.getTitle())
+                        .bind("description", desc.getDescription())
+                        // Không update cột products_id vì mô tả hiếm khi chuyển từ sản phẩm này sang sản phẩm khác
+                        .execute() > 0
+        );
+    }
+
+    // 2. Xóa mô tả theo ID (Delete single item)
+    // Dùng khi người dùng bấm nút "Xóa dòng này" trên giao diện sửa
+    public boolean delete(int id) {
+        return get().withHandle(h ->
+                h.createUpdate("DELETE FROM products_description WHERE id = :id")
+                        .bind("id", id)
+                        .execute() > 0
+        );
+    }
+
+    // 3. (Tùy chọn) Xóa tất cả mô tả của một sản phẩm
+    // Dùng khi xóa hoàn toàn sản phẩm khỏi hệ thống
+    public boolean deleteByProductId(int productId) {
+        return get().withHandle(h ->
+                h.createUpdate("DELETE FROM products_description WHERE products_id = :productId")
+                        .bind("productId", productId)
+                        .execute() > 0
+        );
+    }
 }
