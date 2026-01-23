@@ -55,4 +55,24 @@ public class BrandsDao extends BaseDao {
                         .one() > 0
         );
     }
+    public boolean update(Brands brand) {
+        return get().withHandle(h ->
+                // Đã xóa "logo = :logo" trong câu SQL
+                h.createUpdate("UPDATE brands SET name = :name, country = :country, updated_at = NOW() WHERE id = :id")
+                        .bind("id", brand.getId())
+                        .bind("name", brand.getName())
+                        .bind("country", brand.getCountry())
+                        // Đã xóa dòng bind("logo", ...)
+                        .execute() > 0
+        );
+    }
+
+    // 6. Xóa thương hiệu (Giữ nguyên)
+    public boolean delete(int id) {
+        return get().withHandle(h ->
+                h.createUpdate("DELETE FROM brands WHERE id = :id")
+                        .bind("id", id)
+                        .execute() > 0
+        );
+    }
 }

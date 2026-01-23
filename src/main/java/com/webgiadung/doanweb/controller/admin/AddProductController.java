@@ -36,7 +36,7 @@ public class AddProductController extends HttpServlet {
             // --- 1. ĐỌC DỮ LIỆU CƠ BẢN ---
             String brandIdRaw = req.getParameter("brandID");
             String tagIdRaw = req.getParameter("tagID");
-            String cateIdRaw = req.getParameter("cateID"); // <--- MỚI THÊM: Lấy chuỗi ID danh mục
+            String cateIdRaw = req.getParameter("cateID");
             String postStatusRaw = req.getParameter("postStatus");
 
             if (brandIdRaw == null || tagIdRaw == null || cateIdRaw == null || req.getParameter("productPrice") == null) {
@@ -46,6 +46,7 @@ public class AddProductController extends HttpServlet {
 
             Product p = new Product();
             p.setName(req.getParameter("productName"));
+            p.setFirstPrice(Double.parseDouble(req.getParameter("productPrice")));
             p.setTotalPrice(Double.parseDouble(req.getParameter("productPrice")));
 
             // Set ID các khóa ngoại

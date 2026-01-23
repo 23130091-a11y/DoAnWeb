@@ -36,4 +36,27 @@ public class ProductDetailsDao extends BaseDao {
                         .execute()
         );
     }
+    public boolean update(ProductDetails detail) {
+        return get().withHandle(h ->
+                h.createUpdate("UPDATE products_detail " +
+                                "SET title = :title, description = :description, image = :image, updated_at = NOW() " +
+                                "WHERE id = :id")
+                        .bind("id", detail.getId())
+                        .bind("title", detail.getTitle())
+                        .bind("description", detail.getDescription())
+                        .bind("image", detail.getImage())
+                        .execute() > 0
+        );
+    }
+
+    // 3. Delete (Xóa một chi tiết cụ thể theo ID)
+    // Dùng cho trường hợp user bấm nút xóa 1 dòng chi tiết
+    public boolean delete(int id) {
+        return get().withHandle(h ->
+                h.createUpdate("DELETE FROM products_detail WHERE id = :id")
+                        .bind("id", id)
+                        .execute() > 0
+        );
+    }
+
 }

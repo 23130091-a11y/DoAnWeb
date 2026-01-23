@@ -73,4 +73,41 @@ public class ProductService {
     public List<Product> getProductsByCategory(int categoryId) {
         return pdao.getByCategoryId(categoryId);
     }
+
+    public List<Product> searchProductByName(String keyword) {
+        return pdao.searchByName(keyword);
+    }
+    public Product getProductFullInfo(int id) {
+        return pdao.getProductFullInfo(id);
+    }
+    public boolean updateProduct(Product p) {
+        return pdao.updateProduct(p);
+    }
+    public boolean updateDescription(ProductDescriptions desc) {
+        return descDao.update(desc);
+    }
+
+    public boolean deleteDescription(int id) {
+        return descDao.delete(id);
+    }
+
+    public boolean deleteAllDescriptionsByProductId(int productId) {
+        return descDao.deleteByProductId(productId);
+    }
+
+    public boolean updateProductDetail(ProductDetails detail) {
+        return detailDao.update(detail);
+    }
+
+
+    public boolean deleteProductDetail(int id) {
+        return detailDao.delete(id);
+    }
+
+    public void deleteAllDetailsByProductId(int productId) {
+        detailDao.deleteByProductId(productId);
+    }
+    public boolean deleteProduct(int id) {
+        return pdao.deleteProduct(id);
+    }
 }

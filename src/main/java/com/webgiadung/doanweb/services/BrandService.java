@@ -40,4 +40,47 @@ public class BrandService {
             return -1;
         }
     }
+    public int updateBrand(Brands brand) {
+        // 1. Validate dữ liệu đầu vào
+        if (brand == null || brand.getName() == null || brand.getName().trim().isEmpty()) {
+            return -1;
+        }
+
+        Brands currentBrand = brandsDao.findById(brand.getId());
+        if (currentBrand == null) {
+            return -1;
+        }
+
+        String newName = brand.getName().trim();
+
+        if (!currentBrand.getName().equalsIgnoreCase(newName)) {
+            if (brandsDao.checkExists(newName)) {
+                return 0;
+            }
+        }
+
+
+        brand.setName(newName);
+
+        try {
+            boolean success = brandsDao.update(brand);
+            return success ? 1 : -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+
+    public boolean deleteBrand(int id) {
+
+
+        try {
+            return brandsDao.delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

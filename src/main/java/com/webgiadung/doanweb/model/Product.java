@@ -8,20 +8,24 @@ import java.util.List;
 public class Product implements Serializable {
     private int id;
     private String name;
-    private String image;         // Lưu đường dẫn ảnh chính
-    private double firstPrice;    // Giá gốc ban đầu
-    private int discountsId;  // Khóa ngoại liên kết bảng giảm giá
-    private double totalPrice;    // Giá sau khi đã tính giảm giá
-    private int categoriesId; // Khóa ngoại liên kết danh mục
-    private int brandsId;     // Khóa ngoại liên kết thương hiệu
-    private int keywordsId;   // Khóa ngoại liên kết từ khóa tìm kiếm
-    private int post;         // Trạng thái hiển thị (ví dụ: 0: Ẩn, 1: Hiện)
-    private int quantity;     // Số lượng trong kho
-    private int quantitySaled;// Số lượng đã bán
+    private String image;
+    private double firstPrice;
+    private int discountsId;
+    private double totalPrice;
+    private int categoriesId;
+    private int brandsId;
+    private int keywordsId;
+    private String brandName;
+    private String keywordName;
+    private int post;
+    private int quantity;
+    private int quantitySaled;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     // Liên kết các bảng phụ
+    private List<ProductDescriptions> descriptionsList;  // Thông số động
+    private List<ProductDetails> detailsList;
     private List<ProductAttribute> attributes;  // Thông số động
     private List<ProductOption> options;        // Tùy chọn
     private List<ProductImage> images;          // Ảnh phụ
@@ -95,6 +99,27 @@ public class Product implements Serializable {
         this.options = new ArrayList<>();
         this.images = new ArrayList<>();
         this.reviews = new ArrayList<>();
+    }
+
+    public Product(int id, String name, String image, double firstPrice, int discountsId, double totalPrice, int categoriesId, int brandsId, int keywordsId, String brandName, String keywordName, int post, int quantity, int quantitySaled, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductDescriptions> descriptionsList, List<ProductDetails> detailsList) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.firstPrice = firstPrice;
+        this.discountsId = discountsId;
+        this.totalPrice = totalPrice;
+        this.categoriesId = categoriesId;
+        this.brandsId = brandsId;
+        this.keywordsId = keywordsId;
+        this.brandName = brandName;
+        this.keywordName = keywordName;
+        this.post = post;
+        this.quantity = quantity;
+        this.quantitySaled = quantitySaled;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.descriptionsList = descriptionsList;
+        this.detailsList = detailsList;
     }
 
     public int getId() {
@@ -239,6 +264,38 @@ public class Product implements Serializable {
 
     public void setReviews(List<ProductReview> reviews) {
         this.reviews = reviews;
+    }
+
+    public List<ProductDescriptions> getDescriptionsList() {
+        return descriptionsList;
+    }
+
+    public void setDescriptionsList(List<ProductDescriptions> descriptionsList) {
+        this.descriptionsList = descriptionsList;
+    }
+
+    public List<ProductDetails> getDetailsList() {
+        return detailsList;
+    }
+
+    public void setDetailsList(List<ProductDetails> detailsList) {
+        this.detailsList = detailsList;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getKeywordName() {
+        return keywordName;
+    }
+
+    public void setKeywordName(String keywordName) {
+        this.keywordName = keywordName;
     }
 
     @Override

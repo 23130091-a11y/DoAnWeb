@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css?v=100">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css?v=99">
     <!-- Include stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
@@ -1646,79 +1646,53 @@
                                 <div class="view-grid">
                                     <div class="view-col">
                                         <div class="view-image-box">
-                                            <img id="v-image" src="assets/img/binhxit.png" alt="Ảnh sản phẩm" class="view-img-main">
+                                            <img id="v-image" src="" alt="Ảnh sản phẩm" class="view-img-main" onerror="this.src='assets/img/no-image.png'">
                                         </div>
                                         <div class="view-time">
-                                            <p><strong>Ngày tạo:</strong> <span id="v-createdAt">10/10/2025</span></p>
-                                            <p><strong>Cập nhật:</strong> <span id="v-updatedAt">15/10/2025</span></p>
+                                            <p><strong>Ngày tạo:</strong> <span id="v-createdAt">---</span></p>
+                                            <p><strong>Cập nhật:</strong> <span id="v-updatedAt">---</span></p>
                                         </div>
                                     </div>
 
                                     <div class="view-col">
-                                        <h2 id="v-name" class="view-product-title">Sản phẩm ABC</h2>
+                                        <h2 id="v-name" class="view-product-title">---</h2>
 
                                         <div class="view-info-group">
-                                            <p><strong>Nhãn hiệu:</strong> <span class="badge" id="v-brand">Samsung</span></p>
-                                            <p><strong>Từ khóa:</strong> <span class="badge badge--tag" id="v-tags">Đồ dùng vệ sinh</span></p>
+                                            <p><strong>Nhãn hiệu:</strong> <span class="badge" id="v-brand">---</span></p>
+                                            <p><strong>Từ khóa:</strong> <span class="badge badge--tag" id="v-tags">---</span></p>
                                         </div>
 
                                         <div class="view-price-card">
-                                            <div class="price-item">
-                                                <span>Giá gốc:</span>
-                                                <del id="v-oldPrice">600.000đ</del>
+                                            <div class="price-edit-row">
+                                                <label class="price-label">Giá gốc (đ):</label>
+                                                <input type="number" id="edit-oldPrice" name="oldPrice" class="form-input-small" value="0" oninput="calculateNewPrice()">
                                             </div>
-                                            <div class="price-item">
-                                                <span>Giảm giá:</span>
-                                                <span class="text-discount">-<span id="v-discount">10</span>%</span>
+                                            <div class="price-edit-row">
+                                                <label class="price-label">Giảm giá (%):</label>
+                                                <input type="number" id="edit-discount" name="discount" class="form-input-small" value="0" oninput="calculateNewPrice()">
                                             </div>
                                             <div class="price-item price-item--main">
-                                                <span>Giá mới:</span>
-                                                <span id="v-newPrice" class="text-price">540.000đ</span>
+                                                <span>Giá mới:</span><span id="v-newPrice" class="text-price">0đ</span>
                                             </div>
                                         </div>
 
                                         <div class="view-inventory">
-                                            <p><strong>Số lượng còn lại:</strong> <span id="v-stock">50</span></p>
-                                            <p><strong>Số lượng đã bán:</strong> <span id="v-sold">12</span></p>
-                                            <p><strong>Trạng thái Post:</strong>
-                                                <input type="checkbox" id="v-isPost" class="product-table__checkbox" checked disabled>
-                                            </p>
+                                            <p><strong>Số lượng còn lại:</strong> <span id="v-stock">0</span></p>
+                                            <p><strong>Số lượng đã bán:</strong> <span id="v-sold">0</span></p>
+                                            <p><strong>Trạng thái Post:</strong> <input type="checkbox" id="v-isPost" class="product-table__checkbox" disabled></p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="view-section">
                                     <h4 class="view-section-title">Mô tả sản phẩm</h4>
-                                    <div id="v-descriptionList" class="view-list">
-                                        <div class="view-text-item">
-                                            <h5>Tiêu đề mô tả (VD: Chất liệu)</h5>
-                                            <p>Nội dung mô tả chi tiết về sản phẩm...</p>
-                                        </div>
-                                    </div>
+                                    <div id="v-descriptionList" class="view-list"></div>
                                 </div>
 
                                 <div class="view-section">
                                     <h4 class="view-section-title">Chi tiết kỹ thuật</h4>
-                                    <div id="v-detailList" class="view-detail-grid">
-                                        <div class="view-detail-card">
-                                            <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
-                                            <div class="view-detail-info">
-                                                <h5>Tiêu đề chi tiết</h5>
-                                                <p>Nội dung chi tiết đi kèm ảnh...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="v-detailList" class="view-detail-grid">
-                                        <div class="view-detail-card">
-                                            <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
-                                            <div class="view-detail-info">
-                                                <h5>Tiêu đề chi tiết</h5>
-                                                <p>Nội dung chi tiết đi kèm ảnh...</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div id="v-detailList" class="view-detail-grid"></div>
                                 </div>
-
                             </div>
                             <div class="product-view-footer">
                                 <button type="button" class="btn btn--primary btn--back-rect" onclick="backToList()">
@@ -1734,21 +1708,24 @@
                             </div>
 
                             <div class="modal-body">
-                                <form id="editProductForm">
+                                <form id="editProductForm" enctype="multipart/form-data">
+
+                                    <input type="hidden" id="edit-id" name="id" value="">
+                                    <input type="hidden" id="edit-oldImageName" name="oldImageName" value="">
+
                                     <div class="view-grid">
                                         <div class="view-col">
                                             <div class="view-image-box">
-                                                <img id="edit-v-image" src="assets/img/binhxit.png" alt="Ảnh sản phẩm" class="view-img-main">
+                                                <img id="edit-v-image" src="assets/img/no-image.png" alt="Ảnh sản phẩm" class="view-img-main">
                                                 <div class="upload-action">
                                                     <label for="input-file-edit" class="btn-upload">
                                                         <i class="fa-solid fa-camera"></i> Thay đổi ảnh
                                                     </label>
-                                                    <input type="file" id="input-file-edit" hidden>
+                                                    <input type="file" id="input-file-edit" name="image" hidden onchange="previewImage(this, 'edit-v-image')">
                                                 </div>
                                             </div>
                                             <div class="view-time">
-                                                <p><strong>Ngày tạo:</strong> <span>10/10/2025</span></p>
-                                                <p><strong>Lần cuối:</strong> <span>Vừa xong</span></p>
+                                                <p><strong>Ngày tạo:</strong> <span id="view-created-at">---</span></p>
                                             </div>
                                         </div>
 
@@ -1756,37 +1733,35 @@
                                             <div class="edit-info-list">
                                                 <div class="info-row">
                                                     <label class="info-label">Tên sản phẩm:</label>
-                                                    <input type="text" id="edit-name" class="form-input primary-focus" value="Sản phẩm ABC">
+                                                    <input type="text" id="edit-name" name="name" class="form-input primary-focus" placeholder="Nhập tên sản phẩm">
                                                 </div>
 
                                                 <div class="info-row">
                                                     <label class="info-label">Nhãn hiệu:</label>
-                                                    <select id="edit-brand" class="form-input">
-                                                        <option value="samsung">Samsung</option>
-                                                        <option value="apple">Apple</option>
+                                                    <select id="edit-brand" name="brandId" class="form-input">
+                                                        <option value="">Đang tải...</option>
                                                     </select>
                                                 </div>
 
                                                 <div class="info-row">
                                                     <label class="info-label">Từ khóa (Tags):</label>
-                                                    <select id="edit-tags" class="form-input">
-                                                        <option value="gia-dung">Gia dụng</option>
-                                                        <option value="dien-tu">Điện tử</option>
+                                                    <select id="edit-tags" name="keywordId" class="form-input">
+                                                        <option value="">Đang tải...</option>
                                                     </select>
                                                 </div>
 
                                                 <div class="view-price-card">
                                                     <div class="price-edit-row">
                                                         <label class="price-label">Giá gốc (đ):</label>
-                                                        <input type="number" id="edit-oldPrice" class="form-input-small" value="600000">
+                                                        <input type="number" id="edit-oldPrice" name="oldPrice" class="form-input-small" value="0">
                                                     </div>
                                                     <div class="price-edit-row">
                                                         <label class="price-label">Giảm giá (%):</label>
-                                                        <input type="number" id="edit-discount" class="form-input-small" value="10">
+                                                        <input type="number" id="edit-discount" name="discount" class="form-input-small" value="0" readonly style="background-color: #f0f0f0;">
                                                     </div>
                                                     <div class="price-edit-row">
                                                         <label class="price-label primary-text">Giá mới (đ):</label>
-                                                        <input type="number" id="edit-newPrice" class="form-input-small price-edit-input" value="540000">
+                                                        <input type="number" id="edit-newPrice" class="form-input-small price-edit-input" readonly style="background-color: #f0f0f0;">
                                                     </div>
                                                 </div>
 
@@ -1794,16 +1769,16 @@
                                                     <div class="inventory-row">
                                                         <div class="info-row no-border">
                                                             <label class="info-label">Kho hàng:</label>
-                                                            <input type="number" id="edit-stock" class="form-input-small" style="width: 80px;" value="50">
+                                                            <input type="number" id="edit-stock" name="stock" class="form-input-small" style="width: 80px;" value="0">
                                                         </div>
                                                         <div class="info-row no-border">
                                                             <label class="info-label">Đã bán:</label>
-                                                            <input type="number" id="edit-sold" class="form-input-small" style="width: 80px;" value="12">
+                                                            <input type="number" id="edit-sold" name="sold" class="form-input-small" style="width: 80px;" value="0">
                                                         </div>
                                                     </div>
                                                     <div class="info-row no-border mt-10">
                                                         <label class="info-label">Trạng thái Post:</label>
-                                                        <input type="checkbox" id="edit-isPost" class="product-table__checkbox" style="width: 20px; height: 20px;" checked>
+                                                        <input type="checkbox" id="edit-isPost" name="isPost" class="product-table__checkbox" style="width: 20px; height: 20px;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1813,46 +1788,21 @@
                                     <div class="view-section">
                                         <h4 class="view-section-title">Mô tả sản phẩm</h4>
                                         <div id="edit-v-descriptionList" class="edit-mode-list">
-                                            <div class="edit-item-box">
-                                                <input type="text" class="form-input edit-sub-title" value="Chất liệu" placeholder="Tiêu đề">
-                                                <textarea class="form-textarea" rows="2" placeholder="Nội dung mô tả..."></textarea>
-                                            </div>
                                         </div>
-                                        <button type="button" class="btn-add-more">+ Thêm dòng mô tả</button>
+                                        <button type="button" class="btn-add-more" onclick="addDescriptionRow()">+ Thêm dòng mô tả</button>
                                     </div>
 
                                     <div class="view-section">
                                         <h4 class="view-section-title">Chi tiết sản phẩm</h4>
                                         <div id="edit-v-detailList" class="edit-mode-list">
-                                            <div class="edit-detail-card">
-                                                <div class="edit-card-img">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
-                                                    <label class="change-img-mini"><i class="fa-solid fa-camera"></i> <input type="file" hidden></label>
-                                                </div>
-                                                <div class="view-detail-info">
-                                                    <input type="text" class="form-input edit-sub-title" value="Đặc điểm nổi bật" placeholder="Tiêu đề">
-                                                    <textarea class="form-textarea" rows="3" placeholder="Nội dung chi tiết..."></textarea>
-                                                </div>
-                                            </div>
                                         </div>
-                                        <div id="edit-v-detailList" class="edit-mode-list">
-                                            <div class="edit-detail-card">
-                                                <div class="edit-card-img">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt="Detail">
-                                                    <label class="change-img-mini"><i class="fa-solid fa-camera"></i> <input type="file" hidden></label>
-                                                </div>
-                                                <div class="view-detail-info">
-                                                    <input type="text" class="form-input edit-sub-title" value="Đặc điểm nổi bật" placeholder="Tiêu đề">
-                                                    <textarea class="form-textarea" rows="3" placeholder="Nội dung chi tiết..."></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn-add-more">+ Thêm khối chi tiết</button>
+                                        <button type="button" class="btn-add-more" onclick="addDetailRow()">+ Thêm khối chi tiết</button>
                                     </div>
 
-                                    <div class="product-view-footer">
-                                        <button type="button" class="bton btn-cancel" onclick="backFromEdit()">Hủy bỏ</button>
-                                        <button type="submit" class="bton btn--primary btn--back-rect">Lưu thay đổi</button>
+                                    <div class="product-view-footer" style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; text-align: right;">
+                                        <button type="button" class="bton btn-cancel" onclick="closeEditModal()">Hủy bỏ</button>
+
+                                        <button type="button" class="bton btn--primary btn--back-rect btn-save" onclick="updateProduct()">Lưu thay đổi</button>
                                     </div>
                                 </form>
                             </div>
@@ -3068,8 +3018,9 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 </script>
+
 <script>
-    // Khai báo biến toàn cục để dùng chung
+
     var contextPath = '${pageContext.request.contextPath}';
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -3079,13 +3030,11 @@ window.addEventListener("DOMContentLoaded", () => {
             .then(data => renderCategoriesExact(data))
             .catch(err => console.error(err));
 
-        // 2. Tải mặc định tất cả sản phẩm khi mới vào trang (cateId = 0)
         loadProducts(0);
     });
 
-    // --- HÀM 1: TẢI SẢN PHẨM TỪ API ---
     function loadProducts(cateId) {
-        // Gọi API Controller bạn vừa viết: /api/products-by-category
+
         fetch(contextPath + '/api/products-by-category?cateId=' + cateId)
             .then(res => res.json())
             .then(data => {
@@ -3096,7 +3045,6 @@ window.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // --- HÀM 2: VẼ HTML SẢN PHẨM (THEO MẪU BẠN GỬI) ---
     function renderProductTable(products) {
         var container = document.getElementById('product-list-container');
         if (!container) return;
@@ -3133,8 +3081,7 @@ window.addEventListener("DOMContentLoaded", () => {
             html += '        <span class="product-table__text">' + p.name + '</span>';
             html += '    </div>';
 
-            // Cột Checkbox (ĐÃ SỬA)
-            // Thêm biến checkStatus vào trong thẻ input
+
             html += '    <div class="product-table__cell">';
             html += '        <input type="checkbox" class="product-table__checkbox" value="' + p.id + '" ' + checkStatus + '>';
             html += '    </div>';
@@ -3144,17 +3091,16 @@ window.addEventListener("DOMContentLoaded", () => {
             html += '        <span class="product-table__text">' + formattedPrice + '</span>';
             html += '    </div>';
 
-            // Cột Button Xem
+
             html += '    <div class="product-table__cell">';
             html += '        <button class="product-table__view" onclick="viewProduct(' + p.id + ')">Xem</button>';
             html += '    </div>';
 
-            // Cột Button Sửa
             html += '    <div class="product-table__cell">';
             html += '        <button class="product-table__edit" onclick="editProduct(' + p.id + ')">Sửa</button>';
             html += '    </div>';
 
-            // Cột Button Xóa
+
             html += '    <div class="product-table__cell">';
             html += '        <button class="product-table__delete" onclick="deleteProduct(' + p.id + ')">Xóa</button>';
             html += '    </div>';
@@ -3165,7 +3111,6 @@ window.addEventListener("DOMContentLoaded", () => {
         container.innerHTML = html;
     }
 
-    // --- HÀM 3: VẼ MENU SIDEBAR (ĐÃ CẬP NHẬT ONCLICK) ---
     function renderCategoriesExact(list) {
         var container = document.getElementById('category-list');
         if (!container) return;
@@ -3190,9 +3135,6 @@ window.addEventListener("DOMContentLoaded", () => {
                 subHtml += '</ul>';
             }
 
-            // HTML CHO MENU CHA
-            // Nếu cha không có con -> click vào cha cũng load sản phẩm
-            // Nếu cha có con -> click vào cha chỉ để xổ menu con (logic Accordion)
             var parentOnClick = hasChild ? '' : 'onclick="loadProducts(' + parent.id + ')"';
             var parentHref = 'javascript:void(0)';
 
@@ -3208,7 +3150,6 @@ window.addEventListener("DOMContentLoaded", () => {
         initAccordion();
     }
 
-    // --- HÀM 4: ACCORDION (GIỮ NGUYÊN) ---
     function initAccordion() {
         var links = document.querySelectorAll('.product-sidebar__item > .product-sidebar__link');
         links.forEach(function(link) {
@@ -3228,13 +3169,519 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Các hàm placeholder cho nút bấm (bạn tự viết logic sau)
-    function viewProduct(id) { console.log("Xem " + id); }
-    function editProduct(id) { console.log("Sửa " + id); }
+    // --- 1. HÀM XỬ LÝ CLICK NÚT "XEM" ---
+    function viewProduct(id) {
+        console.log("Đang xem sản phẩm ID: " + id);
+
+        // BƯỚC 1: CHUYỂN ĐỔI GIAO DIỆN (Logic của bạn)
+        // Ẩn tất cả các section khác (Giả sử bạn đã có hàm này)
+        if (typeof hideAllSections === 'function') {
+            hideAllSections();
+        }
+
+        // Lấy thẻ container chi tiết (ID trùng với trong HTML bạn đã viết)
+        var sectionProductDetail = document.getElementById('viewProductModal');
+
+        if (sectionProductDetail) {
+            // Áp dụng CSS như bạn yêu cầu để nó hiện ra như một trang con
+            sectionProductDetail.style.display = "block";
+            sectionProductDetail.style.position = "static";
+            sectionProductDetail.style.backgroundColor = "transparent";
+            sectionProductDetail.style.padding = "0"; // Hoặc padding tùy ý
+
+            // Cuộn lên đầu trang
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            console.error("Không tìm thấy div id='viewProductModal'");
+            return;
+        }
+
+        fetch(contextPath + '/api/product-detail?id=' + id)
+            .then(res => {
+                if (!res.ok) throw new Error("Lỗi kết nối server");
+                return res.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    // Nếu lỗi thì quay lại danh sách
+                    backToList();
+                } else {
+                    // BƯỚC 3: ĐỔ DỮ LIỆU VÀO HTML
+                    fillProductModal(data);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Không thể tải thông tin sản phẩm.");
+            });
+    }
+
+    // --- 2. HÀM ĐỔ DỮ LIỆU VÀO HTML (RENDER) ---
+    function fillProductModal(p) {
+        '${pageContext.request.contextPath}';
+
+        var imgPath = p.image ? (contextPath + '/assets/img/products/' + p.image) : (contextPath + '/assets/img/no-image.png');
+
+        var elImg = document.getElementById('v-image');
+        if(elImg) elImg.src = imgPath;
+
+        if(document.getElementById('v-createdAt')) document.getElementById('v-createdAt').innerText = p.createdAt || '---';
+        if(document.getElementById('v-updatedAt')) document.getElementById('v-updatedAt').innerText = p.updatedAt || '---';
+        if(document.getElementById('v-name')) document.getElementById('v-name').innerText = p.name;
+        if(document.getElementById('v-brand')) document.getElementById('v-brand').innerText = p.brandName || '---';
+        if(document.getElementById('v-tags')) document.getElementById('v-tags').innerText = p.keywordName || '---';
+
+        if(document.getElementById('v-stock')) document.getElementById('v-stock').innerText = p.quantity;
+        if(document.getElementById('v-sold')) document.getElementById('v-sold').innerText = p.quantitySaled;
+        if(document.getElementById('v-isPost')) document.getElementById('v-isPost').checked = (p.post === 1);
+
+        // 2. Render Giá tiền
+        var priceFmt = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
+        if(document.getElementById('v-newPrice')) document.getElementById('v-newPrice').innerText = priceFmt.format(p.price);
+
+        var boxOldPrice = document.getElementById('box-oldPrice');
+        var boxDiscount = document.getElementById('box-discount');
+        var oldPriceEl = document.getElementById('v-oldPrice');
+        var discountEl = document.getElementById('v-discount');
+
+        if (p.firstPrice > p.price) {
+            if(oldPriceEl) oldPriceEl.innerText = priceFmt.format(p.firstPrice);
+            if(discountEl) discountEl.innerText = p.discountPercent;
+
+            if(boxOldPrice) boxOldPrice.style.display = 'flex';
+            if(boxDiscount) boxDiscount.style.display = 'flex';
+        } else {
+            if(boxOldPrice) boxOldPrice.style.display = 'none';
+            if(boxDiscount) boxDiscount.style.display = 'none';
+        }
+
+        var descContainer = document.getElementById('v-descriptionList');
+        if(descContainer) {
+            descContainer.innerHTML = '';
+            if (p.descriptions && p.descriptions.length > 0) {
+                var htmlDesc = '';
+                p.descriptions.forEach(function(d) {
+                    // SỬA LỖI TẠI ĐÂY: Dùng nháy đơn và dấu cộng
+                    htmlDesc += '<div class="view-text-item">';
+                    htmlDesc +=     '<h5>' + d.title + '</h5>';
+                    htmlDesc +=     '<p>' + d.description + '</p>';
+                    htmlDesc += '</div>';
+                });
+                descContainer.innerHTML = htmlDesc;
+            } else {
+                descContainer.innerHTML = '<p style="color:#888; font-style:italic">Không có mô tả bổ sung.</p>';
+            }
+        }
+
+        var detailContainer = document.getElementById('v-detailList');
+        if(detailContainer) {
+            detailContainer.innerHTML = '';
+            if (p.details && p.details.length > 0) {
+                var htmlDetail = '';
+                p.details.forEach(function(dt) {
+                    var dtImgSrc = dt.image ? (contextPath + '/assets/img/details/' + dt.image) : '';
+
+                    // SỬA LỖI TẠI ĐÂY:
+                    var imgTag = dtImgSrc ? '<img src="' + dtImgSrc + '" alt="Detail">' : '';
+
+                    htmlDetail += '<div class="view-detail-card">';
+                    htmlDetail +=     imgTag;
+                    htmlDetail +=     '<div class="view-detail-info">';
+                    htmlDetail +=         '<h5>' + dt.title + '</h5>';
+                    htmlDetail +=         '<p>' + dt.description + '</p>';
+                    htmlDetail +=     '</div>';
+                    htmlDetail += '</div>';
+                });
+                detailContainer.innerHTML = htmlDetail;
+            } else {
+                detailContainer.innerHTML = '<p style="color:#888; font-style:italic">Không có chi tiết sản phẩm.</p>';
+            }
+        }
+    }
+    var contextPath = '${pageContext.request.contextPath}';
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        fetch(contextPath + '/api/categories-list')
+            .then(res => res.json())
+            .then(data => renderCategoriesExact(data))
+            .catch(err => console.error(err));
+
+        loadProducts(0);
+
+        document.getElementById('edit-oldPrice').addEventListener('input', calculateNewPrice);
+        document.getElementById('edit-discount').addEventListener('input', calculateNewPrice);
+    });
+
+    // --- 1. HÀM CLICK NÚT SỬA (GỌI API) ---
+    document.addEventListener("DOMContentLoaded", function () {
+        // Tải danh mục, brand, keyword khi trang vừa load
+        if(typeof loadProducts === "function") loadProducts(0);
+        loadBrandOptions();
+        loadKeywordOptions();
+    });
+
+    // Hàm hiển thị Form sửa
+    function editProduct(id) {
+        console.log("Bắt đầu sửa sản phẩm ID: " + id);
+
+        if (typeof hideAllSections === 'function') {
+            hideAllSections();
+        }
+
+
+        var editPage = document.getElementById('editProductPage');
+        if (editPage) {
+            editPage.style.display = 'block';
+
+            // Reset form
+            document.getElementById('editProductForm').reset();
+            document.getElementById('edit-v-image').src = contextPath + '/assets/img/no-image.png';
+            document.getElementById('edit-v-descriptionList').innerHTML = '';
+            document.getElementById('edit-v-detailList').innerHTML = '';
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            console.error("Không tìm thấy div id='editProductPage'");
+            return;
+        }
+
+        // 2. Gọi API lấy dữ liệu chi tiết
+        fetch(contextPath + '/api/product-detail?id=' + id)
+            .then(res => {
+                if (!res.ok) throw new Error("Lỗi server " + res.status);
+                return res.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    alert("Server báo lỗi: " + data.error);
+                } else {
+                    fillEditForm(data);
+                }
+            })
+            .catch(err => {
+                console.error("Lỗi:", err);
+                alert("Không thể tải thông tin: " + err.message);
+            });
+    }
+
+    // --- 2. HÀM ĐỔ DỮ LIỆU VÀO FORM (ĐÃ CẬP NHẬT LOGIC ID) ---
+    function fillEditForm(p) {
+        console.log("Dữ liệu nhận được:", p);
+
+        // 1. Thông tin cơ bản
+        document.getElementById('edit-id').value = p.id || "";
+        document.getElementById('edit-name').value = p.name || "";
+
+        var createdSpan = document.getElementById('view-created-at');
+        if (createdSpan) createdSpan.innerText = p.createdAt || "---";
+
+        // 2. Select Box
+        setSelectValue('edit-brand', p.brandId);
+        setSelectValue('edit-tags', p.keywordId);
+
+        // 3. Giá cả
+        document.getElementById('edit-oldPrice').value = p.firstPrice || 0;
+        document.getElementById('edit-discount').value = p.discountPercent || 0;
+        document.getElementById('edit-newPrice').value = p.price || 0;
+
+        // 4. Kho hàng & Trạng thái
+        document.getElementById('edit-stock').value = p.quantity || 0;
+        document.getElementById('edit-sold').value = p.quantitySaled || 0;
+        document.getElementById('edit-isPost').checked = (p.post === 1);
+
+        // 5. Ảnh đại diện
+        var imgPath = p.image ? (contextPath + '/assets/img/products/' + p.image) : (contextPath + '/assets/img/no-image.png');
+        document.getElementById('edit-v-image').src = imgPath;
+        document.getElementById('edit-oldImageName').value = p.image || "";
+
+        // 6. Mô tả (CẬP NHẬT: Truyền thêm ID)
+        var descContainer = document.getElementById('edit-v-descriptionList');
+        if(descContainer) {
+            descContainer.innerHTML = "";
+            if (p.descriptions && p.descriptions.length > 0) {
+                p.descriptions.forEach(d => {
+                    // Truyền d.id vào hàm (nếu null thì truyền 0)
+                    addDescriptionRow(d.id || 0, d.title, d.description);
+                });
+            }
+        }
+
+        // 7. Chi tiết (CẬP NHẬT: Truyền thêm ID)
+        var detailContainer = document.getElementById('edit-v-detailList');
+        if(detailContainer) {
+            detailContainer.innerHTML = "";
+            if (p.details && p.details.length > 0) {
+                p.details.forEach(dt => {
+                    // Truyền dt.id vào hàm
+                    addDetailRow(dt.id || 0, dt.title, dt.description, dt.image);
+                });
+            }
+        }
+    }
+
+    var isUpdating = false;
+
+    // --- HÀM TÍNH TOÁN GIÁ (Helper) ---
+    function calculateNewPrice() {
+        var oldPrice = parseFloat(document.getElementById('edit-oldPrice').value) || 0;
+        var discount = parseFloat(document.getElementById('edit-discount').value) || 0;
+        // Tính giá sau giảm
+        var newPrice = oldPrice - (oldPrice * discount / 100);
+        document.getElementById('edit-newPrice').value = Math.round(newPrice);
+    }
+
+    // --- HÀM UPDATE CHÍNH ---
+    function updateProduct() {
+        var id = document.getElementById('edit-id').value;
+        if (!id) { alert("Lỗi: Thiếu ID sản phẩm."); return; }
+        if (isUpdating) return;
+
+        var btnSave = document.querySelector("#editProductPage .btn-save");
+        if (btnSave) { btnSave.innerText = "Đang lưu..."; btnSave.disabled = true; }
+        isUpdating = true;
+
+        var formData = new FormData();
+        formData.append("id", id);
+        formData.append("name", getValue("edit-name"));
+
+        // --- FIX QUAN TRỌNG: Thêm || 0 để tránh lỗi parseInt("") ---
+        formData.append("price_first", getValue("edit-oldPrice") || 0);
+        formData.append("price_total", getValue("edit-newPrice") || 0);
+        formData.append("quantity", getValue("edit-stock") || 0);
+
+        // Lưu ý: Kiểm tra kỹ xem edit-tags là Category hay Keyword.
+        // Code dưới đây giả định bạn đang dùng nó thay cho categories_id như code cũ của bạn.
+        formData.append("categories_id", getValue("edit-tags") || 0);
+        formData.append("brands_id", getValue("edit-brand") || 0);
+
+        var isPost = document.getElementById("edit-isPost").checked ? 1 : 0;
+        formData.append("post", isPost);
+
+        formData.append("old_image", getValue("edit-oldImageName"));
+        var mainFileInput = document.getElementById("input-file-edit");
+        if (mainFileInput.files.length > 0) {
+            formData.append("image", mainFileInput.files[0]);
+        }
+
+        // Xử lý Description
+        document.querySelectorAll("#edit-v-descriptionList .edit-item-box").forEach(function(item) {
+            var dTitle = item.querySelector("input[name='descTitle']").value;
+            if (dTitle && dTitle.trim() !== "") {
+                formData.append("desc_id", item.querySelector("input[name='descId']").value || "0");
+                formData.append("desc_title", dTitle);
+                formData.append("desc_content", item.querySelector("textarea[name='descContent']").value);
+            }
+        });
+
+        // Xử lý Detail
+        document.querySelectorAll("#edit-v-detailList .edit-detail-card").forEach(function(item, index) {
+            formData.append("detail_id", item.querySelector("input[name='detailId']").value || "0");
+            formData.append("detail_title", item.querySelector("input[name='detailTitle']").value);
+            formData.append("detail_desc", item.querySelector("textarea[name='detailContent']").value);
+            formData.append("detail_old_image", item.querySelector("input[name='detailOldImage']").value);
+
+            var fileInput = item.querySelector("input[name='detailImage']");
+            var fileKey = "detail_image_" + index;
+            if (fileInput.files.length > 0) {
+                formData.append(fileKey, fileInput.files[0]);
+            }
+        });
+
+        fetch(contextPath + '/admin/product-edit', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.redirected) {
+                    if(response.url.includes("success")) {
+                        alert("Cập nhật thành công!");
+                    } else {
+                        alert("Có lỗi xảy ra (Redirect Error).");
+                    }
+                } else {
+                    // Nếu Java forward lại trang lỗi (không redirect)
+                    return response.text().then(text => {
+                        console.error("Server Error Content:", text); // Xem lỗi trong Console F12
+                        alert("Cập nhật thất bại! Vui lòng kiểm tra Console (F12) để xem chi tiết.");
+                        isUpdating = false;
+                        resetButton(btnSave);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Lỗi kết nối server: " + error);
+                isUpdating = false;
+                resetButton(btnSave);
+            });
+    }
+
+    function getValue(id) {
+        var el = document.getElementById(id);
+        return el ? el.value : "";
+    }
+
+    function resetButton(btn) {
+        if (btn) {
+            btn.innerText = "Lưu thay đổi";
+            btn.disabled = false;
+        }
+    }
+    function addDescriptionRow(id = 0, title = "", content = "") {
+        var container = document.getElementById('edit-v-descriptionList');
+        var div = document.createElement('div');
+        div.className = 'edit-item-box';
+
+        // Thêm input hidden name="descId"
+        div.innerHTML = `
+        <input type="hidden" name="descId" value="${id}">
+        <input type="text" class="form-input edit-sub-title" name="descTitle" placeholder="Tiêu đề">
+        <textarea class="form-textarea" name="descContent" rows="2" placeholder="Nội dung mô tả..."></textarea>
+        <button type="button" class="btn-remove-item" onclick="this.parentElement.remove()" style="color:red; margin-top:5px; cursor:pointer;">Xóa dòng này</button>
+    `;
+
+        div.querySelector('input[name="descTitle"]').value = title;
+        div.querySelector('textarea[name="descContent"]').value = content;
+
+        container.appendChild(div);
+    }
+
+    // Thêm dòng chi tiết (CÓ THAM SỐ ID)
+    function addDetailRow(id = 0, title = "", content = "", imageName = "") {
+        var container = document.getElementById('edit-v-detailList');
+        var imgSrc = imageName ? (contextPath + '/assets/img/details/' + imageName) : (contextPath + '/assets/img/no-image.png');
+
+        var div = document.createElement('div');
+        div.className = 'edit-detail-card';
+
+        var html = '';
+        // Thêm input hidden name="detailId"
+        html += '<input type="hidden" name="detailId" value="' + id + '">';
+
+        html += '<input type="hidden" name="detailOldImage" value="' + imageName + '">';
+        html += '<div class="edit-card-img">';
+        html += '    <img src="' + imgSrc + '" alt="Detail" class="detail-img-preview">';
+        html += '    <label class="change-img-mini">';
+        html += '        <i class="fa-solid fa-camera"></i>';
+        html += '        <input type="file" name="detailImage" hidden onchange="previewDetailImage(this)">';
+        html += '    </label>';
+        html += '</div>';
+
+        html += '<div class="view-detail-info">';
+        html += '    <input type="text" class="form-input edit-sub-title" name="detailTitle" placeholder="Tiêu đề" value="' + (title || "") + '">';
+        html += '    <textarea class="form-textarea" name="detailContent" rows="3" placeholder="Nội dung chi tiết...">' + (content || "") + '</textarea>';
+        html += '</div>';
+
+        html += '<button type="button" class="btn-remove-detail" onclick="this.parentElement.remove()" style="position: absolute; top: 5px; right: 5px; color: red; border: none; background: none; font-size: 20px;">&times;</button>';
+
+        div.innerHTML = html;
+        container.appendChild(div);
+    }
+
+    // Preview ảnh chi tiết
+    function previewDetailImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = input.closest('.edit-card-img').querySelector('img');
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Preview ảnh chính
+    function previewImage(input, imgId) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(imgId).src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Tính giá mới
+    function calculateNewPrice() {
+        var oldPrice = parseFloat(document.getElementById('edit-oldPrice').value) || 0;
+        var discount = parseInt(document.getElementById('edit-discount').value) || 0;
+        var newPrice = oldPrice * (100 - discount) / 100;
+        document.getElementById('edit-newPrice').value = Math.round(newPrice);
+    }
+
+    // Set select value
+    function setSelectValue(id, value) {
+        var select = document.getElementById(id);
+        if(select) select.value = value;
+    }
+
+    function closeEditModal() {
+        document.getElementById('editProductPage').style.display = 'none';
+        var listSection = document.getElementById('product-manage-section');
+        if(listSection) listSection.style.display = 'block';
+    }
+
+    // --- HÀM LOAD SELECT OPTION ---
+    function loadBrandOptions() {
+        fetch(contextPath + '/api/brands')
+            .then(res => res.json())
+            .then(data => {
+                var select = document.getElementById('edit-brand');
+                if (!select) return;
+                var html = '<option value="">-- Chọn nhãn hiệu --</option>';
+                data.forEach(item => {
+                    html += '<option value="' + item.id + '">' + item.name + '</option>';
+                });
+                select.innerHTML = html;
+            })
+            .catch(err => console.error(err));
+    }
+
+    function loadKeywordOptions() {
+        fetch(contextPath + '/api/keywords')
+            .then(res => res.json())
+            .then(data => {
+                var select = document.getElementById('edit-tags');
+                if (!select) return;
+                var html = '<option value="">-- Chọn từ khóa --</option>';
+                data.forEach(item => {
+                    html += '<option value="' + item.id + '">' + item.name + '</option>';
+                });
+                select.innerHTML = html;
+            })
+            .catch(err => console.error(err));
+    }
     function deleteProduct(id) {
-        if(confirm('Bạn có chắc muốn xóa?')) {
-            console.log("Xóa " + id);
-            // Gọi API xóa ở đây...
+        if(confirm('Bạn có chắc muốn xóa sản phẩm này? Hành động này không thể hoàn tác.')) {
+
+            // SỬA ĐOẠN NÀY: Không dùng FormData nữa
+            // Dùng URLSearchParams hoặc chuỗi string đơn giản
+
+            fetch(contextPath + '/admin/product-delete', {
+                method: 'POST',
+                headers: {
+                    // Báo cho server biết đây là form data bình thường
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                // Gửi dữ liệu dạng key=value
+                body: 'id=' + id
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert("Đã xóa sản phẩm thành công!");
+                        // Reload lại bảng (gọi lại hàm load ban đầu của bạn)
+                        loadProducts(0);
+                    } else {
+                        alert("Lỗi: " + data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error('Lỗi mạng:', err);
+                    alert("Không thể kết nối đến server.");
+                });
         }
     }
 </script>

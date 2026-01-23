@@ -36,4 +36,37 @@ public class KeywordsDao extends BaseDao {
                         .one() > 0
         );
     }
+    public Keywords getById(int id) {
+        return get().withHandle(h ->
+                h.createQuery("SELECT * FROM keywords WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(Keywords.class)
+                        .findOne() // Trả về Optional<Keywords>
+                        .orElse(null) // Nếu không thấy thì trả về null
+        );
+    }
+
+    // 2. Cập nhật Keyword
+    // Trả về true nếu update thành công (có dòng bị ảnh hưởng), false nếu thất bại
+    public boolean update(Keywords keyword) {
+        return get().withHandle(h ->
+                h.createUpdate("UPDATE keywords SET name = :name, description = :description, updated_at = NOW() WHERE id = :id")
+                        .bind("id", keyword.getId())
+                        .bind("name", keyword.getName())
+                        .bind("description", keyword.getDescription())
+                        .execute() > 0 // execute() trả về số dòng thay đổi
+        );
+    }
+
+    // --- BỔ SUNG THÊM (NẾU CẦN XÓA) ---
+
+    // 3. Xóa Keyword
+    public boolean delete(int id) {
+        return get().withHandle(h ->
+                h.createUpdate("DELETE FROM keywords WHERE id = :id")
+                        .bind("id", id)
+                        .execute() > 0
+        );
+    }
+
 }
