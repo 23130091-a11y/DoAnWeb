@@ -178,61 +178,95 @@
 
                 <div class="header-cart">
                     <div class="header-cart__scale header-cart__scale--fade-product">
+
+                        <c:set var="user" value="${sessionScope.user}" />
                         <c:set var="cart" value="${sessionScope.cart}" />
-                        <!-- Icon cart -->
+
+                        <!-- ICON CART -->
                         <a href="cart">
                             <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                             <span class="header-cart__notice">
-                                    <c:choose>
-                                        <c:when test="${not empty cart}">${cart.totalQuantity}</c:when>
-                                        <c:otherwise>0</c:otherwise>
-                                    </c:choose>
-                                </span>
+                                 <c:choose>
+                                     <c:when test="${not empty cart && not empty cart.items}">
+                                         ${cart.totalQuantity}
+                                     </c:when>
+                                     <c:otherwise>0</c:otherwise>
+                                 </c:choose>
+                            </span>
                         </a>
 
-                        <!-- Dropdown cart -->
+                        <!-- DROPDOWN CART -->
                         <div class="cart-list">
                             <c:choose>
-                                <c:when test="${not empty cart}">
+
+                                <c:when test="${empty user}">
+                                    <div class="cart-list--no-cart">
+                                        <img src="assets/img/no-cart_img.png" class="header-cart__img" alt="">
+                                        <span class="header-cart__msg">Bạn cần đăng nhập</span>
+                                    </div>
+                                </c:when>
+
+                                <c:when test="${empty cart || empty cart.items}">
+                                    <div class="cart-list--no-cart">
+                                        <img src="assets/img/no-cart_img.png" class="header-cart__img" alt="">
+                                        <span class="header-cart__msg">Chưa có sản phẩm</span>
+                                    </div>
+                                </c:when>
+
+                                <c:otherwise>
                                     <div class="cart-list__wrap">
                                         <h3 class="cart-list__header">Sản phẩm đã thêm</h3>
+
                                         <ul class="cart-list__list">
                                             <c:forEach items="${cart.items}" var="item">
                                                 <li class="cart-list__item">
-                                                    <img src="${item.product.image}" alt="${item.product.name}" class="cart-list__img">
+                                                    <img src="${item.product.image}"
+                                                         alt="${item.product.name}"
+                                                         class="cart-list__img">
+
                                                     <section class="cart-list__body">
                                                         <div class="cart-list__info">
-                                                            <h4 class="cart-list__heading">${item.product.name}</h4>
+                                                            <h4 class="cart-list__heading">
+                                                                    ${item.product.name}
+                                                            </h4>
+
                                                             <div class="cart-list__price-wrap">
-                                                                <!---->
-                                                                <span class="cart-list__old-price">${item.originalPrice} đ</span>
+                                                <span class="cart-list__price">
+                                                    ${item.totalPrice} đ
+                                                </span>
                                                                 <span class="cart-list__multiply">x</span>
-                                                                <span class="cart-list__qnt">${item.quantity}</span>
+                                                                <span class="cart-list__qnt">
+                                                                        ${item.quantity}
+                                                                </span>
                                                             </div>
                                                         </div>
+
                                                         <div class="cart-list__desc">
-                                                                <span class="cart-list__product-cate">
-                                                                    Phân loại: ${item.product.categoriesId}
-                                                                </span>
-                                                            <a href="delete-cart?id=${item.product.id}" class="cart-list__remove">Xóa</a>
+                                            <span class="cart-list__product-cate">
+                                                Phân loại: ${item.product.categoriesId}
+                                            </span>
+                                                            <a href="delete-cart?id=${item.product.id}"
+                                                               class="cart-list__remove">
+                                                                Xóa
+                                                            </a>
                                                         </div>
                                                     </section>
                                                 </li>
                                             </c:forEach>
                                         </ul>
-                                        <a href="cart" class="cart-list__view btn btn--default-color">Xem giỏ hàng</a>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="cart-list--no-cart">
-                                        <img src="assets/img/no-cart_img.png" alt="" class="header-cart__img">
-                                        <span class="header-cart__msg">Chưa có sản phẩm</span>
+
+                                        <a href="cart"
+                                           class="cart-list__view btn btn--default-color">
+                                            Xem giỏ hàng
+                                        </a>
                                     </div>
                                 </c:otherwise>
+
                             </c:choose>
                         </div>
                     </div>
                 </div>
+
                 <div class="header-hotline">
                     <i class="header-hotline__icon fa-solid fa-phone-volume"></i>
                     <div>

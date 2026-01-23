@@ -77,19 +77,31 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- Quantity -->
                                 <div class="colum qty-col item-qty">
-                                    <button type="button">-</button>
-                                    <input class="text" type="text" value="${item.quantity}">
-                                    <button type="button">+</button>
+                                    <form action="${pageContext.request.contextPath}/update-cart" method="post" style="display:inline">
+                                        <input type="hidden" name="productId" value="${item.product.id}">
+                                        <input type="hidden" name="action" value="dec">
+                                        <button type="submit">-</button>
+                                    </form>
+
+                                    <input class="text" type="text" value="${item.quantity}" readonly>
+
+                                    <form action="${pageContext.request.contextPath}/update-cart" method="post" style="display:inline">
+                                        <input type="hidden" name="productId" value="${item.product.id}">
+                                        <input type="hidden" name="action" value="inc">
+                                        <button type="submit">+</button>
+                                    </form>
                                 </div>
+
                                 <!-- Total -->
                                 <span class="colum total-col">${item.totalPrice}
                                             <span class="currency">đ</span>
                                         </span>
                                 <!-- Action -->
                                 <div class="colum action-col">
-                                    <a href="delete-cart?id=${item.product.id}" class="item-delete">Xóa</a>
+                                    <a href="${pageContext.request.contextPath}/delete-cart?id=${item.product.id}" class="item-delete">Xóa</a>
                                 </div>
                             </div>
                         </c:forEach>

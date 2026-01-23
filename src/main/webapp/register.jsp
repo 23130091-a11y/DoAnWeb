@@ -23,7 +23,7 @@
     <header class="main-header">
         <div class="container">
             <div class="logo">
-                <a href="index.jsp">
+                <a href="${pageContext.request.contextPath}/list-product">
                     <img src="assets/img/logo.png" alt="Logo Gia Dụng Online">
                 </a>
                 <h1>Đăng ký</h1>

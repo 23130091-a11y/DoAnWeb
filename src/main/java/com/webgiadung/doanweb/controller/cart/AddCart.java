@@ -3,6 +3,7 @@ package com.webgiadung.doanweb.controller.cart;
 import com.webgiadung.doanweb.model.Cart;
 import com.webgiadung.doanweb.model.CartItem;
 import com.webgiadung.doanweb.model.Product;
+import com.webgiadung.doanweb.model.User;
 import com.webgiadung.doanweb.services.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -18,26 +19,54 @@ import java.util.stream.Collectors;
 public class AddCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int productId = Integer.parseInt(request.getParameter("productId"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-
         HttpSession session = request.getSession();
+
+        // ===== 1. CHECK LOGIN =====
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            // lưu lại URL để login xong quay lại
+            String query = request.getQueryString();
+            session.setAttribute("redirectAfterLogin", "add-cart?" + query);
+
+            response.sendRedirect("login");
+            return;
+        }
+
+        // ===== 2. VALIDATE PARAM =====
+        int productId;
+        int quantity;
+
+        try {
+            productId = Integer.parseInt(request.getParameter("productId"));
+            quantity = Integer.parseInt(request.getParameter("quantity"));
+        } catch (Exception e) {
+            response.sendRedirect("home");
+            return;
+        }
+
+        if (quantity <= 0) quantity = 1;
+
+        // ===== 3. LẤY / TẠO CART =====
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {
             cart = new Cart();
+            session.setAttribute("cart", cart);
         }
 
+        // ===== 4. LẤY PRODUCT =====
         ProductService productService = new ProductService();
         Product product = productService.getProduct(productId);
-        if(product != null) {
-            cart.addItem(product, quantity);
-            session.setAttribute("cart", cart);
 
-            response.sendRedirect("product-detail?id=" + productId); //
+        if (product == null) {
+            response.sendRedirect("home");
             return;
         }
-        request.setAttribute("msg", "Product not found");
-        request.getRequestDispatcher("/product.jsp").forward(request, response); //
+
+        // ===== 5. ADD CART =====
+        cart.addItem(product, quantity);
+
+        // ===== 6. REDIRECT UX =====
+        response.sendRedirect("product-detail?id=" + productId);
     }
 
     @Override

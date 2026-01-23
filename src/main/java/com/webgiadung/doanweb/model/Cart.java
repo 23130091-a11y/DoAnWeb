@@ -3,6 +3,7 @@ package com.webgiadung.doanweb.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Cart implements Serializable {
@@ -68,5 +69,27 @@ public class Cart implements Serializable {
 
     public void updateCustomerInfo(User user) {
         this.user = user;
+    }
+
+    public void increaseQuantity(int productId) {
+        CartItem item = data.get(productId);
+        if (item != null) {
+            item.setQuantity(item.getQuantity() + 1);
+        }
+    }
+
+    public void decreaseQuantity(int productId) {
+        Iterator<CartItem> iterator = data.values().iterator();
+        while (iterator.hasNext()) {
+            CartItem item = iterator.next();
+            if (item.getProduct().getId() == productId) {
+                if (item.getQuantity() > 1) {
+                    item.setQuantity(item.getQuantity() - 1);
+                } else {
+                    iterator.remove(); // quantity = 0 thì xóa
+                }
+                return;
+            }
+        }
     }
 }

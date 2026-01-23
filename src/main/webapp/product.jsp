@@ -135,7 +135,7 @@
                                 Thêm vào giỏ hàng
                             </button>
                             <button class="content-details__buy btn btn--default-color"
-                                onclick="window.location.href='checkout.jsp'">Mua ngay</button>
+                                onclick="window.location.href='${pageContext.request.contextPath}/checkout'">Mua ngay</button>
                         </div>
 
                         <div class="content-details__trp">
