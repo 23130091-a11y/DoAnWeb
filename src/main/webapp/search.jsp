@@ -219,8 +219,19 @@
                     <div class="col l-10 m-12 c-12">
                         <section class="product-search-list">
                             <div class="search-header">
-                                <p>Kết quả tìm kiếm:</p>
-                                <div class="word-search">${keyword}</div>
+                                <c:choose>
+
+                                    <c:when test="${not empty keyword}">
+                                        <p>Kết quả tìm kiếm:</p>
+                                        <div class="word-search">${keyword}</div>
+                                    </c:when>
+
+                                    <c:when test="${not empty category}">
+                                        <p>Danh mục:</p>
+                                        <div class="word-search">${category.name}</div>
+                                    </c:when>
+
+                                </c:choose>
                             </div>
                             <div class="row-list row small-gutter">
 

@@ -31,17 +31,40 @@ public class CategoriesDao extends BaseDao {
                         .orElse(null)
         );
     }
+//    public List<Categories> getCategoriesParent() {
+//        return get().withHandle(h ->
+//                h.createQuery("""
+//                    SELECT *
+//                    FROM categories
+//                    WHERE parent_id IS NULL
+//                """)
+//                        .mapToBean(Categories.class)
+//                        .list()
+//        );
+//    }
+
     public List<Categories> getCategoriesParent() {
         return get().withHandle(h ->
                 h.createQuery("""
-                    SELECT *
-                    FROM categories
-                    WHERE parent_id IS NULL
-                """)
+                SELECT *
+                FROM categories
+                WHERE parent_id IS NULL OR parent_id = 0
+            """)
                         .mapToBean(Categories.class)
                         .list()
         );
     }
+
+    public List<Categories> getCategoryTree() {
+        List<Categories> parents = getCategoriesParent();
+        for (Categories parent : parents) {
+            List<Categories> children =
+                    getCategoriesByParentId(parent.getId());
+            parent.setChildren(children);
+        }
+        return parents;
+    }
+
     // Lấy danh sách danh mục con theo parent_id
     public List<Categories> getCategoriesByParentId(int parentId) {
         return get().withHandle(h ->

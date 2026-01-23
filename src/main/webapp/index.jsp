@@ -59,35 +59,23 @@
                         <nav class="category">
                             <h2 class="category__heading">Danh mục</h2>
                             <ul class="category__list">
-                                <li class="category__item category__item--active">
-                                    <a href="#!" class="category__link">Gia dụng - Nhà cửa</a>
-                                    <ul class="category-menu">
-                                        <li class="category-menu__item">
-                                            <a href="search.jsp" class="category-menu__link">Đồ dùng nhà bếp</a>
-                                        </li>
-                                        <li class="category-menu__item">
-                                            <a href="#!" class="category-menu__link">Dụng cụ làm vườn</a>
-                                        </li>
-                                        <li class="category-menu__item">
-                                            <a href="#!" class="category-menu__link">Đồ dùng sinh hoạt</a>
-                                        </li>
-                                        <li class="category-menu__item">
-                                            <a href="#!" class="category-menu__link">Vệ sinh nhà cửa</a>
-                                        </li>
-                                        <li class="category-menu__item">
-                                            <a href="#!" class="category-menu__link">Dụng cụ sửa chữa</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="category__item">
-                                    <a href="#!" class="category__link">Phụ kiện ô tô</a>
-                                </li>
-                                <li class="category__item">
-                                    <a href="#!" class="category__link">Thời trang</a>
-                                </li>
-                                <li class="category__item">
-                                    <a href="#!" class="category__link">Âm thanh - Camera</a>
-                                </li>
+                                <c:forEach items="${parentCategories}" var="parent">
+                                    <li class="category__item category__item--active">
+                                        <a href="#!" class="category__link">${parent.name}</a>
+                                        <c:if test="${not empty parent.children}">
+                                            <ul class="category-menu">
+                                                <c:forEach items="${parent.children}" var="child">
+                                                    <li class="category-menu__item">
+                                                        <a class="category-menu__link"
+                                                           href="${pageContext.request.contextPath}/category?id=${child.id}">
+                                                                ${child.name}
+                                                        </a>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </c:if>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </nav>
                     </div>
