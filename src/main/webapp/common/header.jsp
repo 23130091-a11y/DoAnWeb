@@ -139,8 +139,8 @@
             </nav>
             <!-- Search -->
             <div class="search">
-                <a href="/" class="logo">
-                    <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
+                <a href="${pageContext.request.contextPath}/list-product" class="logo">
+                    <img class="logo__img" src="assets/img/logo.png" alt="WebGiaDung">
                 </a>
 
                 <!-- Thay toàn bộ header search bằng -->
@@ -159,16 +159,13 @@
                         <div class="search-history">
                             <h3 class="search-history__heading">Lịch sử tìm kiếm</h3>
                             <ul class="search-history__list">
-                                <li class="search-history__item">
-                                    <a href="search?keyword=Tủ lạnh aqua 90l" class="search-history__link">
-                                        Tủ lạnh aqua 90l
-                                    </a>
-                                </li>
-                                <li class="search-history__item">
-                                    <a href="search?keyword=Thuốc diệt chuột" class="search-history__link">
-                                        Thuốc diệt chuột
-                                    </a>
-                                </li>
+                                <c:forEach items="${sessionScope.searchHistory}" var="item">
+                                    <li class="search-history__item">
+                                        <a href="${pageContext.request.contextPath}/search-product?keyword=${item}" class="search-history__link">
+                                                ${item}
+                                        </a>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>

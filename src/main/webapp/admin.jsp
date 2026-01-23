@@ -49,11 +49,11 @@
             <ul class="navbar__list">
                 <li class="navbar__item">
                     <i class="navbar__icon fa-solid fa-house"></i>
-                    <a href="/index.html" class="navbar__link">Trang chủ</a>
+                    <a href="${pageContext.request.contextPath}/list-product" class="navbar__link">Trang chủ</a>
                 </li>
                 <li class="navbar__item">
                     <i class="navbar__icon fa-solid fa-right-from-bracket"></i>
-                    <a href="#!" class="navbar__link">Đăng xuất</a>
+                    <a href="${pageContext.request.contextPath}/logout" class="navbar__link">Đăng xuất</a>
                 </li>
             </ul>
         </nav>
@@ -465,7 +465,8 @@
 
                                                 <!-- Xóa/Khóa -->
                                                 <td>
-                                                    <form method="post" action="${pageContext.request.contextPath}/admin/customers/delete"
+                                                    <form method="post"
+                                                          action="${pageContext.request.contextPath}/admin/customers/lock"
                                                           onsubmit="return confirm('Khóa khách hàng này?');">
                                                         <input type="hidden" name="id" value="${u.id}">
                                                         <button type="submit" class="customer-table__delete">Xóa</button>
@@ -561,7 +562,8 @@
                                   method="post"
                                   action="${pageContext.request.contextPath}/admin/customers/update">
                                 <input type="hidden" name="id" id="editId">
-
+                                <input type="hidden" name="role" id="editRole">
+                                <input type="hidden" name="status" id="editStatus">
 
                                 <div class="customer-detail__row">
                                     <label class="label">Tên:</label>
@@ -2498,14 +2500,65 @@ window.addEventListener("DOMContentLoaded", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-    // SỬA KHÁCH HÀNG
-    document.querySelectorAll(".customer-table__edit").forEach(btn => {
+    <!-- Xem khách hàng -->
+    document.querySelectorAll(".customer-table__view").forEach(btn => {
         btn.addEventListener("click", () => {
+
             hideAllSections();
-            sectionCustomerEdit.style.display = "block";
+
+            // HIỆN DETAIL (gỡ class hidden)
+            sectionCustomerDetail.classList.remove("hidden");
+            sectionCustomerDetail.style.display = "block";
+
+            // ĐỔ DATA
+            document.getElementById("customerDetailName").innerText = btn.dataset.name;
+            document.getElementById("customerDetailEmail").innerText = btn.dataset.email;
+            document.getElementById("customerDetailPhone").innerText = btn.dataset.phone || "-";
+            document.getElementById("customerDetailAddress").innerText = btn.dataset.address || "-";
+
+            document.getElementById("customerDetailCreatedAt").innerText =
+                btn.dataset.created || "-";
+
+            document.getElementById("customerDetailUpdatedAt").innerText =
+                btn.dataset.updated || "-";
+
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     });
+
+
+    // SỬA KHÁCH HÀNG
+    // ===== SỬA KHÁCH HÀNG =====
+    document.querySelectorAll("edit").forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            // 1. LẤY DATA TỪ BUTTON
+            const id = btn.dataset.id;
+            const name = btn.dataset.name;
+            const email = btn.dataset.email;
+            const phone = btn.dataset.phone;
+            const address = btn.dataset.address;
+            const role = btn.dataset.role;
+            const status = btn.dataset.status;
+
+            // 2. ĐỔ DỮ LIỆU VÀO FORM
+            document.getElementById("editId").value = id;
+            document.getElementById("editName").value = name;
+            document.getElementById("editEmail").value = email;
+            document.getElementById("editPhone").value = phone ?? "";
+            document.getElementById("editAddress").value = address ?? "";
+            document.getElementById("editRole").value = role;
+            document.getElementById("editStatus").value = status;
+
+            // 3. SHOW FORM EDIT
+            hideAllSections();
+            sectionCustomerEdit.style.display = "block";
+
+            // 4. SCROLL LÊN ĐẦU
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
     function hideCustomerEdit() {
         hideAllSections();
         sectionCustomer.style.display = "block";
