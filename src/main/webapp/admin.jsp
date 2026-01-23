@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html lang="en">
@@ -49,11 +49,11 @@
             <ul class="navbar__list">
                 <li class="navbar__item">
                     <i class="navbar__icon fa-solid fa-house"></i>
-                    <a href="/index.html" class="navbar__link">Trang chủ</a>
+                    <a href="${pageContext.request.contextPath}/list-product" class="navbar__link">Trang chủ</a>
                 </li>
                 <li class="navbar__item">
                     <i class="navbar__icon fa-solid fa-right-from-bracket"></i>
-                    <a href="#!" class="navbar__link">Đăng xuất</a>
+                    <a href="${pageContext.request.contextPath}/logout" class="navbar__link">Đăng xuất</a>
                 </li>
             </ul>
         </nav>
@@ -76,7 +76,7 @@
                                 <a href="#news" class="manage-nav__link">Tin tức</a>
                             </li>
                             <li class="manage-nav__item">
-                                <a href="#customer" class="manage-nav__link">Khách hàng</a>
+                                <a href="${pageContext.request.contextPath}/admin/customers" class="manage-nav__link">Khách hàng</a>
 
                             </li>
 
@@ -385,7 +385,7 @@
                             </form>
                         </div>
                     </section>
-SD
+
 
                     <section id="customer" class="admin-section">
                         <div class="section-header">
@@ -465,7 +465,8 @@ SD
 
                                                 <!-- Xóa/Khóa -->
                                                 <td>
-                                                    <form method="post" action="${pageContext.request.contextPath}/admin/customers/delete"
+                                                    <form method="post"
+                                                          action="${pageContext.request.contextPath}/admin/customers/lock"
                                                           onsubmit="return confirm('Khóa khách hàng này?');">
                                                         <input type="hidden" name="id" value="${u.id}">
                                                         <button type="submit" class="customer-table__delete">Xóa</button>
@@ -561,7 +562,8 @@ SD
                                   method="post"
                                   action="${pageContext.request.contextPath}/admin/customers/update">
                                 <input type="hidden" name="id" id="editId">
-
+                                <input type="hidden" name="role" id="editRole">
+                                <input type="hidden" name="status" id="editStatus">
 
                                 <div class="customer-detail__row">
                                     <label class="label">Tên:</label>
@@ -2064,17 +2066,18 @@ window.addEventListener("DOMContentLoaded", () => {
 });
     // Click menu
     menuLinks.forEach(link => {
-        link.addEventListener("click", function(e) {
+        link.addEventListener("click", function (e) {
+            const href = this.getAttribute("href") || "";
+            if (!href.startsWith("#")) return;
             e.preventDefault();
-            const targetId = this.getAttribute("href").replace("#","");
+            const targetId = href.substring(1);
             hideAllSections(); // ẩn tất cả trước
-            if(targetId === "config") sectionConfig.style.display = "block";
-            if(targetId === "product") sectionProduct.style.display = "block";
-            if(targetId === "order") sectionOrder.style.display = "block";
+
+            if (targetId === "config") sectionConfig.style.display = "block";
+            if (targetId === "product") sectionProduct.style.display = "block";
+            if (targetId === "order") sectionOrder.style.display = "block";
             if (targetId === "customer") sectionCustomer.style.display = "block";
-            if (targetId === "news") {
-                showNewsDefault();
-            }
+            if (targetId === "news") showNewsDefault();
         });
     });
     productMenuButtons.forEach(btn => {
@@ -2447,14 +2450,65 @@ window.addEventListener("DOMContentLoaded", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-    // SỬA KHÁCH HÀNG
-    document.querySelectorAll(".customer-table__edit").forEach(btn => {
+    <!-- Xem khách hàng -->
+    document.querySelectorAll(".customer-table__view").forEach(btn => {
         btn.addEventListener("click", () => {
+
             hideAllSections();
-            sectionCustomerEdit.style.display = "block";
+
+            // HIỆN DETAIL (gỡ class hidden)
+            sectionCustomerDetail.classList.remove("hidden");
+            sectionCustomerDetail.style.display = "block";
+
+            // ĐỔ DATA
+            document.getElementById("customerDetailName").innerText = btn.dataset.name;
+            document.getElementById("customerDetailEmail").innerText = btn.dataset.email;
+            document.getElementById("customerDetailPhone").innerText = btn.dataset.phone || "-";
+            document.getElementById("customerDetailAddress").innerText = btn.dataset.address || "-";
+
+            document.getElementById("customerDetailCreatedAt").innerText =
+                btn.dataset.created || "-";
+
+            document.getElementById("customerDetailUpdatedAt").innerText =
+                btn.dataset.updated || "-";
+
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     });
+
+
+    // SỬA KHÁCH HÀNG
+    // ===== SỬA KHÁCH HÀNG =====
+    document.querySelectorAll("edit").forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            // 1. LẤY DATA TỪ BUTTON
+            const id = btn.dataset.id;
+            const name = btn.dataset.name;
+            const email = btn.dataset.email;
+            const phone = btn.dataset.phone;
+            const address = btn.dataset.address;
+            const role = btn.dataset.role;
+            const status = btn.dataset.status;
+
+            // 2. ĐỔ DỮ LIỆU VÀO FORM
+            document.getElementById("editId").value = id;
+            document.getElementById("editName").value = name;
+            document.getElementById("editEmail").value = email;
+            document.getElementById("editPhone").value = phone ?? "";
+            document.getElementById("editAddress").value = address ?? "";
+            document.getElementById("editRole").value = role;
+            document.getElementById("editStatus").value = status;
+
+            // 3. SHOW FORM EDIT
+            hideAllSections();
+            sectionCustomerEdit.style.display = "block";
+
+            // 4. SCROLL LÊN ĐẦU
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
     function hideCustomerEdit() {
         hideAllSections();
         sectionCustomer.style.display = "block";

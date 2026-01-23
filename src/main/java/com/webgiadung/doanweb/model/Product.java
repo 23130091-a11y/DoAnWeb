@@ -31,9 +31,46 @@ public class Product implements Serializable {
     private List<ProductImage> images;          // Ảnh phụ
     private List<ProductReview> reviews;        // Đánh giá
 
+    // rating tính sẵn từ SQL (dùng cho trang list)
+    private Double ratingAvg;
+
+    public Double getRatingAvg() {
+        return ratingAvg;
+    }
+
+    public void setRatingAvg(Double ratingAvg) {
+        this.ratingAvg = ratingAvg;
+    }
+
+    // ===== Khuyến mãi (dùng cho trang list) =====
+    private Double discountPercent;   // 25
+    private String discountType;      // percentage | fixed
+
+    public Double getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(Double discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    public String getDiscountType() {
+        return discountType;
+    }
+
+    public void setDiscountType(String discountType) {
+        this.discountType = discountType;
+    }
+
     public double getRating() {
         if (reviews == null || reviews.isEmpty()) return 0.0;
-        return reviews.stream().mapToDouble(ProductReview::getRating).average().orElse(0.0);
+
+        double avg = reviews.stream()
+                .mapToDouble(ProductReview::getRating)
+                .average()
+                .orElse(0.0);
+
+        return Math.round(avg * 10.0) / 10.0; // làm tròn 1 chữ số
     }
 
     public int getRatingInt() {

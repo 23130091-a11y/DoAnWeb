@@ -7,6 +7,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "SearchServlet", value = "/search-product")
@@ -30,6 +31,24 @@ public class SearchServlet extends HttpServlet {
             request.getRequestDispatcher("/search.jsp").forward(request, response);
             return;
         }
+
+        // ===== LƯU LỊCH SỬ TÌM KIẾM =====
+        HttpSession session = request.getSession();
+        List<String> searchHistory = (List<String>) session.getAttribute("searchHistory");
+
+        if (searchHistory == null) {
+            searchHistory = new ArrayList<>();
+        }
+
+        searchHistory.remove(keyword);
+        searchHistory.add(0, keyword);
+
+        if (searchHistory.size() > 5) {
+            searchHistory = searchHistory.subList(0, 5);
+        }
+
+        session.setAttribute("searchHistory", searchHistory);
+        // ===============================
 
         ProductDao productDao = new ProductDao();
         List<Product> products = productDao.searchByName(keyword);

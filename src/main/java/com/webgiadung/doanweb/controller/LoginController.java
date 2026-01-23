@@ -25,13 +25,18 @@ public class LoginController extends HttpServlet {
 
         if (user != null) {
             HttpSession session = request.getSession(true);
-            session.setAttribute("user", user);      // KEY PHẢI LÀ "user" để AdminCustomerController đọc được
-            session.setAttribute("USER_LOGIN", user); // (giữ lại nếu chỗ khác trong web bạn đang dùng)
-            response.sendRedirect(request.getContextPath() + "/list-product");
+            session.setAttribute("user", user);
+            session.setAttribute("USER_LOGIN", user);
+
+            // PHÂN QUYỀN CHUYỂN TRANG
+            if (user.getRole() == 1) {
+                // ADMIN
+                response.sendRedirect(request.getContextPath() + "/admin/customers");
+            } else {
+                // USER
+                response.sendRedirect(request.getContextPath() + "/list-product");
+            }
             return;
-        } else {
-            request.setAttribute("error", "Sai email hoặc mật khẩu");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 }

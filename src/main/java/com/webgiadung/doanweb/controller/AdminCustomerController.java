@@ -66,13 +66,20 @@ public class AdminCustomerController extends HttpServlet {
         String uri = request.getRequestURI();
 
         if (uri.endsWith("/admin/customers/update")) {
-            int id = Integer.parseInt(request.getParameter("id"));
+
+            int id = parseIntSafe(request.getParameter("id"), -1);
+            if (id == -1) {
+                response.sendRedirect(request.getContextPath() + "/admin/customers?error=invalid_id");
+                return;
+            }
+
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
-            int role = Integer.parseInt(request.getParameter("role"));
-            int status = Integer.parseInt(request.getParameter("status"));
+
+            int role = parseIntSafe(request.getParameter("role"), 0);
+            int status = parseIntSafe(request.getParameter("status"), 1);
 
             User u = new User();
             u.setId(id);
@@ -84,7 +91,6 @@ public class AdminCustomerController extends HttpServlet {
             u.setStatus(status);
 
             String password = request.getParameter("password");
-
             if (password != null && !password.trim().isEmpty()) {
                 u.setPassword(password.trim());
                 authDao.adminUpdateUserWithPassword(u);
@@ -92,19 +98,24 @@ public class AdminCustomerController extends HttpServlet {
                 authDao.adminUpdateUser(u);
             }
 
-            response.sendRedirect(request.getContextPath() + "/admin/customers");
-            return;
+        } else if (uri.endsWith("/admin/customers/lock")) {
 
+            int id = parseIntSafe(request.getParameter("id"), -1);
+            if (id != -1) {
+                authDao.adminSoftDeleteUser(id);
+            }
         }
 
-        if (uri.endsWith("/admin/customers/lock")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            authDao.adminSoftDeleteUser(id);
-
-            response.sendRedirect(request.getContextPath() + "/admin/customers");
-            return;
-        }
-
+        // REDIRECT DUY NHẤT 1 LẦN
         response.sendRedirect(request.getContextPath() + "/admin/customers");
+    }
+
+    private int parseIntSafe(String value, int defaultValue) {
+        try {
+            if (value == null || value.trim().isEmpty()) return defaultValue;
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
     }
 }

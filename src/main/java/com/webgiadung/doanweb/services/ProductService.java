@@ -49,6 +49,27 @@ public class ProductService {
     public List<ProductDetails> getDetailsByProduct(int productId) {
         return detailDao.findByProductId(productId);
     }
+
+    public List<Product> getFeaturedProducts() {
+        return pdao.getFeaturedProducts();
+    }
+
+    public List<Product> getPromotionProducts() {
+        return pdao.getPromotionProducts();
+    }
+
+    public List<Product> getSuggestedProducts() {
+        return pdao.getSuggestedProducts();
+    }
+
+    public List<Product> getLimitedProducts() {
+        return pdao.getLimitedProducts();
+    }
+
+    public List<Product> getNewProducts() {
+        return pdao.getNewProducts();
+    }
+
     public List<Product> getProductsByCategory(int categoryId) {
         return pdao.getByCategoryId(categoryId);
     }
@@ -90,4 +111,3 @@ public class ProductService {
         return pdao.deleteProduct(id);
     }
 }
-

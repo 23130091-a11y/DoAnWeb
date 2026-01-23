@@ -63,9 +63,10 @@ a {
 .login-container {
     position: absolute;
     top: 50%;
-    right: 10%;
+    right: 5%;
     transform: translateY(-50%);
     z-index: 10;
+    width: 390px;
 }
 
 .login-form {
@@ -73,7 +74,7 @@ a {
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 380px;
+    width: 100%;
     font-size: inherit;
 }
 
@@ -141,4 +142,47 @@ a {
 .register-link a {
     color: #FF8C00;
     font-weight: bold;
+}
+
+/* CSS nút đăng nhập với Google */
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+    width: 100%;
+    padding: 12px 16px;
+
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider span {
+    margin: 0 10px;
 }
