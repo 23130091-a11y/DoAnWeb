@@ -110,4 +110,11 @@ public class ProductService {
     public boolean deleteProduct(int id) {
         return pdao.deleteProduct(id);
     }
+    public int applyDiscountToAll(int discountId) {
+        return pdao.applyDiscountToAll(discountId);
+    }
+
+    public int applyDiscountToCategory(int categoryId, int discountId) {
+        return pdao.applyDiscountToCategory(categoryId, discountId);
+    }
 }

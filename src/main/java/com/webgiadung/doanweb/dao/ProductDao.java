@@ -618,5 +618,43 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+    public int applyDiscountToAll(int newDiscountId) {
+        return get().withHandle(handle -> {
+            return handle.createUpdate("""
+        UPDATE products p
+        CROSS JOIN discounts d ON d.id = :discountId
+        SET p.discounts_id = :discountId,
+            p.price_total = CASE 
+                WHEN d.type_discount = 'percentage' THEN p.price_first * (1 - d.discount / 100)
+                WHEN d.type_discount = 'amount' THEN GREATEST(p.price_first - d.discount, 0)
+                ELSE p.price_first 
+            END,
+            p.updated_at = NOW()
+    """)
+                    .bind("discountId", newDiscountId)
+                    .execute();
+        });
+    }
 
+    public int applyDiscountToCategory(int categoryId, int newDiscountId) {
+        return get().withHandle(handle -> {
+            return handle.createUpdate("""
+        UPDATE products p
+        CROSS JOIN discounts d ON d.id = :discountId
+        SET p.discounts_id = :discountId,
+            p.price_total = CASE 
+                WHEN d.type_discount = 'percentage' THEN p.price_first * (1 - d.discount / 100)
+                WHEN d.type_discount = 'amount' THEN GREATEST(p.price_first - d.discount, 0)
+                ELSE p.price_first 
+            END,
+            p.updated_at = NOW()
+        WHERE p.categories_id = :categoryId
+    """)
+                    .bind("categoryId", categoryId)
+                    .bind("discountId", newDiscountId)
+                    .execute();
+        });
+    }
 }
+
+

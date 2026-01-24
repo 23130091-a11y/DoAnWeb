@@ -11,12 +11,11 @@ public class Discounts implements Serializable {
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private int slideId;
 
     public Discounts() {
     }
 
-    public Discounts(int id, String name, String typeDiscount, double discount, String description, LocalDateTime startDate, LocalDateTime endDate, int slideId) {
+    public Discounts(int id, String name, String typeDiscount, double discount, String description, LocalDateTime startDate, LocalDateTime endDate) {
         this.id = id;
         this.name = name;
         this.typeDiscount = typeDiscount;
@@ -24,7 +23,6 @@ public class Discounts implements Serializable {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.slideId = slideId;
     }
 
     public int getId() {
@@ -83,14 +81,6 @@ public class Discounts implements Serializable {
         this.endDate = endDate;
     }
 
-    public int getSlideId() {
-        return slideId;
-    }
-
-    public void setSlideId(int slideId) {
-        this.slideId = slideId;
-    }
-
     @Override
     public String toString() {
         return "Discounts{" +
@@ -101,7 +91,6 @@ public class Discounts implements Serializable {
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", slideId=" + slideId +
                 '}';
     }
 }
