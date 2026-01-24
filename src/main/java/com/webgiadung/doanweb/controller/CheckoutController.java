@@ -55,7 +55,7 @@ public class CheckoutController extends HttpServlet {
         try {
             orderDao.placeOrder(user, cart, shipFee);
 
-            session.removeAttribute("cart");
+            session.setAttribute("cart", new Cart());
 
             resp.sendRedirect(req.getContextPath() + "/account?tab=orders#orders-all");
         } catch (Exception e) {

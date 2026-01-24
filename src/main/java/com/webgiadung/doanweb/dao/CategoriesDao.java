@@ -31,17 +31,52 @@ public class CategoriesDao extends BaseDao {
                         .orElse(null)
         );
     }
+//    public List<Categories> getCategoriesParent() {
+//        return get().withHandle(h ->
+//                h.createQuery("""
+//                    SELECT *
+//                    FROM categories
+//                    WHERE parent_id IS NULL
+//                """)
+//                        .mapToBean(Categories.class)
+//                        .list()
+//        );
+//    }
 
-    // Lấy chuỗi danh mục cha đầy đủ
-    public List<Categories> getParentChain(int categoryId) {
-        List<Categories> chain = new java.util.ArrayList<>();
-        Categories current = getCategory(categoryId);
-        while (current != null && current.getParentId() != 0) {
-            Categories parent = getCategory(current.getParentId());
-            if(parent != null) chain.add(0, parent); // thêm đầu danh sách
-            current = parent;
+    public List<Categories> getCategoriesParent() {
+        return get().withHandle(h ->
+                h.createQuery("""
+                SELECT *
+                FROM categories
+                WHERE parent_id IS NULL OR parent_id = 0
+            """)
+                        .mapToBean(Categories.class)
+                        .list()
+        );
+    }
+
+    public List<Categories> getCategoryTree() {
+        List<Categories> parents = getCategoriesParent();
+        for (Categories parent : parents) {
+            List<Categories> children =
+                    getCategoriesByParentId(parent.getId());
+            parent.setChildren(children);
         }
-        return chain;
+        return parents;
+    }
+
+    // Lấy danh sách danh mục con theo parent_id
+    public List<Categories> getCategoriesByParentId(int parentId) {
+        return get().withHandle(h ->
+                h.createQuery("""
+                    SELECT *
+                    FROM categories
+                    WHERE parent_id = :parentId
+                """)
+                        .bind("parentId", parentId)
+                        .mapToBean(Categories.class)
+                        .list()
+        );
     }
     public Categories findByName(String name) {
         // Giả sử bạn dùng JDBI giống như ProductDao

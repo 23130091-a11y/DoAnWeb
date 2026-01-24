@@ -1,5 +1,7 @@
 package com.webgiadung.doanweb.controller;
 
+import com.webgiadung.doanweb.dao.CategoriesDao;
+import com.webgiadung.doanweb.model.Categories;
 import com.webgiadung.doanweb.model.Product;
 import com.webgiadung.doanweb.model.Slide;
 import com.webgiadung.doanweb.services.ProductService;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @WebServlet(name = "listProduct", value = "/list-product")
 public class ListProductController extends HttpServlet {
+    private CategoriesDao categoriesDao = new CategoriesDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductService productService = new ProductService();
@@ -23,6 +26,27 @@ public class ListProductController extends HttpServlet {
 
         request.setAttribute("list", list);
         request.setAttribute("slides", slides);
+
+        // LOAD CÁC LOẠI SẢN PHẨM
+        request.setAttribute("featuredProducts",
+                productService.getFeaturedProducts());
+
+        request.setAttribute("promotionProducts",
+                productService.getPromotionProducts());
+
+        request.setAttribute("suggestedProducts",
+                productService.getSuggestedProducts());
+
+        request.setAttribute("limitedProducts",
+                productService.getLimitedProducts());
+
+        request.setAttribute("newProducts",
+                productService.getNewProducts());
+
+        List<Categories> parentCategories =
+                categoriesDao.getCategoryTree();
+
+        request.setAttribute("parentCategories", parentCategories);
 
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }

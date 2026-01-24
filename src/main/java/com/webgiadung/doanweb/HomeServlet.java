@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "HomeServlet", value = "/homeservlet")
+@WebServlet(name = "HomeServlet", value = "/home-servlet")
 public class HomeServlet extends HttpServlet {
     private String message;
 

@@ -2,6 +2,7 @@ package com.webgiadung.doanweb.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Categories implements Serializable {
     private int id;
@@ -11,6 +12,16 @@ public class Categories implements Serializable {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int parentId;
+
+    private List<Categories> children;
+
+    public List<Categories> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Categories> children) {
+        this.children = children;
+    }
 
     public Categories(String name, String description, int post, int parentId) {
         this.name = name;

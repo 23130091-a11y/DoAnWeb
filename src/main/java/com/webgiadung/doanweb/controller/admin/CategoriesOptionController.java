@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.StringJoiner;
 
-// QUAN TRỌNG: URL này phải khớp với JS: fetchData('/DoAnWeb/api/categories'...)
 @WebServlet("/api/categories")
 public class CategoriesOptionController extends HttpServlet {
 
@@ -49,8 +48,8 @@ public class CategoriesOptionController extends HttpServlet {
             out.flush();
 
         } catch (Exception e) {
-            e.printStackTrace(); // In lỗi ra console server nếu có
-            response.setStatus(500); // Báo lỗi 500 cho JS biết
+            e.printStackTrace();
+            response.setStatus(500);
         }
     }
 }
