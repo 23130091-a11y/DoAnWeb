@@ -23,15 +23,30 @@ public class LoginController extends HttpServlet {
         AuthService authService = new AuthService();
         User user = authService.checkLogin(email, password);
 
-        if (user != null) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("user", user);      // KEY PHẢI LÀ "user" để AdminCustomerController đọc được
-            session.setAttribute("USER_LOGIN", user); // (giữ lại nếu chỗ khác trong web bạn đang dùng)
-            response.sendRedirect(request.getContextPath() + "/list-product");
-            return;
-        } else {
+        // 1) Sai tài khoản/mật khẩu
+        if (user == null) {
             request.setAttribute("error", "Sai email hoặc mật khẩu");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
+            return;
+        }
+
+        // 2) Bị khóa
+        if (user.getStatus() == 0) {
+            request.setAttribute("error", "Tài khoản đã bị khóa!");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            return;
+        }
+
+        // 3) Lưu session
+        HttpSession session = request.getSession(true);
+        session.setAttribute("user", user);
+        session.setAttribute("USER_LOGIN", user);
+
+        // 4) Điều hướng theo role
+        if (user.getRole() == 1) {
+            response.sendRedirect(request.getContextPath() + "/admin/customers");
+        } else {
+            response.sendRedirect(request.getContextPath() + "/list-product");
         }
     }
 }

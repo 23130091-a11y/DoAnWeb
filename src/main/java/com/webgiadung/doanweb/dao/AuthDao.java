@@ -169,4 +169,47 @@ public class AuthDao extends BaseDao {
                         .isPresent()
         );
     }
+    // ===== USER: ACCOUNT (UPDATE PROFILE + CHANGE PASSWORD) =====
+    public User findByIdFull(int id) {
+        return get().withHandle(h ->
+                h.createQuery("SELECT * FROM users WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(User.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+
+    public boolean updateProfile(int id, String name, String phone, String address) {
+        int updated = get().withHandle(h ->
+                h.createUpdate("UPDATE users SET name = :name, phone = :phone, address = :address, updated_at = NOW() WHERE id = :id")
+                        .bind("id", id)
+                        .bind("name", name)
+                        .bind("phone", phone)
+                        .bind("address", address)
+                        .execute()
+        );
+        return updated > 0;
+    }
+
+    public boolean checkPassword(int id, String oldPass) {
+        Integer cnt = get().withHandle(h ->
+                h.createQuery("SELECT COUNT(*) FROM users WHERE id=:id AND password=:pass")
+                        .bind("id", id)
+                        .bind("pass", oldPass)
+                        .mapTo(Integer.class)
+                        .one()
+        );
+        return cnt != null && cnt > 0;
+    }
+
+    public boolean updatePassword(int id, String newPass) {
+        int updated = get().withHandle(h ->
+                h.createUpdate("UPDATE users SET password=:pass, updated_at=NOW() WHERE id=:id")
+                        .bind("id", id)
+                        .bind("pass", newPass)
+                        .execute()
+        );
+        return updated > 0;
+    }
 }

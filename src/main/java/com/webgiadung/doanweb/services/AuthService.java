@@ -10,10 +10,15 @@ public class AuthService {
         User user = authDao.getUserByEmail(email);
         if (user == null) return null;
 
-        if (user.getPassword().equals(password)) {
-            return user;
-        }
-        return null;
+        // CHẶN TÀI KHOẢN BỊ KHÓA
+        if (user.getStatus() != 1) return null;
+
+        // check password
+        if (user.getPassword() == null) return null;
+        if (password == null) password = "";
+        if (!user.getPassword().equals(password)) return null;
+
+        return user;
     }
 
     public User loginWithGoogle(String email, String name) {

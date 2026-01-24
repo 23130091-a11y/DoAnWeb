@@ -161,7 +161,7 @@
 
                                 <ul class="navbar-user__menu">
                                     <li class="navbar-user__item">
-                                        <a href="profile.jsp" class="navbar-user__link">
+                                        <a href="${pageContext.request.contextPath}/account" class="navbar-user__link">
                                             Tài khoản của tôi
                                         </a>
                                     </li>
