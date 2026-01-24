@@ -97,4 +97,59 @@ public class OrderDao extends BaseDao {
                         .list()
         );
     }
+    public boolean cancelOrder(int orderId, int userId) {
+        String sql = """
+        UPDATE orders
+        SET status_transport = 3
+        WHERE id = :id
+          AND user_id = :user_id
+          AND status_transport = 0
+    """;
+
+        int updated = get().withHandle(h ->
+                h.createUpdate(sql)
+                        .bind("id", orderId)
+                        .bind("user_id", userId)
+                        .execute()
+        );
+        return updated > 0;
+    }
+
+    public boolean isOrderOwnedByUser(int orderId, int userId) {
+        String sql = "SELECT COUNT(*) FROM orders WHERE id=:id AND user_id=:user_id";
+        Integer cnt = get().withHandle(h ->
+                h.createQuery(sql)
+                        .bind("id", orderId)
+                        .bind("user_id", userId)
+                        .mapTo(Integer.class)
+                        .one()
+        );
+        return cnt != null && cnt > 0;
+    }
+
+
+    public List<Map<String, Object>> findItemsForRepurchase(int orderId) {
+        String sql = """
+        SELECT 
+            oi.product_id   AS product_id,
+            oi.product_name AS name,
+            COALESCE(p.image, 'assets/img/no-image.png') AS image,
+            oi.price        AS first_price,
+            oi.price        AS total_price,
+            oi.quantity     AS quantity
+        FROM order_items oi
+        LEFT JOIN products p ON p.id = oi.product_id
+        WHERE oi.order_id = :order_id
+        ORDER BY oi.id ASC
+    """;
+
+        return get().withHandle(h ->
+                h.createQuery(sql)
+                        .bind("order_id", orderId)
+                        .mapToMap()
+                        .list()
+        );
+    }
+
+
 }

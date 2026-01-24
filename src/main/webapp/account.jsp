@@ -41,7 +41,7 @@
 <body>
 <!-- header -->
 <%@ include file="/common/header.jsp" %>
-
+<c:set var="tab" value="${empty param.tab ? 'all' : param.tab}" />
 <main class="main">
     <div class="account">
         <div class="grid wide">
@@ -77,22 +77,37 @@
 
                         <!-- Nhóm: Thông tin đơn hàng -->
                         <section class="account__section">
-                            <h2 class="account__title">Thông tin đơn hàng</h2>
-                            <ul class="account__list">
-                                <li class="account__item">
-                                    <a href="#orders-all" class="account__link">Tất cả đơn hàng</a>
-                                </li>
-                                <li class="account__item">
-                                    <a href="#orders-processing" class="account__link">Đơn đang xử lý</a>
-                                </li>
-                                <li class="account__item">
-                                    <a href="#orders-delivered" class="account__link">Đơn đã giao</a>
-                                </li>
-                                <li class="account__item">
-                                    <a href="#orders-cancelled" class="account__link">Đơn đã hủy</a>
-                                </li>
-                            </ul>
+                          <h2 class="account__title">Thông tin đơn hàng</h2>
+                          <ul class="account__list">
+                            <li class="account__item">
+                              <a href="${pageContext.request.contextPath}/account?tab=all"
+                                 class="account__link ${tab=='all' ? 'is-active' : ''}">
+                                Tất cả đơn hàng
+                              </a>
+                            </li>
+                            <li class="account__item">
+                              <a href="${pageContext.request.contextPath}/account?tab=processing"
+                                 class="account__link ${tab=='processing' ? 'is-active' : ''}">
+                                Đơn đang xử lý
+                              </a>
+                            </li>
+                            <li class="account__item">
+                              <a href="${pageContext.request.contextPath}/account?tab=delivered"
+                                 class="account__link ${tab=='delivered' ? 'is-active' : ''}">
+                                Đơn đã giao
+                              </a>
+                            </li>
+                            <li class="account__item">
+                              <a href="${pageContext.request.contextPath}/account?tab=cancelled"
+                                 class="account__link ${tab=='cancelled' ? 'is-active' : ''}">
+                                Đơn đã hủy
+                              </a>
+                            </li>
+                          </ul>
                         </section>
+
+
+
                     </aside>
                 </div>
 
@@ -213,152 +228,254 @@
                         </form>
                     </section>
 
-                    <section class="account-section__content" id="orders-all">
-                      <c:forEach var="o" items="${orders}">
-                        <article class="order-item">
-                          <header class="order-item__header">
-                            <div>
-                              <div>Mã đơn: #${o.id}</div>
-                              <div>Ngày đặt: <fmt:formatDate value="${o.created_at}" pattern="dd/MM/yyyy HH:mm"/></div>
-                            </div>
-                          </header>
 
-                          <section class="order-item__body">
-                            <c:forEach var="it" items="${orderItemsMap[o.id]}">
-                              <div class="order-product">
-                                <div class="order-product__info">
-                                  <h4 class="order-product__name">${it.product_name}</h4>
-                                  <span class="order-product__quantity">x ${it.quantity}</span>
-                                </div>
-                                <div class="order-product__price-wrap">
-                                  <span class="order-product__final-price">${it.total_price}đ</span>
-                                </div>
-                              </div>
-                            </c:forEach>
-                          </section>
 
-                          <footer class="order-item__footer">
-                            <div class="order-item__total">
-                              <span>Thành tiền:</span>
-                              <span class="order-item__total-price">${o.total_price}đ</span>
-                            </div>
-                          </footer>
-                        </article>
-                      </c:forEach>
-                    </section>
+                   <!-- ========== TẤT CẢ ĐƠN HÀNG ========== -->
+                   <c:if test="${tab == 'all'}">
+                     <section class="account-section__content" id="orders-all">
+                     <h2 class="account__heading">Tất cả đơn hàng</h2>
+                       <c:if test="${empty ordersAll}">
+                         <div class="order-empty">Chưa có đơn hàng.</div>
+                       </c:if>
 
-                    <section id="orders-processing" class="account__content">
-                        <h2 class="account__heading">Đơn đang xử lý</h2>
-                        <div class="order-list">
-                            <article class="order-item">
-                                <header class="order-item__header">
-                                    <div class="order-item__info">
-                                        <span class="order-item__id">Mã đơn: #123456</span>
-                                        <span class="order-item__date">Ngày đặt: 10/11/2025</span>
-                                    </div>
-                                    <span class="order-item__status order-item__status--processing">Đang xử
-                                            lý</span>
-                                </header>
-                                <section class="order-item__body">
-                                    <div class="order-product">
-                                        <img src="assets/img/notify-img-01.png" alt="Túi đựng quần áo"
-                                             class="order-product__img">
-                                        <div class="order-product__info">
-                                            <h4 class="order-product__name">Tặng ngay 1 túi đựng quần áo, chăn ga
-                                            </h4>
-                                            <span class="order-product__quantity">x 1</span>
-                                        </div>
-                                        <div class="order-product__price-wrap">
-                                            <span class="order-product__original-price">25.000đ</span>
-                                            <span class="order-product__final-price">19.300đ</span>
-                                        </div>
-                                    </div>
-                                </section>
-                                <footer class="order-item__footer">
-                                    <div class="order-item__total">
-                                        <span class="order-item__total-label">Thành tiền:</span>
-                                        <span class="order-item__total-price">19.300đ</span>
-                                    </div>
-                                    <button type="button" class="order-item__action-btn">Hủy đơn</button>
-                                </footer>
-                            </article>
-                        </div>
-                    </section>
+                       <c:forEach var="o" items="${ordersAll}">
+                         <article class="order-item">
+                           <header class="order-item__header">
+                             <div class="order-item__info">
+                               <div>Mã đơn: #${o.id}</div>
+                               <div>Ngày đặt:
+                                 <fmt:formatDate value="${o.created_at}" pattern="dd/MM/yyyy HH:mm"/>
+                               </div>
+                             </div>
 
-                    <section id="orders-delivered" class="account__content">
-                        <h2 class="account__heading">Đơn đã giao</h2>
-                        <div class="order-list">
-                            <article class="order-item">
-                                <header class="order-item__header">
-                                    <div class="order-item__info">
-                                        <span class="order-item__id">Mã đơn: #123455</span>
-                                        <span class="order-item__date">Ngày đặt: 08/11/2025</span>
-                                    </div>
-                                    <span class="order-item__status order-item__status--delivered">Đã giao</span>
-                                </header>
-                                <section class="order-item__body">
-                                    <div class="order-product">
-                                        <img src="assets/img/notify-img-02.jpg" alt="Viên vệ sinh"
-                                             class="order-product__img">
-                                        <div class="order-product__info">
-                                            <h4 class="order-product__name">Combo 12 viên vệ sinh lồng máy giặt</h4>
-                                            <span class="order-product__quantity">x 2</span>
-                                        </div>
-                                        <div class="order-product__price-wrap">
-                                            <span class="order-product__original-price">50.000đ</span>
-                                            <span class="order-product__final-price">44.500đ</span>
-                                        </div>
-                                    </div>
-                                </section>
-                                <footer class="order-item__footer">
-                                    <div class="order-item__total">
-                                        <span class="order-item__total-label">Thành tiền:</span>
-                                        <span class="order-item__total-price">44.500đ</span>
-                                    </div>
-                                    <button type="button"
-                                            class="order-item__action-btn order-item__action-btn--primary">Mua
-                                        lại</button>
-                                </footer>
-                            </article>
-                        </div>
-                    </section>
+                             <c:choose>
+                               <c:when test="${o.status_transport == 0}">
+                                 <span class="order-item__status order-item__status--processing">Đang xử lý</span>
+                               </c:when>
+                               <c:when test="${o.status_transport == 1}">
+                                 <span class="order-item__status order-item__status--delivered">Đã giao</span>
+                               </c:when>
+                               <c:when test="${o.status_transport == 3}">
+                                 <span class="order-item__status order-item__status--cancelled">Đã hủy</span>
+                               </c:when>
+                               <c:otherwise>
+                                 <span class="order-item__status">Không rõ</span>
+                               </c:otherwise>
+                             </c:choose>
+                           </header>
 
-                    <section id="orders-cancelled" class="account__content">
-                        <h2 class="account__heading">Đơn đã hủy</h2>
-                        <div class="order-list">
-                            <article class="order-item">
-                                <header class="order-item__header">
-                                    <div class="order-item__info">
-                                        <span class="order-item__id">Mã đơn: #123454</span>
-                                        <span class="order-item__date">Ngày đặt: 01/11/2025</span>
-                                    </div>
-                                    <span class="order-item__status order-item__status--cancelled">Đã hủy</span>
-                                </header>
-                                <section class="order-item__body">
-                                    <div class="order-product">
-                                        <img src="https://pos.nvncdn.com/e8033b-157317/ps/20251029_JExQSE5UKT.jpeg?v=1761702921"
-                                             alt="Đĩa sứ" class="order-product__img">
-                                        <div class="order-product__info">
-                                            <h4 class="order-product__name">Đĩa Sứ Tròn 8.5inch CHIBI</h4>
-                                            <span class="order-product__quantity">x 1</span>
-                                        </div>
-                                        <div class="order-product__price-wrap">
-                                            <span class="order-product__final-price">44.500đ</span>
-                                        </div>
-                                    </div>
-                                </section>
-                                <footer class="order-item__footer">
-                                    <div class="order-item__total">
-                                        <span class="order-item__total-label">Thành tiền:</span>
-                                        <span class="order-item__total-price">44.500đ</span>
-                                    </div>
-                                    <button type="button"
-                                            class="order-item__action-btn order-item__action-btn--primary">Mua
-                                        lại</button>
-                                </footer>
-                            </article>
-                        </div>
-                    </section>
+                           <section class="order-item__body">
+                             <c:forEach var="it" items="${orderItemsMap[o.id]}">
+                               <div class="order-product">
+                                 <div class="order-product__info">
+                                   <h4 class="order-product__name">${it.product_name}</h4>
+                                   <span class="order-product__quantity">x ${it.quantity}</span>
+                                 </div>
+                                 <div class="order-product__price-wrap">
+                                   <span class="order-product__final-price">
+                                     <fmt:formatNumber value="${it.total_price}" type="number" maxFractionDigits="0"/>đ
+                                   </span>
+                                 </div>
+                               </div>
+                             </c:forEach>
+                           </section>
+
+                           <footer class="order-item__footer">
+                             <div class="order-item__total">
+                               <span>Thành tiền:</span>
+                               <span class="order-item__total-price">
+                                 <fmt:formatNumber value="${o.total_price}" type="number" maxFractionDigits="0"/>đ
+                               </span>
+                             </div>
+
+                             <c:if test="${o.status_transport == 0}">
+                               <form method="post" action="${pageContext.request.contextPath}/account" style="display:inline;">
+                                 <input type="hidden" name="action" value="cancelOrder"/>
+                                 <input type="hidden" name="orderId" value="${o.id}"/>
+                                 <button type="submit" class="order-item__action-btn"
+                                         onclick="return confirm('Bạn muốn hủy đơn #${o.id}?');">Hủy đơn</button>
+                               </form>
+                             </c:if>
+                           </footer>
+                         </article>
+                       </c:forEach>
+                     </section>
+                   </c:if>
+
+
+                   <!-- ========== ĐƠN ĐANG XỬ LÝ ========== -->
+                   <c:if test="${tab == 'processing'}">
+                     <section id="orders-processing" class="account__content">
+                       <h2 class="account__heading">Đơn đang xử lý</h2>
+
+                       <c:if test="${empty ordersProcessing}">
+                         <div class="order-empty">Không có đơn đang xử lý.</div>
+                       </c:if>
+
+                       <c:forEach var="o" items="${ordersProcessing}">
+                         <article class="order-item">
+                           <header class="order-item__header">
+                             <div class="order-item__info">
+                               <span class="order-item__id">Mã đơn: #${o.id}</span>
+                               <span class="order-item__date">
+                                 Ngày đặt: <fmt:formatDate value="${o.created_at}" pattern="dd/MM/yyyy HH:mm"/>
+                               </span>
+                             </div>
+                             <span class="order-item__status order-item__status--processing">Đang xử lý</span>
+                           </header>
+
+                           <section class="order-item__body">
+                             <c:forEach var="it" items="${orderItemsMap[o.id]}">
+                               <div class="order-product">
+                                 <div class="order-product__info">
+                                   <h4 class="order-product__name">${it.product_name}</h4>
+                                   <span class="order-product__quantity">x ${it.quantity}</span>
+                                 </div>
+                                 <div class="order-product__price-wrap">
+                                   <span class="order-product__final-price">
+                                     <fmt:formatNumber value="${it.total_price}" type="number" maxFractionDigits="0"/>đ
+                                   </span>
+                                 </div>
+                               </div>
+                             </c:forEach>
+                           </section>
+
+                           <footer class="order-item__footer">
+                             <div class="order-item__total">
+                               <span class="order-item__total-label">Thành tiền:</span>
+                               <span class="order-item__total-price">
+                                 <fmt:formatNumber value="${o.total_price}" type="number" maxFractionDigits="0"/>đ
+                               </span>
+                             </div>
+                             <form method="post" action="${pageContext.request.contextPath}/account" style="display:inline;">
+                               <input type="hidden" name="action" value="cancelOrder"/>
+                               <input type="hidden" name="orderId" value="${o.id}"/>
+                               <button type="submit" class="order-item__action-btn"
+                                       onclick="return confirm('Bạn muốn hủy đơn #${o.id}?');">Hủy đơn</button>
+                             </form>
+                           </footer>
+                         </article>
+                       </c:forEach>
+                     </section>
+                   </c:if>
+
+
+                   <!-- ========== ĐƠN ĐÃ GIAO ========== -->
+                   <c:if test="${tab == 'delivered'}">
+                     <section id="orders-delivered" class="account__content">
+                       <h2 class="account__heading">Đơn đã giao</h2>
+
+                       <c:if test="${empty ordersDelivered}">
+                         <div class="order-empty">Không có đơn đã giao.</div>
+                       </c:if>
+
+                       <c:forEach var="o" items="${ordersDelivered}">
+                         <article class="order-item">
+                           <header class="order-item__header">
+                             <div class="order-item__info">
+                               <span class="order-item__id">Mã đơn: #${o.id}</span>
+                               <span class="order-item__date">
+                                 Ngày đặt: <fmt:formatDate value="${o.created_at}" pattern="dd/MM/yyyy HH:mm"/>
+                               </span>
+                             </div>
+                             <span class="order-item__status order-item__status--delivered">Đã giao</span>
+                           </header>
+
+                           <section class="order-item__body">
+                             <c:forEach var="it" items="${orderItemsMap[o.id]}">
+                               <div class="order-product">
+                                 <div class="order-product__info">
+                                   <h4 class="order-product__name">${it.product_name}</h4>
+                                   <span class="order-product__quantity">x ${it.quantity}</span>
+                                 </div>
+                                 <div class="order-product__price-wrap">
+                                   <span class="order-product__final-price">
+                                     <fmt:formatNumber value="${it.total_price}" type="number" maxFractionDigits="0"/>đ
+                                   </span>
+                                 </div>
+                               </div>
+                             </c:forEach>
+                           </section>
+
+                           <footer class="order-item__footer">
+                             <div class="order-item__total">
+                               <span class="order-item__total-label">Thành tiền:</span>
+                               <span class="order-item__total-price">
+                                 <fmt:formatNumber value="${o.total_price}" type="number" maxFractionDigits="0"/>đ
+                               </span>
+                             </div>
+                             <form method="post" action="${pageContext.request.contextPath}/account" style="display:inline;">
+                               <input type="hidden" name="action" value="repurchase"/>
+                               <input type="hidden" name="orderId" value="${o.id}"/>
+                               <input type="hidden" name="redirect" value="checkout"/>
+                               <input type="hidden" name="replaceCart" value="1"/>
+                               <button type="submit" class="order-item__action-btn order-item__action-btn--primary">Mua lại</button>
+                             </form>
+                           </footer>
+                         </article>
+                       </c:forEach>
+                     </section>
+                   </c:if>
+
+
+                   <!-- ========== ĐƠN ĐÃ HỦY ========== -->
+                   <c:if test="${tab == 'cancelled'}">
+                     <section id="orders-cancelled" class="account__content">
+                       <h2 class="account__heading">Đơn đã hủy</h2>
+
+                       <c:if test="${empty ordersCancelled}">
+                         <div class="order-empty">Không có đơn đã hủy.</div>
+                       </c:if>
+
+                       <c:forEach var="o" items="${ordersCancelled}">
+                         <article class="order-item">
+                           <header class="order-item__header">
+                             <div class="order-item__info">
+                               <span class="order-item__id">Mã đơn: #${o.id}</span>
+                               <span class="order-item__date">
+                                 Ngày đặt: <fmt:formatDate value="${o.created_at}" pattern="dd/MM/yyyy HH:mm"/>
+                               </span>
+                             </div>
+                             <span class="order-item__status order-item__status--cancelled">Đã hủy</span>
+                           </header>
+
+                           <section class="order-item__body">
+                             <c:forEach var="it" items="${orderItemsMap[o.id]}">
+                               <div class="order-product">
+                                 <div class="order-product__info">
+                                   <h4 class="order-product__name">${it.product_name}</h4>
+                                   <span class="order-product__quantity">x ${it.quantity}</span>
+                                 </div>
+                                 <div class="order-product__price-wrap">
+                                   <span class="order-product__final-price">
+                                     <fmt:formatNumber value="${it.total_price}" type="number" maxFractionDigits="0"/>đ
+                                   </span>
+                                 </div>
+                               </div>
+                             </c:forEach>
+                           </section>
+
+                           <footer class="order-item__footer">
+                             <div class="order-item__total">
+                               <span class="order-item__total-label">Thành tiền:</span>
+                               <span class="order-item__total-price">
+                                 <fmt:formatNumber value="${o.total_price}" type="number" maxFractionDigits="0"/>đ
+                               </span>
+                             </div>
+                            <form method="post" action="${pageContext.request.contextPath}/account" style="display:inline;">
+                              <input type="hidden" name="action" value="repurchase"/>
+                              <input type="hidden" name="orderId" value="${o.id}"/>
+                              <input type="hidden" name="redirect" value="checkout"/>
+                              <input type="hidden" name="replaceCart" value="1"/>
+                              <button type="submit" class="order-item__action-btn order-item__action-btn--primary">Mua lại</button>
+                            </form>
+                           </footer>
+                         </article>
+                       </c:forEach>
+                     </section>
+                   </c:if>
+
+
                     <section id="favorite-product" class="account__content">
                         <h2 class="account__heading">Sản phẩm đã thích</h2>
                         <div class="favorite-product-list row small-gutter">
@@ -566,11 +683,28 @@
 <!-- Link JS -->
 <script src="assets/js/script.js"></script>
 <script>
-  const tab = new URLSearchParams(location.search).get("tab");
-  if (tab === "orders") {
-    const el = document.getElementById("orders-all");
-    if (el) el.scrollIntoView({behavior:"smooth"});
-  }
+  (function () {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+
+    const map = {
+      all: "#orders-all",
+      processing: "#orders-processing",
+      delivered: "#orders-delivered",
+      cancelled: "#orders-cancelled",
+      orders: "#orders-all"
+    };
+
+    if (tab && map[tab]) {
+      location.hash = map[tab]; // để CSS :target hiển thị đúng tab
+      const el = document.querySelector(map[tab]);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    // vào /account mà không có hash/tab thì mặc định hiện thông tin cá nhân
+    if (!location.hash) location.hash = "#info";
+  })();
 </script>
 <!-- Ghép tỉnh + huyện + địa chỉ thành 1 chuỗi lưu vào users.address -->
 <script>
