@@ -2,6 +2,8 @@ package com.webgiadung.doanweb.dao;
 
 import com.webgiadung.doanweb.model.Discounts;
 
+import java.util.List;
+
 public class DiscountDao extends BaseDao {
 
     public int insertDiscount(Discounts d) {
@@ -23,6 +25,13 @@ public class DiscountDao extends BaseDao {
                     .mapToBean(Discounts.class)
                     .findOne()
                     .orElse(null);
+        });
+    }
+    public List<Discounts> getAllDiscounts() {
+        return get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM discounts ORDER BY id DESC")
+                    .mapToBean(Discounts.class)
+                    .list();
         });
     }
 }

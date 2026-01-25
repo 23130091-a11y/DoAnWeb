@@ -1086,66 +1086,11 @@
                                     </div>
                                 </div>
                                 <div class="event-table">
-                                    <div class="event-table__row event-table__row--header">
-                                        <div class="event-table__cell event-col-name">Tên sự kiện</div>
-                                        <div class="event-table__cell event-col-discount">Giảm giá</div>
-                                        <div class="event-table__cell event-col-post">Post</div>
-                                        <div class="event-table__cell event-col-date">Ngày bắt đầu</div>
-                                        <div class="event-table__cell event-col-date">Ngày kết thúc</div>
-                                        <div class="event-table__cell event-col-action">Xem</div>
-                                        <div class="event-table__cell event-col-action">Sửa</div>
-                                        <div class="event-table__cell event-col-action">Xóa</div>
+
+                                    <div class="product-table">
+                                        <div id="discount-list-container">
+                                        </div>
                                     </div>
-
-                                    <article class="event-table__row">
-                                        <div class="event-table__cell event-col-name">
-                                            <span class="event-table__text event-table__text--bold">Chương trình Sale Hè 2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-discount">
-                                            <span class="event-table__text event-table__text--red">-25%</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">15/06/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">30/06/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-view">Xem</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-edit">Sửa</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-delete">Xóa</button>
-                                        </div>
-                                    </article>
-
-                                    <article class="event-table__row">
-                                        <div class="event-table__cell event-col-name">
-                                            <span class="event-table__text event-table__text--bold">Đồng giá khai trương</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-discount">
-                                            <span class="event-table__text event-table__text--red">99.000đ</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">01/01/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">05/01/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-view">Xem</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-edit">Sửa</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-delete">Xóa</button>
-                                        </div>
-                                    </article>
 
                                 </div>
                             </div>
@@ -3757,7 +3702,79 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     });
 </script>
+<script>
+    // Phải khai báo contextPath từ JSP
+    var contextPath = '${pageContext.request.contextPath}';
 
+    document.addEventListener("DOMContentLoaded", function () {
+        loadAllDiscounts();
+    });
+
+    function loadAllDiscounts() {
+        fetch(contextPath + '/api/admin/discounts-list')
+            .then(res => {
+                if (!res.ok) throw new Error("Lỗi Server");
+                return res.json();
+            })
+            .then(data => {
+                renderDiscountTable(data);
+            })
+            .catch(err => console.error("Không tải được giảm giá:", err));
+    }
+
+    function renderDiscountTable(discounts) {
+        var container = document.getElementById('discount-list-container');
+        if (!container) return;
+
+        var html = '<div class="event-table__row event-table__row--header">';
+        html += '    <div class="event-table__cell event-col-name">Tên sự kiện</div>';
+        html += '    <div class="event-table__cell event-col-discount">Giảm giá</div>';
+        html += '    <div class="event-table__cell event-col-post">Post</div>';
+        html += '    <div class="event-table__cell event-col-date">Ngày bắt đầu</div>';
+        html += '    <div class="event-table__cell event-col-date">Ngày kết thúc</div>';
+        html += '    <div class="event-table__cell event-col-action">Xem</div>';
+        html += '    <div class="event-table__cell event-col-action">Sửa</div>';
+        html += '    <div class="event-table__cell event-col-action">Xóa</div>';
+        html += '</div>';
+
+        // BƯỚC 2: Duyệt danh sách để thêm dữ liệu
+        if (discounts && discounts.length > 0) {
+            discounts.forEach(function (d) {
+                var discountDisplay = d.discount + "%";
+
+                html += '<article class="event-table__row">';
+                html += '    <div class="event-table__cell event-col-name">';
+                html += '        <span class="event-table__text event-table__text--bold">' + d.name + '</span>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-discount">';
+                html += '        <span class="event-table__text event-table__text--red">' + discountDisplay + '</span>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-post"><input type="checkbox" ' + (d.status == 1 ? "checked" : "") + '></div>';
+                html += '    <div class="event-table__cell event-col-date">';
+                html += '        <span class="event-table__text">' + d.startDate + '</span>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-date">';
+                html += '        <span class="event-table__text">' + d.endDate + '</span>';
+                html += '    </div>';
+
+                html += '    <div class="event-table__cell event-col-action">';
+                html += '        <button class="event-btn-view" onclick="viewDiscount(' + d.id + ')">Xem</button>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-action">';
+                html += '        <button class="event-btn-edit" onclick="editDiscount(' + d.id + ')">Sửa</button>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-action">';
+                html += '        <button class="event-btn-delete" onclick="deleteDiscount(' + d.id + ')">Xóa</button>';
+                html += '    </div>';
+                html += '</article>';
+            });
+        } else {
+            html += '<p style="padding: 20px; text-align: center;">Không có dữ liệu giảm giá nào.</p>';
+        }
+
+        container.innerHTML = html;
+    }
+</script>
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </html>

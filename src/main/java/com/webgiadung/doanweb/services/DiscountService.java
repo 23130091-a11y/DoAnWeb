@@ -3,6 +3,8 @@ package com.webgiadung.doanweb.services;
 import com.webgiadung.doanweb.dao.DiscountDao;
 import com.webgiadung.doanweb.model.Discounts;
 
+import java.util.List;
+
 public class DiscountService {
     DiscountDao discountDao = new DiscountDao();
 
@@ -12,5 +14,8 @@ public class DiscountService {
     }
     public Discounts getDiscountById(int id) {
         return discountDao.getDiscountById(id);
+    }
+    public List<Discounts> getAllDiscounts() {
+        return discountDao.getAllDiscounts();
     }
 }
