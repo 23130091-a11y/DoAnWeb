@@ -2718,7 +2718,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const formData = new FormData(form);
 
-        fetch('api/add-brands', {
+        fetch('/DoAnWeb/api/add-brands', {
             method: 'POST',
             body: formData
         })
@@ -2761,7 +2761,7 @@ window.addEventListener("DOMContentLoaded", () => {
         params.append('tagName', tagName);
         params.append('tagDesc', tagDesc);
 
-        fetch('api/add-tag', {
+        fetch('/DoAnWeb/api/add-tag', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params
@@ -2792,7 +2792,7 @@ window.addEventListener("DOMContentLoaded", () => {
         params.append('cateName', cateName);
         params.append('cateDesc', cateDesc);
 
-        fetch('api/add-category', {
+        fetch('/DoAnWeb/api/add-category', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params
@@ -3663,10 +3663,9 @@ window.addEventListener("DOMContentLoaded", () => {
         setupFormSubmit();
     });
 
-    // Load danh mục vào Select
     async function loadCategories() {
         try {
-            const response = await fetch('${pageContext.request.contextPath}/api/categories');
+            const response = await fetch(window.location.origin + '/DoAnWeb/api/categories');
             const data = await response.json();
             const select = document.querySelector('select[name="applyCategories"]');
             if (select) {
@@ -3677,8 +3676,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         } catch (err) { console.error("Lỗi load categories:", err); }
     }
-
-    // Xử lý gửi Form AJAX
     function setupFormSubmit() {
         const form = document.getElementById('addEventForm');
         if (!form) return;
@@ -3686,22 +3683,19 @@ window.addEventListener("DOMContentLoaded", () => {
         form.onsubmit = async function(e) {
             e.preventDefault();
 
-
-            const formData = new URLSearchParams(new FormData(form));
+            const formData = new FormData(form);
 
             try {
-                // SỬA DÒNG NÀY:
-                const response = await fetch('${pageContext.request.contextPath}/admin/add-discount', {
+
+                const response = await fetch('/DoAnWeb/admin/add-discount', {
                     method: 'POST',
-                    body: formData,
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    body: formData
+
                 });
 
-                // Kiểm tra nếu response không ok (ví dụ 404, 500)
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error("Server Error:", errorText);
-                    throw new Error("Mã lỗi: " + response.status);
+                    throw new Error("Mã lỗi: " + response.status + " - " + errorText);
                 }
 
                 const result = await response.json();
@@ -3714,11 +3708,27 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             } catch (error) {
                 console.error("Chi tiết lỗi:", error);
-                alert("Lỗi: " + error.message);
+                alert("Lỗi hệ thống: " + error.message);
             }
         };
     }
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('input[name="applyScope"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const scopeCategory = document.getElementById('scopeCategory');
+                if (this.value === 'category') {
+                    scopeCategory.style.display = 'block';
+                    loadCategories();
+                } else {
+                    scopeCategory.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </html>

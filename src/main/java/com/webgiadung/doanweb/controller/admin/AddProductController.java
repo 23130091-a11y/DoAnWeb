@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 
 @WebServlet("/api/add-product")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 2,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 50
+        fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 20,
+        maxRequestSize = 1024 * 1024 * 100
 )
 public class AddProductController extends HttpServlet {
     private ProductService productService = new ProductService();
