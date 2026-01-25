@@ -120,4 +120,7 @@ public class ProductService {
     public List<Product> searchWithFilters(String keyword, String[] brands, String[] priceRanges) {
         return pdao.searchWithFilters(keyword, brands, priceRanges);
     }
+    public Product getProductFull(int id) {
+        return pdao.getProductFull(id);
+    }
 }

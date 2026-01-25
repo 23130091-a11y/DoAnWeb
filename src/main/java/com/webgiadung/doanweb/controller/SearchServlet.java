@@ -16,9 +16,9 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String keyword = request.getParameter("keyword");
-
         String[] brands = request.getParameterValues("brands");
         String[] priceRanges = request.getParameterValues("priceRanges");
+
         if (brands == null) brands = request.getParameterValues("brands[]");
         if (priceRanges == null) priceRanges = request.getParameterValues("priceRanges[]");
 
@@ -26,19 +26,21 @@ public class SearchServlet extends HttpServlet {
             keyword = keyword.trim();
         }
 
-        if (keyword == null || keyword.isEmpty()) {
-            request.setAttribute("message", "Vui lòng nhập từ khóa tìm kiếm");
+        boolean hasKeyword = (keyword != null && !keyword.isEmpty());
+        boolean hasFilter = (brands != null && brands.length > 0) || (priceRanges != null && priceRanges.length > 0);
+
+        if (!hasKeyword && !hasFilter) {
+            request.setAttribute("message", "Vui lòng nhập từ khóa tìm kiếm hoặc chọn bộ lọc");
             request.getRequestDispatcher("/search.jsp").forward(request, response);
             return;
         }
 
-        if (keyword.length() < 2) {
+        if (hasKeyword && keyword.length() < 2) {
             request.setAttribute("message", "Từ khóa tìm kiếm quá ngắn");
             request.getRequestDispatcher("/search.jsp").forward(request, response);
             return;
         }
 
-        // ===== GIỮ NGUYÊN LỊCH SỬ TÌM KIẾM =====
         HttpSession session = request.getSession();
         List<String> searchHistory = (List<String>) session.getAttribute("searchHistory");
 

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,10 +117,18 @@
                                 <a href="product?id=${p.id}">
                                     <p>${p.name}</p>
                                 </a>
+                                    <div class="price-discount">
+                                        <c:if test="${p.discountPercent > 0}">
+                                            <div class="price-top">
+                                                <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                                <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                            </div>
+                                        </c:if>
 
-                                    <span class="price">
-                                        <fmt:formatNumber value="${p.totalPrice}" type="number"/>đ
-                                    </span>
+                                        <div class="price-bottom">
+                                            <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                        </div>
+                                    </div>
 
                                 <div class="bottom">
                                     <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
@@ -137,7 +146,7 @@
                     <div class="product-list">
                         <c:forEach items="${promotionProducts}" var="p">
                             <div class="product-card">
-                                <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                                <a href="product?id=${p.id}"> <img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}"></a>
                                 <a href="product?id=${p.id}">
                                     <p>${p.name}</p>
                                 </a>
@@ -171,7 +180,18 @@
                             <a href="product?id=${p.id}">
                                 <p>${p.name}</p>
                             </a>
-                            <span class="price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                <div class="price-discount">
+                                    <c:if test="${p.discountPercent > 0}">
+                                        <div class="price-top">
+                                            <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                        </div>
+                                    </c:if>
+
+                                    <div class="price-bottom">
+                                        <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                    </div>
+                                </div>
                             <div class="bottom">
                                 <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
                                 <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
@@ -192,15 +212,18 @@
                             <a href="product?id=${p.id}">
                                 <p>${p.name}</p>
                             </a>
-                            <div class="price-discount">
-                                <div class="price-top">
-                                    <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                    <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                <div class="price-discount">
+                                    <c:if test="${p.discountPercent > 0}">
+                                        <div class="price-top">
+                                            <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                        </div>
+                                    </c:if>
+
+                                    <div class="price-bottom">
+                                        <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                    </div>
                                 </div>
-                                <div class="price-bottom">
-                                    <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
-                                </div>
-                            </div>
                             <div class="bottom">
                                 <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
                                 <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu

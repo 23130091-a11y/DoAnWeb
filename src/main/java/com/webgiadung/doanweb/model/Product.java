@@ -101,7 +101,7 @@ public class Product implements Serializable {
         this.reviews = new ArrayList<>();
     }
 
-    public Product(int id, String name, String image, double firstPrice, int discountsId, double totalPrice, int categoriesId, int brandsId, int keywordsId, String brandName, String keywordName, int post, int quantity, int quantitySaled, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductDescriptions> descriptionsList, List<ProductDetails> detailsList) {
+    public Product(int id, String name, String image, double firstPrice, int discountsId, double totalPrice, int categoriesId, int brandsId, int keywordsId, String brandName, String keywordName, int post, int quantity, int quantitySaled, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductDescriptions> descriptionsList, List<ProductDetails> detailsList, List<ProductReview> reviews, Double discountPercent, String discountType) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -120,6 +120,9 @@ public class Product implements Serializable {
         this.updatedAt = updatedAt;
         this.descriptionsList = descriptionsList;
         this.detailsList = detailsList;
+        this.reviews = reviews;
+        this.discountPercent = discountPercent;
+        this.discountType = discountType;
     }
 
     public int getId() {

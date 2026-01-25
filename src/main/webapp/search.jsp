@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html lang="en">
 
 <head>
@@ -239,15 +240,35 @@
                                 <c:forEach items="${products}" var="p">
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a href="product?id=${p.id}"><img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}"></a>
-                                        <a>
+                                        <a href="product?id=${p.id}">
+                                            <img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}">
+                                        </a>
+                                        <a href="product?id=${p.id}">
                                             <p>${p.name}</p>
                                         </a>
-                                        <span class="price">${p.totalPrice}đ</span>
+
+                                        <div class="price-discount">
+                                                <%-- Chỉ hiện phần giá cũ nếu có giảm giá --%>
+                                            <c:if test="${p.discountPercent > 0}">
+                                                <div class="price-top">
+                                                 <span class="old-price">
+                                                    <fmt:formatNumber value="${p.firstPrice}" type="number"/>đ
+                                                  </span>
+                                                    <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                                </div>
+                                            </c:if>
+
+                                            <div class="price-bottom">
+                                            <span class="new-price">
+                                              <fmt:formatNumber value="${p.totalPrice}" type="number"/>đ
+                                               </span>
+                                            </div>
+                                        </div>
                                         <div class="bottom">
                                             <div class="star"><i class="fa-solid fa-star"></i> ${p.rating}</div>
-                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                                thích</button>
+                                            <button class="fav-btn">
+                                                <i class="fa-regular fa-heart"></i> Yêu thích
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +317,6 @@
             $.ajax({
                 url: "search-product",
                 type: "GET",
-                // Chú ý: JQuery sẽ tự biến mảng thành brands=Bear&brands=Inochi
                 data: {
                     keyword: keyword,
                     brands: brands,

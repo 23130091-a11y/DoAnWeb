@@ -49,10 +49,7 @@ public class ProductViewController extends HttpServlet {
                     String createdAt = (p.getCreatedAt() != null) ? p.getCreatedAt().format(formatter) : "";
                     String updatedAt = (p.getUpdatedAt() != null) ? p.getUpdatedAt().format(formatter) : "";
 
-                    // --- THAY ĐỔI: LẤY GIẢM GIÁ TỪ DISCOUNT SERVICE ---
                     double discountPercent = 0;
-                    // Giả sử trong Product có trường discountId để liên kết sang bảng discounts
-                    // Bạn cần kiểm tra tên method chính xác trong model Product (ví dụ: getDiscountId())
                     if (p.getDiscountsId() > 0) {
                         Discounts d = discountService.getDiscountById(p.getDiscountsId());
                         if (d != null) {
