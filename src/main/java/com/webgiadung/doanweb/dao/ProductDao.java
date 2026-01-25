@@ -655,6 +655,72 @@ public class ProductDao extends BaseDao {
                     .execute();
         });
     }
+    public List<Product> searchWithFilters(String keyword, String[] brands, String[] priceRanges) {
+        return get().withHandle(h -> {
+            // 1. Thay SELECT * bằng cách liệt kê cột kèm Alias (AS) để khớp với Model
+            StringBuilder sql = new StringBuilder("""
+            SELECT 
+                id, name, image, post, quantity,
+                price_first AS firstPrice, 
+                price_total AS totalPrice, 
+                discounts_id AS discountsId, 
+                categories_id AS categoriesId, 
+                brands_id AS brandsId, 
+                keywords_id AS keywordsId, 
+                quantity_saled AS quantitySaled, 
+                created_at AS createdAt, 
+                updated_at AS updatedAt
+            FROM products 
+            WHERE post = 1
+        """);
+
+            // 2. Nối điều kiện Keyword
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                sql.append(" AND LOWER(name) LIKE LOWER(:keyword) ");
+            }
+
+            // 3. Nối điều kiện Thương hiệu
+            if (brands != null && brands.length > 0) {
+                sql.append(" AND brands_id IN (SELECT id FROM brands WHERE name IN (<brandNames>)) ");
+            }
+
+            // 4. Nối điều kiện Khoảng giá
+            if (priceRanges != null && priceRanges.length > 0) {
+                sql.append(" AND ( ");
+                for (int i = 0; i < priceRanges.length; i++) {
+                    sql.append(" (price_total BETWEEN :min").append(i).append(" AND :max").append(i).append(") ");
+                    if (i < priceRanges.length - 1) sql.append(" OR ");
+                }
+                sql.append(" ) ");
+            }
+
+            var query = h.createQuery(sql.toString());
+
+            // 5. Binding dữ liệu
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.bind("keyword", "%" + keyword.trim().toLowerCase() + "%");
+            }
+
+            if (brands != null && brands.length > 0) {
+                query.bindList("brandNames", java.util.Arrays.asList(brands));
+            }
+
+            if (priceRanges != null && priceRanges.length > 0) {
+                for (int i = 0; i < priceRanges.length; i++) {
+                    try {
+                        String[] parts = priceRanges[i].split("-");
+                        query.bind("min" + i, Double.parseDouble(parts[0]));
+                        query.bind("max" + i, Double.parseDouble(parts[1]));
+                    } catch (Exception e) {
+                        System.out.println("Lỗi định dạng giá: " + priceRanges[i]);
+                    }
+                }
+            }
+
+            // 6. Map kết quả về Product.class
+            return query.mapToBean(Product.class).list();
+        });
+    }
 }
 
 

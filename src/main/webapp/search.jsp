@@ -83,23 +83,22 @@
                                 <h3 class="search-filter__title">Theo thương hiệu</h3>
                                 <div class="search-filter__options">
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="brand-bear" value="Bear" />
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-bear" value="Bear" />
                                         <label class="search-filter__checkbox" for="brand-bear">Bear</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="brand-vietnhat" value="Việt Nhật Plastic" />
-                                        <label class="search-filter__checkbox" for="brand-vietnhat">Việt Nhật
-                                            Plastic</label>
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-vietnhat" value="Việt Nhật Plastic" />
+                                        <label class="search-filter__checkbox" for="brand-vietnhat">Việt Nhật Plastic</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="brand-akata" value="AKATA" />
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-akata" value="AKATA" />
                                         <label class="search-filter__checkbox" for="brand-akata">AKATA</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="brand-inochi" value="inochi" />
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-inochi" value="inochi" />
                                         <label class="search-filter__checkbox" for="brand-inochi">inochi</label>
                                     </div>
                                 </div>
@@ -109,38 +108,36 @@
                                 <h3 class="search-filter__title">Khoảng giá</h3>
                                 <div class="search-filter__options">
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="price-all" value="Tất cả" />
+                                        <input hidden type="checkbox" id="price-all" value="all" />
                                         <label class="search-filter__checkbox" for="price-all">Tất cả</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="price-under100" value="Dưới 100k" />
+                                        <input hidden type="checkbox" name="priceRanges" class="filter-checkbox" id="price-under100" value="0-100000" />
                                         <label class="search-filter__checkbox" for="price-under100">Dưới 100k</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="price-100-200" value="100k - 200k" />
+                                        <input hidden type="checkbox" name="priceRanges" class="filter-checkbox" id="price-100-200" value="100000-200000" />
                                         <label class="search-filter__checkbox" for="price-100-200">100k - 200k</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="price-200-500" value="200k - 500k" />
+                                        <input hidden type="checkbox" name="priceRanges" class="filter-checkbox" id="price-200-500" value="200000-500000" />
                                         <label class="search-filter__checkbox" for="price-200-500">200k - 500k</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="price-500-1000" value="500k - 1 triệu" />
-                                        <label class="search-filter__checkbox" for="price-500-1000">500k - 1
-                                            triệu</label>
+                                        <input hidden type="checkbox" name="priceRanges" class="filter-checkbox" id="price-500-1000" value="500000-1000000" />
+                                        <label class="search-filter__checkbox" for="price-500-1000">500k - 1 triệu</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" id="price-over1000" value="Trên 1 triệu" />
+                                        <input hidden type="checkbox" name="priceRanges" class="filter-checkbox" id="price-over1000" value="1000000-999999999" />
                                         <label class="search-filter__checkbox" for="price-over1000">Trên 1 triệu</label>
                                     </div>
                                 </div>
                             </article>
-
                             <article class="search-filter__category">
                                 <h3 class="search-filter__title">Đánh giá</h3>
 
@@ -233,7 +230,7 @@
 
                                 </c:choose>
                             </div>
-                            <div class="row-list row small-gutter">
+                            <div class="row-list row small-gutter" id="content-products">
 
                                 <c:if test="${empty products}">
                                     <p style="padding:20px">Không tìm thấy sản phẩm phù hợp</p>
@@ -242,7 +239,7 @@
                                 <c:forEach items="${products}" var="p">
                                 <div class="col l-2-4 m-4 c-6">
                                     <div class="product-card">
-                                        <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                                        <a href="product?id=${p.id}"><img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}"></a>
                                         <a>
                                             <p>${p.name}</p>
                                         </a>
@@ -265,5 +262,71 @@
 </body>
 <!-- Link JS -->
 <script src="assets/js/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
 
+        $(document).on('change', '.filter-checkbox', function() {
+            if ($(this).attr('name') === 'priceRanges' && $(this).is(':checked')) {
+                $('#price-all').prop('checked', false);
+            }
+            searchFilter();
+        });
+
+        $('#price-all').on('change', function() {
+            if ($(this).is(':checked')) {
+                $('input[name="priceRanges"]').prop('checked', false);
+                searchFilter();
+            }
+        });
+
+        function searchFilter() {
+            let brands = [];
+            $('input[name="brands"]:checked').each(function() {
+                brands.push($(this).val());
+            });
+
+            let priceRanges = [];
+            $('input[name="priceRanges"]:checked').each(function() {
+                priceRanges.push($(this).val());
+            });
+
+            let keyword = $(".word-search").text().trim();
+
+            $.ajax({
+                url: "search-product",
+                type: "GET",
+                // Chú ý: JQuery sẽ tự biến mảng thành brands=Bear&brands=Inochi
+                data: {
+                    keyword: keyword,
+                    brands: brands,
+                    priceRanges: priceRanges
+                },
+                beforeSend: function() {
+                    // Hiệu ứng làm mờ để người dùng biết đang tải
+                    $("#content-products").css("opacity", "0.5");
+                },
+                success: function(data) {
+
+                    let $htmlResponse = $(data);
+                    let newList = $htmlResponse.find("#content-products").html();
+                    let newHeader = $htmlResponse.find(".search-header").html();
+
+                    $("#content-products").fadeOut(100, function() {
+                        $(this).html(newList).fadeIn(100).css("opacity", "1");
+                    });
+
+
+                    if (newHeader) {
+                        $(".search-header").html(newHeader);
+                    }
+                },
+                error: function(xhr) {
+                    $("#content-products").css("opacity", "1");
+                    console.error("Lỗi hệ thống: " + xhr.status);
+                }
+            });
+        }
+    });
+</script>
 </html>

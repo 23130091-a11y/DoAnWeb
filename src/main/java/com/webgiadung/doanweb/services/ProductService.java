@@ -117,4 +117,7 @@ public class ProductService {
     public int applyDiscountToCategory(int categoryId, int discountId) {
         return pdao.applyDiscountToCategory(categoryId, discountId);
     }
+    public List<Product> searchWithFilters(String keyword, String[] brands, String[] priceRanges) {
+        return pdao.searchWithFilters(keyword, brands, priceRanges);
+    }
 }
