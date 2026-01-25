@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Slide implements Serializable {
 
-    private String id;
+    private int id;
     private String name;
     private String avatar;
     private String text;
@@ -16,7 +16,7 @@ public class Slide implements Serializable {
     public Slide() {
     }
 
-    public Slide(String id, String name, String avatar, String text, int status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Slide(int id, String name, String avatar, String text, int status, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
@@ -26,20 +26,20 @@ public class Slide implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAvatar() {
@@ -80,18 +80,5 @@ public class Slide implements Serializable {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Slide{" +
-                "id: '" + id + '\'' +
-                ", name: '" + name + '\'' +
-                ", avatar: '" + avatar + '\'' +
-                ", text: '" + text + '\'' +
-                ", status: " + status +
-                ", createdAt: " + createdAt +
-                ", updatedAt: " + updatedAt +
-                '}';
     }
 }

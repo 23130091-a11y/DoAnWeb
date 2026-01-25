@@ -18,24 +18,26 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductService pService = new ProductService();
         CategoriesService cService = new CategoriesService();
+
         int id = 0;
         try {
             id = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException e) {
-
         }
-        Product p = pService.getProduct(id);
+        Product p = pService.getProductFull(id);
 
-        // Lấy danh mục sản phẩm
-        Categories category = cService.getCategory(p.getCategoriesId());
+        if (p != null) {
+            Categories category = cService.getCategory(p.getCategoriesId());
 
-        // Lấy các parent category
-        List<Categories> parentCategories = cService.getCategoriesByParentId(p.getCategoriesId());
+            List<Categories> parentCategories = cService.getCategoriesByParentId(p.getCategoriesId());
 
-        request.setAttribute("product", p);
-        request.setAttribute("category", category);
-        request.setAttribute("parentCategories", parentCategories);
-        request.getRequestDispatcher("/product.jsp").forward(request, response);
+            request.setAttribute("product", p);
+            request.setAttribute("category", category);
+            request.setAttribute("parentCategories", parentCategories);
+            request.getRequestDispatcher("/product.jsp").forward(request, response);
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
     }
 
     @Override

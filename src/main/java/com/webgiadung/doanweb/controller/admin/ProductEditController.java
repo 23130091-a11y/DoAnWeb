@@ -161,9 +161,6 @@ public class ProductEditController extends HttpServlet {
         }
     }
 
-    // --- HÀM HỖ TRỢ ---
-
-    // Hàm upload file, trả về tên file tương đối hoặc null nếu không upload
     private String handleFileUpload(Part part, String appPath) throws IOException {
         if (part == null || part.getSize() == 0 || part.getSubmittedFileName().isEmpty()) {
             return null;

@@ -1153,11 +1153,9 @@
                         <h2 class="manage__heading">Thêm sự kiện giảm giá mới</h2>
 
                         <div class="event-card">
-                            <div class="event-card__header">
-                                <button type="submit" form="addEventForm" class="event-btn event-btn--save">
-                                    <i class="fa-solid fa-floppy-disk"></i> Lưu sự kiện
-                                </button>
-                            </div>
+                            <button type="submit" form="addEventForm" class="event-btn event-btn--save">
+                                <i class="fa-solid fa-floppy-disk"></i> Lưu sự kiện
+                            </button>
 
                             <div class="event-card__body">
                                 <form id="addEventForm" class="event-form">
@@ -1195,37 +1193,24 @@
                                     </div>
 
                                     <div class="event-form__group">
-                                        <label class="event-form__label">Mô tả sự kiện:</label>
+                                        <label class="event-form__label1">Mô tả sự kiện:</label>
                                         <textarea name="eventDesc" class="event-form__input event-form__input--textarea" rows="3" placeholder="Mô tả ngắn gọn chương trình..."></textarea>
                                     </div>
 
-                                    <div class="event-form__group">
+                                    <div class="event-form__group" style="display: none">
                                         <label class="event-form__label">Chọn Slide cho sự kiện:</label>
                                         <div class="event-select" id="eventSlideSelect">
-                                            <div class="event-select__selected">-- Không hiển thị lên Slide --</div>
-                                            <div class="event-select__options">
-                                                <div class="event-option" data-value="none">
-                                                    <span>Không hiển thị lên Slide</span>
-                                                </div>
-                                                <div class="event-option" data-value="home-main">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-main-thumb.png" alt="" class="event-option__img">
-                                                    <div class="event-option__content">
-                                                        <strong class="event-option__title">Slide chính</strong>
-                                                        <span class="event-option__desc">- Banner lớn trang chủ (1200x400)</span>
-                                                    </div>
-                                                </div>
-                                                <div class="event-option" data-value="home-sub">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-sub-thumb.png" alt="" class="event-option__img">
-                                                    <div class="event-option__content">
-                                                        <strong class="event-option__title">Banner phụ</strong>
-                                                        <span class="event-option__desc">- Banner nhỏ bên phải (400x200)</span>
-                                                    </div>
+                                            <div class="event-select__selected">-- Đang tải danh sách Slide... --</div>
+
+                                            <div class="event-select__options" id="listSlideOptions">
+                                                <div class="event-option">
+                                                    <span>Đang tải dữ liệu...</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="eventSlideTarget" id="eventSlideTargetHidden" value="none">
+                                        <input type="hidden" name="eventSlideTarget" id="eventSlideTargetHidden" value="0">
                                     </div>
-                                    <label class="event-form__label">Phạm vi áp dụng giảm giá:</label>
+                                    <label class="event-form__label2">Phạm vi áp dụng giảm giá:</label>
                                     <div class="event-form__apply-type">
 
                                         <div class="event-form__apply-row">
@@ -1254,49 +1239,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="event-form__apply-row">
-                                            <label class="event-radio">
-                                                <input type="radio" name="applyScope" value="specific">
-                                                <span>Sản phẩm cụ thể</span>
-                                            </label>
-
-                                            <div id="scopeSpecific" class="event-scope-box" style="display: none;">
-                                                <div class="event-search-mini">
-                                                    <div class="event-search-wrapper">
-                                                        <input type="text" id="productSearchEvent" class="event-form__input" placeholder="Nhập tên sản phẩm để lọc...">
-                                                        <button type="button" class="event-search-btn"><i class="fas fa-search"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="event-product-select">
-                                                    <div class="event-product-table">
-                                                        <div class="event-product-table__header">
-                                                            <div class="col-check">Chọn</div>
-                                                            <div class="col-img">Ảnh</div>
-                                                            <div class="col-name">Tên sản phẩm</div>
-                                                            <div class="col-price">Giá</div>
-                                                            <div class="col-cat">Danh mục</div>
-                                                        </div>
-                                                        <div class="event-product-table__body" id="eventProductList">
-                                                            <div class="event-product-item">
-                                                                <div class="col-check"><input type="checkbox" name="selectedProducts[]" value="101"></div>
-                                                                <div class="col-img"><img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt=""></div>
-                                                                <div class="col-name">Bình xịt bọt tuyết siêu sạch</div>
-                                                                <div class="col-price">150.000đ</div>
-                                                                <div class="col-cat">Gia dụng</div>
-                                                            </div>
-                                                            <div class="event-product-item">
-                                                                <div class="col-check"><input type="checkbox" name="selectedProducts[]" value="102"></div>
-                                                                <div class="col-img"><img src="${pageContext.request.contextPath}/assets/img/camera.png" alt=""></div>
-                                                                <div class="col-name">Camera hành trình 4K</div>
-                                                                <div class="col-price">1.200.000đ</div>
-                                                                <div class="col-cat">Phụ kiện ô tô</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -1306,6 +1248,7 @@
                             </div>
                         </div>
                     </section>
+
 
                     <section id="view-event-page" class="ev-container" style="display: none;">
                         <div class="ev-header">
@@ -1676,13 +1619,13 @@
                                         </div>
 
                                         <div class="view-price-card">
-                                            <div class="price-edit-row">
-                                                <label class="price-label">Giá gốc (đ):</label>
-                                                <input type="number" id="edit-oldPrice" name="oldPrice" class="form-input-small" value="0" oninput="calculateNewPrice()">
+                                            <div id="box-oldPrice" style="display:none">
+                                                <label>Giá gốc:</label>
+                                                <span id="v-oldPrice"></span>
                                             </div>
-                                            <div class="price-edit-row">
-                                                <label class="price-label">Giảm giá (%):</label>
-                                                <input type="number" id="edit-discount" name="discount" class="form-input-small" value="0" oninput="calculateNewPrice()">
+                                            <div id="box-discount" style="display:none">
+                                                <label>Giảm giá:</label>
+                                                <span id="v-discount"></span>%
                                             </div>
                                             <div class="price-item price-item--main">
                                                 <span>Giá mới:</span><span id="v-newPrice" class="text-price">0đ</span>
@@ -3263,16 +3206,27 @@ window.addEventListener("DOMContentLoaded", () => {
         var oldPriceEl = document.getElementById('v-oldPrice');
         var discountEl = document.getElementById('v-discount');
 
-        if (p.firstPrice > p.price) {
+        if (p.discountPercent > 0) {
             if(oldPriceEl) oldPriceEl.innerText = priceFmt.format(p.firstPrice);
             if(discountEl) discountEl.innerText = p.discountPercent;
 
-            if(boxOldPrice) boxOldPrice.style.display = 'flex';
-            if(boxDiscount) boxDiscount.style.display = 'flex';
+            if(boxOldPrice) {
+                boxOldPrice.style.display = 'block';
+                boxOldPrice.style.marginBottom = '10px';
+                boxOldPrice.style.lineHeight = '1.8';
+            }
+            if(boxDiscount) {
+                boxDiscount.style.display = 'block';
+                boxDiscount.style.marginBottom = '10px';
+                boxDiscount.style.lineHeight = '1.8';
+            }
         } else {
             if(boxOldPrice) boxOldPrice.style.display = 'none';
             if(boxDiscount) boxDiscount.style.display = 'none';
         }
+
+
+
 
         var descContainer = document.getElementById('v-descriptionList');
         if(descContainer) {
@@ -3701,6 +3655,68 @@ window.addEventListener("DOMContentLoaded", () => {
                     alert("Không thể kết nối đến server.");
                 });
         }
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        loadCategories();
+        setupFormSubmit();
+    });
+
+    // Load danh mục vào Select
+    async function loadCategories() {
+        try {
+            const response = await fetch('${pageContext.request.contextPath}/api/categories');
+            const data = await response.json();
+            const select = document.querySelector('select[name="applyCategories"]');
+            if (select) {
+                select.innerHTML = '<option value="0">-- Chọn một danh mục --</option>';
+                data.forEach(cat => {
+                    select.add(new Option(cat.name, cat.id));
+                });
+            }
+        } catch (err) { console.error("Lỗi load categories:", err); }
+    }
+
+    // Xử lý gửi Form AJAX
+    function setupFormSubmit() {
+        const form = document.getElementById('addEventForm');
+        if (!form) return;
+
+        form.onsubmit = async function(e) {
+            e.preventDefault();
+
+
+            const formData = new URLSearchParams(new FormData(form));
+
+            try {
+                // SỬA DÒNG NÀY:
+                const response = await fetch('${pageContext.request.contextPath}/admin/add-discount', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                });
+
+                // Kiểm tra nếu response không ok (ví dụ 404, 500)
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Server Error:", errorText);
+                    throw new Error("Mã lỗi: " + response.status);
+                }
+
+                const result = await response.json();
+                if (result.status === "success") {
+                    alert("Lưu sự kiện thành công!");
+                    form.reset();
+                    if (typeof backToEventList === "function") backToEventList();
+                } else {
+                    alert("Lỗi: " + result.message);
+                }
+            } catch (error) {
+                console.error("Chi tiết lỗi:", error);
+                alert("Lỗi: " + error.message);
+            }
+        };
     }
 </script>
 <!-- Link JS -->
