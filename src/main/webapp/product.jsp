@@ -145,8 +145,8 @@
                         </div>
 
                         <div class="content-details__act">
-                            <button class="content-details__cart-btn btn"
-                                    onclick="window.location.href='add-cart?productId=${product.id}&quantity=1'">
+                            <button type="button" class="content-details__cart-btn btn"
+                                    onclick="addToCart(${product.id})">
                                 <i class="fa-solid fa-cart-plus content-details__cart-icon"></i>
                                 Thêm vào giỏ hàng
                             </button>
@@ -402,6 +402,49 @@
             updateButtons(); // khởi tạo trạng thái nút
         });
     });
+
+    function addToCart(productId) {
+        const contextPath = '${pageContext.request.contextPath}';
+        const url = contextPath + '/add-cart?productId=' + productId + '&quantity=1';
+
+        fetch(url)
+            .then(response => {
+                if (response.status === 401) {
+                    alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+                    window.location.href = contextPath + '/login';
+                    return;
+                }
+                if (response.ok) return response.json();
+            })
+            .then(data => {
+                if (data && data.status === 'success') {
+                    // 1. Sửa lại class cho đúng với HTML (header-cart__notice)
+                    const cartNotice = document.querySelector('.header-cart__notice');
+                    if (cartNotice) {
+                        cartNotice.innerText = data.cartQty;
+                    }
+
+                    alert("Đã thêm sản phẩm vào giỏ hàng!");
+
+                    /** * 2. Giải quyết vấn đề Dropdown không cập nhật:
+                     * Vì nội dung dropdown được render bằng JSTL (Server-side),
+                     * AJAX không thể tự chèn thêm thẻ <li> vào đó một cách dễ dàng.
+                     * Cách đơn giản và hiệu quả nhất lúc này:
+                     */
+                    const cartList = document.querySelector('.cart-list');
+                    // Nếu giỏ hàng đang hiện "Chưa có sản phẩm" (no-cart), ta reload để lấy HTML mới
+                    if (cartList.querySelector('.cart-list--no-cart')) {
+                        location.reload();
+                    } else {
+                        // Nếu đã có sản phẩm rồi, chỉ cần báo thành công là đủ,
+                        // khách hàng nhấn vào icon giỏ hàng hoặc sang trang khác sẽ thấy đủ.
+                        // Hoặc bạn có thể dùng location.reload() cho mọi trường hợp để đảm bảo dropdown luôn khớp.
+                        location.reload();
+                    }
+                }
+            })
+            .catch(err => console.error("Lỗi:", err));
+    }
 </script>
 
 <!-- Link JS -->

@@ -123,4 +123,8 @@ public class ProductService {
     public Product getProductFull(int id) {
         return pdao.getProductFull(id);
     }
+
+    public List<Product> getProductsFromIds(List<Integer> viewedIds) {
+        return pdao.getProductsFromIds(viewedIds);
+    }
 }

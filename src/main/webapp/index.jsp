@@ -102,6 +102,47 @@
 
         <div class="main_product">
             <div class="grid wide">
+                <!-- Sản phẩm vừa xem -->
+                <c:if test="${not empty historyProducts}">
+                    <section class="featured history-section">
+                        <div class="container">
+                            <h2 class="section-title">Sản phẩm bạn đã xem</h2>
+                            <div class="product-list-wrapper">
+                                <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
+
+                                <div class="product-list">
+                                    <c:forEach items="${historyProducts}" var="p">
+                                        <div class="product-card">
+                                            <a href="product?id=${p.id}">
+                                                <img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}">
+                                            </a>
+                                            <a href="product?id=${p.id}"><p>${p.name}</p></a>
+
+                                            <div class="price-discount">
+                                                    <%-- Sử dụng hàm an toàn từ Model --%>
+                                                <c:if test="${p.isDiscounted}">
+                                                    <div class="price-top">
+                                                        <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                                        <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                                    </div>
+                                                </c:if>
+                                                <div class="price-bottom">
+                                                    <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="bottom">
+                                                <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
+                                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </c:if>
                 <!-- Sản phẩm nổi bật -->
                     <section class="featured">
                     <h2>Sản phẩm nổi bật</h2>
@@ -144,62 +185,83 @@
                     <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                     <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <div class="product-list">
-                        <c:forEach items="${promotionProducts}" var="p">
-                            <div class="product-card">
-                                <a href="product?id=${p.id}"> <img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}"></a>
-                                <a href="product?id=${p.id}">
-                                    <p>${p.name}</p>
-                                </a>
-                                <div class="price-discount">
-                                    <div class="price-top">
-                                        <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                        <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                        <c:choose>
+                            <c:when test="${not empty promotionProducts}">
+                                <c:forEach items="${promotionProducts}" var="p">
+                                    <div class="product-card">
+                                        <a href="product?id=${p.id}"> <img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}"></a>
+                                        <a href="product?id=${p.id}">
+                                            <p>${p.name}</p>
+                                        </a>
+                                        <div class="price-discount">
+                                                <%-- CHỈ HIỆN GIÁ CŨ VÀ BADGE NẾU CÓ GIẢM GIÁ THẬT --%>
+                                            <c:if test="${p.isDiscounted}">
+                                                <div class="price-top">
+                                                    <span class="old-price">
+                                                        <fmt:formatNumber value="${p.firstPrice}" type="number"/>đ
+                                                    </span>
+                                                    <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                                </div>
+                                            </c:if>
+
+                                                <%-- GIÁ MỚI LUÔN HIỆN --%>
+                                            <div class="price-bottom">
+                                                <span class="new-price">
+                                                    <fmt:formatNumber value="${p.totalPrice}" type="number"/>đ
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="bottom">
+                                            <div class="star"><i class="fa-solid fa-star"></i>${p.ratingAvg}</div>
+                                            <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
+                                        </div>
                                     </div>
-                                    <div class="price-bottom">
-                                        <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
-                                    </div>
-                                </div>
-                                <div class="bottom">
-                                    <div class="star"><i class="fa-solid fa-star"></i>${p.ratingAvg}</div>
-                                    <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                                </div>
-                            </div>
-                        </c:forEach>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="empty-msg">Hiện chưa có chương trình khuyến mãi, mời bạn xem các sản phẩm khác!</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </section>
 
                 <!-- Gợi ý cho bạn -->
-                <section class="featured">
-                    <h2>Gợi ý cho bạn</h2>
-                    <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
-                    <div class="product-list">
-                        <c:forEach items="${suggestedProducts}" var="p">
-                            <div class="product-card">
-                            <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
-                            <a href="product?id=${p.id}">
-                                <p>${p.name}</p>
-                            </a>
-                                <div class="price-discount">
-                                    <c:if test="${p.discountPercent > 0}">
-                                        <div class="price-top">
-                                            <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
-                                        </div>
-                                    </c:if>
+                <%-- Chỉ hiển thị Section nếu danh sách không rỗng --%>
+                <c:if test="${not empty suggestedProducts}">
+                    <section class="featured">
+                        <h2>Gợi ý cho bạn</h2>
+                        <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="product-list">
+                            <c:forEach items="${suggestedProducts}" var="p">
+                                <div class="product-card">
+                                    <a href="product?id=${p.id}">
+                                        <img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}">
+                                    </a>
+                                    <a href="product?id=${p.id}"><p>${p.name}</p></a>
 
-                                    <div class="price-bottom">
-                                        <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                    <div class="price-discount">
+                                            <%-- Sử dụng hàm an toàn từ Model --%>
+                                        <c:if test="${p.isDiscounted}">
+                                            <div class="price-top">
+                                                <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                                <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                            </div>
+                                        </c:if>
+                                        <div class="price-bottom">
+                                            <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bottom">
+                                        <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
+                                        <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
                                     </div>
                                 </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu thích</button>
-                            </div>
+                            </c:forEach>
                         </div>
-                        </c:forEach>
-                    </div>
-                </section>
+                    </section>
+                </c:if>
                 <!-- Sản phẩm giới hạn -->
                 <section class="featured">
                     <h2>Sản phẩm giới hạn</h2>
@@ -209,11 +271,12 @@
                         <c:forEach items="${limitedProducts}" var="p">
                             <div class="product-card">
                                 <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
-                            <a href="product?id=${p.id}">
-                                <p>${p.name}</p>
-                            </a>
+                                <a href="product?id=${p.id}">
+                                    <p>${p.name}</p>
+                                </a>
                                 <div class="price-discount">
-                                    <c:if test="${p.discountPercent > 0}">
+                                        <%-- Dùng hàm logic thông minh đã viết ở Product.java --%>
+                                    <c:if test="${p.isDiscounted}">
                                         <div class="price-top">
                                             <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
                                             <div class="discount-badge">Giảm ${p.discountPercent}%</div>
@@ -224,12 +287,12 @@
                                         <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
                                     </div>
                                 </div>
-                            <div class="bottom">
-                                <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
-                                <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
-                                    thích</button>
+                                <div class="bottom">
+                                    <div class="star"><i class="fa-solid fa-star"></i> ${p.ratingAvg}</div>
+                                    <button class="fav-btn"><i class="fa-regular fa-heart"></i> Yêu
+                                        thích</button>
+                                </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </section>

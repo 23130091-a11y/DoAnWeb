@@ -5,6 +5,7 @@ import com.webgiadung.doanweb.model.Categories;
 import com.webgiadung.doanweb.model.Product;
 import com.webgiadung.doanweb.services.CategoriesService;
 import com.webgiadung.doanweb.services.ProductService;
+import com.webgiadung.doanweb.utils.CookieUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -27,6 +28,8 @@ public class ProductController extends HttpServlet {
         Product p = pService.getProductFull(id);
 
         if (p != null) {
+            CookieUtils.addIdToCookie(request, response, "viewed_products", id);
+
             Categories category = cService.getCategory(p.getCategoriesId());
 
             List<Categories> parentCategories = cService.getCategoriesByParentId(p.getCategoriesId());
