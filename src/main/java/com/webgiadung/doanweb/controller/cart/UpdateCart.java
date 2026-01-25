@@ -32,5 +32,20 @@ public class UpdateCart extends HttpServlet {
         }
 
         response.sendRedirect(request.getContextPath() + "/cart");
+
+        com.webgiadung.doanweb.model.User user = (com.webgiadung.doanweb.model.User) session.getAttribute("user");
+        if (user != null && cart != null) {
+            Integer cartId = (Integer) session.getAttribute("CART_ID");
+            com.webgiadung.doanweb.dao.CartDao cartDao = new com.webgiadung.doanweb.dao.CartDao();
+            if (cartId == null) cartId = cartDao.getOrCreateCartId(user.getId());
+
+            int newQty = 0;
+            for (var it : cart.getItems()) {
+                if (it.getProduct().getId() == productId) { newQty = it.getQuantity(); break; }
+            }
+
+            new com.webgiadung.doanweb.dao.CartItemDao().setQuantity(cartId, productId, newQty);
+            session.setAttribute("CART_ID", cartId);
+        }
     }
 }

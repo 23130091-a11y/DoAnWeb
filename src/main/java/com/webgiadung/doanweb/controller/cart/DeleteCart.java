@@ -17,6 +17,16 @@ public class DeleteCart extends HttpServlet {
         Cart cart = (Cart)session.getAttribute("cart");
         CartItem cartItem = cart.deleteItem(id);
 
+        com.webgiadung.doanweb.model.User user = (com.webgiadung.doanweb.model.User) session.getAttribute("user");
+        if (user != null) {
+            Integer cartId = (Integer) session.getAttribute("CART_ID");
+            com.webgiadung.doanweb.dao.CartDao cartDao = new com.webgiadung.doanweb.dao.CartDao();
+            if (cartId == null) cartId = cartDao.getOrCreateCartId(user.getId());
+
+            new com.webgiadung.doanweb.dao.CartItemDao().deleteItem(cartId, id);
+            session.setAttribute("CART_ID", cartId);
+        }
+
         if(cartItem == null) {
             //todo
         }

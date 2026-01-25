@@ -65,6 +65,13 @@ public class AddCart extends HttpServlet {
         // ===== 5. ADD CART =====
         cart.addItem(product, quantity);
 
+        // ===== SAVE TO DB =====
+        com.webgiadung.doanweb.dao.CartDao cartDao = new com.webgiadung.doanweb.dao.CartDao();
+        com.webgiadung.doanweb.dao.CartItemDao itemDao = new com.webgiadung.doanweb.dao.CartItemDao();
+        int cartId = cartDao.getOrCreateCartId(user.getId());
+        itemDao.addOrInc(cartId, productId, quantity);
+        session.setAttribute("CART_ID", cartId);
+
         // ===== 6. REDIRECT UX =====
         response.sendRedirect("product-detail?id=" + productId);
     }

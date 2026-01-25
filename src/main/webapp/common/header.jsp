@@ -188,7 +188,7 @@
                         <c:set var="cart" value="${sessionScope.cart}" />
 
                         <!-- ICON CART -->
-                        <a href="cart">
+                        <a href="${pageContext.request.contextPath}/cart">
                             <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                             <span class="header-cart__notice">
                                  <c:choose>
