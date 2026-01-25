@@ -22,15 +22,20 @@ public class AdminCustomerController extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session == null) return false;
 
-        Object obj = session.getAttribute("USER_LOGIN");
-        if (!(obj instanceof User)) {
-            obj = session.getAttribute("user");
-        }
-
+        Object obj = session.getAttribute("user");
+        if (!(obj instanceof User)) obj = session.getAttribute("USER_LOGIN");
         if (!(obj instanceof User)) return false;
 
-        User u = (User) obj;
-        return u.getRole() == 1;
+        User ses = (User) obj;
+
+        // reload từ DB để lấy role/status mới nhất
+        User fresh = authDao.findByIdFull(ses.getId());
+        if (fresh == null) return false;
+
+        // cập nhật lại session luôn cho đồng bộ
+        session.setAttribute("user", fresh);
+
+        return fresh.getRole() == 1 && fresh.getStatus() == 1;
     }
 
     @Override

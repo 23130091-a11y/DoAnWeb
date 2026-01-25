@@ -9,7 +9,7 @@ import com.webgiadung.doanweb.services.SlideService;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
-
+import com.webgiadung.doanweb.services.BlogService;
 import java.io.IOException;
 import java.util.List;
 
@@ -47,7 +47,8 @@ public class ListProductController extends HttpServlet {
                 categoriesDao.getCategoryTree();
 
         request.setAttribute("parentCategories", parentCategories);
-
+        BlogService blogService = new BlogService();
+        request.setAttribute("latestBlogs", blogService.getHomeBlogs());
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

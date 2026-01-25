@@ -28,6 +28,19 @@
 </head>
 
 <body>
+<c:if test="${not empty sessionScope.orderMsg}">
+  <div style="max-width:1200px;margin:12px auto;padding:10px 14px;border:1px solid #c3e6cb;background:#d4edda;color:#155724;border-radius:6px;">
+    ${sessionScope.orderMsg}
+  </div>
+  <c:remove var="orderMsg" scope="session"/>
+</c:if>
+
+<c:if test="${not empty sessionScope.orderError}">
+  <div style="max-width:1200px;margin:12px auto;padding:10px 14px;border:1px solid #f5c6cb;background:#f8d7da;color:#721c24;border-radius:6px;">
+    ${sessionScope.orderError}
+  </div>
+  <c:remove var="orderError" scope="session"/>
+</c:if>
     <!-- header -->
     <%@ include file="/common/header.jsp" %>
 

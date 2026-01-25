@@ -465,8 +465,7 @@
 
                                                 <!-- Xóa/Khóa -->
                                                 <td>
-                                                    <form method="post"
-                                                          action="${pageContext.request.contextPath}/admin/customers/lock"
+                                                    <form method="post" action="${pageContext.request.contextPath}/admin/customers/lock"
                                                           onsubmit="return confirm('Khóa khách hàng này?');">
                                                         <input type="hidden" name="id" value="${u.id}">
                                                         <button type="submit" class="customer-table__delete">Xóa</button>
@@ -594,7 +593,21 @@
                                     <input type="text" class="input" name="address" id="editAddress">
 
                                 </div>
+                                <div class="customer-detail__row">
+                                    <label class="label">Quyền:</label>
+                                    <select class="input" name="role" id="editRole" required>
+                                        <option value="0">User</option>
+                                        <option value="1">Admin</option>
+                                    </select>
+                                </div>
 
+                                <div class="customer-detail__row">
+                                    <label class="label">Trạng thái:</label>
+                                    <select class="input" name="status" id="editStatus" required>
+                                        <option value="1">Đang hoạt động</option>
+                                        <option value="0">Bị khóa</option>
+                                    </select>
+                                </div>
                                 <div class="customer-detail__row">
                                     <label class="label">Ngày tạo:</label>
                                     <input type="text" class="input" value="01/12/2025" disabled>
@@ -2450,63 +2463,68 @@ window.addEventListener("DOMContentLoaded", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
-    <!-- Xem khách hàng -->
-    document.querySelectorAll(".customer-table__view").forEach(btn => {
+    // SỬA KHÁCH HÀNG (mở form + đổ dữ liệu)
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".customer-table__edit").forEach(btn => {
         btn.addEventListener("click", () => {
+          hideAllSections();
+          sectionCustomerEdit.style.display = "block";
+          window.scrollTo({ top: 0, behavior: "smooth" });
 
-            hideAllSections();
+          // đổ dữ liệu từ data-* vào form
+          document.getElementById("editId").value = btn.dataset.id || "";
+          document.getElementById("editName").value = btn.dataset.name || "";
+          document.getElementById("editEmail").value = btn.dataset.email || "";
+          document.getElementById("editPhone").value = btn.dataset.phone || "";
+          document.getElementById("editAddress").value = btn.dataset.address || "";
 
-            // HIỆN DETAIL (gỡ class hidden)
-            sectionCustomerDetail.classList.remove("hidden");
-            sectionCustomerDetail.style.display = "block";
+          // role/status (nếu có)
+          const roleEl = document.getElementById("editRole");
+          if (roleEl) roleEl.value = btn.dataset.role ?? "0";
 
-            // ĐỔ DATA
-            document.getElementById("customerDetailName").innerText = btn.dataset.name;
-            document.getElementById("customerDetailEmail").innerText = btn.dataset.email;
-            document.getElementById("customerDetailPhone").innerText = btn.dataset.phone || "-";
-            document.getElementById("customerDetailAddress").innerText = btn.dataset.address || "-";
+          const statusEl = document.getElementById("editStatus");
+          if (statusEl) statusEl.value = btn.dataset.status ?? "1";
 
-            document.getElementById("customerDetailCreatedAt").innerText =
-                btn.dataset.created || "-";
-
-            document.getElementById("customerDetailUpdatedAt").innerText =
-                btn.dataset.updated || "-";
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
+          // password luôn để trống
+          const passEl = document.getElementById("editPassword");
+          if (passEl) passEl.value = "";
         });
+      });
     });
+    // XEM KHÁCH HÀNG (mở detail + đổ dữ liệu)
+    document.querySelectorAll(".customer-table__view").forEach(btn => {
+      btn.addEventListener("click", () => {
+        hideAllSections();
+        sectionCustomerDetail.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
 
+        document.getElementById("customerDetailName").textContent = btn.dataset.name || "";
+        document.getElementById("customerDetailEmail").textContent = btn.dataset.email || "";
+        document.getElementById("customerDetailPhone").textContent = btn.dataset.phone || "";
+        document.getElementById("customerDetailAddress").textContent = btn.dataset.address || "";
+        document.getElementById("customerDetailCreatedAt").textContent = btn.dataset.created || "-";
+        document.getElementById("customerDetailUpdatedAt").textContent = btn.dataset.updated || "-";
 
-    // SỬA KHÁCH HÀNG
-    // ===== SỬA KHÁCH HÀNG =====
-    document.querySelectorAll("edit").forEach(btn => {
-        btn.addEventListener("click", () => {
+        // status badge (tuỳ bạn đang dùng online/offline)
+        const st = btn.dataset.status; // "1" hoặc "0"
+        const statusEl = document.getElementById("customerDetailStatus");
+        if (statusEl) {
+          if (st === "1") {
+            statusEl.textContent = "Đang hoạt động";
+            statusEl.classList.remove("offline");
+            statusEl.classList.add("online");
+          } else {
+            statusEl.textContent = "Bị khóa";
+            statusEl.classList.remove("online");
+            statusEl.classList.add("offline");
+          }
+        }
 
-            // 1. LẤY DATA TỪ BUTTON
-            const id = btn.dataset.id;
-            const name = btn.dataset.name;
-            const email = btn.dataset.email;
-            const phone = btn.dataset.phone;
-            const address = btn.dataset.address;
-            const role = btn.dataset.role;
-            const status = btn.dataset.status;
-
-            // 2. ĐỔ DỮ LIỆU VÀO FORM
-            document.getElementById("editId").value = id;
-            document.getElementById("editName").value = name;
-            document.getElementById("editEmail").value = email;
-            document.getElementById("editPhone").value = phone ?? "";
-            document.getElementById("editAddress").value = address ?? "";
-            document.getElementById("editRole").value = role;
-            document.getElementById("editStatus").value = status;
-
-            // 3. SHOW FORM EDIT
-            hideAllSections();
-            sectionCustomerEdit.style.display = "block";
-
-            // 4. SCROLL LÊN ĐẦU
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+        // avatar (nếu có dataset.avatar thì set, không thì thôi)
+        const av = btn.dataset.avatar;
+        const avatarEl = document.getElementById("customerDetailAvatar");
+        if (avatarEl && av) avatarEl.src = av;
+      });
     });
 
     function hideCustomerEdit() {

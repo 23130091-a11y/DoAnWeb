@@ -38,32 +38,40 @@
         <div class="banner-section"></div>
 
         <div class="login-container">
-            <form class="login-form" action="${pageContext.request.contextPath}/register" method="post">
-            <h3>Đăng ký</h3>
+            <form id="registerForm" class="login-form"
+                  action="${pageContext.request.contextPath}/register" method="post"novalidate>
+                <h3>Đăng ký</h3>
+
+                <!-- lỗi client-side -->
+                <p id="clientError" style="color:#d93025; margin-top:10px;"></p>
 
                 <input type="text"
+                       id="email"
                        name="email"
                        placeholder="Email"
                        required>
 
                 <input type="text"
+                       id="phone"
                        name="phone"
                        placeholder="Số điện thoại"
                        required>
 
                 <input type="password"
+                       id="password"
                        name="password"
                        placeholder="Mật khẩu"
                        required>
 
                 <input type="password"
+                       id="repassword"
                        name="repassword"
                        placeholder="Nhập lại mật khẩu"
                        required>
 
                 <button type="submit" class="btn-login">ĐĂNG KÝ</button>
 
-                <%-- HIỂN THỊ LỖI --%>
+                <%-- HIỂN THỊ LỖI server-side --%>
                 <% if (request.getAttribute("error") != null) { %>
                 <p style="color:red; margin-top:10px;">
                     <%= request.getAttribute("error") %>
@@ -73,8 +81,6 @@
                 <div class="register-link">
                     <span>Đã có tài khoản?</span>
                     <a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
-
-
                 </div>
             </form>
 

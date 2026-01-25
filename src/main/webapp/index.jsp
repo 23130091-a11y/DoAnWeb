@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<c:out value="${blog.content}" escapeXml="false"/>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -221,110 +221,41 @@
                         <a href="#!" class="blog__view-all">Xem tất cả</a>
                     </div>
                     <div class="blog__list row small-gutter ">
-                        <div class="col c-3 m-3 l-3">
-                            <article class="blog-item">
-                                <a href="blog.jsp" class="blog-item__link">
-                                    <img src="assets/img/blog-img-01.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                         class="blog-item__img">
-                                </a>
-                                <div class="blog-item__content">
-                                    <h3>
-                                        <a class="blog-item__title" href="blog.jsp">Hướng dẫn vệ sinh máy giặt đúng
-                                            cách</a>
-                                    </h3>
-                                    <p class="blog-item__desc">
-                                        Máy giặt sử dụng lâu ngày không được vệ sinh đúng cách sẽ khiến máy giặt trở nên
-                                        bẩn, bám cặn, điều này vô tình làm cho quần áo khi giặt sẽ không còn sạch và có
-                                        mùi khó chịu. Nếu máy giặt nhà bạn có những dấu hiệu trên thì đã đến lúc để làm
-                                        sạch máy giặt
-                                    </p>
-                                    <div class="blog-item__meta">
-                                        <span class="blog-item__time">
-                                            <i class="fa-regular fa-clock"></i>
-                                            14/11/2025 • 10:30
-                                        </span>
+                        <c:choose>
+                            <c:when test="${not empty latestBlogs}">
+                                <c:forEach items="${latestBlogs}" var="b">
+                                    <div class="col c-3 m-3 l-3">
+                                        <article class="blog-item">
+                                            <a href="blog-detail?id=${b.id}" class="blog-item__link">
+                                                <img src="${b.thumbnail}" alt="${b.title}" class="blog-item__img">
+                                            </a>
+                                            <div class="blog-item__content">
+                                                <h3>
+                                                    <a class="blog-item__title" href="blog-detail?id=${b.id}">
+                                                        ${b.title}
+                                                    </a>
+                                                </h3>
+                                                <p class="blog-item__desc">
+                                                    ${b.summary}
+                                                </p>
+                                                <div class="blog-item__meta">
+                                                    <span class="blog-item__time">
+                                                        <i class="fa-regular fa-clock"></i>
+                                                       <fmt:formatDate value="${b.createdAtDate}" pattern="dd/MM/yyyy • HH:mm"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </article>
                                     </div>
-                                </div>
-                            </article>
-                        </div>
+                                </c:forEach>
+                            </c:when>
 
-                        <div class="col c-3 m-3 l-3">
-                            <article class="blog-item">
-                                <a href="#!" class="blog-item__link">
-                                    <img src="assets/img/blog-img-02.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                         class="blog-item__img">
-                                </a>
-                                <div class="blog-item__content">
-                                    <h3>
-                                        <a class="blog-item__title" href="#!">Lợi ích của việc bảo quản thực phẩm bằng
-                                            máy hút chân không</a>
-                                    </h3>
-                                    <p class="blog-item__desc">
-                                        Bảo quản thực phẩm lâu hơn: Đây là lợi ích đầu tiên mà của máy hút chân không mà
-                                        chúng ta cần phải kể đến. Với mỗi cơ sở sản xuất và chế biến thực phẩm thì việc
-                                        bảo quản thực phẩm lâu dài, nhất là các loại thịt, cá, hải sản là điều vô cùng
-                                        cần thiết
-                                    </p>
-                                    <div class="blog-item__meta">
-                                        <span class="blog-item__time">
-                                            <i class="fa-regular fa-clock"></i>
-                                            14/11/2025 • 10:30
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="col c-3 m-3 l-3">
-                            <article class="blog-item">
-                                <a href="#!" class="blog-item__link">
-                                    <img src="assets/img/blog-img-03.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                         class="blog-item__img">
-                                </a>
-                                <div class="blog-item__content">
-                                    <h3>
-                                        <a class="blog-item__title" href="#!">Cách sử dụng đèn bắt muỗi giúp tiêu diệt
-                                            muỗi hiệu quả</a>
-                                    </h3>
-                                    <p class="blog-item__desc">
-                                        Đèn bắt muỗi được các gia đình và nhiều người tin tưởng sử dụng. Sản phẩm không
-                                        chỉ giúp tiêu diệt muỗi hiệu quả mà còn có thể dùng làm đèn ngủ. Bạn đã viết
-                                        cách sử dụng đèn bắt muỗi sao cho đúng chưa?
-                                    </p>
-                                    <div class="blog-item__meta">
-                                        <span class="blog-item__time">
-                                            <i class="fa-regular fa-clock"></i>
-                                            14/11/2025 • 10:30
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-
-                        <div class="col c-3 m-3 l-3">
-                            <article class="blog-item">
-                                <a href="#!" class="blog-item__link">
-                                    <img src="assets/img/blog-img-04.jpg" alt="Hướng dẫn vệ sinh máy giặt"
-                                         class="blog-item__img">
-                                </a>
-                                <div class="blog-item__content">
-                                    <h3>
-                                        <a class="blog-item__title" href="#!">Vệ sinh và bảo quản máy xay sinh tố đúng
-                                            cách </a>
-                                    </h3>
-                                    <p class="blog-item__desc">
-                                        Sau khi sử dụng, cần xoay đúng chiều để tháo cối ra. Vì có một số loại máy xay
-                                        sinh tố phải xoay thuận hoặc ngược chiều với kim đồng hồ mới tháo ra được.
-                                    </p>
-                                    <div class="blog-item__meta">
-                                        <span class="blog-item__time">
-                                            <i class="blog-item__icon fa-regular fa-clock"></i>
-                                            14/11/2025 • 10:30
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
+                            <c:otherwise>
+                                <!-- nếu DB chưa có blog thì giữ hard-code 4 bài cũ ở đây -->
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+   </div>
                     </div>
                 </div>
             </div>
