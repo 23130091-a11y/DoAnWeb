@@ -123,4 +123,7 @@ public class ProductService {
     public Product getProductFull(int id) {
         return pdao.getProductFull(id);
     }
+    public List<Product> findProductByName(String name) {
+        return pdao.searchByName(name);
+    }
 }

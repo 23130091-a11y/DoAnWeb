@@ -1041,11 +1041,13 @@
                             <div class="product-main-content">
                                 <div id="product-list-section">
                                 <div class="product-table">
-                                    <div class="product-search__wrapper">
-                                        <input type="text" class="product-search__input" placeholder="Tìm tên sản phẩm hoặc từ khóa...">
-                                        <button class="product-search__btn">
-                                            <i class="fas fa-search"></i> Search
-                                        </button>
+                                    <div class="event-search">
+                                        <div class="event-search__wrapper">
+                                            <input type="text" id="productSearchInput" class="event-search__input" placeholder="Tìm kiếm tên sản phẩm...">
+                                            <button class="event-search__btn" id="productSearchBtn">
+                                                <i class="fas fa-search"></i> Tìm kiếm
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="product-table__header">
                                         <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
@@ -2992,8 +2994,36 @@ window.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error(err));
 
         loadProducts(0);
+
+        const searchBtn = document.querySelector('.event-search__btn');
+        const searchInput = document.querySelector('.event-search__input');
+
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', function() {
+                searchProducts(searchInput.value);
+            });
+
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    searchProducts(searchInput.value);
+                }
+            });
+        }
     });
 
+    function searchProducts(keyword) {
+        console.log("Đang tìm kiếm:", keyword);
+        fetch(contextPath + '/api/search-products?query=' + encodeURIComponent(keyword))
+            .then(res => {
+                if (!res.ok) return res.text().then(text => { throw new Error(text) });
+                return res.json();
+            })
+            .then(data => {
+                console.log("Dữ liệu search trả về:", data);
+                renderProductTable(data);
+            })
+            .catch(err => console.error('Lỗi search:', err));
+    }
     function loadProducts(cateId) {
 
         fetch(contextPath + '/api/products-by-category?cateId=' + cateId)
@@ -3010,7 +3040,6 @@ window.addEventListener("DOMContentLoaded", () => {
         var container = document.getElementById('product-list-container');
         if (!container) return;
 
-        // Kiểm tra nếu không có sản phẩm
         if (!products || products.length === 0) {
             container.innerHTML = '<p style="padding:20px; text-align:center;">Không có sản phẩm nào.</p>';
             return;

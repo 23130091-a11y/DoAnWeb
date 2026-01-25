@@ -111,7 +111,7 @@
                             <c:forEach items="${featuredProducts}" var="p">
                                 <div class="product-card">
                                 <a href="product?id=${p.id}">
-                                    <img src="${p.image}" alt="${p.name}">
+                                    <img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}">
                                 </a>
 
                                 <a href="product?id=${p.id}">
@@ -121,7 +121,9 @@
                                         <c:if test="${p.discountPercent > 0}">
                                             <div class="price-top">
                                                 <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                                <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                                <div class="discount-badge" style="color: red;">
+                                                    Giảm ${p.discountPercent}%
+                                                </div>
                                             </div>
                                         </c:if>
 
@@ -176,7 +178,7 @@
                     <div class="product-list">
                         <c:forEach items="${suggestedProducts}" var="p">
                             <div class="product-card">
-                            <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                            <a href="product?id=${p.id}"><img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}"></a>
                             <a href="product?id=${p.id}">
                                 <p>${p.name}</p>
                             </a>
@@ -184,7 +186,9 @@
                                     <c:if test="${p.discountPercent > 0}">
                                         <div class="price-top">
                                             <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                            <div class="discount-badge" style="color: red;">
+                                                Giảm ${p.discountPercent}%
+                                            </div>
                                         </div>
                                     </c:if>
 
@@ -208,7 +212,7 @@
                     <div class="product-list">
                         <c:forEach items="${limitedProducts}" var="p">
                             <div class="product-card">
-                                <a href="product?id=${p.id}"><img src="${p.image}" alt="${p.name}"></a>
+                                <a href="product?id=${p.id}"><img src="${pageContext.request.contextPath}/assets/img/products/${p.image}" alt="${p.name}"></a>
                             <a href="product?id=${p.id}">
                                 <p>${p.name}</p>
                             </a>
@@ -216,7 +220,9 @@
                                     <c:if test="${p.discountPercent > 0}">
                                         <div class="price-top">
                                             <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                            <div class="discount-badge" style="color: red;">
+                                                Giảm ${p.discountPercent}%
+                                            </div>
                                         </div>
                                     </c:if>
 
