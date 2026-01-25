@@ -56,6 +56,7 @@
             </div>
             <!-- Login thường -->
             <form class="login-form" action="login" method="post" >
+            <input type="hidden" name="redirect" value="${param.redirect}" />
                 <h3>Đăng nhập</h3>
 
                 <!-- Xác nhận -->

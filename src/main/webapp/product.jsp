@@ -252,131 +252,104 @@
             <div class="grid wide">
                 <div class="row small-gutter">
                     <div class="col l-9 m-12 c-12">
-                        <div class="product-comment">
+                        <div class="product-comment" id="reviews">
                             <h2 class="section-title product-comment__heading">Chia sẻ đánh giá của bạn</h2>
-                            <div class="product-comment__vote">
-                                <span class="product-comment__title">Đánh giá của bạn: </span>
-                                <div class="rating">
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                    <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                </div>
-                            </div>
 
-                            <textarea class="product-comment__input" name="new_comment" id="new_comment" rows="4"
-                                placeholder="Nhập câu hỏi / Bình luận / Nhận xét tại đây"></textarea>
+                            <c:choose>
+                                <%-- CHƯA ĐĂNG NHẬP: chỉ hiện nút login --%>
+                                <c:when test="${empty sessionScope.user}">
+                                    <p style="margin:12px 0;">
+                                        Bạn cần <b>đăng nhập</b> để gửi đánh giá.
+                                    </p>
 
-                            <div class="product-comment__upload">
-                                <label for="reviewImage" class="product-comment__upload-label">
-                                    Upload ảnh đánh giá:
-                                </label>
+                                    <c:url var="loginUrl" value="/login">
+                                        <c:param name="redirect" value="/product?id=${product.id}#reviews"/>
+                                    </c:url>
 
-                                <input 
-                                    type="file" 
-                                    id="reviewImage" 
-                                    name="reviewImage" 
-                                    class="product-comment__upload-input"
-                                    accept="image/*"
-                                    multiple
-                                >
-                            </div>
+                                    <a class="btn btn--default-color"
+                                       href="${pageContext.request.contextPath}/login?redirect=/product?id=${product.id}%23reviews">
+                                       Đăng nhập để đánh giá
+                                    </a>
+                                </c:when>
 
-                            <button class="product-comment__btn btn btn--default-color">Gửi đánh giá</button>
+                                <%-- ĐÃ ĐĂNG NHẬP: hiện form gửi review --%>
+                                <c:otherwise>
+                                    <form action="${pageContext.request.contextPath}/review" method="post">
+                                        <input type="hidden" name="productId" value="${product.id}" />
+                                        <input type="hidden" name="rating" id="ratingValue" value="5" />
+
+                                        <div class="product-comment__vote">
+                                            <span class="product-comment__title">Đánh giá của bạn: </span>
+                                            <div class="rating" id="ratingStars" style="cursor:pointer;">
+                                                <i class="fa-solid fa-star rating__star rating__star--gold" data-val="1"></i>
+                                                <i class="fa-solid fa-star rating__star rating__star--gold" data-val="2"></i>
+                                                <i class="fa-solid fa-star rating__star rating__star--gold" data-val="3"></i>
+                                                <i class="fa-solid fa-star rating__star rating__star--gold" data-val="4"></i>
+                                                <i class="fa-solid fa-star rating__star rating__star--gold" data-val="5"></i>
+                                            </div>
+                                        </div>
+
+                                        <%-- đổi name từ new_comment -> comment để controller nhận --%>
+                                        <textarea class="product-comment__input" name="comment" id="new_comment" rows="4"
+                                                  placeholder="Nhập câu hỏi / Bình luận / Nhận xét tại đây" required></textarea>
+
+                                        <%-- Upload ảnh: tạm thời giữ UI, chưa lưu DB (để sau) --%>
+                                        <div class="product-comment__upload">
+                                            <label for="reviewImage" class="product-comment__upload-label">
+                                                Upload ảnh đánh giá:
+                                            </label>
+
+                                            <input
+                                                    type="file"
+                                                    id="reviewImage"
+                                                    name="reviewImage"
+                                                    class="product-comment__upload-input"
+                                                    accept="image/*"
+                                                    multiple
+                                                    disabled
+                                            >
+                                            <small style="display:block;margin-top:6px;opacity:.7">
+                                                (Tạm thời chưa lưu ảnh, chỉ lưu nội dung + sao)
+                                            </small>
+                                        </div>
+
+                                        <button type="submit" class="product-comment__btn btn btn--default-color">Gửi đánh giá</button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
+
 
                         <div class="product-review">
                             <h2 class="section-title product-review__heading">Bình luận</h2>
 
-                            <section class="product-review__item">
-                                <figure class="product-review__avatar">
-                                    <img class="avatar" src="assets/img/avatar1.jpg" alt="Avatar Trần Phương">
-                                </figure>
+                            <c:if test="${empty reviews}">
+                                <p style="margin:12px 0;">Chưa có đánh giá nào cho sản phẩm này.</p>
+                            </c:if>
 
-                                <article class="product-review__content-wrapper">
-                                    <h3 class="product-review__author">Trần Phương</h3>
-
-                                    <div class="rating">
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star"></i>
-                                    </div>
-                                    <figure class="product-review__thumb">
-                                        <img class="product-review__img"
-                                            src="https://down-vn.img.susercontent.com/file/vn-11134103-7ra0g-m7onomgt8mr713@resize_w144_nl.webp"
-                                            alt="Ảnh đánh giá sản phẩm">
-                                        <img class="product-review__img"
-                                            src="https://down-vn.img.susercontent.com/file/vn-11134103-7ra0g-m7onomgu3iyuf8@resize_w144_nl.webp"
-                                            alt="Ảnh đánh giá sản phẩm">
+                            <c:forEach var="rv" items="${reviews}">
+                                <section class="product-review__item">
+                                    <figure class="product-review__avatar">
+                                        <img class="avatar" src="assets/img/avatar1.jpg" alt="Avatar">
                                     </figure>
 
-                                    <p class="product-review__text">Lorem ipsum dolor sit amet.</p>
-                                    <div class="product-review__info">
-                                        <a href="#" class="product-review__reply">Trả lời</a>
-                                        <div class="product-review__separate"></div>
-                                        <time class="product-review__date" datetime="2025-07-05T02:59">05/07/2025
-                                            02:59</time>
-                                    </div>
-                                </article>
-                            </section>
-                            <section class="product-review__item">
-                                <figure class="product-review__avatar">
-                                    <img class="avatar" src="assets/img/avatar2.jpg" alt="Avatar Văn Thảo">
-                                </figure>
+                                    <article class="product-review__content-wrapper">
+                                        <h3 class="product-review__author">${rv.authorName}</h3>
 
-                                <article class="product-review__content-wrapper">
-                                    <h3 class="product-review__author">Văn Thảo</h3>
+                                        <div class="rating">
+                                            <c:forEach var="i" begin="1" end="5">
+                                                <i class="fa-solid fa-star rating__star ${i <= rv.rating ? 'rating__star--gold' : ''}"></i>
+                                            </c:forEach>
+                                        </div>
 
-                                    <div class="rating">
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star"></i>
-                                        <i class="fa-solid fa-star rating__star"></i>
-                                    </div>
-                                    <figure class="product-review__thumb">
-                                        <img class="product-review__img" class=""
-                                            src="https://down-vn.img.susercontent.com/file/vn-11134103-7ras8-mca24hn81nekd6@resize_w144_nl.webp"
-                                            alt="Ảnh đánh giá sản phẩm">
-                                    </figure>
+                                        <p class="product-review__text">${rv.comment}</p>
 
-                                    <p class="product-review__text">Lorem ipsum dolor sit amet.</p>
-                                    <div class="product-review__info">
-                                        <a href="#" class="product-review__reply">Trả lời</a>
-                                        <div class="product-review__separate"></div>
-                                        <time class="product-review__date" datetime="2025-07-05T02:59">05/07/2025
-                                            02:59</time>
-                                    </div>
-                                </article>
-                            </section>
-                            <section class="product-review__item">
-                                <div class="product-review__avatar">
-                                    <div class="avatar" style="--bg-color: #000339">S</div>
-                                </div>
-
-                                <article class="product-review__content-wrapper">
-                                    <h3 class="product-review__author">Ngọc Sơn</h3>
-
-                                    <div class="rating">
-                                        <i class="fa-solid fa-star rating__star rating__star--gold"></i>
-                                        <i class="fa-solid fa-star rating__star"></i>
-                                        <i class="fa-solid fa-star rating__star"></i>
-                                        <i class="fa-solid fa-star rating__star"></i>
-                                        <i class="fa-solid fa-star rating__star"></i>
-                                    </div>
-
-                                    <p class="product-review__text">Lorem ipsum dolor sit amet.</p>
-                                    <div class="product-review__info">
-                                        <a href="#" class="product-review__reply">Trả lời</a>
-                                        <div class="product-review__separate"></div>
-                                        <time class="product-review__date" datetime="2025-07-05T02:59">05/07/2025
-                                            02:59</time>
-                                    </div>
-                                </article>
-                            </section>
+                                        <div class="product-review__info">
+                                            <time class="product-review__date">${rv.createdAt}</time>
+                                        </div>
+                                    </article>
+                                </section>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -424,7 +397,39 @@
         });
     });
 </script>
+<script>
+(function () {
+  const stars = document.querySelectorAll('#ratingStars .rating__star');
+  const input = document.getElementById('ratingValue');
 
+  function paint(val) {
+    stars.forEach(s => {
+      const v = Number(s.dataset.val);
+      if (v <= val) s.classList.add('rating__star--gold');
+      else s.classList.remove('rating__star--gold');
+    });
+  }
+
+  // click chọn sao
+  stars.forEach(s => {
+    s.addEventListener('click', () => {
+      const val = Number(s.dataset.val);
+      input.value = val;
+      paint(val);
+    });
+
+    // hover preview (tuỳ chọn)
+    s.addEventListener('mouseenter', () => paint(Number(s.dataset.val)));
+  });
+
+  // rời chuột -> vẽ lại theo giá trị đã chọn
+  const wrap = document.getElementById('ratingStars');
+  wrap.addEventListener('mouseleave', () => paint(Number(input.value) || 5));
+
+  // mặc định 5 sao
+  paint(Number(input.value) || 5);
+})();
+</script>
 <!-- Link JS -->
 <script src="assets/js/script.js"></script>
 

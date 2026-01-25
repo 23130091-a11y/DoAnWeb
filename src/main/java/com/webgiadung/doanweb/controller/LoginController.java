@@ -42,11 +42,24 @@ public class LoginController extends HttpServlet {
         session.setAttribute("user", user);
         session.setAttribute("USER_LOGIN", user);
 
+
+
         // 4) Điều hướng theo role
         if (user.getRole() == 1) {
             response.sendRedirect(request.getContextPath() + "/admin/customers");
+            return;
+        }
+
+// USER thường: nếu có redirect hợp lệ thì quay lại đúng trang
+        String redirect = request.getParameter("redirect");
+        if (redirect != null) redirect = redirect.trim();
+
+// chỉ cho redirect nội bộ (tránh open redirect)
+        if (redirect != null && !redirect.isEmpty() && redirect.startsWith("/") && !redirect.startsWith("//")) {
+            response.sendRedirect(request.getContextPath() + redirect);
         } else {
             response.sendRedirect(request.getContextPath() + "/list-product");
         }
+
     }
 }

@@ -8,7 +8,8 @@ import com.webgiadung.doanweb.services.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
+import com.webgiadung.doanweb.dao.ProductReviewDao;
+import com.webgiadung.doanweb.model.ProductReview;
 import java.io.IOException;
 import java.util.List;
 
@@ -35,6 +36,9 @@ public class ProductController extends HttpServlet {
         request.setAttribute("product", p);
         request.setAttribute("category", category);
         request.setAttribute("parentCategories", parentCategories);
+        ProductReviewDao reviewDao = new ProductReviewDao();
+        List<ProductReview> reviews = reviewDao.findByProductId(id);
+        request.setAttribute("reviews", reviews);
         request.getRequestDispatcher("/product.jsp").forward(request, response);
     }
 
