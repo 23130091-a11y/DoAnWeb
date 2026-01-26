@@ -77,6 +77,14 @@ public class Product implements Serializable {
         return (int) Math.round(getRating()); // làm tròn để hiển thị sao
     }
 
+    // Trong Product.java
+    public boolean getIsDiscounted() {
+        // Thêm kiểm tra null và đảm bảo giá gốc lớn hơn giá tổng ít nhất 1000đ (để tránh sai số)
+        return discountPercent != null
+                && discountPercent > 0
+                && (firstPrice - totalPrice > 1);
+    }
+
     public Product() {
     }
 

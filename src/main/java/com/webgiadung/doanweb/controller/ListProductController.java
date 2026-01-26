@@ -6,6 +6,7 @@ import com.webgiadung.doanweb.model.Product;
 import com.webgiadung.doanweb.model.Slide;
 import com.webgiadung.doanweb.services.ProductService;
 import com.webgiadung.doanweb.services.SlideService;
+import com.webgiadung.doanweb.utils.CookieUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
@@ -20,6 +21,13 @@ public class ListProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductService productService = new ProductService();
         List<Product> list = productService.getListProduct();
+
+        // --- QUAN TRỌNG: Đọc lịch sử xem từ Cookie ---
+        List<Integer> viewedIds = CookieUtils.getIdsFromCookie(request, "viewed_products");
+        if (!viewedIds.isEmpty()) {
+            List<Product> historyProducts = productService.getProductsFromIds(viewedIds);
+            request.setAttribute("historyProducts", historyProducts);
+        }
 
         SlideService slideService = new SlideService();
         List<Slide> slides = slideService.getListSlide();

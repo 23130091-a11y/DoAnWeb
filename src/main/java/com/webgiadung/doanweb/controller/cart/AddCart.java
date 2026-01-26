@@ -10,6 +10,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -24,23 +25,19 @@ public class AddCart extends HttpServlet {
         // ===== 1. CHECK LOGIN =====
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            // lưu lại URL để login xong quay lại
-            String query = request.getQueryString();
-            session.setAttribute("redirectAfterLogin", "add-cart?" + query);
-
-            response.sendRedirect("login");
+            // Trả về mã 401 (Unauthorized) để AJAX biết và chuyển hướng login
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
         // ===== 2. VALIDATE PARAM =====
         int productId;
         int quantity;
-
         try {
             productId = Integer.parseInt(request.getParameter("productId"));
             quantity = Integer.parseInt(request.getParameter("quantity"));
         } catch (Exception e) {
-            response.sendRedirect("home");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
@@ -58,15 +55,23 @@ public class AddCart extends HttpServlet {
         Product product = productService.getProduct(productId);
 
         if (product == null) {
-            response.sendRedirect("home");
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
         // ===== 5. ADD CART =====
         cart.addItem(product, quantity);
 
-        // ===== 6. REDIRECT UX =====
-        response.sendRedirect("product-detail?id=" + productId);
+        // ===== 6. TRẢ VỀ KẾT QUẢ CHO AJAX =====
+        // Thay vì redirect hoặc in script, ta trả về JSON
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        // Trả về tổng số lượng mới để update vào icon giỏ hàng trên Header
+        out.print("{\"status\":\"success\", \"cartQty\":" + cart.getTotalQuantity() + "}");
+        out.flush();
+        out.close();
     }
 
     @Override

@@ -50,7 +50,7 @@
                 <!-- Header -->
                 <c:set var="cart" value="${sessionScope.cart}" />
                 <div class="cart-header flex">
-                    <div class="colum product-col">Sản phẩm</div>
+                    <div class="colum product-col">Sản phẩm</div>c
                     <div class="colum price-col">Đơn giá</div>
                     <div class="colum qty-col">Số lượng</div>
                     <div class="colum total-col">Số tiền</div>
@@ -93,28 +93,20 @@
 
                                 <!-- Quantity -->
                                 <div class="colum qty-col item-qty">
-                                    <form action="${pageContext.request.contextPath}/update-cart" method="post" style="display:inline">
-                                        <input type="hidden" name="productId" value="${item.product.id}">
-                                        <input type="hidden" name="action" value="dec">
-                                        <button type="submit">-</button>
-                                    </form>
-
-                                    <input class="text" type="text" value="${item.quantity}" readonly>
-
-                                    <form action="${pageContext.request.contextPath}/update-cart" method="post" style="display:inline">
-                                        <input type="hidden" name="productId" value="${item.product.id}">
-                                        <input type="hidden" name="action" value="inc">
-                                        <button type="submit">+</button>
-                                    </form>
+                                    <button type="button" onclick="handleUpdate(${item.product.id}, 'dec')">-</button>
+                                    <input class="text" type="text" id="qty-input-${item.product.id}" value="${item.quantity}" readonly>
+                                    <button type="button" onclick="handleUpdate(${item.product.id}, 'inc')">+</button>
                                 </div>
 
                                 <!-- Total -->
-                                <span class="colum total-col">${item.totalPrice}
-                                            <span class="currency">đ</span>
-                                        </span>
+                                <span id="subtotal-${item.product.id}">
+                                    <fmt:formatNumber value="${item.totalPrice}" type="number"/>
+                                </span>
+                                <span class="currency">đ</span>
+
                                 <!-- Action -->
                                 <div class="colum action-col">
-                                    <a href="${pageContext.request.contextPath}/delete-cart?id=${item.product.id}" class="item-delete">Xóa</a>
+                                    <button type="button" class="item-delete" onclick="deleteItem(${item.product.id})">Xóa</button>
                                 </div>
                             </div>
                         </c:forEach>
@@ -127,7 +119,10 @@
                     <button type="button" class="footer-btn">Lưu vào mục yêu thích</button>
 
                     <div class="cart-summary">
-                        Tổng cộng (<span class="total-items">${cart.totalQuantity}</span> sản phẩm): <span class="total-price">${cart.totalPrice} đ</span>
+                        Tổng cộng (<span id="cart-qty-total" class="total-items">${cart.totalQuantity}</span> sản phẩm):
+                        <span id="cart-grand-total" class="total-price">
+                            <fmt:formatNumber value="${cart.totalPrice}" type="number"/> đ
+                        </span>
                     </div>
 
                     <button type="button" class="buy-btn"
@@ -364,6 +359,87 @@
     </main>
     <!-- Footer -->
     <jsp:include page="/common/footer.jsp" />
+
+<script>
+    // Tăng giảm
+    function handleUpdate(pId, actionType) {
+        // Tạo dữ liệu gửi đi
+        const params = new URLSearchParams();
+        params.append('productId', pId);
+        params.append('action', actionType);
+
+        fetch('${pageContext.request.contextPath}/update-cart', {
+            method: 'POST',
+            body: params,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.newQuantity > 0) {
+                    // Cập nhật số lượng trên input
+                    document.getElementById('qty-input-' + pId).value = data.newQuantity;
+
+                    // Cập nhật số tiền của sản phẩm đó (định dạng số có dấu phẩy)
+                    document.getElementById('subtotal-' + pId).innerText = data.newSubtotal.toLocaleString('vi-VN');
+                } else {
+                    // Nếu số lượng = 0, xóa dòng sản phẩm đó khỏi giao diện
+                    const row = document.getElementById('product-row-' + pId);
+                    if(row) row.remove();
+                }
+
+                // Luôn cập nhật tổng tiền và tổng số lượng giỏ hàng ở footer
+                document.getElementById('cart-grand-total').innerText = data.cartTotal.toLocaleString('vi-VN') + ' đ';
+                document.getElementById('cart-qty-total').innerText = data.cartQty;
+
+                // Cập nhật số lượng trên icon giỏ hàng ở Header (nếu bạn có ID cho nó)
+                const headerCartNotify = document.querySelector('.header__cart-notice');
+                if(headerCartNotify) headerCartNotify.innerText = data.cartQty;
+            })
+            .catch(err => console.error('Lỗi Cart:', err));
+    }
+    // Xóa
+    function deleteItem(pId) {
+        if (!confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) return;
+
+        const params = new URLSearchParams();
+        params.append('id', pId);
+
+        fetch('${pageContext.request.contextPath}/delete-cart', {
+            method: 'POST',
+            body: params,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 1. Xóa dòng sản phẩm khỏi giao diện
+                const row = document.getElementById('product-row-' + pId);
+                if (row) {
+                    row.style.transition = "all 0.3s ease";
+                    row.style.opacity = "0";
+                    setTimeout(() => row.remove(), 300);
+                }
+
+                // 2. Cập nhật tổng tiền và tổng số lượng ở footer
+                document.getElementById('cart-grand-total').innerText = data.cartTotal.toLocaleString('vi-VN') + ' đ';
+                document.getElementById('cart-qty-total').innerText = data.cartQty;
+
+                // 3. Cập nhật icon giỏ hàng trên Header
+                const headerCartNotify = document.querySelector('.header__cart-notice');
+                if(headerCartNotify) headerCartNotify.innerText = data.cartQty;
+
+                // 4. Nếu giỏ hàng trống, có thể hiện thông báo "Giỏ hàng trống"
+                if (data.cartQty === 0) {
+                    location.reload(); // Tải lại để hiện giao diện trống chuyên nghiệp
+                }
+            })
+            .catch(err => console.error('Lỗi xóa sản phẩm:', err));
+    }
+</script>
+
     <script src="assets/js/script.js"></script>
 </body>
 

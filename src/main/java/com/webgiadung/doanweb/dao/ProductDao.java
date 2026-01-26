@@ -3,6 +3,7 @@ package com.webgiadung.doanweb.dao;
 import com.webgiadung.doanweb.model.*;
 import org.jdbi.v3.core.Jdbi;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -106,6 +107,17 @@ public class ProductDao extends BaseDao {
                         .mapToBean(ProductReview.class)
                         .list();
                 product.setReviews(reviews);
+
+                // Bổ sung load Description cho trang chi tiết
+                List<ProductDescriptions> descriptions = h.createQuery("""
+                        SELECT id, title, description, products_id AS productId
+                        FROM products_description
+                        WHERE products_id = :id
+                    """)
+                        .bind("id", id)
+                        .mapToBean(ProductDescriptions.class)
+                        .list();
+                product.setDescriptionsList(descriptions); // Đảm bảo tên setter đúng với class Product
             }
 
             return product;
@@ -157,7 +169,8 @@ public class ProductDao extends BaseDao {
     private static final String BASE_SELECT = """
     SELECT
         p.id, p.name, p.image,
-        p.price_first AS firstPrice,
+        -- Nếu price_first NULL thì lấy price_total làm giá gốc
+        IFNULL(p.price_first, p.price_total) AS firstPrice,
         p.price_total AS totalPrice,
         p.discounts_id AS discountsId,
         p.categories_id AS categoriesId,
@@ -167,7 +180,7 @@ public class ProductDao extends BaseDao {
         p.quantity_saled AS quantitySaled,
         p.created_at AS createdAt,
         p.updated_at AS updatedAt,
-        d.discount AS discountPercent, -- Lấy từ bảng discounts
+        IFNULL(d.discount, 0) AS discountPercent, -- Đảm bảo không bị NULL
         d.type_discount AS discountType,
         IFNULL(ROUND(AVG(pr.rating), 1), 0.0) AS ratingAvg
     FROM products p
@@ -181,6 +194,7 @@ public class ProductDao extends BaseDao {
         p.quantity_saled, p.created_at, p.updated_at,
         d.discount, d.type_discount
 """;
+
     private static final String PROMOTION_SELECT = """
     SELECT
         p.id, p.name, p.image,
@@ -280,31 +294,56 @@ public class ProductDao extends BaseDao {
         );
     }
 
+    // Sửa lại getPromotionProducts (Nếu không có khuyến mãi, lấy sản phẩm mới nhất)
     public List<Product> getPromotionProducts() {
-        return get().withHandle(h ->
-                h.createQuery(PROMOTION_SELECT + """
-                ORDER BY p.created_at DESC
-                LIMIT 8
-            """)
-                        .mapToBean(Product.class)
-                        .list()
-        );
+        return get().withHandle(h -> {
+            List<Product> list = h.createQuery(PROMOTION_SELECT + " ORDER BY p.created_at DESC LIMIT 8")
+                    .mapToBean(Product.class).list();
+
+            if (list.isEmpty()) {
+                return getNewProducts(); // Fallback về sản phẩm mới
+            }
+            return list;
+        });
     }
 
     public List<Product> getSuggestedProducts() {
-        return get().withHandle(h ->
-                h.createQuery(SUGGESTED_SELECT)
+        return get().withHandle(h -> {
+            // Bước 1: Thử lấy sản phẩm theo đúng tiêu chí (Rating cao, đã bán được hàng)
+            List<Product> list = h.createQuery(SUGGESTED_SELECT)
+                    .mapToBean(Product.class)
+                    .list();
+
+            // Bước 2: Nếu không đủ 8 sản phẩm, lấy thêm sản phẩm mới nhất để bù vào
+            if (list.size() < 8) {
+                List<Integer> idsToExclude = list.stream().map(Product::getId).collect(Collectors.toList());
+                if (idsToExclude.isEmpty()) idsToExclude.add(-1); // Tránh lỗi SQL IN empty
+
+                List<Product> fallback = h.createQuery(BASE_SELECT + """
+                AND p.id NOT IN (<ids>)
+                ORDER BY p.created_at DESC
+                LIMIT :limit
+            """)
+                        .bindList("ids", idsToExclude)
+                        .bind("limit", 8 - list.size())
                         .mapToBean(Product.class)
-                        .list()
-        );
+                        .list();
+
+                list.addAll(fallback);
+            }
+            return list;
+        });
     }
 
+    // Sửa lại getLimitedProducts (Nếu không có hàng sắp hết, lấy hàng ngẫu nhiên)
     public List<Product> getLimitedProducts() {
-        return get().withHandle(h ->
-                h.createQuery(LIMITED_DISCOUNT_SELECT)
-                        .mapToBean(Product.class)
-                        .list()
-        );
+        return get().withHandle(h -> {
+            List<Product> list = h.createQuery(LIMITED_DISCOUNT_SELECT).mapToBean(Product.class).list();
+            if (list.size() < 4) {
+                return getFeaturedProducts(); // Fallback về hàng nổi bật
+            }
+            return list;
+        });
     }
 
     public List<Product> getNewProducts() {
@@ -313,6 +352,30 @@ public class ProductDao extends BaseDao {
             ORDER BY p.created_at DESC
             LIMIT 8
         """)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    // THÊM MỚI: Lấy sản phẩm dựa trên danh sách ID từ Cookie
+    public List<Product> getProductsFromIds(List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) return new ArrayList<>();
+
+        String idList = ids.stream().map(String::valueOf).collect(java.util.stream.Collectors.joining(","));
+
+        return get().withHandle(h ->
+                h.createQuery("""
+            SELECT 
+                p.id, p.name, p.image, 
+                IFNULL(p.price_first, p.price_total) AS firstPrice,
+                p.price_total AS totalPrice,
+                IFNULL(d.discount, 0) AS discountPercent, 
+                d.type_discount AS discountType 
+            FROM products p 
+            LEFT JOIN discounts d ON p.discounts_id = d.id 
+            WHERE p.id IN (<ids>) 
+            ORDER BY FIELD(p.id, """ + idList + ")")
+                        .bindList("ids", ids)
                         .mapToBean(Product.class)
                         .list()
         );

@@ -1738,6 +1738,7 @@
                                 </div>
                             </form>
 
+                        <div class="order-table" id="order-main-content">
                             <!-- Form xóa -->
                             <form id="deleteOrdersForm" action="<c:url value='/order-delete'/>" method="post">
                                 <div class="order-table__header">
