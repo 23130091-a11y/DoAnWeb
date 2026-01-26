@@ -150,8 +150,8 @@
                                 <i class="fa-solid fa-cart-plus content-details__cart-icon"></i>
                                 Thêm vào giỏ hàng
                             </button>
-                            <button class="content-details__buy btn btn--default-color"
-                                onclick="window.location.href='${pageContext.request.contextPath}/checkout'">Mua ngay</button>
+                            <button type="button" class="content-details__buy btn btn--default-color"
+                                    onclick="buyNow(${product.id})">Mua ngay</button>
                         </div>
 
                         <div class="content-details__trp">
@@ -376,48 +376,114 @@
         });
     });
 
-    function addToCart(productId) {
-        const contextPath = '${pageContext.request.contextPath}';
-        const url = contextPath + '/add-cart?productId=' + productId + '&quantity=1';
+   function getCurrentQty() {
+       const el = document.querySelector(".content-quantity__number");
+       const q = el ? parseInt(el.textContent.trim()) : 1;
+       return (isNaN(q) || q <= 0) ? 1 : q;
+   }
 
-        fetch(url)
-            .then(response => {
-                if (response.status === 401) {
-                    alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
-                    window.location.href = contextPath + '/login';
-                    return;
-                }
-                if (response.ok) return response.json();
-            })
-            .then(data => {
-                if (data && data.status === 'success') {
-                    // 1. Sửa lại class cho đúng với HTML (header-cart__notice)
-                    const cartNotice = document.querySelector('.header-cart__notice');
-                    if (cartNotice) {
-                        cartNotice.innerText = data.cartQty;
-                    }
+   function updateHeaderCartQty(cartQty) {
+       const el = document.querySelector('#headerCartQty')
+           || document.querySelector('.header__cart-notice')
+           || document.querySelector('.header-cart__notice');
+       if (el) el.innerText = cartQty;
+   }
 
-                    alert("Đã thêm sản phẩm vào giỏ hàng!");
+function showToast(msg) {
+  let t = document.getElementById('toast-addcart');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast-addcart';
+    t.style.position = 'fixed';
+    t.style.right = '20px';
+    t.style.bottom = '20px';
+    t.style.padding = '12px 16px';
+    t.style.background = '#333';
+    t.style.color = '#fff';
+    t.style.borderRadius = '10px';
+    t.style.zIndex = '99999';
+    t.style.opacity = '0';
+    t.style.transition = 'opacity .2s ease';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => t.style.opacity = '0', 1200);
+}
 
-                    /** * 2. Giải quyết vấn đề Dropdown không cập nhật:
-                     * Vì nội dung dropdown được render bằng JSTL (Server-side),
-                     * AJAX không thể tự chèn thêm thẻ <li> vào đó một cách dễ dàng.
-                     * Cách đơn giản và hiệu quả nhất lúc này:
-                     */
-                    const cartList = document.querySelector('.cart-list');
-                    // Nếu giỏ hàng đang hiện "Chưa có sản phẩm" (no-cart), ta reload để lấy HTML mới
-                    if (cartList.querySelector('.cart-list--no-cart')) {
-                        location.reload();
-                    } else {
-                        // Nếu đã có sản phẩm rồi, chỉ cần báo thành công là đủ,
-                        // khách hàng nhấn vào icon giỏ hàng hoặc sang trang khác sẽ thấy đủ.
-                        // Hoặc bạn có thể dùng location.reload() cho mọi trường hợp để đảm bảo dropdown luôn khớp.
-                        location.reload();
-                    }
-                }
-            })
-            .catch(err => console.error("Lỗi:", err));
-    }
+
+   function addToCart(productId) {
+       const contextPath = '${pageContext.request.contextPath}';
+       const qty = getCurrentQty();
+
+       fetch(contextPath + '/add-cart', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+               'X-Requested-With': 'XMLHttpRequest'
+           },
+           body: new URLSearchParams({
+               productId: productId,
+               quantity: qty,
+               ajax: '1'
+           })
+       })
+       .then(res => {
+           if (res.status === 401) {
+               alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+               window.location.href = contextPath + '/login';
+               return null;
+           }
+           return res.ok ? res.json() : null;
+       })
+       .then(data => {
+           if (data && data.status === 'success') {
+               updateHeaderCartQty(data.cartQty);
+
+               // yêu cầu của bạn: thêm vào giỏ là nhảy liền
+               showToast("Đã thêm vào giỏ hàng!");
+           }
+       })
+       .catch(err => console.error("Lỗi addToCart:", err));
+   }
+
+   function buyNow(productId) {
+       const contextPath = '${pageContext.request.contextPath}';
+       const qty = getCurrentQty();
+
+       // đảm bảo sản phẩm đã được add vào cart (session + DB) rồi mới checkout theo ids
+       fetch(contextPath + '/add-cart', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+               'X-Requested-With': 'XMLHttpRequest'
+           },
+           body: new URLSearchParams({
+               productId: productId,
+               quantity: qty,
+               ajax: '1'
+           })
+       })
+       .then(res => {
+           if (res.status === 401) {
+               alert("Vui lòng đăng nhập để mua ngay!");
+               window.location.href = contextPath + '/login';
+               return null;
+           }
+           return res.ok ? res.json() : null;
+       })
+       .then(data => {
+           if (data && data.status === 'success') {
+               updateHeaderCartQty(data.cartQty);
+
+               // checkout chỉ 1 sản phẩm
+               window.location.href = contextPath + '/checkout?ids=' + productId;
+           }
+       })
+       .catch(err => console.error("Lỗi buyNow:", err));
+   }
+
 </script>
 <script>
 (function () {

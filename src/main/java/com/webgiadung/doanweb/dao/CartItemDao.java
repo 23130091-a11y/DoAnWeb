@@ -72,4 +72,12 @@ public class CartItemDao extends BaseDao {
             this.quantity = quantity;
         }
     }
+    public void clearCartItems(int cartId) {
+        get().useHandle(h ->
+                h.createUpdate("DELETE FROM cart_items WHERE cart_id = :cid")
+                        .bind("cid", cartId)
+                        .execute()
+        );
+    }
+
 }

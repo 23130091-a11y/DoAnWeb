@@ -21,47 +21,66 @@ public class AddCart extends HttpServlet {
         return "XMLHttpRequest".equalsIgnoreCase(x) || "1".equals(req.getParameter("ajax"));
     }
 
+    private void writeJson(HttpServletResponse resp, int status, String json) throws IOException {
+        resp.setStatus(status);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter out = resp.getWriter();
+        out.print(json);
+        out.flush();
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        boolean ajax = isAjax(request);
 
         // 1) check login
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            if (ajax) {
+                writeJson(response, HttpServletResponse.SC_UNAUTHORIZED, "{\"status\":\"unauthorized\"}");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
             return;
         }
 
         // 2) validate params
-        int productId, quantity;
+        int productId;
+        int quantity = 1;
+
         try {
             productId = Integer.parseInt(request.getParameter("productId"));
-            quantity = Integer.parseInt(request.getParameter("quantity"));
         } catch (Exception e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid params");
+            if (ajax) writeJson(response, HttpServletResponse.SC_BAD_REQUEST, "{\"status\":\"error\",\"message\":\"Invalid productId\"}");
+            else response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid productId");
             return;
         }
+
+        try {
+            quantity = Integer.parseInt(request.getParameter("quantity"));
+        } catch (Exception ignored) { }
         if (quantity <= 0) quantity = 1;
 
         // 3) get/create cart in session
         Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
+        if (cart == null) cart = new Cart();
 
         // 4) get product
         ProductService productService = new ProductService();
         Product product = productService.getProduct(productId);
         if (product == null) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Product not found");
+            if (ajax) writeJson(response, HttpServletResponse.SC_NOT_FOUND, "{\"status\":\"error\",\"message\":\"Product not found\"}");
+            else response.sendError(HttpServletResponse.SC_NOT_FOUND, "Product not found");
             return;
         }
 
         // 5) add to session cart
         cart.addItem(product, quantity);
+        session.setAttribute("cart", cart);
 
-        // 6) save to DB (nếu login)
+        // 6) save to DB
         CartDao cartDao = new CartDao();
         CartItemDao itemDao = new CartItemDao();
         int cartId = cartDao.getOrCreateCartId(user.getId());
@@ -69,20 +88,18 @@ public class AddCart extends HttpServlet {
         session.setAttribute("CART_ID", cartId);
 
         // 7) response
-        if (isAjax(request)) {
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter out = response.getWriter();
-            out.print("{\"status\":\"success\",\"cartQty\":" + cart.getTotalQuantity() + "}");
-            out.flush();
+        if (ajax) {
+            writeJson(response, HttpServletResponse.SC_OK,
+                    "{\"status\":\"success\",\"cartQty\":" + cart.getTotalQuantity() + "}"
+            );
         } else {
-            response.sendRedirect(request.getContextPath() + "/product?id=" + productId);
+            // yêu cầu: bấm thêm vào giỏ => nhảy qua giỏ liền
+            response.sendRedirect(request.getContextPath() + "/cart");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // nếu bạn đang gọi bằng link GET thì cho chạy luôn như POST
         doPost(request, response);
     }
 }

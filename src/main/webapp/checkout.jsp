@@ -174,6 +174,7 @@
     <main class="main" style="background-color: #f5f5f5; padding-top: 20px;">
         <div class="grid wide">
             <form action="${pageContext.request.contextPath}/checkout" method="post">
+            <input type="hidden" name="ids" value="${ids != null ? ids : param.ids}">
                 <div class="row">
 
                     <div class="col l-8 m-12 c-12">
@@ -266,12 +267,10 @@
                                             <div class="summary-product-item">
 
                                                 <%-- Ảnh: nhớ thêm contextPath để khỏi lỗi đường dẫn --%>
-                                                <img
-                                                    src="${pageContext.request.contextPath}/${item.product.image}"
-                                                    alt="${item.product.name}"
-                                                    class="summary-thumb"
-                                                    onerror="this.src='${pageContext.request.contextPath}/assets/img/no-image.png';"
-                                                >
+                                                <img class="summary-thumb"
+                                                     src="${pageContext.request.contextPath}/assets/img/products/${item.product.image}"
+                                                     alt="${item.product.name}" />
+
 
                                                 <div class="summary-product-details">
                                                     <p class="summary-product-name">${item.product.name}</p>

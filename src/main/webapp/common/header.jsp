@@ -190,7 +190,7 @@
                         <!-- ICON CART -->
                         <a href="${pageContext.request.contextPath}/cart">
                             <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
-                            <span class="header-cart__notice">
+                            <span class="header-cart__notice header__cart-notice" id="headerCartQty">
                                  <c:choose>
                                      <c:when test="${not empty cart && not empty cart.items}">
                                          ${cart.totalQuantity}
@@ -206,14 +206,14 @@
 
                                 <c:when test="${empty user}">
                                     <div class="cart-list--no-cart">
-                                        <img src="assets/img/no-cart_img.png" class="header-cart__img" alt="">
+                                        <img src="${pageContext.request.contextPath}/assets/img/no-cart_img.png" class="header-cart__img" alt="">
                                         <span class="header-cart__msg">Bạn cần đăng nhập</span>
                                     </div>
                                 </c:when>
 
                                 <c:when test="${empty cart || empty cart.items}">
                                     <div class="cart-list--no-cart">
-                                        <img src="assets/img/no-cart_img.png" class="header-cart__img" alt="">
+                                        <img src="${pageContext.request.contextPath}/assets/img/no-cart_img.png" class="header-cart__img" alt="">
                                         <span class="header-cart__msg">Chưa có sản phẩm</span>
                                     </div>
                                 </c:when>
@@ -224,43 +224,45 @@
 
                                         <ul class="cart-list__list">
                                             <c:forEach items="${cart.items}" var="item">
-                                                <li class="cart-list__item">
-                                                    <img src="${item.product.image}"
-                                                         alt="${item.product.name}"
-                                                         class="cart-list__img">
+                                                <li class="cart-list__item" id="mini-cart-item-${item.product.id}">
+                                                    <a href="${pageContext.request.contextPath}/product?id=${item.product.id}"
+                                                       style="display:flex; gap:10px; align-items:center; text-decoration:none; color:inherit; width:100%;">
 
-                                                    <section class="cart-list__body">
-                                                        <div class="cart-list__info">
-                                                            <h4 class="cart-list__heading">
-                                                                    ${item.product.name}
-                                                            </h4>
+                                                        <img src="${pageContext.request.contextPath}/assets/img/products/${item.product.image}"
+                                                             alt="${item.product.name}"
+                                                             class="cart-list__img">
 
-                                                            <div class="cart-list__price-wrap">
-                                                <span class="cart-list__price">
-                                                    ${item.totalPrice} đ
-                                                </span>
-                                                                <span class="cart-list__multiply">x</span>
-                                                                <span class="cart-list__qnt">
-                                                                        ${item.quantity}
+                                                        <section class="cart-list__body">
+                                                            <div class="cart-list__info">
+                                                                <h4 class="cart-list__heading">${item.product.name}</h4>
+
+                                                                <div class="cart-list__price-wrap">
+                                                                    <span class="cart-list__price">${item.totalPrice} đ</span>
+                                                                    <span class="cart-list__multiply">x</span>
+                                                                    <span class="cart-list__qnt">${item.quantity}</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="cart-list__desc">
+                                                                <span class="cart-list__product-cate">
+                                                                    Phân loại: ${item.product.categoriesId}
                                                                 </span>
                                                             </div>
-                                                        </div>
+                                                        </section>
+                                                    </a>
 
-                                                        <div class="cart-list__desc">
-                                            <span class="cart-list__product-cate">
-                                                Phân loại: ${item.product.categoriesId}
-                                            </span>
-                                                            <a href="delete-cart?id=${item.product.id}"
-                                                               class="cart-list__remove">
-                                                                Xóa
-                                                            </a>
-                                                        </div>
-                                                    </section>
+                                                    <!-- nút xóa để ngoài <a> để bấm xóa không bị nhảy sang trang product -->
+                                                    <a href="${pageContext.request.contextPath}/delete-cart?id=${item.product.id}"
+                                                       class="cart-list__remove"
+                                                       onclick="event.preventDefault(); removeMiniCartItem(${item.product.id});">
+                                                        Xóa
+                                                    </a>
                                                 </li>
-                                            </c:forEach>
+
+                                                </c:forEach>
                                         </ul>
 
-                                        <a href="cart"
+                                        <a href="${pageContext.request.contextPath}/cart"
                                            class="cart-list__view btn btn--default-color">
                                             Xem giỏ hàng
                                         </a>
@@ -283,3 +285,38 @@
         </div>
     </div>
 </header>
+<script>
+  function removeMiniCartItem(pid) {
+    const params = new URLSearchParams();
+    params.append('id', pid);
+    params.append('ajax', '1');
+
+    fetch('${pageContext.request.contextPath}/delete-cart', {
+      method: 'POST',
+      body: params,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    .then(r => r.json())
+    .then((data) => {
+      // update badge số lượng giỏ ngay
+      const badge = document.querySelector('#headerCartQty')
+        || document.querySelector('.header__cart-notice')
+        || document.querySelector('.header-cart__notice');
+      if (badge && data && typeof data.cartQty !== 'undefined') {
+        badge.innerText = data.cartQty;
+      }
+
+      // remove item khỏi dropdown
+      const li = document.getElementById('mini-cart-item-' + pid);
+      if (li) li.remove();
+
+      // nếu hết item => reload để hiện "Chưa có sản phẩm"
+      const remain = document.querySelectorAll('.cart-list__item').length;
+      if (remain === 0) location.reload();
+    })
+    .catch(() => location.reload());
+  }
+</script>

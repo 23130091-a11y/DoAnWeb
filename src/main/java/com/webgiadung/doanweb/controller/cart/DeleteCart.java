@@ -1,56 +1,98 @@
 package com.webgiadung.doanweb.controller.cart;
 
+import com.webgiadung.doanweb.dao.CartDao;
+import com.webgiadung.doanweb.dao.CartItemDao;
 import com.webgiadung.doanweb.model.Cart;
-import com.webgiadung.doanweb.model.CartItem;
-import jakarta.servlet.*;
+import com.webgiadung.doanweb.model.User;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "DeleteCart", value = "/delete-cart")
 public class DeleteCart extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        HttpSession session = request.getSession();
-        Cart cart = (Cart)session.getAttribute("cart");
-        CartItem cartItem = cart.deleteItem(id);
 
-        com.webgiadung.doanweb.model.User user = (com.webgiadung.doanweb.model.User) session.getAttribute("user");
-        if (user != null) {
-            Integer cartId = (Integer) session.getAttribute("CART_ID");
-            com.webgiadung.doanweb.dao.CartDao cartDao = new com.webgiadung.doanweb.dao.CartDao();
-            if (cartId == null) cartId = cartDao.getOrCreateCartId(user.getId());
-
-            new com.webgiadung.doanweb.dao.CartItemDao().deleteItem(cartId, id);
-            session.setAttribute("CART_ID", cartId);
-        }
-
-        if(cartItem == null) {
-            //todo
-        }
-        response.sendRedirect("cart");
+    private boolean isAjax(HttpServletRequest req) {
+        String x = req.getHeader("X-Requested-With");
+        return "XMLHttpRequest".equalsIgnoreCase(x) || "1".equals(req.getParameter("ajax"));
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int productId = Integer.parseInt(request.getParameter("id"));
-        HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute("cart");
-
-        if (cart != null) {
-            cart.deleteItem(productId);
-            session.setAttribute("cart", cart);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String raw = request.getParameter("id");
+        int productId;
+        try {
+            productId = Integer.parseInt(raw);
+        } catch (Exception e) {
+            response.sendRedirect(request.getContextPath() + "/cart");
+            return;
         }
 
-        // Trả về thông tin tổng giỏ hàng mới sau khi xóa
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        out.print("{\"cartTotal\":" + cart.getTotalPrice() +
-                ", \"cartQty\":" + cart.getTotalQuantity() + "}");
-        out.flush();
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) cart = new Cart();
+
+        cart.deleteItem(productId);
+        session.setAttribute("cart", cart);
+
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            Integer cartId = (Integer) session.getAttribute("CART_ID");
+            CartDao cartDao = new CartDao();
+            if (cartId == null) {
+                cartId = cartDao.getOrCreateCartId(user.getId());
+                session.setAttribute("CART_ID", cartId);
+            }
+            new CartItemDao().deleteItem(cartId, productId);
+        }
+
+        response.sendRedirect(request.getContextPath() + "/cart");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String raw = request.getParameter("productId");
+        if (raw == null) raw = request.getParameter("id");
+
+        int productId;
+        try {
+            productId = Integer.parseInt(raw);
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid id");
+            return;
+        }
+
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) cart = new Cart();
+
+        cart.deleteItem(productId);
+        session.setAttribute("cart", cart);
+
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            Integer cartId = (Integer) session.getAttribute("CART_ID");
+            CartDao cartDao = new CartDao();
+            if (cartId == null) {
+                cartId = cartDao.getOrCreateCartId(user.getId());
+                session.setAttribute("CART_ID", cartId);
+            }
+            new CartItemDao().deleteItem(cartId, productId);
+        }
+
+        if (isAjax(request)) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            out.print("{\"status\":\"success\",\"cartQty\":" + cart.getTotalQuantity()
+                    + ",\"cartTotal\":" + cart.getTotalPrice() + "}");
+            out.flush();
+            return;
+        }
+
+        response.sendRedirect(request.getContextPath() + "/cart");
     }
 }
