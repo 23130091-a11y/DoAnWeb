@@ -854,6 +854,34 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+    public List<Product> searchByDiscountName(String discountName) {
+        return get().withHandle(h ->
+                h.createQuery("""
+            SELECT 
+                p.id, p.name, p.image, 
+                p.price_first AS firstPrice, 
+                p.price_total AS totalPrice, 
+                p.discounts_id AS discountsId, 
+                p.categories_id AS categoriesId, 
+                p.brands_id AS brandsId, 
+                p.keywords_id AS keywordsId, 
+                p.post, p.quantity, 
+                p.quantity_saled AS quantitySaled, 
+                p.created_at AS createdAt, 
+                p.updated_at AS updatedAt,
+                d.name AS discountName, -- Giả định bảng discount có cột name
+                d.discount AS discountPercent,
+                d.type_discount AS discountType
+            FROM products p
+            INNER JOIN discounts d ON p.discounts_id = d.id
+            WHERE d.name LIKE :discountName 
+              AND p.post = 1 -- Chỉ lấy sản phẩm đang hiển thị
+        """)
+                        .bind("discountName", "%" + discountName + "%")
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
 }
 
 

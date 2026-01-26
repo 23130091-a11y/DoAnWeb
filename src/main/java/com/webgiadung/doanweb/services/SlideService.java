@@ -13,6 +13,8 @@ public class SlideService {
     public List<Slide> getListSlide(){
         return SlideDao.getListSlide();
     }
-
+    public Slide getById(int id) {
+        return SlideDao.getById(id);
+    }
 
 }
