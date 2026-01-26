@@ -23,7 +23,7 @@ public class OrderSearchServlet extends HttpServlet {
         } else {
             orders = orderAdminDao.searchOrders(keyword.trim());
         }
-
+        request.setAttribute("keyword", keyword);
         request.setAttribute("orders", orders);
         request.getRequestDispatcher("/admin.jsp").forward(request, response);
     }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <html lang="en">
 
 <head>
@@ -24,7 +25,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product.css?v=99">
     <!-- Link favicon -->
 </head>
 
@@ -52,14 +53,8 @@
                 <div class="product-details__inner">
                     <!-- Media Details -->
                     <figure class="media-details">
-                        <img src="${product.image}" alt="${product.name}" class="media-details__img">
-                        <div class="more-details">
-                            <c:forEach items="${product.images}" var="img">
-                                <button class="more-details__thumb">
-                                    <img class="more-details__img" src="${img.path}" alt="${product.name}">
-                                </button>
-                            </c:forEach>
-                        </div>
+                        <img src="${pageContext.request.contextPath}/assets/img/products/${product.image}"  alt="${product.name}" class="media-details__img">
+
                     </figure>
 
                     <!-- Content Details -->
@@ -87,15 +82,36 @@
                             <div class="content-details__separate"></div>
                             <div class="content-sold">
                                 <span class="content-sold__text">Đã bán</span>
-                                <span class="content-feedback__level">${product.quantitySaled}k</span>
+                                <span class="content-feedback__level">${product.quantitySaled}</span>
                             </div>
                         </div>
+                        <c:if test="${product.discountPercent > 0}">
+                            <div class="content-details__desc-wrap">
+                                <span class="content-details__desc">Giá gốc</span>
+                                <span class="content-details__desc">
+                                <fmt:formatNumber value="${product.firstPrice}" type="number"/> đ
+                                  </span>
+                            </div>
 
+                            <div class="content-details__desc-wrap">
+                                <span class="content-details__desc">Giảm</span>
+                                <span class="content-details__desc">${product.discountPercent} %</span>
+                            </div>
+                        </c:if>
                         <div class="content-details__desc-wrap">
                             <span class="content-details__desc">Giá</span>
-                            <span class="content-details__price">${product.totalPrice} đ</span>
+                            <span class="content-details__price"><fmt:formatNumber value="${product.totalPrice}" type="number"/> đ</span>
                         </div>
+                        <c:if test="${not empty product.descriptionsList}">
+                            <c:forEach items="${product.descriptionsList}" var="desc">
+                                <div class="content-details__desc-wrap">
+                                    <span class="content-details__desc"><strong>${desc.title}</strong></span>
 
+                                    <span class="content-details__info">${desc.description}</span>
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                       <%--
                         <!-- Attributes -->
                         <c:forEach items="${product.attributes}" var="attr">
                             <div class="content-details__desc-wrap">
@@ -118,7 +134,7 @@
                                 </div>
                             </div>
                         </c:if>
-
+                        --%>
                         <div class="content-details__desc-wrap content-details__option">
                             <span class="content-details__desc">Số lượng</span>
                             <div class="content-quantity">
@@ -129,8 +145,8 @@
                         </div>
 
                         <div class="content-details__act">
-                            <button class="content-details__cart-btn btn"
-                                    onclick="window.location.href='add-cart?productId=${product.id}&quantity=1'">
+                            <button type="button" class="content-details__cart-btn btn"
+                                    onclick="addToCart(${product.id})">
                                 <i class="fa-solid fa-cart-plus content-details__cart-icon"></i>
                                 Thêm vào giỏ hàng
                             </button>
@@ -155,58 +171,21 @@
                 <div class="row small-gutter product-desc__inner">
                     <div class="col l-9 m-12 c-12">
                         <div class="product-desc__content">
-                            <h2 class="product-desc__name">Quạt tích điện Makita</h2>
-                            <p class="product-desc__text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, eaque rem quidem ratione
-                                sint aut praesentium sequi, labore dolorem cupiditate reprehenderit quo consectetur,
-                                corrupti aliquam itaque numquam accusamus tenetur ipsam?
-                                Quis sunt neque ipsam corrupti! Id, odit! Dolores, consectetur numquam voluptatibus
-                                optio molestiae labore distinctio eum praesentium facere, cumque, velit dolore.
-                                Accusantium nihil necessitatibus id iste placeat, quam repudiandae aperiam?
-                                Consectetur iure ut illo deleniti, eius assumenda suscipit quaerat explicabo recusandae
-                                velit dolore nulla labore, iusto rerum quisquam. Voluptate dolores ipsa pariatur
-                                distinctio qui eum aut laudantium? Ad, laudantium rerum.
-                                Distinctio accusamus fugiat soluta possimus harum iusto! Dolorum sint nam aliquam
-                                cupiditate ut expedita nisi accusantium numquam provident quia voluptatem accusamus quos
-                                sapiente, eius cumque unde fuga ipsam? Distinctio, voluptatum?
-                                Officia eveniet amet quas aliquid itaque voluptates eaque iste incidunt quasi nisi ea
-                                aspernatur a quo doloribus quis tempora dicta tempore, suscipit deserunt assumenda
-                                pariatur non quam natus voluptatum? Quia!
-                            </p>
-                            <figure class="product-desc__thumb">
-                                <img class="product-desc__img" src="assets/img/detail-01.jpg" alt="Quạt Makita" />
-                            </figure>
-                            <p class="product-desc__text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nam pariatur sunt totam
-                                autem. Natus autem, eum obcaecati, quod praesentium fugit voluptatum odit officiis neque
-                                necessitatibus magnam reprehenderit iste consequuntur.
-                                Totam quam sint maxime veritatis dolor, cumque, earum nesciunt dicta provident tenetur,
-                                voluptatum eum distinctio reiciendis esse excepturi modi. Repellendus, omnis consectetur
-                                ab earum molestiae voluptatum vitae velit quaerat distinctio?
-                                Eum quisquam accusamus quos mollitia maxime accusantium illum expedita aperiam
-                                consequuntur esse, cum quasi tempora! Facere magni, officia veniam, consequuntur
-                                repellat sapiente, iusto commodi fugiat harum ex molestiae saepe dolorem.
-                                Ad, quod ex nisi corrupti doloremque dicta magni adipisci consectetur eos culpa
-                                provident sed odio, temporibus, veniam facilis eius veritatis doloribus quibusdam quae?
-                                Alias quasi consequatur commodi ratione corrupti maxime!
-                                Id, magnam? Rerum, temporibus impedit! Itaque in minima rerum incidunt laborum odio
-                                earum mollitia illo cupiditate placeat perferendis molestiae nam ipsum nihil odit
-                                officia aspernatur adipisci, quos illum! Quae, dolorem!
-                            </p>
-                            <h2 class="product-desc__name">Thông tin sản phẩm</h2>
-                            <ul class="product-desc__features">
-                                <li class="product-desc__text product-desc__text--bullet">Công suất mạnh mẽ giúp làm mát
-                                    nhanh</li>
-                                <li class="product-desc__text product-desc__text--bullet">Dung lượng pin lớn, sử dụng
-                                    lâu</li>
-                                <li class="product-desc__text product-desc__text--bullet">Thiết kế nhỏ gọn dễ mang theo
-                                </li>
-                                <li class="product-desc__text product-desc__text--bullet">Đầy đủ phụ kiện: 1 pin + 1 sạc
-                                </li>
-                            </ul>
-                            <figure class="product-desc__thumb">
-                                <img class="product-desc__img" src="assets/img/detail-02.jpg" alt="Quạt Makita" />
-                            </figure>
+                            <c:if test="${not empty product.detailsList}">
+                                <c:forEach items="${product.detailsList}" var="detail">
+                                    <h2 class="product-desc__name">${detail.title}</h2>
+
+                                    <p class="product-desc__text">${detail.description}
+                                    </p>
+
+                                    <figure class="product-desc__thumb">
+                                        <img class="product-desc__img"
+                                             src="${pageContext.request.contextPath}/assets/img/details/${detail.image}"
+                                             alt="${detail.title}"
+                                        />
+                                    </figure>
+                                </c:forEach>
+                            </c:if>
                         </div>
                     </div>
 
@@ -396,6 +375,49 @@
             updateButtons(); // khởi tạo trạng thái nút
         });
     });
+
+    function addToCart(productId) {
+        const contextPath = '${pageContext.request.contextPath}';
+        const url = contextPath + '/add-cart?productId=' + productId + '&quantity=1';
+
+        fetch(url)
+            .then(response => {
+                if (response.status === 401) {
+                    alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+                    window.location.href = contextPath + '/login';
+                    return;
+                }
+                if (response.ok) return response.json();
+            })
+            .then(data => {
+                if (data && data.status === 'success') {
+                    // 1. Sửa lại class cho đúng với HTML (header-cart__notice)
+                    const cartNotice = document.querySelector('.header-cart__notice');
+                    if (cartNotice) {
+                        cartNotice.innerText = data.cartQty;
+                    }
+
+                    alert("Đã thêm sản phẩm vào giỏ hàng!");
+
+                    /** * 2. Giải quyết vấn đề Dropdown không cập nhật:
+                     * Vì nội dung dropdown được render bằng JSTL (Server-side),
+                     * AJAX không thể tự chèn thêm thẻ <li> vào đó một cách dễ dàng.
+                     * Cách đơn giản và hiệu quả nhất lúc này:
+                     */
+                    const cartList = document.querySelector('.cart-list');
+                    // Nếu giỏ hàng đang hiện "Chưa có sản phẩm" (no-cart), ta reload để lấy HTML mới
+                    if (cartList.querySelector('.cart-list--no-cart')) {
+                        location.reload();
+                    } else {
+                        // Nếu đã có sản phẩm rồi, chỉ cần báo thành công là đủ,
+                        // khách hàng nhấn vào icon giỏ hàng hoặc sang trang khác sẽ thấy đủ.
+                        // Hoặc bạn có thể dùng location.reload() cho mọi trường hợp để đảm bảo dropdown luôn khớp.
+                        location.reload();
+                    }
+                }
+            })
+            .catch(err => console.error("Lỗi:", err));
+    }
 </script>
 <script>
 (function () {

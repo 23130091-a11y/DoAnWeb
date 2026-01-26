@@ -1,51 +1,85 @@
 package com.webgiadung.doanweb.controller.cart;
 
+import com.webgiadung.doanweb.dao.CartDao;
+import com.webgiadung.doanweb.dao.CartItemDao;
 import com.webgiadung.doanweb.model.Cart;
-import jakarta.servlet.*;
+import com.webgiadung.doanweb.model.CartItem;
+import com.webgiadung.doanweb.model.User;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "UpdateCart", value = "/update-cart")
 public class UpdateCart extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    private boolean isAjax(HttpServletRequest req) {
+        String x = req.getHeader("X-Requested-With");
+        return "XMLHttpRequest".equalsIgnoreCase(x) || "1".equals(req.getParameter("ajax"));
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int productId = Integer.parseInt(request.getParameter("productId"));
+        int productId;
         String action = request.getParameter("action");
+
+        try {
+            productId = Integer.parseInt(request.getParameter("productId"));
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid productId");
+            return;
+        }
 
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
-
-        if (cart != null) {
-            if ("inc".equals(action)) {
-                cart.increaseQuantity(productId);
-            } else if ("dec".equals(action)) {
-                cart.decreaseQuantity(productId);
-            }
-            session.setAttribute("cart", cart);
+        if (cart == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Cart is empty");
+            return;
         }
 
-        response.sendRedirect(request.getContextPath() + "/cart");
+        // update session cart
+        if ("inc".equals(action)) cart.increaseQuantity(productId);
+        else if ("dec".equals(action)) cart.decreaseQuantity(productId);
 
-        com.webgiadung.doanweb.model.User user = (com.webgiadung.doanweb.model.User) session.getAttribute("user");
-        if (user != null && cart != null) {
+        int newQuantity = 0;
+        double newSubtotal = 0;
+
+        for (CartItem item : cart.getItems()) {
+            if (item.getProduct().getId() == productId) {
+                newQuantity = item.getQuantity();
+                newSubtotal = item.getTotalPrice();
+                break;
+            }
+        }
+
+        double cartTotal = cart.getTotalPrice();
+        int cartQty = cart.getTotalQuantity();
+
+        // sync DB nếu login
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
             Integer cartId = (Integer) session.getAttribute("CART_ID");
-            com.webgiadung.doanweb.dao.CartDao cartDao = new com.webgiadung.doanweb.dao.CartDao();
+            CartDao cartDao = new CartDao();
             if (cartId == null) cartId = cartDao.getOrCreateCartId(user.getId());
 
-            int newQty = 0;
-            for (var it : cart.getItems()) {
-                if (it.getProduct().getId() == productId) { newQty = it.getQuantity(); break; }
-            }
-
-            new com.webgiadung.doanweb.dao.CartItemDao().setQuantity(cartId, productId, newQty);
+            new CartItemDao().setQuantity(cartId, productId, newQuantity);
             session.setAttribute("CART_ID", cartId);
+        }
+
+        // response
+        if (isAjax(request)) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            out.print("{\"newQuantity\":" + newQuantity
+                    + ",\"newSubtotal\":" + newSubtotal
+                    + ",\"cartTotal\":" + cartTotal
+                    + ",\"cartQty\":" + cartQty + "}");
+            out.flush();
+        } else {
+            response.sendRedirect(request.getContextPath() + "/cart");
         }
     }
 }

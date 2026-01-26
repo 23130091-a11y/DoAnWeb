@@ -110,4 +110,21 @@ public class ProductService {
     public boolean deleteProduct(int id) {
         return pdao.deleteProduct(id);
     }
+    public int applyDiscountToAll(int discountId) {
+        return pdao.applyDiscountToAll(discountId);
+    }
+
+    public int applyDiscountToCategory(int categoryId, int discountId) {
+        return pdao.applyDiscountToCategory(categoryId, discountId);
+    }
+    public List<Product> searchWithFilters(String keyword, String[] brands, String[] priceRanges) {
+        return pdao.searchWithFilters(keyword, brands, priceRanges);
+    }
+    public Product getProductFull(int id) {
+        return pdao.getProductFull(id);
+    }
+
+    public List<Product> getProductsFromIds(List<Integer> viewedIds) {
+        return pdao.getProductsFromIds(viewedIds);
+    }
 }
