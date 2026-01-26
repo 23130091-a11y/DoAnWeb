@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 
 @WebServlet("/api/add-product")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 2,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 50
+        fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 20,
+        maxRequestSize = 1024 * 1024 * 100
 )
 public class AddProductController extends HttpServlet {
     private ProductService productService = new ProductService();
@@ -60,8 +60,7 @@ public class AddProductController extends HttpServlet {
             // Lưu ảnh chính sản phẩm
             Part mainPart = req.getPart("productImage");
             if (mainPart != null && mainPart.getSize() > 0) {
-                // Thêm tham số 'req' vào cuối
-                p.setImage(FileUtil.saveFile(mainPart, "products", req));
+                p.setImage(FileUtil.saveFile(mainPart, "products"));
             }
 
             // --- 2. LƯU SẢN PHẨM & LẤY ID ---
@@ -69,12 +68,8 @@ public class AddProductController extends HttpServlet {
 
             if (productId > 0) {
                 // --- 3. LƯU MÔ TẢ (DESCRIPTIONS) ---
-                // Thử lấy cả 2 trường hợp có [] và không có []
-                String[] dTitles = req.getParameterValues("descTitles[]") != null ?
-                        req.getParameterValues("descTitles[]") : req.getParameterValues("descTitles");
-
-                String[] dContents = req.getParameterValues("descContents[]") != null ?
-                        req.getParameterValues("descContents[]") : req.getParameterValues("descContents");
+                String[] dTitles = req.getParameterValues("descTitles[]");
+                String[] dContents = req.getParameterValues("descContents[]");
 
                 if (dTitles != null && dContents != null) {
                     for (int i = 0; i < dTitles.length; i++) {
@@ -89,11 +84,8 @@ public class AddProductController extends HttpServlet {
                 }
 
                 // --- 4. LƯU CHI TIẾT (DETAILS) ---
-                String[] detTitles = req.getParameterValues("detTitles[]") != null ?
-                        req.getParameterValues("detTitles[]") : req.getParameterValues("detTitles");
-
-                String[] detContents = req.getParameterValues("detContents[]") != null ?
-                        req.getParameterValues("detContents[]") : req.getParameterValues("detContents");
+                String[] detTitles = req.getParameterValues("detTitles[]");
+                String[] detContents = req.getParameterValues("detContents[]");
                 List<Part> detImages = req.getParts().stream()
                         .filter(part -> "detImages[]".equals(part.getName()) && part.getSize() > 0)
                         .collect(Collectors.toList());
@@ -106,8 +98,7 @@ public class AddProductController extends HttpServlet {
                         detail.setDescription(detContents[i]);
 
                         if (i < detImages.size()) {
-                            // Thêm tham số 'req' vào cuối
-                            detail.setImage(FileUtil.saveFile(detImages.get(i), "details", req));
+                            detail.setImage(FileUtil.saveFile(detImages.get(i), "details"));
                         }
                         productService.addProductDetail(detail);
                     }

@@ -4,6 +4,7 @@ import com.webgiadung.doanweb.model.Discounts;
 import com.webgiadung.doanweb.services.DiscountService;
 import com.webgiadung.doanweb.services.ProductService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @WebServlet("/admin/add-discount")
+@MultipartConfig // BẮT BUỘC: Để đọc được dữ liệu FormData từ JavaScript (Fix lỗi 500)
 public class AddDiscountController extends HttpServlet {
 
     private final DiscountService discountService = new DiscountService();
@@ -22,11 +24,13 @@ public class AddDiscountController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // Đảm bảo nhận dữ liệu đúng định dạng UTF-8
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         try {
-            // 1. Lấy dữ liệu và kiểm tra rỗng (Trim để tránh lỗi cách trắng)
+            // 1. Lấy dữ liệu từ Form
             String name = request.getParameter("eventName");
             String discountValueRaw = request.getParameter("discountValue");
             String startDateRaw = request.getParameter("startDate");
@@ -34,18 +38,18 @@ public class AddDiscountController extends HttpServlet {
             String scope = request.getParameter("applyScope");
             String type = request.getParameter("discountType");
             String desc = request.getParameter("eventDesc");
+            String catIdRaw = request.getParameter("applyCategories");
 
+            // 2. Kiểm tra dữ liệu bắt buộc (Fix lỗi NullPointerException)
             if (name == null || name.isBlank() || discountValueRaw == null || startDateRaw == null || endDateRaw == null) {
-                response.setStatus(400); // Bad Request
-                response.getWriter().write("{\"status\":\"error\", \"message\":\"Vui lòng điền đầy đủ các trường bắt buộc!\"}");
+                response.setStatus(400);
+                response.getWriter().write("{\"status\":\"error\", \"message\":\"Vui lòng điền đầy đủ các trường!\"}");
                 return;
             }
 
+            // 3. Ép kiểu an toàn
             double value = Double.parseDouble(discountValueRaw);
-
-            String catIdRaw = request.getParameter("applyCategories");
             int catId = (catIdRaw != null && !catIdRaw.isEmpty()) ? Integer.parseInt(catIdRaw) : 0;
-
             LocalDateTime start = LocalDate.parse(startDateRaw).atStartOfDay();
             LocalDateTime end = LocalDate.parse(endDateRaw).atTime(23, 59, 59);
 
@@ -58,35 +62,24 @@ public class AddDiscountController extends HttpServlet {
             d.setStartDate(start);
             d.setEndDate(end);
 
-            // 5. Thực hiện lưu vào DB
+            // 5. Lưu Database
             int newDiscountId = discountService.insertDiscount(d);
 
             if (newDiscountId > 0) {
-                // Áp dụng giảm giá cho sản phẩm
                 if ("category".equals(scope) && catId > 0) {
                     productService.applyDiscountToCategory(catId, newDiscountId);
                 } else if ("all".equals(scope)) {
                     productService.applyDiscountToAll(newDiscountId);
                 }
-
                 response.getWriter().write("{\"status\":\"success\"}");
             } else {
-                // Nếu insertDiscount trả về 0 hoặc -1
-                response.getWriter().write("{\"status\":\"error\", \"message\":\"Database không trả về ID mới. Vui lòng kiểm tra lại hàm insert!\"}");
+                response.getWriter().write("{\"status\":\"error\", \"message\":\"Lỗi Database: Không thể lưu Discount!\"}");
             }
 
-        } catch (java.time.format.DateTimeParseException e) {
-            response.setStatus(400);
-            response.getWriter().write("{\"status\":\"error\", \"message\":\"Ngày tháng không đúng định dạng!\"}");
-        } catch (NumberFormatException e) {
-            response.setStatus(400);
-            response.getWriter().write("{\"status\":\"error\", \"message\":\"Mức giảm giá phải là số!\"}");
         } catch (Exception e) {
-            e.printStackTrace(); // Quan trọng: Xem lỗi ở Console của Server (Tomcat)
+            e.printStackTrace(); // In lỗi chi tiết ra console server để bạn dễ theo dõi
             response.setStatus(500);
-            // Tránh trả về message quá chi tiết của hệ thống cho user, nhưng giúp bạn debug
-            String errorMsg = e.getMessage() != null ? e.getMessage() : "Lỗi hệ thống không xác định";
-            response.getWriter().write("{\"status\":\"error\", \"message\":\"Server Error: " + errorMsg.replace("\"", "'") + "\"}");
+            response.getWriter().write("{\"status\":\"error\", \"message\":\"Server Error: " + e.getMessage() + "\"}");
         }
     }
 }

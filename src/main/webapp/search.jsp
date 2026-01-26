@@ -254,7 +254,9 @@
                                                  <span class="old-price">
                                                     <fmt:formatNumber value="${p.firstPrice}" type="number"/>đ
                                                   </span>
-                                                    <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                                    <div class="discount-badge" style="color: red;">
+                                                        Giảm ${p.discountPercent}%
+                                                    </div>
                                                 </div>
                                             </c:if>
 

@@ -1041,11 +1041,13 @@
                             <div class="product-main-content">
                                 <div id="product-list-section">
                                 <div class="product-table">
-                                    <div class="product-search__wrapper">
-                                        <input type="text" class="product-search__input" placeholder="Tìm tên sản phẩm hoặc từ khóa...">
-                                        <button class="product-search__btn">
-                                            <i class="fas fa-search"></i> Search
-                                        </button>
+                                    <div class="event-search">
+                                        <div class="event-search__wrapper">
+                                            <input type="text" id="productSearchInput" class="event-search__input" placeholder="Tìm kiếm tên sản phẩm...">
+                                            <button class="event-search__btn" id="productSearchBtn">
+                                                <i class="fas fa-search"></i> Tìm kiếm
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="product-table__header">
                                         <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
@@ -1084,66 +1086,11 @@
                                     </div>
                                 </div>
                                 <div class="event-table">
-                                    <div class="event-table__row event-table__row--header">
-                                        <div class="event-table__cell event-col-name">Tên sự kiện</div>
-                                        <div class="event-table__cell event-col-discount">Giảm giá</div>
-                                        <div class="event-table__cell event-col-post">Post</div>
-                                        <div class="event-table__cell event-col-date">Ngày bắt đầu</div>
-                                        <div class="event-table__cell event-col-date">Ngày kết thúc</div>
-                                        <div class="event-table__cell event-col-action">Xem</div>
-                                        <div class="event-table__cell event-col-action">Sửa</div>
-                                        <div class="event-table__cell event-col-action">Xóa</div>
+
+                                    <div class="product-table">
+                                        <div id="discount-list-container">
+                                        </div>
                                     </div>
-
-                                    <article class="event-table__row">
-                                        <div class="event-table__cell event-col-name">
-                                            <span class="event-table__text event-table__text--bold">Chương trình Sale Hè 2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-discount">
-                                            <span class="event-table__text event-table__text--red">-25%</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">15/06/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">30/06/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-view">Xem</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-edit">Sửa</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-delete">Xóa</button>
-                                        </div>
-                                    </article>
-
-                                    <article class="event-table__row">
-                                        <div class="event-table__cell event-col-name">
-                                            <span class="event-table__text event-table__text--bold">Đồng giá khai trương</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-discount">
-                                            <span class="event-table__text event-table__text--red">99.000đ</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-post"><input type="checkbox" checked></div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">01/01/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-date">
-                                            <span class="event-table__text">05/01/2026</span>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-view">Xem</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-edit">Sửa</button>
-                                        </div>
-                                        <div class="event-table__cell event-col-action">
-                                            <button class="event-btn-delete">Xóa</button>
-                                        </div>
-                                    </article>
 
                                 </div>
                             </div>
@@ -1791,6 +1738,7 @@
                                 </div>
                             </form>
 
+                        <div class="order-table" id="order-main-content">
                             <!-- Form xóa -->
                             <form id="deleteOrdersForm" action="<c:url value='/order-delete'/>" method="post">
                                 <div class="order-table__header">
@@ -2718,7 +2666,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const formData = new FormData(form);
 
-        fetch('api/add-brands', {
+        fetch('/DoAnWeb/api/add-brands', {
             method: 'POST',
             body: formData
         })
@@ -2761,7 +2709,7 @@ window.addEventListener("DOMContentLoaded", () => {
         params.append('tagName', tagName);
         params.append('tagDesc', tagDesc);
 
-        fetch('api/add-tag', {
+        fetch('/DoAnWeb/api/add-tag', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params
@@ -2792,7 +2740,7 @@ window.addEventListener("DOMContentLoaded", () => {
         params.append('cateName', cateName);
         params.append('cateDesc', cateDesc);
 
-        fetch('api/add-category', {
+        fetch('/DoAnWeb/api/add-category', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params
@@ -2992,8 +2940,36 @@ window.addEventListener("DOMContentLoaded", () => {
             .catch(err => console.error(err));
 
         loadProducts(0);
+
+        const searchBtn = document.querySelector('.event-search__btn');
+        const searchInput = document.querySelector('.event-search__input');
+
+        if (searchBtn && searchInput) {
+            searchBtn.addEventListener('click', function() {
+                searchProducts(searchInput.value);
+            });
+
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    searchProducts(searchInput.value);
+                }
+            });
+        }
     });
 
+    function searchProducts(keyword) {
+        console.log("Đang tìm kiếm:", keyword);
+        fetch(contextPath + '/api/search-products?query=' + encodeURIComponent(keyword))
+            .then(res => {
+                if (!res.ok) return res.text().then(text => { throw new Error(text) });
+                return res.json();
+            })
+            .then(data => {
+                console.log("Dữ liệu search trả về:", data);
+                renderProductTable(data);
+            })
+            .catch(err => console.error('Lỗi search:', err));
+    }
     function loadProducts(cateId) {
 
         fetch(contextPath + '/api/products-by-category?cateId=' + cateId)
@@ -3010,7 +2986,6 @@ window.addEventListener("DOMContentLoaded", () => {
         var container = document.getElementById('product-list-container');
         if (!container) return;
 
-        // Kiểm tra nếu không có sản phẩm
         if (!products || products.length === 0) {
             container.innerHTML = '<p style="padding:20px; text-align:center;">Không có sản phẩm nào.</p>';
             return;
@@ -3663,10 +3638,9 @@ window.addEventListener("DOMContentLoaded", () => {
         setupFormSubmit();
     });
 
-    // Load danh mục vào Select
     async function loadCategories() {
         try {
-            const response = await fetch('${pageContext.request.contextPath}/api/categories');
+            const response = await fetch(window.location.origin + '/DoAnWeb/api/categories');
             const data = await response.json();
             const select = document.querySelector('select[name="applyCategories"]');
             if (select) {
@@ -3677,8 +3651,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         } catch (err) { console.error("Lỗi load categories:", err); }
     }
-
-    // Xử lý gửi Form AJAX
     function setupFormSubmit() {
         const form = document.getElementById('addEventForm');
         if (!form) return;
@@ -3686,22 +3658,19 @@ window.addEventListener("DOMContentLoaded", () => {
         form.onsubmit = async function(e) {
             e.preventDefault();
 
-
-            const formData = new URLSearchParams(new FormData(form));
+            const formData = new FormData(form);
 
             try {
-                // SỬA DÒNG NÀY:
-                const response = await fetch('${pageContext.request.contextPath}/admin/add-discount', {
+
+                const response = await fetch('/DoAnWeb/admin/add-discount', {
                     method: 'POST',
-                    body: formData,
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    body: formData
+
                 });
 
-                // Kiểm tra nếu response không ok (ví dụ 404, 500)
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error("Server Error:", errorText);
-                    throw new Error("Mã lỗi: " + response.status);
+                    throw new Error("Mã lỗi: " + response.status + " - " + errorText);
                 }
 
                 const result = await response.json();
@@ -3714,9 +3683,97 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             } catch (error) {
                 console.error("Chi tiết lỗi:", error);
-                alert("Lỗi: " + error.message);
+                alert("Lỗi hệ thống: " + error.message);
             }
         };
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('input[name="applyScope"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const scopeCategory = document.getElementById('scopeCategory');
+                if (this.value === 'category') {
+                    scopeCategory.style.display = 'block';
+                    loadCategories();
+                } else {
+                    scopeCategory.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+<script>
+    // Phải khai báo contextPath từ JSP
+    var contextPath = '${pageContext.request.contextPath}';
+
+    document.addEventListener("DOMContentLoaded", function () {
+        loadAllDiscounts();
+    });
+
+    function loadAllDiscounts() {
+        fetch(contextPath + '/api/admin/discounts-list')
+            .then(res => {
+                if (!res.ok) throw new Error("Lỗi Server");
+                return res.json();
+            })
+            .then(data => {
+                renderDiscountTable(data);
+            })
+            .catch(err => console.error("Không tải được giảm giá:", err));
+    }
+
+    function renderDiscountTable(discounts) {
+        var container = document.getElementById('discount-list-container');
+        if (!container) return;
+
+        var html = '<div class="event-table__row event-table__row--header">';
+        html += '    <div class="event-table__cell event-col-name">Tên sự kiện</div>';
+        html += '    <div class="event-table__cell event-col-discount">Giảm giá</div>';
+        html += '    <div class="event-table__cell event-col-post">Post</div>';
+        html += '    <div class="event-table__cell event-col-date">Ngày bắt đầu</div>';
+        html += '    <div class="event-table__cell event-col-date">Ngày kết thúc</div>';
+        html += '    <div class="event-table__cell event-col-action">Xem</div>';
+        html += '    <div class="event-table__cell event-col-action">Sửa</div>';
+        html += '    <div class="event-table__cell event-col-action">Xóa</div>';
+        html += '</div>';
+
+        // BƯỚC 2: Duyệt danh sách để thêm dữ liệu
+        if (discounts && discounts.length > 0) {
+            discounts.forEach(function (d) {
+                var discountDisplay = d.discount + "%";
+
+                html += '<article class="event-table__row">';
+                html += '    <div class="event-table__cell event-col-name">';
+                html += '        <span class="event-table__text event-table__text--bold">' + d.name + '</span>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-discount">';
+                html += '        <span class="event-table__text event-table__text--red">' + discountDisplay + '</span>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-post"><input type="checkbox" ' + (d.status == 1 ? "checked" : "") + '></div>';
+                html += '    <div class="event-table__cell event-col-date">';
+                html += '        <span class="event-table__text">' + d.startDate + '</span>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-date">';
+                html += '        <span class="event-table__text">' + d.endDate + '</span>';
+                html += '    </div>';
+
+                html += '    <div class="event-table__cell event-col-action">';
+                html += '        <button class="event-btn-view" onclick="viewDiscount(' + d.id + ')">Xem</button>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-action">';
+                html += '        <button class="event-btn-edit" onclick="editDiscount(' + d.id + ')">Sửa</button>';
+                html += '    </div>';
+                html += '    <div class="event-table__cell event-col-action">';
+                html += '        <button class="event-btn-delete" onclick="deleteDiscount(' + d.id + ')">Xóa</button>';
+                html += '    </div>';
+                html += '</article>';
+            });
+        } else {
+            html += '<p style="padding: 20px; text-align: center;">Không có dữ liệu giảm giá nào.</p>';
+        }
+
+        container.innerHTML = html;
     }
 </script>
 <!-- Link JS -->
