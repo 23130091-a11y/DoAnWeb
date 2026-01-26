@@ -42,11 +42,43 @@ public class LoginController extends HttpServlet {
         session.setAttribute("user", user);
         session.setAttribute("USER_LOGIN", user);
 
+        // ===== LOAD CART FROM DB INTO SESSION (for header) =====
+        try {
+            com.webgiadung.doanweb.dao.CartDao cartDao = new com.webgiadung.doanweb.dao.CartDao();
+            com.webgiadung.doanweb.dao.CartItemDao itemDao = new com.webgiadung.doanweb.dao.CartItemDao();
+            com.webgiadung.doanweb.services.ProductService productService = new com.webgiadung.doanweb.services.ProductService();
+
+            int cartId = cartDao.getOrCreateCartId(user.getId());
+            session.setAttribute("CART_ID", cartId);
+
+            var rows = itemDao.findItems(cartId);
+            com.webgiadung.doanweb.model.Cart cart = new com.webgiadung.doanweb.model.Cart();
+            for (var r : rows) {
+                com.webgiadung.doanweb.model.Product p = productService.getProduct(r.productId);
+                if (p != null) cart.addItem(p, r.quantity);
+            }
+            session.setAttribute("cart", cart);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         // 4) Điều hướng theo role
         if (user.getRole() == 1) {
             response.sendRedirect(request.getContextPath() + "/admin/customers");
+            return;
+        }
+
+// USER thường: nếu có redirect hợp lệ thì quay lại đúng trang
+        String redirect = request.getParameter("redirect");
+        if (redirect != null) redirect = redirect.trim();
+
+// chỉ cho redirect nội bộ (tránh open redirect)
+        if (redirect != null && !redirect.isEmpty() && redirect.startsWith("/") && !redirect.startsWith("//")) {
+            response.sendRedirect(request.getContextPath() + redirect);
         } else {
             response.sendRedirect(request.getContextPath() + "/list-product");
         }
+
     }
 }

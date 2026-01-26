@@ -1,62 +1,85 @@
 package com.webgiadung.doanweb.controller.cart;
 
+import com.webgiadung.doanweb.dao.CartDao;
+import com.webgiadung.doanweb.dao.CartItemDao;
 import com.webgiadung.doanweb.model.Cart;
 import com.webgiadung.doanweb.model.CartItem;
-import jakarta.servlet.*;
+import com.webgiadung.doanweb.model.User;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "UpdateCart", value = "/update-cart")
 public class UpdateCart extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    private boolean isAjax(HttpServletRequest req) {
+        String x = req.getHeader("X-Requested-With");
+        return "XMLHttpRequest".equalsIgnoreCase(x) || "1".equals(req.getParameter("ajax"));
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int productId = Integer.parseInt(request.getParameter("productId"));
+        int productId;
         String action = request.getParameter("action");
+
+        try {
+            productId = Integer.parseInt(request.getParameter("productId"));
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid productId");
+            return;
+        }
 
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Cart is empty");
+            return;
+        }
+
+        // update session cart
+        if ("inc".equals(action)) cart.increaseQuantity(productId);
+        else if ("dec".equals(action)) cart.decreaseQuantity(productId);
 
         int newQuantity = 0;
         double newSubtotal = 0;
-        double cartTotal = 0;
-        int cartQty = 0;
 
-        if (cart != null) {
-            if ("inc".equals(action)) {
-                cart.increaseQuantity(productId);
-            } else if ("dec".equals(action)) {
-                cart.decreaseQuantity(productId);
+        for (CartItem item : cart.getItems()) {
+            if (item.getProduct().getId() == productId) {
+                newQuantity = item.getQuantity();
+                newSubtotal = item.getTotalPrice();
+                break;
             }
-
-            // Lấy lại thông số từ Map 'data' trong Cart (vì get() đang private)
-            // Hoặc bạn có thể dùng cart.getItems() để tìm
-            for (CartItem item : cart.getItems()) {
-                if (item.getProduct().getId() == productId) {
-                    newQuantity = item.getQuantity();
-                    newSubtotal = item.getTotalPrice();
-                    break;
-                }
-            }
-            cartTotal = cart.getTotalPrice();
-            cartQty = cart.getTotalQuantity();
         }
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
-        // Trả thêm cartQty để cập nhật con số trên Header nếu cần
-        out.print("{\"newQuantity\":" + newQuantity +
-                ", \"newSubtotal\":" + newSubtotal +
-                ", \"cartTotal\":" + cartTotal +
-                ", \"cartQty\":" + cartQty + "}");
-        out.flush();
+        double cartTotal = cart.getTotalPrice();
+        int cartQty = cart.getTotalQuantity();
+
+        // sync DB nếu login
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            Integer cartId = (Integer) session.getAttribute("CART_ID");
+            CartDao cartDao = new CartDao();
+            if (cartId == null) cartId = cartDao.getOrCreateCartId(user.getId());
+
+            new CartItemDao().setQuantity(cartId, productId, newQuantity);
+            session.setAttribute("CART_ID", cartId);
+        }
+
+        // response
+        if (isAjax(request)) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            out.print("{\"newQuantity\":" + newQuantity
+                    + ",\"newSubtotal\":" + newSubtotal
+                    + ",\"cartTotal\":" + cartTotal
+                    + ",\"cartQty\":" + cartQty + "}");
+            out.flush();
+        } else {
+            response.sendRedirect(request.getContextPath() + "/cart");
+        }
     }
 }

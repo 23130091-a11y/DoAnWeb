@@ -7,6 +7,11 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%
+    response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+%>
 <header id="header" class="header header-checkout">
     <div class="grid wide">
         <div class="header-top">
@@ -130,7 +135,7 @@
                                     <a href="account.jsp#orders-all" class="navbar-user__link">Thông tin đơn hàng</a>
                                 </li>
                                 <li class="navbar-user__item navbar-user__item--separate">
-                                    <a href="login.jsp" class="navbar-user__link">Đăng xuất</a>
+                                    <a href="${pageContext.request.contextPath}/logout" class="navbar-user__link">Đăng xuất</a>
                                 </li>
                             </ul>
                         </li>
@@ -183,7 +188,7 @@
                         <c:set var="cart" value="${sessionScope.cart}" />
 
                         <!-- ICON CART -->
-                        <a href="cart">
+                        <a href="${pageContext.request.contextPath}/cart">
                             <i class="header-cart__icon fa-solid fa-cart-shopping"></i>
                             <span class="header-cart__notice">
                                  <c:choose>

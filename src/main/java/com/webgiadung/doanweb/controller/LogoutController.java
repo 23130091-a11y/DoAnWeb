@@ -11,11 +11,16 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.removeAttribute("user");
-            session.removeAttribute("USER_LOGIN");
-            session.invalidate();
+            session.invalidate(); // xoá sạch session
         }
-        resp.sendRedirect(req.getContextPath() + "/login");
+
+        // chặn cache
+        resp.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        resp.setHeader("Pragma", "no-cache");
+        resp.setDateHeader("Expires", 0);
+
+        // về trang công khai
+        resp.sendRedirect(req.getContextPath() + "/list-product");
     }
 
     @Override
