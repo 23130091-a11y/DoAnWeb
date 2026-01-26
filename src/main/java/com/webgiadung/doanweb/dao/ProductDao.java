@@ -29,7 +29,7 @@ public class ProductDao extends BaseDao {
                         created_at AS createdAt,
                         updated_at AS updatedAt
                     FROM products
-                    WHERE post = 1
+                    LIMIT 50
                 """)
                         .mapToBean(Product.class)
                         .list()
@@ -157,8 +157,7 @@ public class ProductDao extends BaseDao {
                 created_at AS createdAt,
                 updated_at AS updatedAt
             FROM products
-            WHERE post = 1
-            AND name LIKE :keyword
+            WHERE name LIKE :keyword
         """)
                         .bind("keyword", "%" + keyword + "%")
                         .mapToBean(Product.class)
@@ -401,7 +400,6 @@ public class ProductDao extends BaseDao {
                         updated_at AS updatedAt
                     FROM products
                     WHERE categories_id = :categoryId
-                    AND post = 1
                 """)
                         .bind("categoryId", categoryId)
                         .mapToBean(Product.class)
@@ -410,7 +408,6 @@ public class ProductDao extends BaseDao {
     }
     public Product getProductFullInfo(int id) {
         return get().withHandle(handle -> {
-            // 1. SỬA CÂU SQL: Thêm LEFT JOIN và SELECT thêm tên
             Product product = handle.createQuery("""
             SELECT 
                 p.id, p.name, p.image, 
@@ -645,8 +642,7 @@ public class ProductDao extends BaseDao {
                     created_at AS createdAt,
                     updated_at AS updatedAt
                 FROM products
-                WHERE post = 1
-                  AND categories_id = :cid
+                WHERE categories_id = :cid
             """)
                         .bind("cid", categoryId)
                         .mapToBean(Product.class)
@@ -690,7 +686,7 @@ public class ProductDao extends BaseDao {
                     .execute();
         });
     }
-    public List<Product> searchWithFilters(String keyword, String[] brands, String[] priceRanges) {
+    public List<Product> searchWithFilters(String keyword, String[] brands, String[] priceRanges, String categoryId) {
         return get().withHandle(h -> {
             StringBuilder sql = new StringBuilder("""
             SELECT 
@@ -698,9 +694,7 @@ public class ProductDao extends BaseDao {
                 p.price_first AS firstPrice, 
                 p.price_total AS totalPrice, 
                 p.discounts_id AS discountsId, 
-                
                 d.discount AS discountPercent,
-                
                 p.categories_id AS categoriesId, 
                 p.brands_id AS brandsId, 
                 p.keywords_id AS keywordsId, 
@@ -709,45 +703,66 @@ public class ProductDao extends BaseDao {
                 p.updated_at AS updatedAt
             FROM products p
             LEFT JOIN discounts d ON p.discounts_id = d.id
-            WHERE p.post = 1
+            WHERE 1=1 
         """);
 
-            // 2. Nối điều kiện Keyword
+            if (categoryId != null && !categoryId.trim().isEmpty()) {
+                sql.append(" AND p.categories_id = :categoryId ");
+            }
+
+            // 2. Lọc theo Từ khóa
             if (keyword != null && !keyword.trim().isEmpty()) {
                 sql.append(" AND LOWER(p.name) LIKE LOWER(:keyword) ");
             }
 
-            // 3. Nối điều kiện Thương hiệu
+            // 3. Lọc theo Thương hiệu
             if (brands != null && brands.length > 0) {
                 sql.append(" AND p.brands_id IN (SELECT id FROM brands WHERE name IN (<brandNames>)) ");
             }
 
-            // 4. Nối điều kiện Khoảng giá
+            // 4. Lọc theo Khoảng giá (Dùng OR giữa các khoảng)
             if (priceRanges != null && priceRanges.length > 0) {
                 sql.append(" AND ( ");
                 for (int i = 0; i < priceRanges.length; i++) {
                     sql.append(" (p.price_total BETWEEN :min").append(i).append(" AND :max").append(i).append(") ");
-                    if (i < priceRanges.length - 1) sql.append(" OR ");
+                    if (i < priceRanges.length - 1) {
+                        sql.append(" OR ");
+                    }
                 }
                 sql.append(" ) ");
             }
 
             var query = h.createQuery(sql.toString());
 
-            // 5. Binding dữ liệu
-            if (keyword != null && !keyword.trim().isEmpty()) {
-                query.bind("keyword", "%" + keyword.trim().toLowerCase() + "%");
+
+            // Bind CategoryId
+            if (categoryId != null && !categoryId.trim().isEmpty()) {
+                query.bind("categoryId", categoryId);
             }
+
+            // Bind Keyword
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.bind("keyword", "%" + keyword.trim() + "%");
+            }
+
+            // Bind Brands
             if (brands != null && brands.length > 0) {
                 query.bindList("brandNames", java.util.Arrays.asList(brands));
             }
+
+            // Bind Price Ranges
             if (priceRanges != null && priceRanges.length > 0) {
                 for (int i = 0; i < priceRanges.length; i++) {
-                    try {
-                        String[] parts = priceRanges[i].split("-");
-                        query.bind("min" + i, Double.parseDouble(parts[0]));
-                        query.bind("max" + i, Double.parseDouble(parts[1]));
-                    } catch (Exception e) { }
+                    String[] parts = priceRanges[i].split("-");
+                    if (parts.length == 2) {
+                        try {
+                            query.bind("min" + i, Double.parseDouble(parts[0]));
+                            query.bind("max" + i, Double.parseDouble(parts[1]));
+                        } catch (NumberFormatException e) {
+                            query.bind("min" + i, -1.0);
+                            query.bind("max" + i, -1.0);
+                        }
+                    }
                 }
             }
 

@@ -288,7 +288,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-
+        // 1. Xử lý logic Checkbox
         $(document).on('change', '.filter-checkbox', function() {
             if ($(this).attr('name') === 'priceRanges' && $(this).is(':checked')) {
                 $('#price-all').prop('checked', false);
@@ -303,7 +303,9 @@
             }
         });
 
+        // 2. Hàm lọc chính
         function searchFilter() {
+            // Lấy danh sách Thương hiệu
             let brands = [];
             $('input[name="brands"]:checked').each(function() {
                 brands.push($(this).val());
@@ -314,22 +316,27 @@
                 priceRanges.push($(this).val());
             });
 
-            let keyword = $(".word-search").text().trim();
+            const urlParams = new URLSearchParams(window.location.search);
+
+            let categoryId = urlParams.get('id') || "";
+
+
+            let keyword = urlParams.get('keyword') || "";
 
             $.ajax({
                 url: "search-product",
                 type: "GET",
                 data: {
                     keyword: keyword,
-                    brands: brands,
-                    priceRanges: priceRanges
+                    categoryId: categoryId,
+                    'brands[]': brands,
+                    'priceRanges[]': priceRanges
                 },
                 beforeSend: function() {
-                    // Hiệu ứng làm mờ để người dùng biết đang tải
-                    $("#content-products").css("opacity", "0.5");
+                    // Hiệu ứng loading
+                    $("#content-products").stop(true, true).css("opacity", "0.5");
                 },
                 success: function(data) {
-
                     let $htmlResponse = $(data);
                     let newList = $htmlResponse.find("#content-products").html();
                     let newHeader = $htmlResponse.find(".search-header").html();
@@ -338,14 +345,13 @@
                         $(this).html(newList).fadeIn(100).css("opacity", "1");
                     });
 
-
                     if (newHeader) {
                         $(".search-header").html(newHeader);
                     }
                 },
                 error: function(xhr) {
                     $("#content-products").css("opacity", "1");
-                    console.error("Lỗi hệ thống: " + xhr.status);
+                    console.error("Lỗi AJAX: " + xhr.status + " " + xhr.statusText);
                 }
             });
         }
