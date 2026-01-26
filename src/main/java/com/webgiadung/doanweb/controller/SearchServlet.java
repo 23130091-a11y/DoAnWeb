@@ -16,9 +16,11 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String keyword = request.getParameter("keyword");
+        // THÊM: Lấy categoryId để giữ phạm vi lọc
+        String categoryId = request.getParameter("categoryId");
+
         String[] brands = request.getParameterValues("brands");
         String[] priceRanges = request.getParameterValues("priceRanges");
-
         if (brands == null) brands = request.getParameterValues("brands[]");
         if (priceRanges == null) priceRanges = request.getParameterValues("priceRanges[]");
 
@@ -27,48 +29,40 @@ public class SearchServlet extends HttpServlet {
         }
 
         boolean hasKeyword = (keyword != null && !keyword.isEmpty());
+        boolean hasCategory = (categoryId != null && !categoryId.isEmpty());
         boolean hasFilter = (brands != null && brands.length > 0) || (priceRanges != null && priceRanges.length > 0);
 
-        if (!hasKeyword && !hasFilter) {
+        if (!hasKeyword && !hasFilter && !hasCategory) {
             request.setAttribute("message", "Vui lòng nhập từ khóa tìm kiếm hoặc chọn bộ lọc");
             request.getRequestDispatcher("/search.jsp").forward(request, response);
             return;
         }
 
-        if (hasKeyword && keyword.length() < 2) {
+        if (hasKeyword && keyword.length() < 2 && !hasFilter && !hasCategory) {
             request.setAttribute("message", "Từ khóa tìm kiếm quá ngắn");
             request.getRequestDispatcher("/search.jsp").forward(request, response);
             return;
         }
 
-        HttpSession session = request.getSession();
-        List<String> searchHistory = (List<String>) session.getAttribute("searchHistory");
-
-        if (searchHistory == null) {
-            searchHistory = new ArrayList<>();
+        if (hasKeyword) {
+            HttpSession session = request.getSession();
+            List<String> searchHistory = (List<String>) session.getAttribute("searchHistory");
+            if (searchHistory == null) searchHistory = new ArrayList<>();
+            searchHistory.remove(keyword);
+            searchHistory.add(0, keyword);
+            if (searchHistory.size() > 5) searchHistory = new ArrayList<>(searchHistory.subList(0, 5));
+            session.setAttribute("searchHistory", searchHistory);
         }
 
-        searchHistory.remove(keyword);
-        searchHistory.add(0, keyword);
-
-        if (searchHistory.size() > 5) {
-            searchHistory = searchHistory.subList(0, 5);
-        }
-        session.setAttribute("searchHistory", searchHistory);
-
-        ProductDao productDao = new ProductDao();
-        List<Product> products = productDao.searchWithFilters(keyword, brands, priceRanges);
+        ProductService productsSer = new ProductService();
+        List<Product> products = productsSer.searchWithFilters(keyword, brands, priceRanges, categoryId);
 
         request.setAttribute("keyword", keyword);
+        request.setAttribute("selectedCategoryId", categoryId);
         request.setAttribute("products", products);
-
         request.setAttribute("selectedBrands", brands);
         request.setAttribute("selectedPrices", priceRanges);
 
         request.getRequestDispatcher("/search.jsp").forward(request, response);
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
