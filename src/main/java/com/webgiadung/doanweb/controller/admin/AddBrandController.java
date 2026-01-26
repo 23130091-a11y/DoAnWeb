@@ -41,7 +41,8 @@ public class AddBrandController extends HttpServlet {
             }
 
             Part filePart = request.getPart("brandLogo");
-            String fileName = FileUtil.saveFile(filePart, "brands");
+            // Thành dòng này:
+            String fileName = FileUtil.saveFile(filePart, "brands", request);
 
             Brands brand = new Brands();
             brand.setName(brandName);

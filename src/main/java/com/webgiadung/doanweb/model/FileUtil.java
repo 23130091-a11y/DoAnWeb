@@ -1,5 +1,6 @@
 package com.webgiadung.doanweb.model;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
@@ -10,27 +11,22 @@ public class FileUtil {
     private static final String PROJECT_PATH = "D:/DoAnLapTrinh/DoAnWeb/src/main/webapp";
     private static final String ASSETS_DIR = "assets/img";
 
-    public static String saveFile(Part part, String subFolder) throws IOException {
+    public static String saveFile(Part part, String subFolder, HttpServletRequest request) throws IOException {
         if (part == null || part.getSubmittedFileName() == null || part.getSubmittedFileName().isEmpty()) {
             return null;
         }
 
-        // 1. Làm sạch tên file
         String originalFileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-        String cleanFileName = originalFileName.replaceAll("\\s+", "_");
-        String fileName = System.currentTimeMillis() + "_" + cleanFileName;
+        String fileName = System.currentTimeMillis() + "_" + originalFileName.replaceAll("\\s+", "_");
 
-        // 2. Tạo đường dẫn tuyệt đối trỏ thẳng vào src/main/webapp/assets/image
-        String fullPath = PROJECT_PATH + File.separator + ASSETS_DIR + File.separator + subFolder;
+        // LẤY ĐƯỜNG DẪN THỰC TẾ MÀ SERVER ĐANG CHẠY
+        // Nó sẽ trỏ vào thư mục /target/ hoặc /out/ tùy cấu hình IntelliJ
+        String uploadPath = request.getServletContext().getRealPath("/") + "assets" + File.separator + "img" + File.separator + subFolder;
 
-        File dir = new File(fullPath);
-        if (!dir.exists()) {
-            dir.mkdirs(); // Tự động tạo thư mục nếu chưa có
-        }
+        File dir = new File(uploadPath);
+        if (!dir.exists()) dir.mkdirs();
 
-        // 3. Ghi file trực tiếp vào ổ đĩa
-        part.write(fullPath + File.separator + fileName);
-
+        part.write(uploadPath + File.separator + fileName);
         return fileName;
     }
 }
