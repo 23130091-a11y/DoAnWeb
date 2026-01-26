@@ -107,6 +107,17 @@ public class ProductDao extends BaseDao {
                         .mapToBean(ProductReview.class)
                         .list();
                 product.setReviews(reviews);
+
+                // Bổ sung load Description cho trang chi tiết
+                List<ProductDescriptions> descriptions = h.createQuery("""
+                        SELECT id, title, description, products_id AS productId
+                        FROM products_description
+                        WHERE products_id = :id
+                    """)
+                        .bind("id", id)
+                        .mapToBean(ProductDescriptions.class)
+                        .list();
+                product.setDescriptionsList(descriptions); // Đảm bảo tên setter đúng với class Product
             }
 
             return product;
