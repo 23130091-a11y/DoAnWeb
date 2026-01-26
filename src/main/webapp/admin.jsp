@@ -2934,7 +2934,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("DOMContentLoaded", function () {
         // 1. Tải danh mục bên trái
-        fetch(contextPath + '/api/categories-list')
+        fetch('DoAnWeb/api/categories-list')
             .then(res => res.json())
             .then(data => renderCategoriesExact(data))
             .catch(err => console.error(err));

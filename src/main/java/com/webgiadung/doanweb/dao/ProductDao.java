@@ -29,7 +29,7 @@ public class ProductDao extends BaseDao {
                         created_at AS createdAt,
                         updated_at AS updatedAt
                     FROM products
-                    WHERE post = 1
+                    LIMIT 50
                 """)
                         .mapToBean(Product.class)
                         .list()
@@ -157,8 +157,7 @@ public class ProductDao extends BaseDao {
                 created_at AS createdAt,
                 updated_at AS updatedAt
             FROM products
-            WHERE post = 1
-            AND name LIKE :keyword
+            WHERE name LIKE :keyword
         """)
                         .bind("keyword", "%" + keyword + "%")
                         .mapToBean(Product.class)
@@ -401,7 +400,6 @@ public class ProductDao extends BaseDao {
                         updated_at AS updatedAt
                     FROM products
                     WHERE categories_id = :categoryId
-                    AND post = 1
                 """)
                         .bind("categoryId", categoryId)
                         .mapToBean(Product.class)
@@ -410,7 +408,6 @@ public class ProductDao extends BaseDao {
     }
     public Product getProductFullInfo(int id) {
         return get().withHandle(handle -> {
-            // 1. SỬA CÂU SQL: Thêm LEFT JOIN và SELECT thêm tên
             Product product = handle.createQuery("""
             SELECT 
                 p.id, p.name, p.image, 
