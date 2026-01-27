@@ -57,11 +57,9 @@
                        placeholder="Số điện thoại"
                        required>
 
-                <input type="password"
-                       id="password"
-                       name="password"
-                       placeholder="Mật khẩu"
-                       required>
+                <input type="password" name="password" required
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                       title="Tối thiểu 8 ký tự, có chữ hoa, số và ký tự đặc biệt">
 
                 <input type="password"
                        id="repassword"
