@@ -5,6 +5,7 @@ import com.webgiadung.doanweb.dao.CartItemDao;
 import com.webgiadung.doanweb.model.Cart;
 import com.webgiadung.doanweb.model.CartItem;
 import com.webgiadung.doanweb.model.User;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -34,14 +35,13 @@ public class UpdateCart extends HttpServlet {
 
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Cart is empty");
-            return;
-        }
+        if (cart == null) cart = new Cart();
 
         // update session cart
         if ("inc".equals(action)) cart.increaseQuantity(productId);
         else if ("dec".equals(action)) cart.decreaseQuantity(productId);
+
+        session.setAttribute("cart", cart);
 
         int newQuantity = 0;
         double newSubtotal = 0;
@@ -62,10 +62,14 @@ public class UpdateCart extends HttpServlet {
         if (user != null) {
             Integer cartId = (Integer) session.getAttribute("CART_ID");
             CartDao cartDao = new CartDao();
-            if (cartId == null) cartId = cartDao.getOrCreateCartId(user.getId());
+            if (cartId == null) {
+                cartId = cartDao.getOrCreateCartId(user.getId());
+                session.setAttribute("CART_ID", cartId);
+            }
 
-            new CartItemDao().setQuantity(cartId, productId, newQuantity);
-            session.setAttribute("CART_ID", cartId);
+            CartItemDao itemDao = new CartItemDao();
+            if (newQuantity <= 0) itemDao.deleteItem(cartId, productId);
+            else itemDao.setQuantity(cartId, productId, newQuantity);
         }
 
         // response

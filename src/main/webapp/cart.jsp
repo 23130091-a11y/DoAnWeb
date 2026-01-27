@@ -50,7 +50,7 @@
                 <!-- Header -->
                 <c:set var="cart" value="${sessionScope.cart}" />
                 <div class="cart-header flex">
-                    <div class="colum product-col">Sản phẩm</div>c
+                    <div class="colum product-col">Sản phẩm</div>
                     <div class="colum price-col">Đơn giá</div>
                     <div class="colum qty-col">Số lượng</div>
                     <div class="colum total-col">Số tiền</div>
@@ -65,11 +65,19 @@
                         </div>
                         <!-- Cart Items -->
                         <c:forEach var="item" items="${entry.value}">
-                            <div class="cart-item flex">
+                            <div class="cart-item flex"
+                                 id="product-row-${item.product.id}"
+                                 data-subtotal="${item.totalPrice}"
+                                 data-qty="${item.quantity}">
                                 <div class="colum product-col flex">
-                                    <input type="checkbox" class="item-checkbox">
-                                    <a><img src="${item.product.image}" alt="${item.product.name}"></a>
-                                    <a>
+                                    <input type="checkbox"
+                                           class="item-checkbox"
+                                           value="${item.product.id}"
+                                           data-id="${item.product.id}">
+                                    <a href="${pageContext.request.contextPath}/product?id=${item.product.id}">
+                                        <img src="${pageContext.request.contextPath}/assets/img/products/${item.product.image}">
+                                    </a>
+                                    <a href="${pageContext.request.contextPath}/product?id=${item.product.id}">
                                         <div class="item-info">
                                             <p>${item.product.name}</p>
                                         </div>
@@ -99,10 +107,12 @@
                                 </div>
 
                                 <!-- Total -->
-                                <span id="subtotal-${item.product.id}">
-                                    <fmt:formatNumber value="${item.totalPrice}" type="number"/>
-                                </span>
-                                <span class="currency">đ</span>
+                                <div class="colum total-col">
+                                    <span id="subtotal-${item.product.id}">
+                                        <fmt:formatNumber value="${item.totalPrice}" type="number"/>
+                                    </span>
+                                    <span class="currency">đ</span>
+                                </div>
 
                                 <!-- Action -->
                                 <div class="colum action-col">
@@ -115,7 +125,7 @@
                 <!-- Footer -->
                 <div class="cart-footer flex">
                     <input type="checkbox" class="select-all-footer"> Chọn tất cả
-                    <button type="button" class="footer-btn">Xóa</button>
+                    <button type="button" class="footer-btn"onclick="deleteSelected()">Xóa</button>
                     <button type="button" class="footer-btn">Lưu vào mục yêu thích</button>
 
                     <div class="cart-summary">
@@ -125,10 +135,7 @@
                         </span>
                     </div>
 
-                    <button type="button" class="buy-btn"
-                            onclick="window.location.href='${pageContext.request.contextPath}/checkout'">
-                      Thanh toán
-                    </button>
+                    <button type="button" class="buy-btn" onclick="checkoutSelected()">Thanh toán</button>
                 </div>
                 <p class="empty-message">
                     Không có sản phẩm nào trong giỏ hàng
@@ -361,83 +368,202 @@
     <jsp:include page="/common/footer.jsp" />
 
 <script>
+
+function goCheckoutSelected() {
+    const checked = Array.from(document.querySelectorAll('.item-checkbox:checked'))
+        .map(cb => cb.value);
+
+    const base = '${pageContext.request.contextPath}/checkout';
+
+    // Không chọn gì => checkout tất cả
+    if (checked.length === 0) {
+        window.location.href = base;
+        return;
+    }
+    // Có chọn => gửi ids
+    window.location.href = base + '?ids=' + checked.join(',');
+}
+
+
     // Tăng giảm
     function handleUpdate(pId, actionType) {
-        // Tạo dữ liệu gửi đi
         const params = new URLSearchParams();
         params.append('productId', pId);
         params.append('action', actionType);
+        params.append('ajax', '1');
 
         fetch('${pageContext.request.contextPath}/update-cart', {
             method: 'POST',
             body: params,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Requested-With': 'XMLHttpRequest'
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.newQuantity > 0) {
-                    // Cập nhật số lượng trên input
-                    document.getElementById('qty-input-' + pId).value = data.newQuantity;
+        .then(r => r.json())
+        .then(data => {
+            if (data.newQuantity > 0) {
+                document.getElementById('qty-input-' + pId).value = data.newQuantity;
+                document.getElementById('subtotal-' + pId).innerText = data.newSubtotal.toLocaleString('vi-VN');
 
-                    // Cập nhật số tiền của sản phẩm đó (định dạng số có dấu phẩy)
-                    document.getElementById('subtotal-' + pId).innerText = data.newSubtotal.toLocaleString('vi-VN');
-                } else {
-                    // Nếu số lượng = 0, xóa dòng sản phẩm đó khỏi giao diện
-                    const row = document.getElementById('product-row-' + pId);
-                    if(row) row.remove();
+                // update dataset để tính tổng theo checkbox
+                const row = document.getElementById('product-row-' + pId);
+                if (row) {
+                    row.dataset.subtotal = data.newSubtotal;
+                    row.dataset.qty = data.newQuantity;
                 }
+            } else {
+                const row = document.getElementById('product-row-' + pId);
+                if (row) row.remove();
+            }
 
-                // Luôn cập nhật tổng tiền và tổng số lượng giỏ hàng ở footer
-                document.getElementById('cart-grand-total').innerText = data.cartTotal.toLocaleString('vi-VN') + ' đ';
-                document.getElementById('cart-qty-total').innerText = data.cartQty;
+            // cập nhật icon giỏ ở header
+            const headerCartNotify = document.querySelector('#headerCartQty') || document.querySelector('.header__cart-notice');
+            if (headerCartNotify) headerCartNotify.innerText = data.cartQty;
 
-                // Cập nhật số lượng trên icon giỏ hàng ở Header (nếu bạn có ID cho nó)
-                const headerCartNotify = document.querySelector('.header__cart-notice');
-                if(headerCartNotify) headerCartNotify.innerText = data.cartQty;
-            })
-            .catch(err => console.error('Lỗi Cart:', err));
+            // tính lại tổng theo checkbox
+            recalcSelectedTotals();
+        })
+        .catch(err => console.error('Lỗi Cart:', err));
     }
+
     // Xóa
     function deleteItem(pId) {
         if (!confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) return;
 
         const params = new URLSearchParams();
-        params.append('id', pId);
+        params.append('productId', pId);
+        params.append('ajax', '1');
 
         fetch('${pageContext.request.contextPath}/delete-cart', {
             method: 'POST',
             body: params,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Requested-With': 'XMLHttpRequest'
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                // 1. Xóa dòng sản phẩm khỏi giao diện
-                const row = document.getElementById('product-row-' + pId);
-                if (row) {
-                    row.style.transition = "all 0.3s ease";
-                    row.style.opacity = "0";
-                    setTimeout(() => row.remove(), 300);
-                }
+        .then(r => r.json())
+        .then(data => {
+            const row = document.getElementById('product-row-' + pId);
+            if (row) row.remove();
 
-                // 2. Cập nhật tổng tiền và tổng số lượng ở footer
-                document.getElementById('cart-grand-total').innerText = data.cartTotal.toLocaleString('vi-VN') + ' đ';
-                document.getElementById('cart-qty-total').innerText = data.cartQty;
+            const headerCartNotify = document.querySelector('.header__cart-notice');
+            if (headerCartNotify) headerCartNotify.innerText = data.cartQty;
 
-                // 3. Cập nhật icon giỏ hàng trên Header
-                const headerCartNotify = document.querySelector('.header__cart-notice');
-                if(headerCartNotify) headerCartNotify.innerText = data.cartQty;
+            recalcSelectedTotals();
 
-                // 4. Nếu giỏ hàng trống, có thể hiện thông báo "Giỏ hàng trống"
-                if (data.cartQty === 0) {
-                    location.reload(); // Tải lại để hiện giao diện trống chuyên nghiệp
-                }
-            })
-            .catch(err => console.error('Lỗi xóa sản phẩm:', err));
+            if (data.cartQty === 0) location.reload();
+        })
+        .catch(err => console.error('Lỗi xóa sản phẩm:', err));
     }
+function recalcSelectedTotals() {
+   const checked = document.querySelectorAll('.item-checkbox:checked');
+   let total = 0;
+   let qty = 0;
+
+   checked.forEach(cb => {
+     const id = cb.dataset.id || cb.value;
+     const row = document.getElementById('product-row-' + id);
+     if (!row) return;
+
+     total += Number(row.dataset.subtotal || 0);
+     qty += Number(row.dataset.qty || 0);
+   });
+
+   document.getElementById('cart-grand-total').innerText = total.toLocaleString('vi-VN') + ' đ';
+   document.getElementById('cart-qty-total').innerText = qty;
+ }
+
+document.addEventListener('change', function(e){
+  if (e.target.classList.contains('item-checkbox')) {
+    recalcSelectedTotals();
+  }
+
+  if (e.target.classList.contains('select-all-footer') || e.target.classList.contains('shop-checkbox')) {
+    const all = document.querySelectorAll('.item-checkbox');
+    all.forEach(cb => cb.checked = e.target.checked);
+
+    // sync lại 2 nút chọn tất cả
+    const footerAll = document.querySelector('.select-all-footer');
+    const shopAll = document.querySelector('.shop-checkbox');
+    if (footerAll) footerAll.checked = e.target.checked;
+    if (shopAll) shopAll.checked = e.target.checked;
+
+    recalcSelectedTotals();
+  }
+});
+
+function checkoutSelected() {
+  const checked = document.querySelectorAll('.item-checkbox:checked');
+  if (checked.length === 0) {
+    alert("Bạn phải chọn ít nhất 1 sản phẩm để thanh toán!");
+    return;
+  }
+  const ids = Array.from(checked).map(cb => cb.dataset.id || cb.value).join(',');
+  window.location.href = '${pageContext.request.contextPath}/checkout?ids=' + ids;
+}
+
+window.addEventListener('load', recalcSelectedTotals);
+
+function updateHeaderCartQty(qty) {
+  const el = document.querySelector('#headerCartQty')
+    || document.querySelector('.header__cart-notice')
+    || document.querySelector('.header-cart__notice');
+  if (el) el.innerText = qty;
+}
+
+function deleteSelected() {
+  const checked = document.querySelectorAll('.item-checkbox:checked');
+  if (checked.length === 0) {
+    alert("Bạn chưa chọn sản phẩm nào để xóa!");
+    return;
+  }
+  if (!confirm("Xóa các sản phẩm đã chọn khỏi giỏ hàng?")) return;
+
+  const contextPath = '${pageContext.request.contextPath}';
+  const ids = Array.from(checked).map(cb => cb.dataset.id || cb.value);
+
+  Promise.all(ids.map(pid => {
+    const params = new URLSearchParams();
+    params.append('id', pid);
+    params.append('ajax', '1');
+
+    return fetch(contextPath + '/delete-cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: params
+    }).then(r => r.json());
+  }))
+  .then(results => {
+    // remove row khỏi UI
+    ids.forEach(pid => {
+      const row = document.getElementById('product-row-' + pid);
+      if (row) row.remove();
+    });
+
+    // lấy kết quả cuối cùng để update badge
+    const last = results[results.length - 1];
+    if (last && typeof last.cartQty !== 'undefined') {
+      updateHeaderCartQty(last.cartQty);
+    }
+
+    // cập nhật lại tổng tiền đã chọn
+    if (typeof recalcSelectedTotals === 'function') recalcSelectedTotals();
+
+    // nếu hết item thì reload để hiện block "giỏ trống"
+    const remain = document.querySelectorAll('[id^="product-row-"]').length;
+    if (remain === 0) location.reload();
+  })
+  .catch(err => {
+    console.error(err);
+    location.reload();
+  });
+}
+
 </script>
 
     <script src="assets/js/script.js"></script>
