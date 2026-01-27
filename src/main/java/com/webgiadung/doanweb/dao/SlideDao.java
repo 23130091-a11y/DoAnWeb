@@ -16,6 +16,14 @@ public class SlideDao extends BaseDao{
 
         return slides;
     }
-
+    public static Slide getById(int id) {
+        return get().withHandle(h -> {
+            return h.createQuery("SELECT * FROM slide WHERE id = :id AND status = 1")
+                    .bind("id", id)
+                    .mapToBean(Slide.class)
+                    .findOne()
+                    .orElse(null);
+        });
+    }
 
 }
