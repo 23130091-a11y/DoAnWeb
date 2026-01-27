@@ -25,5 +25,15 @@ public class SlideDao extends BaseDao{
                     .orElse(null);
         });
     }
+    public static int insert(Slide slide) {
+        return get().withHandle(handle -> {
+            return handle.createUpdate(
+                            "INSERT INTO slide (name, avatar, text, status, created_at, updated_at) " +
+                                    "VALUES (:name, :avatar, :text, :status, NOW(), NOW())"
+                    )
+                    .bindBean(slide)
+                    .execute();
+        });
+    }
 
 }
