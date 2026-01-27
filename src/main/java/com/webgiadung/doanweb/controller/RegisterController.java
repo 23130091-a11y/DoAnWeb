@@ -5,6 +5,7 @@ import com.webgiadung.doanweb.dao.EmailVerificationDao;
 import com.webgiadung.doanweb.model.User;
 import java.util.regex.Pattern;
 import com.webgiadung.doanweb.services.EmailService;
+import com.webgiadung.doanweb.utils.SecurityUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,6 +17,10 @@ public class RegisterController extends HttpServlet {
             Pattern.compile("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
     private static final Pattern PHONE_RE =
             Pattern.compile("^0\\d{9,10}$"); // 10-11 số, bắt đầu 0
+
+    // Thêm Regex
+    private static final Pattern PASS_RE = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,108 +31,84 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // Lấy và làm sạch dữ liệu
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
+
         email = (email == null) ? "" : email.trim().toLowerCase();
         phone = (phone == null) ? "" : phone.trim();
         password = (password == null) ? "" : password;
         repassword = (repassword == null) ? "" : repassword;
 
-        // 1. Check nhập đủ (chống bypass)
+        // 1. Check trống
         if (email.isEmpty() || phone.isEmpty() || password.isEmpty() || repassword.isEmpty()) {
-            request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            sendError(request, response, "Vui lòng nhập đầy đủ thông tin");
             return;
         }
-        // 1.1 Check email đúng định dạng
+
+        // 2. Check định dạng Email & Phone
         if (!EMAIL_RE.matcher(email).matches()) {
-            request.setAttribute("error", "Email không đúng định dạng");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            sendError(request, response, "Email không đúng định dạng");
             return;
         }
-
-// Check số điện thoại hợp lệ
         if (!PHONE_RE.matcher(phone).matches()) {
-            request.setAttribute("error", "Số điện thoại không hợp lệ (bắt đầu 0, 10-11 chữ số)");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            sendError(request, response, "Số điện thoại không hợp lệ");
             return;
         }
 
-//  Check mật khẩu tối thiểu
-        if (password.length() < 6) {
-            request.setAttribute("error", "Mật khẩu tối thiểu 6 ký tự");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        // 3. Check độ mạnh mật khẩu
+        if (!PASS_RE.matcher(password).matches()) {
+            sendError(request, response, "Mật khẩu tối thiểu 8 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt");
             return;
         }
 
-        // 2. Check mật khẩu khớp
+        // 4. Check mật khẩu khớp (Sửa tại đây)
         if (!password.equals(repassword)) {
-            request.setAttribute("error", "Mật khẩu không khớp");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            sendError(request, response, "Mật khẩu xác nhận không khớp");
             return;
         }
 
-        AuthDao authDao = new AuthDao();
-
-        //  Check email tồn tại
-        if (authDao.checkEmailExists(email)) {
-            request.setAttribute("error", "Email đã tồn tại");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
-            return;
-        }
-        //  Check phone tồn tại
-        if (authDao.checkPhoneExists(phone)) {
-            request.setAttribute("error", "Số điện thoại đã tồn tại");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
-            return;
-        }
-        //  Tạo user
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setPhone(phone);
-        user.setRole(0);   // USER
-        user.setStatus(0);// chưa xác thực
-
+        // XỬ LÝ ĐĂNG KÝ
         try {
-            // Lưu DB
+            User user = new User();
+            user.setEmail(email);
+            user.setPhone(phone);
+            user.setPassword(SecurityUtils.hashMD5(password));
+            user.setRole(0);
+            user.setStatus(0); // Tài khoản chưa kích hoạt
+
+            AuthDao authDao = new AuthDao();
+            // 1. Lưu User vào DB
             authDao.register(user);
 
-            //  Tạo token
+            // 2. TẠO TOKEN VÀ LƯU VÀO BẢNG email_verification
             String token = java.util.UUID.randomUUID().toString();
-
-            //  Lưu token
             EmailVerificationDao evDao = new EmailVerificationDao();
             evDao.saveToken(email, token);
 
-            //  Tạo link xác nhận
-            String verifyLink =
-                    request.getScheme() + "://" +
-                            request.getServerName() + ":" +
-                            request.getServerPort() +
-                            request.getContextPath() +
-                            "/verify?token=" + token;
+            // 3. TẠO LINK XÁC NHẬN
+            // Dùng 127.0.0.1 để tránh lỗi "Từ chối kết nối" trên một số trình duyệt
+            String contextPath = request.getContextPath(); // Sẽ lấy được "/DoAnWeb"
+            String verifyLink = "http://127.0.0.1:8080" + contextPath + "/test-verify?token=" + token;
 
-            //  Gửi mail
+            // 4. GỌI SERVICE GỬI MAIL
             EmailService emailService = new EmailService();
             emailService.sendVerifyEmail(email, verifyLink);
 
-            //  Thông báo
+            // 5. Chuyển hướng thông báo thành công
             response.sendRedirect(request.getContextPath() + "/login.jsp?msg=verify");
+
         } catch (Exception ex) {
             ex.printStackTrace();
-            request.setAttribute("error", "Hệ thống đang lỗi, vui lòng thử lại sau.");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            sendError(request, response, "Hệ thống đang lỗi: " + ex.getMessage());
         }
+    }
 
-//        response.sendRedirect(request.getContextPath() + "/login.jsp");
-
-//        // 6. Chuyển sang login
-//        response.sendRedirect(request.getContextPath() + "/login");
-//        return;
-
-
+    // Hàm phụ để code ngắn gọn hơn, tránh lặp lại requestDispatcher
+    private void sendError(HttpServletRequest request, HttpServletResponse response, String msg) throws ServletException, IOException {
+        request.setAttribute("error", msg);
+        request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 }
