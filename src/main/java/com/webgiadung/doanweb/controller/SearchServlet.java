@@ -1,7 +1,9 @@
 package com.webgiadung.doanweb.controller;
 
 import com.webgiadung.doanweb.dao.ProductDao;
+import com.webgiadung.doanweb.model.Categories;
 import com.webgiadung.doanweb.model.Product;
+import com.webgiadung.doanweb.services.CategoriesService;
 import com.webgiadung.doanweb.services.ProductService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -15,6 +17,7 @@ import java.util.List;
 public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String keyword = request.getParameter("keyword");
         // THÊM: Lấy categoryId để giữ phạm vi lọc
         String categoryId = request.getParameter("categoryId");
@@ -42,6 +45,23 @@ public class SearchServlet extends HttpServlet {
             request.setAttribute("message", "Từ khóa tìm kiếm quá ngắn");
             request.getRequestDispatcher("/search.jsp").forward(request, response);
             return;
+        }
+        if (hasCategory) {
+            try {
+                int id = Integer.parseInt(categoryId);
+                // Dùng Service bạn đã có để lấy đối tượng Categories
+                CategoriesService catService = new CategoriesService();
+                Categories cat = catService.getCategory(id);
+
+                if (cat != null) {
+                    // Gửi cả đối tượng sang để JSP dùng cho linh hoạt
+                    request.setAttribute("category", cat);
+                    // Gửi thêm cái tên String nếu bạn muốn dùng biến categoryName cũ
+                    request.setAttribute("categoryName", cat.getName());
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
         }
 
         if (hasKeyword) {

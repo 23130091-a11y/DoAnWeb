@@ -107,4 +107,5 @@ public class CategoriesDao extends BaseDao {
             return -1; // Trả về -1 nếu lỗi giống bên Brand
         }
     }
+
 }
