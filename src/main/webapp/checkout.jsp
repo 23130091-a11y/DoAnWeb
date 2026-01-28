@@ -163,7 +163,7 @@
         </div>
         <div class="grid wide">
             <div class="header-checkout-content">
-                <a href="#!" class="logo">
+                <a href="/DoAnWeb/list-product" class="logo">
                     <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                 </a>
                 <h1 class="checkout-heading-main">THANH TOÁN</h1>
@@ -184,15 +184,40 @@
                                 <i class="fa-solid fa-location-dot"></i> Địa chỉ nhận hàng
                             </h2>
 
+                            <c:set var="u" value="${sessionScope.user}" />
+
                             <div class="current-address">
-                                <p class="address-name-phone">
-                                    **Nguyễn Văn A** (+84) 1234567989
-                                </p>
-                                <p class="address-detail">
-                                    123,abc, Phường XYZ, Quận 1, Thành phố Hồ Chí Minh
-                                </p>
-                                <a href="#!" class="change-address-link">THAY ĐỔI</a>
+                                <c:choose>
+                                    <c:when test="${not empty u}">
+                                        <p class="address-name-phone">
+                                            <strong>${u.name}</strong>
+                                            <c:if test="${not empty u.phone}">
+                                                (${u.phone})
+                                            </c:if>
+                                        </p>
+
+                                        <p class="address-detail">
+                                            <c:choose>
+                                                <c:when test="${not empty u.address}">
+                                                    ${u.address}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Bạn chưa có địa chỉ. Vui lòng cập nhật để đặt hàng.
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </p>
+
+                                        <a href="${pageContext.request.contextPath}/account?tab=info&return=checkout"
+                                           class="change-address-link">THAY ĐỔI</a>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <p class="address-detail">Vui lòng đăng nhập để nhập địa chỉ nhận hàng.</p>
+                                        <a href="${pageContext.request.contextPath}/login" class="change-address-link">ĐĂNG NHẬP</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
+
                         </section>
 
                         <section class="checkout-section shipping-method-section">

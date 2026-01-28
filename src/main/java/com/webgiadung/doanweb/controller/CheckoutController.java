@@ -77,6 +77,12 @@ public class CheckoutController extends HttpServlet {
             return;
         }
 
+        // ✅ chặn đặt hàng nếu chưa có địa chỉ
+        if (user.getAddress() == null || user.getAddress().trim().isEmpty()) {
+            resp.sendRedirect(req.getContextPath() + "/account?tab=info&return=checkout&need=address");
+            return;
+        }
+
         Cart fullCart = (Cart) session.getAttribute("cart");
         if (fullCart == null) fullCart = new Cart();
 
