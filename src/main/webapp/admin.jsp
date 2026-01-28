@@ -933,32 +933,34 @@
                         <div class="slide-table">
                             <div class="slide-table__header">
                                 <button type="submit" form="addSlideForm" class="slide-table__save">
-                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <i class="fa-solid fa-floppy-disk"></i> Lưu slide
                                 </button>
                             </div>
 
                             <div class="slide-table__inner">
-                                <form id="addSlideForm" class="add-slide-form">
+                                <form id="addSlideForm" class="add-slide-form" enctype="multipart/form-data">
 
-                                    <!-- Tên slide -->
                                     <div class="add-slide-form__field">
                                         <label class="add-slide-form__label">Tên slide:</label>
-                                        <input type="text" class="add-slide-form__input" required>
+                                        <input type="text" name="name" class="add-slide-form__input" placeholder="Nhập tên slide..." required>
                                     </div>
 
-                                    <!-- Trạng thái -->
+                                    <div class="add-slide-form__field">
+                                        <label class="add-slide-form__label">Mô tả ngắn:</label>
+                                        <input type="text" name="text" class="add-slide-form__input" placeholder="Nhập mô tả slide...">
+                                    </div>
+
                                     <div class="add-slide-form__field">
                                         <label class="add-slide-form__label">Trạng thái:</label>
-                                        <select class="add-slide-form__input">
-                                            <option value="active">Đang post</option>
-                                            <option value="inactive">Chưa post</option>
+                                        <select name="status" class="add-slide-form__input">
+                                            <option value="1">Đang post</option>
+                                            <option value="0">Chưa post</option>
                                         </select>
                                     </div>
 
-                                    <!-- Ảnh slide -->
                                     <div class="add-slide-form__field">
                                         <label class="add-slide-form__label">Ảnh slide:</label>
-                                        <input type="file" class="add-slide-form__input" accept="image/*" required>
+                                        <input type="file" name="avatar" class="add-slide-form__input" accept="image/*" required>
                                     </div>
 
                                     <button type="button"
@@ -966,7 +968,6 @@
                                             onclick="hideSlideAdd()">
                                         Quay lại
                                     </button>
-
                                 </form>
                             </div>
                         </div>
@@ -3775,6 +3776,40 @@ window.addEventListener("DOMContentLoaded", () => {
 
         container.innerHTML = html;
     }
+</script>
+<script>
+    document.getElementById('addSlideForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+
+        const formData = new FormData(this);
+
+        const saveBtn = this.closest('.slide-table').querySelector('.slide-table__save');
+        saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
+        saveBtn.disabled = true;
+
+        fetch('${pageContext.request.contextPath}/api/add-slide', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Thêm slide thành công!");
+                    location.reload();
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Đã có lỗi xảy ra khi kết nối server.");
+            })
+            .finally(() => {
+                saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Lưu slide';
+                saveBtn.disabled = false;
+            });
+    });
 </script>
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>

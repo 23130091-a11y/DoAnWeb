@@ -84,6 +84,11 @@
                                 <span class="content-sold__text">Đã bán</span>
                                 <span class="content-feedback__level">${product.quantitySaled}</span>
                             </div>
+                            <div class="content-details__separate"></div>
+                            <div class="content-sold">
+                                <span class="content-sold__text">Số lượng kho</span>
+                                <span class="content-feedback__level">${product.quantity}</span>
+                            </div>
                         </div>
                         <c:if test="${product.discountPercent > 0}">
                             <div class="content-details__desc-wrap">
