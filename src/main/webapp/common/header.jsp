@@ -320,3 +320,58 @@
     .catch(() => location.reload());
   }
 </script>
+<script>
+  function applyMiniCartUpdate(data) {
+    if (!data) return;
+
+    // update badge số lượng
+    const badge = document.querySelector('#headerCartQty')
+      || document.querySelector('.header__cart-notice')
+      || document.querySelector('.header-cart__notice');
+    if (badge && typeof data.cartQty !== 'undefined') {
+      badge.innerText = data.cartQty;
+    }
+
+    // update dropdown HTML
+    if (data.miniCartHtml) {
+      const box = document.querySelector('.cart-list');
+      if (box) box.innerHTML = data.miniCartHtml;
+    }
+  }
+
+  window.applyMiniCartUpdate = applyMiniCartUpdate;
+
+  function removeMiniCartItem(pid) {
+    const params = new URLSearchParams();
+    params.append('id', pid);
+    params.append('ajax', '1');
+
+    fetch('${pageContext.request.contextPath}/delete-cart', {
+      method: 'POST',
+      body: params,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    .then(r => r.json())
+    .then((data) => {
+      // update badge số lượng giỏ ngay
+      const badge = document.querySelector('#headerCartQty')
+        || document.querySelector('.header__cart-notice')
+        || document.querySelector('.header-cart__notice');
+      if (badge && data && typeof data.cartQty !== 'undefined') {
+        badge.innerText = data.cartQty;
+      }
+
+      // remove item khỏi dropdown
+      const li = document.getElementById('mini-cart-item-' + pid);
+      if (li) li.remove();
+
+      // nếu hết item => reload để hiện "Chưa có sản phẩm"
+      const remain = document.querySelectorAll('.cart-list__item').length;
+      if (remain === 0) location.reload();
+    })
+    .catch(() => location.reload());
+  }
+</script>
