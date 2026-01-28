@@ -17,7 +17,8 @@ import java.util.Set;
 @WebServlet("/checkout")
 public class CheckoutController extends HttpServlet {
 
-    private static final int SHIP_FEE = 25000;
+    private static final int SHIP_STANDARD = 25000;
+    private static final int SHIP_EXPRESS  = 150000;
     private final OrderDao orderDao = new OrderDao();
 
     private Cart buildSelectedCart(Cart fullCart, String idsParam) {
@@ -57,9 +58,11 @@ public class CheckoutController extends HttpServlet {
         req.setAttribute("items", orderCart.getItems());
         req.setAttribute("totalQuantity", orderCart.getTotalQuantity());
         req.setAttribute("totalPrice", orderCart.getTotalPrice());
-        req.setAttribute("ship", SHIP_FEE);
 
-        // để checkout.jsp nhét hidden input (giữ ids khi POST)
+        // mặc định hiển thị tiêu chuẩn
+        req.setAttribute("ship", SHIP_STANDARD);
+        req.setAttribute("shippingMethod", "standard");
+
         if (idsParam != null && !idsParam.isBlank()) {
             req.setAttribute("ids", idsParam);
         }
@@ -77,6 +80,11 @@ public class CheckoutController extends HttpServlet {
             return;
         }
 
+        if (user.getAddress() == null || user.getAddress().trim().isEmpty()) {
+            resp.sendRedirect(req.getContextPath() + "/account?tab=info&return=checkout&need=address");
+            return;
+        }
+
         Cart fullCart = (Cart) session.getAttribute("cart");
         if (fullCart == null) fullCart = new Cart();
 
@@ -85,7 +93,7 @@ public class CheckoutController extends HttpServlet {
             return;
         }
 
-        String idsParam = req.getParameter("ids"); // lấy từ hidden input ở checkout.jsp
+        String idsParam = req.getParameter("ids");
         Cart orderCart = buildSelectedCart(fullCart, idsParam);
 
         if (orderCart.getItems() == null || orderCart.getItems().isEmpty()) {
@@ -93,8 +101,12 @@ public class CheckoutController extends HttpServlet {
             return;
         }
 
+        //  LẤY SHIP THEO RADIO
+        String shipMethod = req.getParameter("shipping-method"); // standard | express
+        int shipFee = "express".equalsIgnoreCase(shipMethod) ? SHIP_EXPRESS : SHIP_STANDARD;
+
         try {
-            orderDao.placeOrder(user, orderCart, SHIP_FEE);
+            orderDao.placeOrder(user, orderCart, shipFee);
 
             Integer cartId = (Integer) session.getAttribute("CART_ID");
             if (cartId != null) {
@@ -107,13 +119,10 @@ public class CheckoutController extends HttpServlet {
                         } catch (Exception ignored) {}
                     }
                 } else {
-                    // nếu checkout tất cả thì xóa hết cart_items của cartId (tùy bạn có hàm clearCartItems)
-                    itemDao.clearCartItems(cartId); // nếu chưa có thì mình sẽ đưa SQL cho bạn
+                    itemDao.clearCartItems(cartId);
                 }
             }
 
-
-            // nếu checkout theo ids => xóa đúng các món đó khỏi cart session
             if (idsParam != null && !idsParam.isBlank()) {
                 for (String p : idsParam.split(",")) {
                     try {

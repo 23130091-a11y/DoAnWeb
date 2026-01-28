@@ -163,7 +163,7 @@
         </div>
         <div class="grid wide">
             <div class="header-checkout-content">
-                <a href="#!" class="logo">
+                <a href="/DoAnWeb/list-product" class="logo">
                     <img class="logo__img" src="assets/img/logo.png" alt="webgiadung">
                 </a>
                 <h1 class="checkout-heading-main">THANH TOÁN</h1>
@@ -184,14 +184,38 @@
                                 <i class="fa-solid fa-location-dot"></i> Địa chỉ nhận hàng
                             </h2>
 
+                            <c:set var="u" value="${sessionScope.user}" />
+
                             <div class="current-address">
-                                <p class="address-name-phone">
-                                    **Nguyễn Văn A** (+84) 1234567989
-                                </p>
-                                <p class="address-detail">
-                                    123,abc, Phường XYZ, Quận 1, Thành phố Hồ Chí Minh
-                                </p>
-                                <a href="#!" class="change-address-link">THAY ĐỔI</a>
+                                <c:choose>
+                                    <c:when test="${not empty u}">
+                                        <p class="address-name-phone">
+                                            <strong>${u.name}</strong>
+                                            <c:if test="${not empty u.phone}">
+                                                (${u.phone})
+                                            </c:if>
+                                        </p>
+
+                                        <p class="address-detail">
+                                            <c:choose>
+                                                <c:when test="${not empty u.address}">
+                                                    ${u.address}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Bạn chưa có địa chỉ. Vui lòng cập nhật để đặt hàng.
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </p>
+
+                                        <a href="${pageContext.request.contextPath}/account?tab=info&return=checkout"
+                                           class="change-address-link">THAY ĐỔI</a>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <p class="address-detail">Vui lòng đăng nhập để nhập địa chỉ nhận hàng.</p>
+                                        <a href="${pageContext.request.contextPath}/login" class="change-address-link">ĐĂNG NHẬP</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </section>
 
@@ -201,7 +225,8 @@
                             </h2>
                             <div class="shipping-options">
                                 <label class="shipping-option">
-                                    <input type="radio" name="shipping-method" value="standard" checked>
+                                    <input type="radio" name="shipping-method" value="standard"
+                                           ${ship == 25000 ? "checked" : ""}>
                                     <div class="shipping-details">
                                         <p class="shipping-name">Giao hàng Tiêu Chuẩn</p>
                                         <span class="shipping-time">Nhận hàng dự kiến: 2 - 4 ngày</span>
@@ -210,12 +235,13 @@
                                 </label>
 
                                 <label class="shipping-option">
-                                    <input type="radio" name="shipping-method" value="express">
+                                    <input type="radio" name="shipping-method" value="express"
+                                           ${ship == 150000 ? "checked" : ""}>
                                     <div class="shipping-details">
                                         <p class="shipping-name">Giao hàng Hỏa Tốc</p>
                                         <span class="shipping-time">Nhận hàng dự kiến: Trong 24h</span>
                                     </div>
-                                    <span class="shipping-price">50.000đ</span>
+                                    <span class="shipping-price">150.000đ</span>
                                 </label>
                             </div>
                         </section>
@@ -291,15 +317,12 @@
                                 <span>Tạm tính (${totalQuantity} SP):</span>
                                 <span><fmt:formatNumber value="${totalPrice}" type="number" />đ</span>
                             </div>
-                            <c:set var="ship" value="25000" />
+
                             <div class="summary-line">
                                 <span>Phí vận chuyển:</span>
                                 <span class="shipping-cost"><fmt:formatNumber value="${ship}" type="number" />đ</span>
                             </div>
-                            <div class="summary-line coupon">
-                                <span>Mã giảm giá:</span>
-                                <span class="coupon-discount">- 50.000đ</span>
-                            </div>
+
 
                             <div class="summary-total-final">
                                 <span>TỔNG THANH TOÁN:</span>
@@ -319,6 +342,33 @@
 
     <!-- Footer -->
     <jsp:include page="/common/footer.jsp" />
+
+    <script>
+    (function () {
+      const baseTotal = Number('${totalPrice}'); // tổng tiền hàng (chưa ship)
+      const FEES = { standard: 25000, express: 150000 };
+
+      const shipCostEl = document.querySelector('.shipping-cost');
+      const finalPriceEl = document.querySelector('.final-price');
+      const radios = document.querySelectorAll('input[name="shipping-method"]');
+
+      const fmt = (n) => new Intl.NumberFormat('vi-VN').format(n) + 'đ';
+
+      function updateSummary() {
+        let method = 'standard';
+        radios.forEach(r => { if (r.checked) method = r.value; });
+
+        const ship = FEES[method] ?? FEES.standard;
+
+        if (shipCostEl) shipCostEl.textContent = fmt(ship);
+        if (finalPriceEl) finalPriceEl.textContent = fmt(baseTotal + ship);
+      }
+
+      radios.forEach(r => r.addEventListener('change', updateSummary));
+      updateSummary(); // chạy lần đầu để đúng UI
+    })();
+    </script>
+
 </body>
 
 </html>

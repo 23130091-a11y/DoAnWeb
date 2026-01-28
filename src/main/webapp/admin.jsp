@@ -307,35 +307,6 @@
 
                                 <div class="config-divider-ui"></div>
 
-                                <!-- 5) SEO -->
-                                <div class="config-block">
-                                    <h4 class="config-block__title">SEO</h4>
-
-                                    <div class="config-grid">
-                                        <div class="config-field config-col-2">
-                                            <label class="config-label">Meta title</label>
-                                            <input class="config-input" type="text" name="metaTitle" placeholder="VD: Đồ gia dụng chính hãng | WebGiaDung" />
-                                        </div>
-
-                                        <div class="config-field config-col-2">
-                                            <label class="config-label">Meta description</label>
-                                            <textarea class="config-input config-textarea" name="metaDesc" placeholder="Mô tả ngắn cho Google (tầm 120-160 ký tự)"></textarea>
-                                        </div>
-
-                                        <div class="config-field">
-                                            <label class="config-label">Google Analytics ID</label>
-                                            <input class="config-input" type="text" name="gaId" placeholder="VD: G-XXXXXXXXXX" />
-                                        </div>
-
-                                        <div class="config-field">
-                                            <label class="config-label">Google Tag Manager ID</label>
-                                            <input class="config-input" type="text" name="gtmId" placeholder="VD: GTM-XXXXXXX" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="config-divider-ui"></div>
-
                                 <!-- 6) GIAO DIỆN -->
                                 <div class="config-block">
                                     <h4 class="config-block__title">Giao diện</h4>
