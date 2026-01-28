@@ -443,12 +443,12 @@ function showToast(msg) {
            return res.ok ? res.json() : null;
        })
        .then(data => {
-           if (data && data.status === 'success') {
-               updateHeaderCartQty(data.cartQty);
+         if (data && data.status === 'success') {
+           // update badge + dropdown ngay lập tức
+           if (window.applyMiniCartUpdate) window.applyMiniCartUpdate(data);
 
-               // yêu cầu của bạn: thêm vào giỏ là nhảy liền
-               showToast("Đã thêm vào giỏ hàng!");
-           }
+           showToast("Đã thêm vào giỏ hàng!");
+         }
        })
        .catch(err => console.error("Lỗi addToCart:", err));
    }
@@ -457,7 +457,7 @@ function showToast(msg) {
        const contextPath = '${pageContext.request.contextPath}';
        const qty = getCurrentQty();
 
-       // đảm bảo sản phẩm đã được add vào cart (session + DB) rồi mới checkout theo ids
+       // đảm bảo sản phẩm đã được add vào cart
        fetch(contextPath + '/add-cart', {
            method: 'POST',
            headers: {
@@ -503,7 +503,6 @@ function showToast(msg) {
     });
   }
 
-  // click chọn sao
   stars.forEach(s => {
     s.addEventListener('click', () => {
       const val = Number(s.dataset.val);
@@ -511,15 +510,12 @@ function showToast(msg) {
       paint(val);
     });
 
-    // hover preview (tuỳ chọn)
     s.addEventListener('mouseenter', () => paint(Number(s.dataset.val)));
   });
 
-  // rời chuột -> vẽ lại theo giá trị đã chọn
   const wrap = document.getElementById('ratingStars');
   wrap.addEventListener('mouseleave', () => paint(Number(input.value) || 5));
 
-  // mặc định 5 sao
   paint(Number(input.value) || 5);
 })();
 </script>
