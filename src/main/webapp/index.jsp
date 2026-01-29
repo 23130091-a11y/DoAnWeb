@@ -189,10 +189,13 @@
                                     <p>${p.name}</p>
                                 </a>
                                 <div class="price-discount">
-                                    <div class="price-top">
-                                        <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                        <div class="discount-badge">Giảm ${p.discountPercent}%</div>
-                                    </div>
+                                    <c:if test="${p.discountPercent > 0}">
+                                        <div class="price-top">
+                                            <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                        </div>
+                                    </c:if>
+
                                     <div class="price-bottom">
                                         <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
                                     </div>
@@ -222,10 +225,13 @@
                                     <a href="product?id=${p.id}"><p>${p.name}</p></a>
 
                                     <div class="price-discount">
-                                        <div class="price-top">
-                                            <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
-                                        </div>
+                                        <c:if test="${p.discountPercent > 0}">
+                                            <div class="price-top">
+                                                <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                                <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                            </div>
+                                        </c:if>
+
                                         <div class="price-bottom">
                                             <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
                                         </div>
@@ -253,10 +259,13 @@
                                     <p>${p.name}</p>
                                 </a>
                                 <div class="price-discount">
-                                    <div class="price-top">
-                                        <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
-                                        <div class="discount-badge">Giảm ${p.discountPercent}%</div>
-                                    </div>
+                                    <c:if test="${p.discountPercent > 0}">
+                                        <div class="price-top">
+                                            <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                            <div class="discount-badge">Giảm ${p.discountPercent}%</div>
+                                        </div>
+                                    </c:if>
+
                                     <div class="price-bottom">
                                         <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
                                     </div>
