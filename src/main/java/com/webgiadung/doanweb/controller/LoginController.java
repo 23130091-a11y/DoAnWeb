@@ -13,6 +13,7 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("redirect", request.getParameter("redirect"));
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
@@ -51,6 +52,26 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.setAttribute("user", user);
         session.setAttribute("USER_LOGIN", user);
+
+
+        String redirect = request.getParameter("redirect");
+
+        if (redirect != null) redirect = redirect.trim();
+        if (redirect != null && (!redirect.startsWith("/") || redirect.startsWith("//") || redirect.contains("://"))) {
+            redirect = null;
+        }
+
+        if (redirect != null) {
+            boolean isAdminPath = redirect.equals("/admin.jsp") || redirect.startsWith("/admin") || redirect.endsWith("-admin");
+            if (isAdminPath && user.getRole() != 1) {
+                redirect = null;
+            }
+        }
+
+        if (redirect != null && !redirect.isBlank()) {
+            response.sendRedirect(request.getContextPath() + redirect);
+            return;
+        }
 
         // 4) Điều hướng theo vai trò (Role)
         if (user.getRole() == 1) { // 1 là Admin
