@@ -68,7 +68,7 @@
                                                 <c:forEach items="${parent.children}" var="child">
                                                     <li class="category-menu__item">
                                                         <a class="category-menu__link"
-                                                           href="${pageContext.request.contextPath}/category?id=${child.id}">
+                                                           href="${pageContext.request.contextPath}/search-product?categoryId=${child.id}">
                                                                 ${child.name}
                                                         </a>
                                                     </li>
