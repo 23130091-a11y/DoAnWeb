@@ -3738,6 +3738,44 @@
         });
     });
 </script>
+<script>
+    function deleteDiscount(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa?")) {
+            const url = contextPath + '/api/admin/delete-discount';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'id=' + id
+            })
+                .then(res => {
+                    // Đọc dưới dạng text trước để debug nếu JSON lỗi
+                    return res.text().then(text => {
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error("Nội dung Server trả về lỗi:", text);
+                            throw new Error("Server trả về định dạng không hợp lệ (Xem console)");
+                        }
+                    });
+                })
+                .then(data => {
+                    if (data.status === "success") {
+                        alert("Xóa thành công!");
+                        location.reload();
+                    } else {
+                        alert("Lỗi từ Server: " + data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert(err.message);
+                });
+        }
+    }
+</script>
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </html>

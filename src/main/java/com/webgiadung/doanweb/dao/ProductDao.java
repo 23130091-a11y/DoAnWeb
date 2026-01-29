@@ -870,6 +870,20 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+    public int removeDiscount(int discountId) {
+        return get().withHandle(handle -> {
+            return handle.createUpdate("""
+            UPDATE products 
+            SET 
+                discounts_id = NULL,
+                price_total = price_first, 
+                updated_at = NOW()
+            WHERE discounts_id = :discountId
+        """)
+                    .bind("discountId", discountId)
+                    .execute();
+        });
+    }
 }
 
 

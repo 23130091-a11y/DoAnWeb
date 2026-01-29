@@ -19,7 +19,6 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String keyword = request.getParameter("keyword");
-        // THÊM: Lấy categoryId để giữ phạm vi lọc
         String categoryId = request.getParameter("categoryId");
 
         String[] brands = request.getParameterValues("brands");
@@ -49,14 +48,11 @@ public class SearchServlet extends HttpServlet {
         if (hasCategory) {
             try {
                 int id = Integer.parseInt(categoryId);
-                // Dùng Service bạn đã có để lấy đối tượng Categories
                 CategoriesService catService = new CategoriesService();
                 Categories cat = catService.getCategory(id);
 
                 if (cat != null) {
-                    // Gửi cả đối tượng sang để JSP dùng cho linh hoạt
                     request.setAttribute("category", cat);
-                    // Gửi thêm cái tên String nếu bạn muốn dùng biến categoryName cũ
                     request.setAttribute("categoryName", cat.getName());
                 }
             } catch (NumberFormatException e) {
