@@ -52,4 +52,12 @@ public class DiscountDao extends BaseDao {
             return rowsAffected > 0;
         });
     }
+    public boolean deleteDiscount(int id) {
+        return get().withHandle(handle -> {
+            int rowsAffected = handle.createUpdate("DELETE FROM discounts WHERE id = :id")
+                    .bind("id", id)
+                    .execute();
+            return rowsAffected > 0;
+        });
+    }
 }

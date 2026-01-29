@@ -636,39 +636,35 @@ public class ProductDao extends BaseDao {
     }
     public int applyDiscountToAll(int newDiscountId) {
         return get().withHandle(handle -> {
-            return handle.createUpdate("""
-        UPDATE products p
-        CROSS JOIN discounts d ON d.id = :discountId
-        SET p.discounts_id = :discountId,
-            p.price_total = CASE 
-                WHEN d.type_discount = 'percentage' THEN p.price_first * (1 - d.discount / 100)
-                WHEN d.type_discount = 'amount' THEN GREATEST(p.price_first - d.discount, 0)
-                ELSE p.price_first 
-            END,
-            p.updated_at = NOW()
-    """)
+            int rows = handle.createUpdate("""
+            UPDATE products p
+            JOIN discounts d ON d.id = :discountId
+            SET p.discounts_id = d.id,
+                p.price_total = ROUND(COALESCE(p.price_first, 0) * (1 - COALESCE(d.discount, 0) / 100.0), 0),
+                p.updated_at = NOW()
+        """)
                     .bind("discountId", newDiscountId)
                     .execute();
+            System.out.println("DEBUG: Apply All - Rows affected: " + rows);
+            return rows;
         });
     }
 
     public int applyDiscountToCategory(int categoryId, int newDiscountId) {
         return get().withHandle(handle -> {
-            return handle.createUpdate("""
-        UPDATE products p
-        CROSS JOIN discounts d ON d.id = :discountId
-        SET p.discounts_id = :discountId,
-            p.price_total = CASE 
-                WHEN d.type_discount = 'percentage' THEN p.price_first * (1 - d.discount / 100)
-                WHEN d.type_discount = 'amount' THEN GREATEST(p.price_first - d.discount, 0)
-                ELSE p.price_first 
-            END,
-            p.updated_at = NOW()
-        WHERE p.categories_id = :categoryId
-    """)
+            int rows = handle.createUpdate("""
+            UPDATE products p
+            JOIN discounts d ON d.id = :discountId
+            SET p.discounts_id = d.id,
+                p.price_total = ROUND(COALESCE(p.price_first, 0) * (1 - COALESCE(d.discount, 0) / 100.0), 0),
+                p.updated_at = NOW()
+            WHERE p.categories_id = :categoryId
+        """)
                     .bind("categoryId", categoryId)
                     .bind("discountId", newDiscountId)
                     .execute();
+            System.out.println("DEBUG: Apply Category " + categoryId + " - Rows affected: " + rows);
+            return rows;
         });
     }
     public List<Product> searchWithFilters(String keyword, String[] brands, String[] priceRanges, String categoryId) {

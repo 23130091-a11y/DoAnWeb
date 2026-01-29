@@ -3461,50 +3461,51 @@
         const form = document.getElementById('addEventForm');
         if (!form) return;
 
-        // Dùng addEventListener thay vì onsubmit để đảm bảo tính duy nhất
         form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Chặn hành vi submit mặc định (quan trọng nhất)
-            e.stopImmediatePropagation(); // Chặn các script khác cùng lắng nghe sự kiện này
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            // TỰ ĐỘNG LẤY CONTEXT PATH (Sửa lỗi JasperException)
+            const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));
+            const url = contextPath + '/admin/add-discount';
 
             const formData = new FormData(this);
-            const scope = formData.get('applyScope');
 
-            // Xử lý LOGIC ID_CATE:
-            // Nếu là "all", chúng ta đảm bảo gửi applyCategories = 0 lên Server
-            if (scope === 'all') {
+            // Đảm bảo logic đồng bộ với Java
+            if (formData.get('applyScope') === 'all') {
                 formData.set('applyCategories', '0');
             }
 
-            // Hiệu ứng nút bấm khi đang lưu
             const saveBtn = document.querySelector('.event-btn--save');
             const originalText = saveBtn.innerHTML;
             saveBtn.disabled = true;
             saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý...';
 
             try {
-                const response = await fetch('${pageContext.request.contextPath}/admin/add-discount', {
+                const response = await fetch(url, {
                     method: 'POST',
-                    body: formData
+                    body: formData // Servlet dùng @MultipartConfig nên gửi FormData là chuẩn
                 });
 
-                if (!response.ok) {
-                    throw new Error("Mã lỗi: " + response.status);
+                // Đọc response dưới dạng text trước để check nếu là lỗi 500 (trang HTML lỗi)
+                const responseText = await response.text();
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (e) {
+                    console.error("Server trả về lỗi không phải JSON:", responseText);
+                    throw new Error("Server bị lỗi nội bộ (500). Kiểm tra Console Java!");
                 }
 
-                const result = await response.json();
                 if (result.status === "success") {
                     alert("Lưu sự kiện thành công!");
-                    this.reset();
-                    // Ẩn lại box category sau khi reset form
-                    document.getElementById('scopeCategory').style.display = 'none';
-                    if (typeof backToEventList === "function") backToEventList();
-                    location.reload(); // Reload để cập nhật bảng
+                    location.reload();
                 } else {
-                    alert("Lỗi: " + result.message);
+                    alert(" Lỗi: " + result.message);
                 }
             } catch (error) {
                 console.error("Chi tiết lỗi:", error);
-                alert("Lỗi kết nối Server.");
+                alert(error.message);
             } finally {
                 saveBtn.disabled = false;
                 saveBtn.innerHTML = originalText;
@@ -3718,6 +3719,7 @@
     });
 </script>
 <script>
+
     // --- HÀM XEM (GIỮ NGUYÊN) ---
     function viewDiscount(id) {
         fetch(contextPath + '/api/admin/discount-detail?id=' + id)
@@ -3860,6 +3862,39 @@
             if (box) box.style.display = (e.target.value === 'category') ? 'block' : 'none';
         });
     });
+</script>
+<script>
+    function deleteDiscount(id) {
+        if (!confirm("Bạn có chắc chắn muốn xóa khuyến mãi này?")) return;
+
+        const url = contextPath + '/api/admin/delete-discount';
+        const params = new URLSearchParams();
+        params.append('id', id);
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+            .then(async res => {
+                const data = await res.json();
+
+                if (res.ok && data.status === "success") {
+                    alert("Xóa thành công!");
+                    location.reload();
+                } else {
+                    // Hiển thị lỗi cụ thể từ Server (status: fail hoặc status: error)
+                    const msg = data.message || "Lỗi hệ thống không xác định.";
+                    alert("THẤT BẠI: " + msg);
+                    console.error("Chi tiết lỗi:", data);
+                }
+            })
+            .catch(err => {
+                console.error("Fetch error:", err);
+                alert("Lỗi kết nối: Không thể gửi yêu cầu đến Server.");
+            });
+    }
+
 </script>
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </html>
