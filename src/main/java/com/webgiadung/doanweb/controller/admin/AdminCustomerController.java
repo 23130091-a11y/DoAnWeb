@@ -81,6 +81,10 @@ public class AdminCustomerController extends HttpServlet {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
+            if (phone != null) {
+                phone = phone.trim();
+                if (phone.isEmpty()) phone = null;
+            }
             String address = request.getParameter("address");
 
             int role = parseIntSafe(request.getParameter("role"), 0);
