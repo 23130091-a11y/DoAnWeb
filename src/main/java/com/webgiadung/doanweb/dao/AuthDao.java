@@ -106,8 +106,9 @@ public class AuthDao extends BaseDao {
         get().useHandle(h ->
                 h.createUpdate(
                                 "UPDATE users SET " +
-                                        "name=:name, email=:email, phone=:phone, address=:address, " +
-                                        "role=:role, status=:status " +
+                                        "name=:name, email=:email, " +
+                                        "phone = CASE WHEN :phone IS NULL OR :phone = '' THEN phone ELSE :phone END, " +
+                                        "address=:address, role=:role, status=:status " +
                                         "WHERE id=:id"
                         )
                         .bindBean(u)
@@ -118,8 +119,9 @@ public class AuthDao extends BaseDao {
         get().useHandle(h ->
                 h.createUpdate(
                                 "UPDATE users SET " +
-                                        "name=:name, email=:email, phone=:phone, address=:address, " +
-                                        "role=:role, status=:status, password=:password " +
+                                        "name=:name, email=:email, " +
+                                        "phone = CASE WHEN :phone IS NULL OR :phone = '' THEN phone ELSE :phone END, " +
+                                        "address=:address, role=:role, status=:status, password=:password " +
                                         "WHERE id=:id"
                         )
                         .bindBean(u)

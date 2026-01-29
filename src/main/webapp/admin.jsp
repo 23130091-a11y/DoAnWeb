@@ -497,6 +497,16 @@
                                 </div>
 
                                 <div class="customer-detail__row">
+                                  <span class="label">Quyền:</span>
+                                  <span class="value" id="customerDetailRole"></span>
+                                </div>
+
+                                <div class="customer-detail__row">
+                                  <span class="label">Hoạt động:</span>
+                                  <span class="value" id="customerDetailStatusText"></span>
+                                </div>
+
+                                <div class="customer-detail__row">
                                     <span class="label">Ngày tạo:</span>
                                     <span class="value" id="customerDetailCreatedAt">-</span>
                                 </div>
@@ -532,8 +542,7 @@
                                   method="post"
                                   action="${pageContext.request.contextPath}/admin/customers/update">
                                 <input type="hidden" name="id" id="editId">
-                                <input type="hidden" name="role" id="editRole">
-                                <input type="hidden" name="status" id="editStatus">
+
 
                                 <div class="customer-detail__row">
                                     <label class="label">Tên:</label>
@@ -565,19 +574,19 @@
 
                                 </div>
                                 <div class="customer-detail__row">
-                                    <label class="label">Quyền:</label>
-                                    <select class="input" name="role" id="editRole" required>
-                                        <option value="0">User</option>
-                                        <option value="1">Admin</option>
-                                    </select>
+                                  <label class="label">Quyền:</label>
+                                  <select class="input" name="role" id="editRole" required>
+                                    <option value="0">User</option>
+                                    <option value="1">Admin</option>
+                                  </select>
                                 </div>
 
                                 <div class="customer-detail__row">
-                                    <label class="label">Trạng thái:</label>
-                                    <select class="input" name="status" id="editStatus" required>
-                                        <option value="1">Đang hoạt động</option>
-                                        <option value="0">Bị khóa</option>
-                                    </select>
+                                  <label class="label">Trạng thái:</label>
+                                  <select class="input" name="status" id="editStatus" required>
+                                    <option value="1">Đang hoạt động</option>
+                                    <option value="0">Bị khóa</option>
+                                  </select>
                                 </div>
                                 <div class="customer-detail__row">
                                     <label class="label">Ngày tạo:</label>
@@ -2340,54 +2349,65 @@ window.addEventListener("DOMContentLoaded", () => {
           document.getElementById("editPhone").value = btn.dataset.phone || "";
           document.getElementById("editAddress").value = btn.dataset.address || "";
 
-          // role/status (nếu có)
+          // role/status -> đổ vào SELECT (phải chắc id không trùng)
           const roleEl = document.getElementById("editRole");
-          if (roleEl) roleEl.value = btn.dataset.role ?? "0";
+          if (roleEl) roleEl.value = (btn.dataset.role ?? "0");
 
           const statusEl = document.getElementById("editStatus");
-          if (statusEl) statusEl.value = btn.dataset.status ?? "1";
+          if (statusEl) statusEl.value = (btn.dataset.status ?? "1");
 
           // password luôn để trống
           const passEl = document.getElementById("editPassword");
           if (passEl) passEl.value = "";
         });
       });
-    });
-    // XEM KHÁCH HÀNG (mở detail + đổ dữ liệu)
-    document.querySelectorAll(".customer-table__view").forEach(btn => {
-      btn.addEventListener("click", () => {
-        hideAllSections();
-        sectionCustomerDetail.style.display = "block";
-        window.scrollTo({ top: 0, behavior: "smooth" });
 
-        document.getElementById("customerDetailName").textContent = btn.dataset.name || "";
-        document.getElementById("customerDetailEmail").textContent = btn.dataset.email || "";
-        document.getElementById("customerDetailPhone").textContent = btn.dataset.phone || "";
-        document.getElementById("customerDetailAddress").textContent = btn.dataset.address || "";
-        document.getElementById("customerDetailCreatedAt").textContent = btn.dataset.created || "-";
-        document.getElementById("customerDetailUpdatedAt").textContent = btn.dataset.updated || "-";
+      // XEM KHÁCH HÀNG (mở detail + đổ dữ liệu)
+      document.querySelectorAll(".customer-table__view").forEach(btn => {
+        btn.addEventListener("click", () => {
+          hideAllSections();
+          sectionCustomerDetail.style.display = "block";
+          window.scrollTo({ top: 0, behavior: "smooth" });
 
-        // status badge (tuỳ bạn đang dùng online/offline)
-        const st = btn.dataset.status; // "1" hoặc "0"
-        const statusEl = document.getElementById("customerDetailStatus");
-        if (statusEl) {
-          if (st === "1") {
-            statusEl.textContent = "Đang hoạt động";
-            statusEl.classList.remove("offline");
-            statusEl.classList.add("online");
-          } else {
-            statusEl.textContent = "Bị khóa";
-            statusEl.classList.remove("online");
-            statusEl.classList.add("offline");
+          document.getElementById("customerDetailName").textContent = btn.dataset.name || "";
+          document.getElementById("customerDetailEmail").textContent = btn.dataset.email || "";
+          document.getElementById("customerDetailPhone").textContent = btn.dataset.phone || "";
+          document.getElementById("customerDetailAddress").textContent = btn.dataset.address || "";
+          document.getElementById("customerDetailCreatedAt").textContent = btn.dataset.created || "-";
+          document.getElementById("customerDetailUpdatedAt").textContent = btn.dataset.updated || "-";
+
+          // status badge (online/offline)
+          const st = btn.dataset.status; // "1" hoặc "0"
+          const statusBadge = document.getElementById("customerDetailStatus");
+          if (statusBadge) {
+            if (st === "1") {
+              statusBadge.textContent = "Đang hoạt động";
+              statusBadge.classList.remove("offline");
+              statusBadge.classList.add("online");
+            } else {
+              statusBadge.textContent = "Bị khóa";
+              statusBadge.classList.remove("online");
+              statusBadge.classList.add("offline");
+            }
           }
-        }
 
-        // avatar (nếu có dataset.avatar thì set, không thì thôi)
-        const av = btn.dataset.avatar;
-        const avatarEl = document.getElementById("customerDetailAvatar");
-        if (avatarEl && av) avatarEl.src = av;
+          // avatar (nếu có)
+          const av = btn.dataset.avatar;
+          const avatarEl = document.getElementById("customerDetailAvatar");
+          if (avatarEl && av) avatarEl.src = av;
+
+          // role text
+          const r = btn.dataset.role; // "1" hoặc "0"
+          const roleEl = document.getElementById("customerDetailRole");
+          if (roleEl) roleEl.textContent = (r === "1") ? "Admin" : "User";
+
+          // status text riêng
+          const stTextEl = document.getElementById("customerDetailStatusText");
+          if (stTextEl) stTextEl.textContent = (st === "1") ? "Đang hoạt động" : "Bị khóa";
+        });
       });
     });
+
 
     function hideCustomerEdit() {
         hideAllSections();
