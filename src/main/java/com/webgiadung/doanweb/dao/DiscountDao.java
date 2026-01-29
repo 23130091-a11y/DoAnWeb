@@ -34,4 +34,22 @@ public class DiscountDao extends BaseDao {
                     .list();
         });
     }
+    public boolean updateDiscount(Discounts d) {
+        return get().withHandle(handle -> {
+            int rowsAffected = handle.createUpdate("""
+            UPDATE discounts 
+            SET name = :name, 
+                type_discount = :typeDiscount, 
+                discount = :discount, 
+                description = :description, 
+                start_date = :startDate, 
+                end_date = :endDate 
+            WHERE id = :id
+            """)
+                    .bindBean(d)
+                    .execute();
+
+            return rowsAffected > 0;
+        });
+    }
 }

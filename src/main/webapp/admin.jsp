@@ -1178,6 +1178,10 @@
                     </section>
 
 
+                    <section id="discount-list-page">
+                        <div id="discount-list-container"></div>
+                    </section>
+
                     <section id="view-event-page" class="ev-container" style="display: none;">
                         <div class="ev-header">
                             <h2 class="ev-title">Chi tiết chương trình</h2>
@@ -1187,62 +1191,31 @@
                             <div class="ev-grid">
                                 <div class="ev-group ev-col-2">
                                     <label class="ev-label">Tên sự kiện</label>
-                                    <div class="ev-view-box ev-view-box--bold" id="view-eventName">Sale Tết Nguyên Đán 2026</div>
+                                    <div class="ev-view-box ev-view-box--bold" id="view-eventName"></div>
                                 </div>
 
                                 <div class="ev-group">
                                     <label class="ev-label">Loại giảm giá</label>
-                                    <div class="ev-view-box" id="view-discountType">Phần trăm (%)</div>
+                                    <div class="ev-view-box" id="view-discountType"></div>
                                 </div>
 
                                 <div class="ev-group">
                                     <label class="ev-label">Mức giảm</label>
-                                    <div class="ev-view-box ev-view-box--red" id="view-discountValue">20%</div>
+                                    <div class="ev-view-box ev-view-box--red" id="view-discountValue"></div>
                                 </div>
 
                                 <div class="ev-group">
                                     <label class="ev-label">Ngày bắt đầu</label>
-                                    <div class="ev-view-box" id="view-startDate">01/01/2026</div>
+                                    <div class="ev-view-box" id="view-startDate"></div>
                                 </div>
 
                                 <div class="ev-group">
                                     <label class="ev-label">Ngày kết thúc</label>
-                                    <div class="ev-view-box" id="view-endDate">15/01/2026</div>
+                                    <div class="ev-view-box" id="view-endDate"></div>
                                 </div>
                                 <div class="ev-group">
                                     <label class="ev-label">Mô tả</label>
-                                    <div class="ev-view-box ev-view-box" id="view-descrip">Chương trình khuyến mãi Tết Nguyên Đán 2026.</div>
-                                </div>
-                                <div class="ev-group ev-col-2">
-                                    <label class="ev-label">Phạm vi áp dụng</label>
-                                    <div class="ev-view-box">Sản phẩm cụ thể</div>
-                                </div>
-                            </div>
-
-                            <div class="ev-scope-result">
-                                <div class="ev-divider"></div>
-                                <label class="ev-label">Sản phẩm đã áp dụng</label>
-                                <div class="ev-table-wrapper">
-                                    <table class="ev-table">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th >Ảnh</th>
-                                            <th>Tên sản phẩm</th>
-                                            <th>Giá gốc</th>
-                                            <th>Danh mục</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="viewSelectedProductList">
-                                        <tr>
-                                            <td><input type="checkbox" class="ev-checkbox--yellow" checked disabled></td>
-                                            <td><img src="${pageContext.request.contextPath}/assets/img/binhxit.png" alt=""></td>
-                                            <td>Bình xịt bọt tuyết siêu sạch</td>
-                                            <td>150.000đ</td>
-                                            <td>Gia dụng</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="ev-view-box" id="view-descrip"></div>
                                 </div>
                             </div>
                         </div>
@@ -2475,9 +2448,7 @@
 </script>
 
 <script>
-    // Khai báo biến global để tránh lỗi truy cập
     let quill;
-
     document.addEventListener("DOMContentLoaded", function() {
         quill = new Quill('#editor', {
             theme: 'snow',
@@ -3759,6 +3730,42 @@
     });
 </script>
 <script>
+
+    function viewDiscount(id) {
+        fetch(contextPath + '/api/admin/discount-detail?id=' + id)
+            .then(res => res.text()) // Đọc dạng text để tránh lỗi JSON nửa chừng
+            .then(text => {
+                console.log("Dữ liệu nhận được:", text);
+                const d = JSON.parse(text);
+
+                // Đổ dữ liệu vào giao diện
+                document.getElementById('view-eventName').textContent = d.name;
+                document.getElementById('view-descrip').textContent = d.description || "Không có mô tả";
+                document.getElementById('view-startDate').textContent = d.startDate;
+                document.getElementById('view-endDate').textContent = d.endDate;
+
+                // Xử lý loại giảm giá (dựa trên giá trị từ Java)
+                const isPercent = (d.typeDiscount === "percentage" || d.typeDiscount == 1);
+                document.getElementById('view-discountType').textContent = isPercent ? "Phần trăm (%)" : "Tiền mặt (VNĐ)";
+                document.getElementById('view-discountValue').textContent = d.discount + (isPercent ? "%" : " VNĐ");
+                hideAllSections();
+                // QUAN TRỌNG: Chuyển trang an toàn
+                const listPage = document.getElementById('discount-list-page');
+                const viewPage = document.getElementById('view-event-page');
+
+                if (listPage && viewPage) {
+                    listPage.style.display = 'none';
+                    viewPage.style.display = 'block';
+                    window.scrollTo(0, 0);
+                } else {
+                    console.error("Không tìm thấy ID 'discount-list-page' hoặc 'view-event-page'. Hãy kiểm tra lại HTML!");
+                }
+            })
+            .catch(err => {
+                console.error("Lỗi fetch chi tiết:", err);
+                alert("Lỗi tải dữ liệu: " + err.message);
+            });
+    }
     function deleteDiscount(id) {
         if (confirm("Bạn có chắc chắn muốn xóa?")) {
             const url = contextPath + '/api/admin/delete-discount';

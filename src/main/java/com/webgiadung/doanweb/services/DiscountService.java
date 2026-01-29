@@ -18,4 +18,7 @@ public class DiscountService {
     public List<Discounts> getAllDiscounts() {
         return discountDao.getAllDiscounts();
     }
+    public boolean updateDiscount(Discounts discount) {
+        return discountDao.updateDiscount(discount);
+    }
 }
