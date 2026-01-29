@@ -126,7 +126,7 @@ public class CheckoutController extends HttpServlet {
             return;
         }
 
-        Integer selectedId = (Integer) session.getAttribute("CHECKOUT_ADDR_ID");
+        Integer selectedId = (Integer) session.getAttribute("SELECTED_ADDR_ID");
         boolean okAddress = (user.getAddress() != null && !user.getAddress().trim().isEmpty()) || (selectedId != null);
         if (!okAddress) {
             resp.sendRedirect(req.getContextPath() + "/checkout?needAddress=1");
