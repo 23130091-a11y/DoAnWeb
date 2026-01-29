@@ -1,8 +1,8 @@
 package com.webgiadung.doanweb.controller.admin;
 
-import com.webgiadung.doanweb.model.FileUtil;
 import com.webgiadung.doanweb.model.Slide;
 import com.webgiadung.doanweb.services.SlideService;
+import com.webgiadung.doanweb.utils.FileUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -48,9 +48,10 @@ public class AddSlideController extends HttpServlet {
             s.setStatus(("1".equals(statusRaw) || "active".equals(statusRaw)) ? 1 : 0);
 
             // Xử lý File
+            String realPath = getServletContext().getRealPath("/");
             Part filePart = req.getPart("avatar");
             if (filePart != null && filePart.getSize() > 0) {
-                String filePath = FileUtil.saveFile(filePart, "slides");
+                String filePath = FileUtils.saveFile(filePart, realPath, "slides");
                 s.setAvatar(filePath);
             } else {
 
@@ -74,4 +75,4 @@ public class AddSlideController extends HttpServlet {
             resp.getWriter().write("{\"status\":\"error\", \"message\":\"" + cleanMessage + "\"}");
         }
     }
-    }
+}

@@ -1,7 +1,7 @@
 package com.webgiadung.doanweb.controller.admin;
 
 import com.webgiadung.doanweb.model.Brands;
-import com.webgiadung.doanweb.model.FileUtil;
+import com.webgiadung.doanweb.utils.FileUtils;
 import com.webgiadung.doanweb.services.BrandService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -39,9 +39,10 @@ public class AddBrandController extends HttpServlet {
                 out.print("{\"status\":\"error\", \"message\":\"Tên không được để trống!\"}");
                 return;
             }
-
             Part filePart = request.getPart("brandLogo");
-            String fileName = FileUtil.saveFile(filePart, "brands");
+
+            String realPath = getServletContext().getRealPath("/");
+            String fileName = FileUtils.saveFile(filePart, realPath, "brands");
 
             Brands brand = new Brands();
             brand.setName(brandName);

@@ -307,35 +307,6 @@
 
                                 <div class="config-divider-ui"></div>
 
-                                <!-- 5) SEO -->
-                                <div class="config-block">
-                                    <h4 class="config-block__title">SEO</h4>
-
-                                    <div class="config-grid">
-                                        <div class="config-field config-col-2">
-                                            <label class="config-label">Meta title</label>
-                                            <input class="config-input" type="text" name="metaTitle" placeholder="VD: Đồ gia dụng chính hãng | WebGiaDung" />
-                                        </div>
-
-                                        <div class="config-field config-col-2">
-                                            <label class="config-label">Meta description</label>
-                                            <textarea class="config-input config-textarea" name="metaDesc" placeholder="Mô tả ngắn cho Google (tầm 120-160 ký tự)"></textarea>
-                                        </div>
-
-                                        <div class="config-field">
-                                            <label class="config-label">Google Analytics ID</label>
-                                            <input class="config-input" type="text" name="gaId" placeholder="VD: G-XXXXXXXXXX" />
-                                        </div>
-
-                                        <div class="config-field">
-                                            <label class="config-label">Google Tag Manager ID</label>
-                                            <input class="config-input" type="text" name="gtmId" placeholder="VD: GTM-XXXXXXX" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="config-divider-ui"></div>
-
                                 <!-- 6) GIAO DIỆN -->
                                 <div class="config-block">
                                     <h4 class="config-block__title">Giao diện</h4>
@@ -421,12 +392,12 @@
                                     <c:otherwise>
                                         <c:forEach var="u" items="${users}">
                                             <tr>
-                                               <td>
-                                                 <img class="customer-table__img customer-avatar"
-                                                      src="${pageContext.request.contextPath}/${empty u.avatar ? 'assets/img/default-avatar.png' : u.avatar}"
-                                                      alt="avatar"
-                                                      onerror="this.src='${pageContext.request.contextPath}/assets/img/default-avatar.png'">
-                                               </td>
+                                                <td>
+                                                    <img class="customer-table__img customer-avatar"
+                                                         src="${pageContext.request.contextPath}/${empty u.avatar ? 'assets/img/default-avatar.png' : u.avatar}"
+                                                         alt="avatar"
+                                                         onerror="this.src='${pageContext.request.contextPath}/assets/img/default-avatar.png'">
+                                                </td>
                                                 <td>${fn:escapeXml(u.name)}</td>
                                                 <td>${fn:escapeXml(u.email)}</td>
                                                 <td>${fn:escapeXml(u.address)}</td>
@@ -531,8 +502,8 @@
                                 </div>
 
                                 <div class="customer-detail__row">
-                                   <span class="label">Ngày cập nhật:</span>
-                                   <span class="value" id="customerDetailUpdatedAt">-</span>
+                                    <span class="label">Ngày cập nhật:</span>
+                                    <span class="value" id="customerDetailUpdatedAt">-</span>
                                 </div>
                             </div>
                         </div>
@@ -1030,46 +1001,46 @@
                             <button class="product-menu__btn active" data-target="product-list">Danh mục sản phẩm</button>
                             <button class="product-menu__btn" data-target="product-event">Sự kiện giảm giá</button>
                         </div>
-                            <div class="product-layout">
-                                <aside class="product-sidebar">
-                                    <h3 class="product-sidebar__heading">Danh mục</h3>
-                                    <ul class="product-sidebar__list" id="category-list">
-                                        <li class="product-sidebar__item">
-                                            <a href="#!" class="product-sidebar__link">Đang tải...</a>
-                                        </li>
-                                    </ul>
-                                </aside>
+                        <div class="product-layout">
+                            <aside class="product-sidebar">
+                                <h3 class="product-sidebar__heading">Danh mục</h3>
+                                <ul class="product-sidebar__list" id="category-list">
+                                    <li class="product-sidebar__item">
+                                        <a href="#!" class="product-sidebar__link">Đang tải...</a>
+                                    </li>
+                                </ul>
+                            </aside>
                             <div class="product-main-content">
                                 <div id="product-list-section">
-                                <div class="product-table">
-                                    <div class="event-search">
-                                        <div class="event-search__wrapper">
-                                            <input type="text" id="productSearchInput" class="event-search__input" placeholder="Tìm kiếm tên sản phẩm...">
-                                            <button class="event-search__btn" id="productSearchBtn">
-                                                <i class="fas fa-search"></i> Tìm kiếm
-                                            </button>
+                                    <div class="product-table">
+                                        <div class="event-search">
+                                            <div class="event-search__wrapper">
+                                                <input type="text" id="productSearchInput" class="event-search__input" placeholder="Tìm kiếm tên sản phẩm...">
+                                                <button class="event-search__btn" id="productSearchBtn">
+                                                    <i class="fas fa-search"></i> Tìm kiếm
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="product-table__header">
+                                            <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
+                                        </div>
+                                        <div class="product-table__inner">
+
+                                            <div class="product-table__row table-header">
+                                                <div class="product-table__cell">Ảnh</div>
+                                                <div class="product-table__cell">Tên sản phẩm</div>
+                                                <div class="product-table__cell">Post</div> <div class="product-table__cell">Giá</div>
+                                                <div class="product-table__cell">Xem</div>
+                                                <div class="product-table__cell">Sửa</div>
+                                                <div class="product-table__cell">Xóa</div>
+                                            </div>
+
+                                            <div id="product-list-container">
+                                                <div style="text-align: center; padding: 20px;">Đang tải dữ liệu...</div>
+                                            </div>
+
                                         </div>
                                     </div>
-                                    <div class="product-table__header">
-                                        <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
-                                    </div>
-                                    <div class="product-table__inner">
-
-                                        <div class="product-table__row table-header">
-                                            <div class="product-table__cell">Ảnh</div>
-                                            <div class="product-table__cell">Tên sản phẩm</div>
-                                            <div class="product-table__cell">Post</div> <div class="product-table__cell">Giá</div>
-                                            <div class="product-table__cell">Xem</div>
-                                            <div class="product-table__cell">Sửa</div>
-                                            <div class="product-table__cell">Xóa</div>
-                                        </div>
-
-                                        <div id="product-list-container">
-                                            <div style="text-align: center; padding: 20px;">Đang tải dữ liệu...</div>
-                                        </div>
-
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -1719,7 +1690,7 @@
                         <div class="order-table">
 
                             <!-- Form tìm kiếm -->
-                            <form action="<c:url value='/order-search'/>" method="get">
+                            <form id="searchOrderForm" action="${pageContext.request.contextPath}/order-search" method="get">
                                 <div class="order-table__filter">
                                     <div class="order-table__filter-label">
                                         Điều kiện lọc
@@ -1736,142 +1707,15 @@
                                             class="btn btn--default-color order-table__search-btn">
                                         Tìm kiếm
                                     </button>
+                                    <button type="button" id="btnReloadAll" class="btn btn--default-color" style="margin-left: 10px; min-width: 130px; --height: 30px;">
+                                        Tất cả đơn hàng
+                                    </button>
                                 </div>
                             </form>
 
-                        <div class="order-table" id="order-main-content">
-                            <!-- Form xóa -->
-                            <form id="deleteOrdersForm" action="<c:url value='/order-delete'/>" method="post">
-                                <div class="order-table__header">
-                                    <h3 class="order-table__heading">Danh sách đơn hàng</h3>
-                                    <!-- Nút xóa phải nằm trong form này -->
-                                    <button type="submit" class="btn btn--default-color order-table__btn">Xóa các mục đã chọn</button>
-                                </div>
-
-                                <div class="order-table__inner">
-
-                                    <!-- Header -->
-                                    <div class="order-table__row">
-                                        <div class="order-table__check">
-                                            <input type="checkbox" id="selectAll" class="order-table__checkbox">
-                                        </div>
-                                        <div class="order-table__cell">Mã</div>
-                                        <div class="order-table__cell">Khách hàng</div>
-                                        <div class="order-table__cell">Trạng thái</div>
-                                        <div class="order-table__cell">Thanh toán</div>
-                                        <div class="order-table__cell">Ngày tạo</div>
-                                        <div class="order-table__cell">Tổng tiền</div>
-                                    </div>
-
-                                    <!-- Row -->
-                                    <c:forEach var="order" items="${orders}">
-                                        <article class="order-table__row ${order.rowClass}">
-                                            <div class="order-table__check">
-                                                <input type="checkbox" name="orderIds" value="${order.id}" class="order-table__checkbox">
-                                            </div>
-
-                                            <div class="order-table__cell">
-                                                <a href="#!" class="order-table__text order-table__link">${order.id}</a>
-                                            </div>
-
-                                            <div class="order-table__cell">
-                                                <span class="order-table__text">${order.customer_name}</span>
-                                            </div>
-
-                                            <!-- ===== TRẠNG THÁI ĐƠN HÀNG ===== -->
-                                            <div class="order-table__cell">
-
-                                                <!-- Hiển thị -->
-                                                <span class="order-table__status ${order.statusTransportClass}">
-                                                        ${order.statusTransportText}
-                                                </span>
-
-                                                <!-- Điều khiển -->
-                                                <form action="<c:url value='order-update-status'/>"
-                                                      method="post"
-                                                      style="margin-top:6px">
-
-                                                    <input type="hidden" name="orderId" value="${order.id}">
-                                                    <input type="hidden" name="type" value="transport">
-
-                                                    <select name="status"
-                                                        ${order.status_transport == 1 || order.status_transport == 2
-                                                                ? 'disabled' : ''}>
-
-                                                        <option value="0"
-                                                            ${order.status_transport == 0 ? 'selected' : ''}>
-                                                            Đơn hàng mới
-                                                        </option>
-
-                                                        <option value="1"
-                                                            ${order.status_transport == 1 ? 'selected' : ''}>
-                                                            Hoàn thành
-                                                        </option>
-
-                                                        <option value="2"
-                                                            ${order.status_transport == 2 ? 'selected' : ''}>
-                                                            Hủy đơn
-                                                        </option>
-
-                                                    </select>
-
-                                                    <button type="submit"
-                                                            class="btn btn--default-color"
-                                                        ${order.status_transport == 1 || order.status_transport == 2
-                                                                ? 'disabled' : ''}>
-                                                        Lưu
-                                                    </button>
-                                                </form>
-                                            </div>
-
-
-                                            <!-- ===== TRẠNG THÁI THANH TOÁN ===== -->
-                                            <div class="order-table__cell">
-
-                                                <!-- Hiển thị -->
-                                                <span class="order-table__status ${order.statusPaymentClass}">
-                                                        ${order.statusPaymentText}
-                                                </span>
-
-                                                <!-- Điều khiển -->
-                                                <form action="<c:url value='order-update-status'/>"
-                                                      method="post"
-                                                      style="margin-top:6px">
-
-                                                    <input type="hidden" name="orderId" value="${order.id}">
-                                                    <input type="hidden" name="type" value="payment">
-
-                                                    <select name="status"
-                                                        ${order.status_payment == 1 ? 'disabled' : ''}>
-
-                                                        <option value="0"
-                                                            ${order.status_payment == 0 ? 'selected' : ''}>
-                                                            Chưa thanh toán
-                                                        </option>
-
-                                                        <option value="1"
-                                                            ${order.status_payment == 1 ? 'selected' : ''}>
-                                                            Đã thanh toán
-                                                        </option>
-
-                                                    </select>
-
-                                                    <button type="submit"
-                                                            class="btn btn--default-color"
-                                                        ${order.status_payment == 1 ? 'disabled' : ''}>
-                                                        Lưu
-                                                    </button>
-                                                </form>
-                                            </div>
-
-                                            <div class="order-table__cell">${order.created_at}</div>
-
-                                            <div class="order-table__cell">${order.total_price}đ</div>
-                                        </article>
-                                    </c:forEach>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="order-table" id="order-main-content">
+                                <jsp:include page="_order_list.jsp" />
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -1951,24 +1795,24 @@
         sectionEventEdit.style.display = "none";
 
     }
-// Mở đúng tab theo controller
-const serverTab = "${tab}"; // controller đang set "customers"
+    // Mở đúng tab theo controller
+    const serverTab = "${tab}"; // controller đang set "customers"
 
-window.addEventListener("DOMContentLoaded", () => {
-    if (!serverTab) return; // nếu không có tab thì thôi
+    window.addEventListener("DOMContentLoaded", () => {
+        if (!serverTab) return; // nếu không có tab thì thôi
 
-    hideAllSections();
+        hideAllSections();
 
-    if (serverTab === "customers") {
-        sectionCustomer.style.display = "block";
-    } else if (serverTab === "product") {
-        sectionProduct.style.display = "block";
-    } else if (serverTab === "order") {
-        sectionOrder.style.display = "block";
-    } else {
-        sectionConfig.style.display = "block";
-    }
-});
+        if (serverTab === "customers") {
+            sectionCustomer.style.display = "block";
+        } else if (serverTab === "product") {
+            sectionProduct.style.display = "block";
+        } else if (serverTab === "order") {
+            sectionOrder.style.display = "block";
+        } else {
+            sectionConfig.style.display = "block";
+        }
+    });
     // Click menu
     menuLinks.forEach(link => {
         link.addEventListener("click", function (e) {
@@ -2357,66 +2201,66 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     // SỬA KHÁCH HÀNG (mở form + đổ dữ liệu)
     document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll(".customer-table__edit").forEach(btn => {
-        btn.addEventListener("click", () => {
-          hideAllSections();
-          sectionCustomerEdit.style.display = "block";
-          window.scrollTo({ top: 0, behavior: "smooth" });
+        document.querySelectorAll(".customer-table__edit").forEach(btn => {
+            btn.addEventListener("click", () => {
+                hideAllSections();
+                sectionCustomerEdit.style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
 
-          // đổ dữ liệu từ data-* vào form
-          document.getElementById("editId").value = btn.dataset.id || "";
-          document.getElementById("editName").value = btn.dataset.name || "";
-          document.getElementById("editEmail").value = btn.dataset.email || "";
-          document.getElementById("editPhone").value = btn.dataset.phone || "";
-          document.getElementById("editAddress").value = btn.dataset.address || "";
+                // đổ dữ liệu từ data-* vào form
+                document.getElementById("editId").value = btn.dataset.id || "";
+                document.getElementById("editName").value = btn.dataset.name || "";
+                document.getElementById("editEmail").value = btn.dataset.email || "";
+                document.getElementById("editPhone").value = btn.dataset.phone || "";
+                document.getElementById("editAddress").value = btn.dataset.address || "";
 
-          // role/status (nếu có)
-          const roleEl = document.getElementById("editRole");
-          if (roleEl) roleEl.value = btn.dataset.role ?? "0";
+                // role/status (nếu có)
+                const roleEl = document.getElementById("editRole");
+                if (roleEl) roleEl.value = btn.dataset.role ?? "0";
 
-          const statusEl = document.getElementById("editStatus");
-          if (statusEl) statusEl.value = btn.dataset.status ?? "1";
+                const statusEl = document.getElementById("editStatus");
+                if (statusEl) statusEl.value = btn.dataset.status ?? "1";
 
-          // password luôn để trống
-          const passEl = document.getElementById("editPassword");
-          if (passEl) passEl.value = "";
+                // password luôn để trống
+                const passEl = document.getElementById("editPassword");
+                if (passEl) passEl.value = "";
+            });
         });
-      });
     });
     // XEM KHÁCH HÀNG (mở detail + đổ dữ liệu)
     document.querySelectorAll(".customer-table__view").forEach(btn => {
-      btn.addEventListener("click", () => {
-        hideAllSections();
-        sectionCustomerDetail.style.display = "block";
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        btn.addEventListener("click", () => {
+            hideAllSections();
+            sectionCustomerDetail.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
 
-        document.getElementById("customerDetailName").textContent = btn.dataset.name || "";
-        document.getElementById("customerDetailEmail").textContent = btn.dataset.email || "";
-        document.getElementById("customerDetailPhone").textContent = btn.dataset.phone || "";
-        document.getElementById("customerDetailAddress").textContent = btn.dataset.address || "";
-        document.getElementById("customerDetailCreatedAt").textContent = btn.dataset.created || "-";
-        document.getElementById("customerDetailUpdatedAt").textContent = btn.dataset.updated || "-";
+            document.getElementById("customerDetailName").textContent = btn.dataset.name || "";
+            document.getElementById("customerDetailEmail").textContent = btn.dataset.email || "";
+            document.getElementById("customerDetailPhone").textContent = btn.dataset.phone || "";
+            document.getElementById("customerDetailAddress").textContent = btn.dataset.address || "";
+            document.getElementById("customerDetailCreatedAt").textContent = btn.dataset.created || "-";
+            document.getElementById("customerDetailUpdatedAt").textContent = btn.dataset.updated || "-";
 
-        // status badge (tuỳ bạn đang dùng online/offline)
-        const st = btn.dataset.status; // "1" hoặc "0"
-        const statusEl = document.getElementById("customerDetailStatus");
-        if (statusEl) {
-          if (st === "1") {
-            statusEl.textContent = "Đang hoạt động";
-            statusEl.classList.remove("offline");
-            statusEl.classList.add("online");
-          } else {
-            statusEl.textContent = "Bị khóa";
-            statusEl.classList.remove("online");
-            statusEl.classList.add("offline");
-          }
-        }
+            // status badge (tuỳ bạn đang dùng online/offline)
+            const st = btn.dataset.status; // "1" hoặc "0"
+            const statusEl = document.getElementById("customerDetailStatus");
+            if (statusEl) {
+                if (st === "1") {
+                    statusEl.textContent = "Đang hoạt động";
+                    statusEl.classList.remove("offline");
+                    statusEl.classList.add("online");
+                } else {
+                    statusEl.textContent = "Bị khóa";
+                    statusEl.classList.remove("online");
+                    statusEl.classList.add("offline");
+                }
+            }
 
-        // avatar (nếu có dataset.avatar thì set, không thì thôi)
-        const av = btn.dataset.avatar;
-        const avatarEl = document.getElementById("customerDetailAvatar");
-        if (avatarEl && av) avatarEl.src = av;
-      });
+            // avatar (nếu có dataset.avatar thì set, không thì thôi)
+            const av = btn.dataset.avatar;
+            const avatarEl = document.getElementById("customerDetailAvatar");
+            if (avatarEl && av) avatarEl.src = av;
+        });
     });
 
     function hideCustomerEdit() {
@@ -2611,6 +2455,7 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
+    // Khai báo biến global để tránh lỗi truy cập
     let quill;
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -2875,12 +2720,12 @@ window.addEventListener("DOMContentLoaded", () => {
         // 1. Thu thập ID từ các thẻ Select
         const brandID = document.getElementById('brandSelect').value;
         const tagID = document.getElementById('tagSelect').value;
-        const cateID = document.getElementById('cateSelect').value;
+        const cateID = document.getElementById('cateSelect').value; // <--- MỚI THÊM: Lấy ID danh mục
 
         // Validate thêm cateID
         if (!brandID || brandID === 'add-new' ||
             !tagID || tagID === 'add-new' ||
-            !cateID || cateID === 'add-new') {
+            !cateID || cateID === 'add-new') { // <--- MỚI THÊM
             alert("Vui lòng chọn Nhãn hiệu, Danh mục và Từ khóa hợp lệ!");
             return;
         }
@@ -3704,6 +3549,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 </script>
 <script>
+    // Phải khai báo contextPath từ JSP
     var contextPath = '${pageContext.request.contextPath}';
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -3711,7 +3557,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     function loadAllDiscounts() {
-        fetch('/DoAnWeb/api/admin/discounts-list')
+        fetch(contextPath + '/api/admin/discounts-list')
             .then(res => {
                 if (!res.ok) throw new Error("Lỗi Server");
                 return res.json();
@@ -3807,6 +3653,89 @@ window.addEventListener("DOMContentLoaded", () => {
                 saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Lưu slide';
                 saveBtn.disabled = false;
             });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        // 1. AJAX TÌM KIẾM
+        $(document).on('submit', '#searchOrderForm', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'GET',
+                data: $(this).serialize(),
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                success: function(data) {
+                    $('#order-main-content').html(data);
+                }
+            });
+        });
+
+        // 2. CHỌN TẤT CẢ CHECKBOX
+        $(document).on('change', '#selectAll', function() {
+            $('.order-table__checkbox').prop('checked', this.checked);
+        });
+
+        // 3. AJAX XÓA NHIỀU (Sửa lại logic click nút thay vì submit form)
+        $(document).on('click', '#btnDeleteAll', function() {
+            let selectedIds = [];
+            $('input[name="orderIds"]:checked').each(function() {
+                selectedIds.push($(this).val());
+            });
+
+            if (selectedIds.length === 0) {
+                alert("Vui lòng chọn ít nhất một đơn hàng!");
+                return;
+            }
+
+            if (confirm('Bạn có chắc chắn muốn xóa các mục đã chọn?')) {
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/order-delete',
+                    type: 'POST',
+                    data: { orderIds: selectedIds }, // Gửi mảng ID
+                    traditional: true, // Quan trọng để gửi mảng qua AJAX cho Java nhận diện
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    success: function(response) {
+                        $('#order-main-content').html(response);
+                        alert("Đã xóa thành công!");
+                    }
+                });
+            }
+        });
+
+        // 4. AJAX CẬP NHẬT TRẠNG THÁI (Cả vận chuyển và thanh toán)
+        $(document).on('submit', '.form-update-status', function(e) {
+            e.preventDefault();
+            let form = $(this);
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize(),
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                success: function(response) {
+                    $('#order-main-content').html(response);
+                    alert("Cập nhật thành công!");
+                }
+            });
+        });
+    });
+
+    $(document).on('click', '#btnReloadAll', function() {
+        // Xóa trắng ô input tìm kiếm
+        $('input[name="keyword"]').val('');
+
+        // Gửi AJAX không kèm keyword để lấy toàn bộ danh sách
+        $.ajax({
+            url: '${pageContext.request.contextPath}/order-search',
+            type: 'GET',
+            data: { keyword: '' },
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+            success: function(data) {
+                $('#order-main-content').html(data);
+            }
+        });
     });
 </script>
 <script>

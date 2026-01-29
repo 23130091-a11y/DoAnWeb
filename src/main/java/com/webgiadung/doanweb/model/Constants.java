@@ -2,9 +2,9 @@ package com.webgiadung.doanweb.model;
 
 public class Constants {
 
-    public static String GOOGLE_CLIENT_ID = "client-key";
+    public static String GOOGLE_CLIENT_ID = "";
 
-    public static String GOOGLE_CLIENT_SECRET = "secret-key";
+    public static String GOOGLE_CLIENT_SECRET = "";
 
     public static String GOOGLE_REDIRECT_URI = "http://localhost:8080/DoAnWeb/login-google";
 
