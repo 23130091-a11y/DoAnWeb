@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @WebServlet("/admin/add-discount")
-@MultipartConfig // BẮT BUỘC: Để đọc được dữ liệu FormData từ JavaScript (Fix lỗi 500)
+@MultipartConfig // Quan trọng để đọc được dữ liệu text từ FormData gửi lên
 public class AddDiscountController extends HttpServlet {
 
     private final DiscountService discountService = new DiscountService();
@@ -24,62 +24,68 @@ public class AddDiscountController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Đảm bảo nhận dữ liệu đúng định dạng UTF-8
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         try {
-            // 1. Lấy dữ liệu từ Form
+            // 1. Lấy dữ liệu từ Request (khớp với 'name' trong thẻ input HTML)
             String name = request.getParameter("eventName");
             String discountValueRaw = request.getParameter("discountValue");
             String startDateRaw = request.getParameter("startDate");
             String endDateRaw = request.getParameter("endDate");
-            String scope = request.getParameter("applyScope");
+            String scope = request.getParameter("applyScope"); // "all" hoặc "category"
             String type = request.getParameter("discountType");
             String desc = request.getParameter("eventDesc");
             String catIdRaw = request.getParameter("applyCategories");
 
-            // 2. Kiểm tra dữ liệu bắt buộc (Fix lỗi NullPointerException)
+            // 2. Kiểm tra tính hợp lệ cơ bản
             if (name == null || name.isBlank() || discountValueRaw == null || startDateRaw == null || endDateRaw == null) {
-                response.setStatus(400);
-                response.getWriter().write("{\"status\":\"error\", \"message\":\"Vui lòng điền đầy đủ các trường!\"}");
+                response.getWriter().write("{\"status\":\"error\", \"message\":\"Thiếu thông tin bắt buộc!\"}");
                 return;
             }
 
-            // 3. Ép kiểu an toàn
+            // 3. Xử lý Logic id_cate: Nếu 'all' thì lưu 0, nếu 'category' thì lưu ID danh mục
+            int idCate = 0;
+            if ("category".equals(scope)) {
+                idCate = (catIdRaw != null && !catIdRaw.isEmpty()) ? Integer.parseInt(catIdRaw) : 0;
+            }
+
             double value = Double.parseDouble(discountValueRaw);
-            int catId = (catIdRaw != null && !catIdRaw.isEmpty()) ? Integer.parseInt(catIdRaw) : 0;
             LocalDateTime start = LocalDate.parse(startDateRaw).atStartOfDay();
             LocalDateTime end = LocalDate.parse(endDateRaw).atTime(23, 59, 59);
 
-            // 4. Tạo Model
             Discounts d = new Discounts();
             d.setName(name);
-            d.setTypeDiscount(type);
             d.setDiscount(value);
             d.setDescription(desc);
             d.setStartDate(start);
             d.setEndDate(end);
 
-            // 5. Lưu Database
+            d.setTypeDiscount("percentage".equals(type) ? "1" : "2");
+
+            d.setId_cate(idCate);
+
+            // 6. Lưu vào Database (Phương thức này trả về ID vừa tạo)
             int newDiscountId = discountService.insertDiscount(d);
 
             if (newDiscountId > 0) {
-                if ("category".equals(scope) && catId > 0) {
-                    productService.applyDiscountToCategory(catId, newDiscountId);
+                // 7. Cập nhật giá sản phẩm ngay lập tức sau khi lưu thành công
+                if ("category".equals(scope) && idCate > 0) {
+                    productService.applyDiscountToCategory(idCate, newDiscountId);
                 } else if ("all".equals(scope)) {
                     productService.applyDiscountToAll(newDiscountId);
                 }
+
                 response.getWriter().write("{\"status\":\"success\"}");
             } else {
-                response.getWriter().write("{\"status\":\"error\", \"message\":\"Lỗi Database: Không thể lưu Discount!\"}");
+                response.getWriter().write("{\"status\":\"error\", \"message\":\"Không thể lưu sự kiện vào Database\"}");
             }
 
         } catch (Exception e) {
-            e.printStackTrace(); // In lỗi chi tiết ra console server để bạn dễ theo dõi
+            e.printStackTrace();
             response.setStatus(500);
-            response.getWriter().write("{\"status\":\"error\", \"message\":\"Server Error: " + e.getMessage() + "\"}");
+            response.getWriter().write("{\"status\":\"error\", \"message\":\"Lỗi hệ thống: " + e.getMessage() + "\"}");
         }
     }
 }

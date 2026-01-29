@@ -869,6 +869,24 @@ public class ProductDao extends BaseDao {
                     .execute();
         });
     }
+    public int updateProductPricesByDiscountId(int discountId) {
+        return get().withHandle(handle -> {
+            return handle.createUpdate("""
+            UPDATE products p
+            CROSS JOIN discounts d ON d.id = :discountId
+            SET p.price_total = CASE 
+                    WHEN d.type_discount = 'percentage' THEN p.price_first * (1 - d.discount / 100)
+                    WHEN d.type_discount = 'fixed' THEN GREATEST(p.price_first - d.discount, 0)
+                    ELSE p.price_first 
+                END,
+                p.updated_at = NOW()
+            WHERE p.discounts_id = :discountId
+        """)
+                    .bind("discountId", discountId)
+                    .execute();
+        });
+    }
 }
+
 
 
