@@ -2611,7 +2611,6 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-    // Khai báo biến global để tránh lỗi truy cập
     let quill;
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -2876,12 +2875,12 @@ window.addEventListener("DOMContentLoaded", () => {
         // 1. Thu thập ID từ các thẻ Select
         const brandID = document.getElementById('brandSelect').value;
         const tagID = document.getElementById('tagSelect').value;
-        const cateID = document.getElementById('cateSelect').value; // <--- MỚI THÊM: Lấy ID danh mục
+        const cateID = document.getElementById('cateSelect').value;
 
         // Validate thêm cateID
         if (!brandID || brandID === 'add-new' ||
             !tagID || tagID === 'add-new' ||
-            !cateID || cateID === 'add-new') { // <--- MỚI THÊM
+            !cateID || cateID === 'add-new') {
             alert("Vui lòng chọn Nhãn hiệu, Danh mục và Từ khóa hợp lệ!");
             return;
         }
@@ -3705,7 +3704,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 </script>
 <script>
-    // Phải khai báo contextPath từ JSP
     var contextPath = '${pageContext.request.contextPath}';
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -3713,7 +3711,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     function loadAllDiscounts() {
-        fetch(contextPath + '/api/admin/discounts-list')
+        fetch('/DoAnWeb/api/admin/discounts-list')
             .then(res => {
                 if (!res.ok) throw new Error("Lỗi Server");
                 return res.json();
@@ -3810,6 +3808,44 @@ window.addEventListener("DOMContentLoaded", () => {
                 saveBtn.disabled = false;
             });
     });
+</script>
+<script>
+    function deleteDiscount(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa?")) {
+            const url = contextPath + '/api/admin/delete-discount';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'id=' + id
+            })
+                .then(res => {
+                    // Đọc dưới dạng text trước để debug nếu JSON lỗi
+                    return res.text().then(text => {
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error("Nội dung Server trả về lỗi:", text);
+                            throw new Error("Server trả về định dạng không hợp lệ (Xem console)");
+                        }
+                    });
+                })
+                .then(data => {
+                    if (data.status === "success") {
+                        alert("Xóa thành công!");
+                        location.reload();
+                    } else {
+                        alert("Lỗi từ Server: " + data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert(err.message);
+                });
+        }
+    }
 </script>
 <!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
