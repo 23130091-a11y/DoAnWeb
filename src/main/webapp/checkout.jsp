@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="assets/css/grid.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/checkout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/checkout.css">
+
 </head>
 
 <body>
@@ -185,39 +186,61 @@
                             </h2>
 
                             <c:set var="u" value="${sessionScope.user}" />
+                            <c:set var="sa" value="${requestScope.selectedAddress}" />
 
-                            <div class="current-address">
-                                <c:choose>
-                                    <c:when test="${not empty u}">
-                                        <p class="address-name-phone">
-                                            <strong>${u.name}</strong>
-                                            <c:if test="${not empty u.phone}">
-                                                (${u.phone})
-                                            </c:if>
-                                        </p>
+                           <div class="current-address">
+                               <c:choose>
+                                   <c:when test="${not empty u}">
+                                       <c:choose>
+                                           <c:when test="${not empty sa}">
+                                               <p class="address-name-phone">
+                                                   <strong id="shipName">${sa.fullName}</strong>
+                                                   <c:if test="${not empty sa.phone}">
+                                                       (<span id="shipPhone">${sa.phone}</span>)
+                                                   </c:if>
+                                               </p>
 
-                                        <p class="address-detail">
-                                            <c:choose>
-                                                <c:when test="${not empty u.address}">
-                                                    ${u.address}
-                                                </c:when>
-                                                <c:otherwise>
-                                                    Bạn chưa có địa chỉ. Vui lòng cập nhật để đặt hàng.
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </p>
+                                               <p class="address-detail" id="shipAddress">
+                                                   ${sa.address}
+                                               </p>
+                                           </c:when>
 
-                                        <a href="${pageContext.request.contextPath}/account?tab=info&return=checkout"
-                                           class="change-address-link">THAY ĐỔI</a>
-                                    </c:when>
+                                           <c:otherwise>
+                                               <p class="address-name-phone">
+                                                   <strong id="shipName">${u.name}</strong>
+                                                   <c:if test="${not empty u.phone}">
+                                                       (<span id="shipPhone">${u.phone}</span>)
+                                                   </c:if>
+                                               </p>
 
-                                    <c:otherwise>
-                                        <p class="address-detail">Vui lòng đăng nhập để nhập địa chỉ nhận hàng.</p>
-                                        <a href="${pageContext.request.contextPath}/login" class="change-address-link">ĐĂNG NHẬP</a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
+                                               <p class="address-detail" id="shipAddress">
+                                                   <c:choose>
+                                                       <c:when test="${not empty u.address}">
+                                                           ${u.address}
+                                                       </c:when>
+                                                       <c:otherwise>
+                                                           Bạn chưa có địa chỉ. Vui lòng cập nhật để đặt hàng.
+                                                       </c:otherwise>
+                                                   </c:choose>
+                                               </p>
+                                           </c:otherwise>
+                                       </c:choose>
+
+                                       <a href="javascript:void(0)"
+                                          class="change-address-link"
+                                          id="btnChangeAddr">THAY ĐỔI</a>
+                                   </c:when>
+
+                                   <c:otherwise>
+                                       <p class="address-detail">Vui lòng đăng nhập để nhập địa chỉ nhận hàng.</p>
+                                       <a href="${pageContext.request.contextPath}/login" class="change-address-link">ĐĂNG NHẬP</a>
+                                   </c:otherwise>
+                               </c:choose>
+                           </div>
+
+
                         </section>
+
 
                         <section class="checkout-section shipping-method-section">
                             <h2 class="section-title">
@@ -342,6 +365,263 @@
 
     <!-- Footer -->
     <jsp:include page="/common/footer.jsp" />
+<c:set var="addresses" value="${requestScope.addresses}" />
+<c:set var="sa" value="${requestScope.selectedAddress}" />
+
+<div class="modal" id="addrModal">
+  <div class="modal__overlay" id="addrOverlay"></div>
+
+  <div class="modal__body">
+    <div class="addr-modal__header">
+      <h3 class="addr-modal__title">Chọn địa chỉ nhận hàng</h3>
+      <button type="button" class="addr-modal__close" id="btnCloseAddr">Đóng</button>
+    </div>
+
+    <div class="addr-list" id="addrList">
+      <c:if test="${empty addresses}">
+        <p>Chưa có địa chỉ nào. Hãy thêm địa chỉ mới bên dưới.</p>
+      </c:if>
+
+      <c:forEach var="a" items="${addresses}">
+        <label class="addr-item">
+          <div class="addr-item__left">
+            <input type="radio" name="addressId" value="${a.id}"
+                   <c:if test="${not empty sa && sa.id == a.id}">checked</c:if> />
+
+            <div class="addr-item__info">
+              <div>
+                <strong>${a.fullName}</strong> (${a.phone})
+                <c:if test="${a.isDefault == 1}">
+                  <span class="addr-badge-default">Mặc định</span>
+                </c:if>
+              </div>
+              <div>${a.address}</div>
+            </div>
+          </div>
+
+          <button type="button" class="addr-del" data-id="${a.id}">Xóa</button>
+        </label>
+      </c:forEach>
+    </div>
+
+      <div class="addr-actions" id="chooseWrap">
+        <button type="button" class="addr-btn addr-btn--primary" id="btnChooseAddr">Chọn</button>
+      </div>
+
+
+    <hr style="margin:16px 0;">
+
+    <h4>Thêm địa chỉ mới</h4>
+    <form class="addr-form" id="addAddrForm">
+      <div class="addr-form__grid">
+        <div>
+          <label>Họ tên</label>
+          <input name="fullName" required>
+        </div>
+
+        <div>
+          <label>Số điện thoại</label>
+          <input name="phone" required>
+        </div>
+
+        <div class="full">
+          <label>Địa chỉ</label>
+          <input name="address" required>
+        </div>
+
+        <div class="addr-default">
+          <input type="checkbox" id="makeDefault" name="makeDefault" value="1">
+          <label for="makeDefault">Đặt làm mặc định</label>
+        </div>
+      </div>
+
+      <div class="addr-actions">
+        <button type="submit" class="addr-btn addr-btn--primary">Lưu</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById('addrModal');
+  const openBtn = document.getElementById('btnChangeAddr');
+  const closeBtn = document.getElementById('btnCloseAddr');
+  const overlay = document.getElementById('addrOverlay');
+  const btnChoose = document.getElementById('btnChooseAddr');
+  const chooseWrap = document.getElementById('chooseWrap');
+
+  if (!modal || !openBtn) return;
+
+  function openModal(){ modal.classList.add('is-open'); }
+  function closeModal(){ modal.classList.remove('is-open'); }
+
+  openBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    openModal();
+  });
+
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  if(overlay) overlay.addEventListener('click', closeModal);
+  if(btnChoose) btnChoose.addEventListener('click', closeModal);
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const ctx = '${pageContext.request.contextPath}';
+
+  const modal = document.getElementById('addrModal');
+  const openBtn = document.getElementById('btnChangeAddr');
+  const closeBtn = document.getElementById('btnCloseAddr');
+  const overlay = document.getElementById('addrOverlay');
+
+  const btnChoose = document.getElementById('btnChooseAddr');
+  const addForm = document.getElementById('addAddrForm');
+
+  const addrItems = document.getElementById('addrList');
+  const addrEmpty = document.getElementById('addrEmptyMsg');
+
+  function openModal(){ modal.classList.add('is-open'); }
+  function closeModal(){ modal.classList.remove('is-open'); }
+
+  function setCurrent(selected){
+    if(!selected) return;
+    const nameEl = document.getElementById('shipName');
+    const phoneEl = document.getElementById('shipPhone');
+    const addrEl = document.getElementById('shipAddress');
+    if(nameEl) nameEl.textContent = selected.fullName;
+    if(phoneEl) phoneEl.textContent = selected.phone;
+    if(addrEl) addrEl.textContent = selected.address;
+  }
+
+  function renderList(addresses, selectedId){
+    addrItems.innerHTML = '';
+
+    if(!addresses || addresses.length === 0){
+      addrItems.innerHTML = `<p class="addr-empty">Chưa có địa chỉ nào. Hãy thêm địa chỉ mới bên dưới.</p>`;
+      chooseWrap.style.display = 'none';
+      return;
+    }
+
+    chooseWrap.style.display = 'flex';
+
+    addresses.forEach(a => {
+      const label = document.createElement('label');
+      label.className = 'addr-item';
+      label.innerHTML = `
+        <div class="addr-item__left">
+          <input type="radio" name="addressId" value="${'$'}{a.id}"
+                 ${'$'}{String(a.id)===String(selectedId) ? 'checked' : ''}/>
+          <div class="addr-item__info">
+            <div>
+              <strong>${'$'}{a.fullName}</strong> (${'$'}{a.phone})
+              ${'$'}{a.isDefault==1 ? '<span class="addr-badge-default">Mặc định</span>' : ''}
+            </div>
+            <div>${'$'}{a.address}</div>
+          </div>
+        </div>
+
+        <button type="button" class="addr-del" data-id="${'$'}{a.id}">Xóa</button>
+      `;
+      addrItems.appendChild(label);
+    });
+  }
+
+// XÓA địa chỉ (event delegation)
+// Bắt click nút XÓA (event delegation)
+addrItems.addEventListener('click', async function(e){
+  const btn = e.target.closest('.addr-del');
+  if(!btn) return;
+
+  e.preventDefault();
+  e.stopPropagation(); // quan trọng: không làm tick radio khi bấm Xóa
+
+  const id = btn.dataset.id;
+  if(!confirm('Xóa địa chỉ này?')) return;
+
+  const body = new URLSearchParams();
+  body.set('id', id);
+
+  const res = await fetch(ctx + '/address/delete', {
+    method: 'POST',
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body
+  });
+
+  const data = await res.json();
+  if(!data.ok){ alert(data.msg || 'Xóa thất bại'); return; }
+
+  renderList(data.addresses, data.selected ? data.selected.id : null);
+  setCurrent(data.selected);
+});
+
+
+  if(openBtn) openBtn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  if(overlay) overlay.addEventListener('click', closeModal);
+
+  // CHỌN địa chỉ
+  if(btnChoose) btnChoose.addEventListener('click', async function(){
+    const checked = document.querySelector('input[name="addressId"]:checked');
+    if(!checked){ alert('Bạn chưa chọn địa chỉ'); return; }
+
+    const body = new URLSearchParams();
+    body.set('addressId', checked.value);
+
+    const res = await fetch(ctx + '/address/select', {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body
+    });
+
+    const data = await res.json();
+    if(!data.ok){ alert('Không chọn được địa chỉ'); return; }
+
+    setCurrent(data.selected);
+    closeModal();
+  });
+
+  // LƯU địa chỉ mới
+  if(addForm) addForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    try {
+      const formData = new FormData(addForm);
+      const body = new URLSearchParams();
+      formData.forEach((v,k)=> body.append(k, v));
+
+      const res = await fetch(ctx + '/address/add', {
+        method: 'POST',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body
+      });
+
+      const raw = await res.text(); // đọc text để biết 404/500
+      let data;
+      try { data = JSON.parse(raw); }
+      catch {
+        alert('Server trả về không phải JSON!\nStatus: ' + res.status + '\n' + raw.slice(0, 300));
+        return;
+      }
+
+      if(!res.ok || !data.ok){
+        alert('Lưu địa chỉ thất bại!\nStatus: ' + res.status + '\nMsg: ' + (data.msg || ''));
+        return;
+      }
+
+      renderList(data.addresses, data.selected ? data.selected.id : null);
+      setCurrent(data.selected);
+      addForm.reset();
+      alert('Đã lưu địa chỉ!');
+    } catch (err){
+      console.error(err);
+      alert('Có lỗi khi lưu địa chỉ. Vui lòng thử lại!');
+    }
+  });
+
+});
+</script>
+
 
     <script>
     (function () {

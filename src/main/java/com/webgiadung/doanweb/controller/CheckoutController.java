@@ -14,6 +14,13 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.webgiadung.doanweb.dao.UserAddressDao;
+import com.webgiadung.doanweb.model.UserAddress;
+
+
+import java.util.List;
+import java.util.Optional;
+
 @WebServlet("/checkout")
 public class CheckoutController extends HttpServlet {
 
@@ -67,8 +74,47 @@ public class CheckoutController extends HttpServlet {
             req.setAttribute("ids", idsParam);
         }
 
+        // ================== ADDRESS (CHỈ GIỮ 1 BLOCK) ==================
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            UserAddressDao addrDao = new UserAddressDao();
+
+            List<UserAddress> addresses = addrDao.findByUser(user.getId());
+            req.setAttribute("addresses", addresses);
+
+            Integer selectedId = (Integer) session.getAttribute("SELECTED_ADDR_ID");
+
+            UserAddress selected = null;
+            if (selectedId != null) {
+                selected = addrDao.findById(user.getId(), selectedId).orElse(null);
+            }
+
+            if (selected == null) {
+                // ưu tiên địa chỉ default
+                selected = addrDao.findDefault(user.getId()).orElse(null);
+
+                // có default thì lưu lại
+                if (selected != null) session.setAttribute("SELECTED_ADDR_ID", selected.getId());
+            }
+
+            // nếu chưa có address trong bảng user_addresses
+            if (selected == null && user.getAddress() != null && !user.getAddress().trim().isEmpty()) {
+                UserAddress tmp = new UserAddress();
+                tmp.setId(0);
+                tmp.setUserId(user.getId());
+                tmp.setFullName(user.getName());
+                tmp.setPhone(user.getPhone());
+                tmp.setAddress(user.getAddress());
+                tmp.setIsDefault(1);
+                selected = tmp;
+            }
+
+            req.setAttribute("selectedAddress", selected);
+        }
+
         req.getRequestDispatcher("/checkout.jsp").forward(req, resp);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -80,10 +126,13 @@ public class CheckoutController extends HttpServlet {
             return;
         }
 
-        if (user.getAddress() == null || user.getAddress().trim().isEmpty()) {
-            resp.sendRedirect(req.getContextPath() + "/account?tab=info&return=checkout&need=address");
+        Integer selectedId = (Integer) session.getAttribute("CHECKOUT_ADDR_ID");
+        boolean okAddress = (user.getAddress() != null && !user.getAddress().trim().isEmpty()) || (selectedId != null);
+        if (!okAddress) {
+            resp.sendRedirect(req.getContextPath() + "/checkout?needAddress=1");
             return;
         }
+
 
         Cart fullCart = (Cart) session.getAttribute("cart");
         if (fullCart == null) fullCart = new Cart();
