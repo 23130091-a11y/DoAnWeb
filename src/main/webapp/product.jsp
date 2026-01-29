@@ -39,13 +39,13 @@
         <div class="product-details">
             <div class="grid wide">
                 <div class="navigation nav-product">
-                    <a href="<c:url value='/'/>" class="navigation__link">Trang chủ</a>
+                    <a href="${pageContext.request.contextPath}/list-product" class="navigation__link">Trang chủ</a>
                     <c:forEach items="${parentCategories}" var="parent">
                         <i class="fa-solid fa-chevron-right"></i>
                         <a href="#!" class="navigation__link">${parent.name}</a>
                     </c:forEach>
                     <i class="fa-solid fa-chevron-right"></i>
-                    <a href="#!" class="navigation__link">${category.name}</a>
+                    <a href="${pageContext.request.contextPath}/search-product?categoryId=${category.id}" class="navigation__link">${category.name}</a>
                     <i class="fa-solid fa-chevron-right"></i>
                     <a href="#!" class="navigation__link--active">${product.name}</a>
                 </div>

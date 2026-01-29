@@ -35,7 +35,7 @@ public class Product implements Serializable {
     private Double ratingAvg;
 
     public Double getRatingAvg() {
-        return ratingAvg;
+        return (ratingAvg != null) ? ratingAvg : 0.0;
     }
 
     public void setRatingAvg(Double ratingAvg) {

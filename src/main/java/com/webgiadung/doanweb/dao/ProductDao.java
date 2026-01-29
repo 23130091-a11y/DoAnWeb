@@ -12,25 +12,7 @@ public class ProductDao extends BaseDao {
     // Lấy danh sách sản phẩm cơ bản (không load phụ để nhanh)
     public List<Product> getListProduct() {
         return get().withHandle(h ->
-                h.createQuery("""
-                    SELECT
-                        id,
-                        name,
-                        image,
-                        price_first AS firstPrice,
-                        price_total AS totalPrice,
-                        discounts_id AS discountsId,
-                        categories_id AS categoriesId,
-                        brands_id AS brandsId,
-                        keywords_id AS keywordsId,
-                        post,
-                        quantity,
-                        quantity_saled AS quantitySaled,
-                        created_at AS createdAt,
-                        updated_at AS updatedAt
-                    FROM products
-                    LIMIT 50
-                """)
+                h.createQuery(BASE_SELECT + " LIMIT 50")
                         .mapToBean(Product.class)
                         .list()
         );
@@ -364,16 +346,19 @@ public class ProductDao extends BaseDao {
 
         return get().withHandle(h ->
                 h.createQuery("""
-            SELECT 
-                p.id, p.name, p.image, 
-                IFNULL(p.price_first, p.price_total) AS firstPrice,
-                p.price_total AS totalPrice,
-                IFNULL(d.discount, 0) AS discountPercent, 
-                d.type_discount AS discountType 
-            FROM products p 
-            LEFT JOIN discounts d ON p.discounts_id = d.id 
-            WHERE p.id IN (<ids>) 
-            ORDER BY FIELD(p.id, """ + idList + ")")
+                SELECT 
+                    p.id, p.name, p.image, 
+                    IFNULL(p.price_first, p.price_total) AS firstPrice,
+                    p.price_total AS totalPrice,
+                    IFNULL(d.discount, 0) AS discountPercent, 
+                    d.type_discount AS discountType,
+                    IFNULL(ROUND(AVG(pr.rating), 1), 0.0) AS ratingAvg -- Thêm dòng này
+                FROM products p 
+                LEFT JOIN discounts d ON p.discounts_id = d.id 
+                LEFT JOIN product_reviews pr ON p.id = pr.product_id -- Thêm JOIN này
+                WHERE p.id IN (<ids>) 
+                GROUP BY p.id, d.id -- Thêm GROUP BY để hàm AVG() hoạt động
+                ORDER BY FIELD(p.id, """ + idList + ")")
                         .bindList("ids", ids)
                         .mapToBean(Product.class)
                         .list()
