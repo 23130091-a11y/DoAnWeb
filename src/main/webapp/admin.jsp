@@ -1194,6 +1194,11 @@
                                     <div class="ev-view-box ev-view-box--bold" id="view-eventName"></div>
                                 </div>
 
+                                <div class="ev-group ev-col-2">
+                                    <label class="ev-label">Phạm vi áp dụng (Danh mục)</label>
+                                    <div class="ev-view-box" id="view-categoryName" style="color: #0056b3; font-weight: 600; background: #eef6ff;"></div>
+                                </div>
+
                                 <div class="ev-group">
                                     <label class="ev-label">Loại giảm giá</label>
                                     <div class="ev-view-box" id="view-discountType"></div>
@@ -1213,7 +1218,8 @@
                                     <label class="ev-label">Ngày kết thúc</label>
                                     <div class="ev-view-box" id="view-endDate"></div>
                                 </div>
-                                <div class="ev-group">
+
+                                <div class="ev-group ev-col-2">
                                     <label class="ev-label">Mô tả</label>
                                     <div class="ev-view-box" id="view-descrip"></div>
                                 </div>
@@ -1228,7 +1234,7 @@
                     <section id="edit-event-page" class="ev-container" style="display: none;">
                         <div class="ev-header">
                             <h2 class="ev-title">Cập nhật sự kiện</h2>
-                            <button class="ev-btn ev-btn--blue" onclick="backToEventList()">
+                            <button class="ev-btn ev-btn--blue" onclick="saveDiscountUpdate()">
                                 <i class="fa-solid fa-check"></i> Lưu thay đổi
                             </button>
                         </div>
@@ -1238,126 +1244,68 @@
                                 <div class="ev-grid">
                                     <div class="ev-group ev-col-2">
                                         <label class="ev-label">Tên sự kiện</label>
-                                        <input type="text" class="ev-input" id="edit-eventName" value="Sale Tết Nguyên Đán 2026">
+                                        <input type="text" class="ev-input" id="edit-eventName" placeholder="Ví dụ: Sale Tết Nguyên Đán 2026">
+                                    </div>
+
+                                    <div class="ev-group ev-col-2">
+                                        <label class="ev-label" style="color: #0056b3;">Phạm vi áp dụng hiện tại:</label>
+                                        <div id="edit-currentCategoryName" class="ev-view-box" style="background: #f0f7ff; font-weight: 600; padding: 10px; border-radius: 4px; border: 1px solid #d0e3ff;">
+                                        </div>
                                     </div>
 
                                     <div class="ev-group">
                                         <label class="ev-label">Loại giảm giá</label>
-                                        <select class="ev-input" id="edit-discountType">
-                                            <option value="percentage">Phần trăm (%)</option>
-                                            <option value="amount">Số tiền cố định (đ)</option>
-                                        </select>
+                                        <div class="ev-input" style="background: #f5f5f5; color: #666; cursor: not-allowed; display: flex; align-items: center;">
+                                            Phần trăm (%)
+                                        </div>
+                                        <input type="hidden" id="edit-discountType" value="percentage">
                                     </div>
 
                                     <div class="ev-group">
-                                        <label class="ev-label">Mức giảm</label>
-                                        <input type="number" class="ev-input" id="edit-discountValue" value="20">
+                                        <label class="ev-label">Mức giảm (%)</label>
+                                        <input type="number" class="ev-input" id="edit-discountValue" min="1" max="100" placeholder="20">
                                     </div>
 
                                     <div class="ev-group">
                                         <label class="ev-label">Ngày bắt đầu</label>
-                                        <input type="date" class="ev-input" id="edit-startDate" value="2026-01-01">
+                                        <input type="date" class="ev-input" id="edit-startDate">
                                     </div>
 
                                     <div class="ev-group">
                                         <label class="ev-label">Ngày kết thúc</label>
-                                        <input type="date" class="ev-input" id="edit-endDate" value="2026-01-15">
+                                        <input type="date" class="ev-input" id="edit-endDate">
                                     </div>
 
                                     <div class="ev-group ev-col-2">
                                         <label class="ev-label">Mô tả sự kiện</label>
-                                        <textarea class="ev-input" id="edit-eventDesc" rows="3" style="height: auto;">Chương trình khuyến mãi lớn nhất đầu năm dành cho mọi khách hàng khi mua sắm các thiết bị gia dụng và phụ kiện ô tô.</textarea>
+                                        <textarea class="ev-input" id="edit-eventDesc" rows="3" style="height: auto;" placeholder="Mô tả nội dung khuyến mãi..."></textarea>
                                     </div>
 
                                     <div class="ev-group ev-col-2">
-                                        <label class="ev-label">Chọn Slide cho sự kiện</label>
-
-                                        <div class="ev-slide-sel" id="editEventSlideSelect">
-                                            <div class="ev-slide-sel__selected">
-                                                <div class="ev-slide-opt">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
-                                                    <div class="ev-slide-opt__content">
-                                                        <strong class="ev-slide-opt__title">Slide chính</strong>
-                                                        <span class="ev-slide-opt__desc">- Banner lớn trang chủ</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="ev-slide-sel__options" style="display: none;">
-                                                <div class="ev-slide-opt" data-value="none">
-                                                    <div class="ev-slide-opt__content">
-                                                        <strong class="ev-slide-opt__title">Không hiển thị lên Slide</strong>
-                                                    </div>
-                                                </div>
-                                                <div class="ev-slide-opt" data-value="home-main">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-main-thumb.png" alt="" class="ev-slide-opt__img">
-                                                    <div class="ev-slide-opt__content">
-                                                        <strong class="ev-slide-opt__title">Slide chính</strong>
-                                                        <span class="ev-slide-opt__desc">- Banner lớn trang chủ</span>
-                                                    </div>
-                                                </div>
-                                                <div class="ev-slide-opt" data-value="home-sub">
-                                                    <img src="${pageContext.request.contextPath}/assets/img/slide-sub-thumb.png" alt="" class="ev-slide-opt__img">
-                                                    <div class="ev-slide-opt__content">
-                                                        <strong class="ev-slide-opt__title">Banner phụ</strong>
-                                                        <span class="ev-slide-opt__desc">- Banner nhỏ bên phải</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" id="editEventSlideTargetHidden" value="home-main">
-                                    </div>
-                                    <div class="ev-group ev-col-2">
-                                        <label class="ev-label">Phạm vi áp dụng giảm giá</label>
-                                        <div class="ev-radio-group">
-                                            <label class="ev-radio">
-                                                <input type="radio" name="editApplyScope" value="all" checked>
-                                                <span class="ev-radio-mark"></span> <span>Tất cả sản phẩm</span>
+                                        <label class="ev-label" style="font-weight: 600; margin-bottom: 10px; display: block;">Thay đổi phạm vi áp dụng</label>
+                                        <div class="ev-radio-group" style="display: flex; gap: 20px;">
+                                            <label class="ev-radio" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                <input type="radio" name="editApplyScope" value="all">
+                                                <span>Tất cả sản phẩm</span>
                                             </label>
-                                            <label class="ev-radio">
+                                            <label class="ev-radio" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
                                                 <input type="radio" name="editApplyScope" value="category">
-                                                <span class="ev-radio-mark"></span> <span>Theo danh mục</span>
-                                            </label>
-                                            <label class="ev-radio">
-                                                <input type="radio" name="editApplyScope" value="specific">
-                                                <span class="ev-radio-mark"></span> <span>Sản phẩm cụ thể</span>
+                                                <span>Theo danh mục</span>
                                             </label>
                                         </div>
 
-                                        <div id="editScopeCategory" class="ev-scope-box" style="display: none; margin-top: 15px;">
+                                        <div id="editScopeCategory" class="ev-scope-box" style="display: none; margin-top: 15px; padding: 15px; border: 1px dashed #ddd; border-radius: 8px;">
+                                            <label class="ev-label">Chọn danh mục mới:</label>
                                             <select class="ev-input" id="editApplyCategories">
-                                                <option value="">-- Chọn một danh mục --</option>
-                                                <option value="1">Gia dụng - Nhà cửa</option>
-                                                <option value="2">Phụ kiện ô tô</option>
+                                                <option value="0">-- Chọn một danh mục --</option>
                                             </select>
-                                        </div>
-
-                                        <div id="editScopeSpecific" class="ev-scope-box" style="display: none; margin-top: 15px;">
-                                            <div class="ev-search-bar" style="max-width: 100%; margin-bottom: 10px;">
-                                                <input type="text" id="editProductSearch" class="ev-input" placeholder="Tìm sản phẩm để cập nhật...">
-                                            </div>
-                                            <div class="ev-table-wrapper">
-                                                <table class="ev-table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th >Chọn</th>
-                                                        <th >Ảnh</th>
-                                                        <th>Tên sản phẩm</th>
-                                                        <th>Giá</th>
-                                                        <th>Danh mục</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="editEventProductList">
-                                                    </tbody>
-                                                </table>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
 
-                        <div class="ev-footer">
+                        <div class="ev-footer" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
                             <button class="ev-btn ev-btn--outline" onclick="backToEventList()">Hủy bỏ</button>
                         </div>
                     </section>
@@ -3472,6 +3420,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         loadCategories();
         setupFormSubmit();
+        setupScopeToggle();
     });
 
     async function loadCategories() {
@@ -3487,41 +3436,80 @@
             }
         } catch (err) { console.error("Lỗi load categories:", err); }
     }
+
+    // 2. Hàm xử lý ẩn hiện Select Danh mục dựa trên Radio được chọn
+    function setupScopeToggle() {
+        const radios = document.querySelectorAll('input[name="applyScope"]');
+        const scopeBox = document.getElementById('scopeCategory');
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'category') {
+                    scopeBox.style.display = 'block';
+                } else {
+                    scopeBox.style.display = 'none';
+                    // Reset select về 0 nếu người dùng quay lại chọn "Tất cả"
+                    const select = document.querySelector('select[name="applyCategories"]');
+                    if (select) select.value = "0";
+                }
+            });
+        });
+    }
+
+    // 3. Hàm xử lý gửi Form (Fix lỗi lưu 2 lần và xử lý id_cate)
     function setupFormSubmit() {
         const form = document.getElementById('addEventForm');
         if (!form) return;
 
-        form.onsubmit = async function(e) {
-            e.preventDefault();
+        // Dùng addEventListener thay vì onsubmit để đảm bảo tính duy nhất
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Chặn hành vi submit mặc định (quan trọng nhất)
+            e.stopImmediatePropagation(); // Chặn các script khác cùng lắng nghe sự kiện này
 
-            const formData = new FormData(form);
+            const formData = new FormData(this);
+            const scope = formData.get('applyScope');
+
+            // Xử lý LOGIC ID_CATE:
+            // Nếu là "all", chúng ta đảm bảo gửi applyCategories = 0 lên Server
+            if (scope === 'all') {
+                formData.set('applyCategories', '0');
+            }
+
+            // Hiệu ứng nút bấm khi đang lưu
+            const saveBtn = document.querySelector('.event-btn--save');
+            const originalText = saveBtn.innerHTML;
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý...';
 
             try {
-
-                const response = await fetch('/DoAnWeb/admin/add-discount', {
+                const response = await fetch('${pageContext.request.contextPath}/admin/add-discount', {
                     method: 'POST',
                     body: formData
-
                 });
 
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error("Mã lỗi: " + response.status + " - " + errorText);
+                    throw new Error("Mã lỗi: " + response.status);
                 }
 
                 const result = await response.json();
                 if (result.status === "success") {
                     alert("Lưu sự kiện thành công!");
-                    form.reset();
+                    this.reset();
+                    // Ẩn lại box category sau khi reset form
+                    document.getElementById('scopeCategory').style.display = 'none';
                     if (typeof backToEventList === "function") backToEventList();
+                    location.reload(); // Reload để cập nhật bảng
                 } else {
                     alert("Lỗi: " + result.message);
                 }
             } catch (error) {
                 console.error("Chi tiết lỗi:", error);
-                alert("Lỗi hệ thống: " + error.message);
+                alert("Lỗi kết nối Server.");
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = originalText;
             }
-        };
+        });
     }
 </script>
 <script>
@@ -3730,79 +3718,148 @@
     });
 </script>
 <script>
-
+    // --- HÀM XEM (GIỮ NGUYÊN) ---
     function viewDiscount(id) {
         fetch(contextPath + '/api/admin/discount-detail?id=' + id)
-            .then(res => res.text()) // Đọc dạng text để tránh lỗi JSON nửa chừng
-            .then(text => {
-                console.log("Dữ liệu nhận được:", text);
-                const d = JSON.parse(text);
-
-                // Đổ dữ liệu vào giao diện
+            .then(res => res.json())
+            .then(d => {
+                if (d.status === "error") throw new Error(d.message);
                 document.getElementById('view-eventName').textContent = d.name;
                 document.getElementById('view-descrip').textContent = d.description || "Không có mô tả";
                 document.getElementById('view-startDate').textContent = d.startDate;
                 document.getElementById('view-endDate').textContent = d.endDate;
+                document.getElementById('view-categoryName').textContent = d.categoryName;
 
-                // Xử lý loại giảm giá (dựa trên giá trị từ Java)
                 const isPercent = (d.typeDiscount === "percentage" || d.typeDiscount == 1);
                 document.getElementById('view-discountType').textContent = isPercent ? "Phần trăm (%)" : "Tiền mặt (VNĐ)";
                 document.getElementById('view-discountValue').textContent = d.discount + (isPercent ? "%" : " VNĐ");
-                hideAllSections();
-                // QUAN TRỌNG: Chuyển trang an toàn
-                const listPage = document.getElementById('discount-list-page');
-                const viewPage = document.getElementById('view-event-page');
 
-                if (listPage && viewPage) {
-                    listPage.style.display = 'none';
+                if (typeof hideAllSections === "function") hideAllSections();
+                const viewPage = document.getElementById('view-event-page');
+                if (viewPage) {
                     viewPage.style.display = 'block';
                     window.scrollTo(0, 0);
-                } else {
-                    console.error("Không tìm thấy ID 'discount-list-page' hoặc 'view-event-page'. Hãy kiểm tra lại HTML!");
                 }
             })
-            .catch(err => {
-                console.error("Lỗi fetch chi tiết:", err);
-                alert("Lỗi tải dữ liệu: " + err.message);
-            });
+            .catch(err => alert("Lỗi tải: " + err.message));
     }
-    function deleteDiscount(id) {
-        if (confirm("Bạn có chắc chắn muốn xóa?")) {
-            const url = contextPath + '/api/admin/delete-discount';
 
-            fetch(url, {
+    // --- HÀM SỬA (FIX DẤU NGOẶC + DATE) ---
+    async function editDiscount(id) {
+        try {
+            const res = await fetch(contextPath + '/api/admin/discount-detail?id=' + id);
+            const d = await res.json();
+            if (d.status === "error") throw new Error(d.message);
+
+            hideAllSections();
+            document.getElementById('edit-event-page').style.display = 'block';
+
+            if (document.getElementById('edit-currentCategoryName')) {
+                document.getElementById('edit-currentCategoryName').textContent = d.categoryName;
+            }
+
+            document.getElementById('edit-eventName').value = d.name;
+            document.getElementById('edit-discountType').value = d.typeDiscount == 1 ? "percentage" : "amount";
+            document.getElementById('edit-discountValue').value = d.discount;
+            document.getElementById('edit-eventDesc').value = d.description || "";
+            document.getElementById('editEventForm').dataset.currentId = id;
+
+            // Chuyển dd/MM/yyyy (từ Controller) sang yyyy-MM-dd (cho input date)
+            const formatDateForInput = (dateStr) => {
+                if (!dateStr || !dateStr.includes('/')) return "";
+                const parts = dateStr.split('/');
+                if(parts.length !== 3) return "";
+                return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+            };
+
+            document.getElementById('edit-startDate').value = formatDateForInput(d.startDate);
+            document.getElementById('edit-endDate').value = formatDateForInput(d.endDate);
+
+            await loadEditCategories();
+
+            const idCate = d.id_cate || 0;
+            const scopeBox = document.getElementById('editScopeCategory');
+            if (idCate > 0) {
+                const rb = document.querySelector('input[name="editApplyScope"][value="category"]');
+                if(rb) rb.checked = true;
+                if(scopeBox) scopeBox.style.display = 'block';
+                document.getElementById('editApplyCategories').value = idCate;
+            } else {
+                const rbAll = document.querySelector('input[name="editApplyScope"][value="all"]');
+                if(rbAll) rbAll.checked = true;
+                if(scopeBox) scopeBox.style.display = 'none';
+            }
+        } catch (err) {
+            alert("Lỗi: " + err.message);
+        }
+    } // Đã đóng ngoặc hàm editDiscount
+
+    // --- HÀM LOAD CATEGORIES (GIỮ NGUYÊN) ---
+    async function loadEditCategories() {
+        try {
+            const response = await fetch(window.location.origin + '/DoAnWeb/api/categories');
+            const data = await response.json();
+            const select = document.getElementById('editApplyCategories');
+            if (select) {
+                select.innerHTML = '<option value="">-- Chọn một danh mục --</option>';
+                data.forEach(cat => select.add(new Option(cat.name, cat.id)));
+            }
+        } catch (err) { console.error(err); }
+    }
+
+    // --- HÀM LƯU (GIỮ NGUYÊN LOGIC NHƯNG THÊM CHECK TRỐNG) ---
+    async function saveDiscountUpdate() {
+        const form = document.getElementById('editEventForm');
+        const discountId = form.dataset.currentId;
+
+        const sDate = document.getElementById('edit-startDate').value;
+        const eDate = document.getElementById('edit-endDate').value;
+
+        // Nếu ngày trống, báo lỗi ngay tại đây thay vì để Controller báo lỗi Parse
+        if (!sDate || !eDate) {
+            alert("Vui lòng không để trống ngày tháng!");
+            return;
+        }
+
+        const payload = {
+            id: parseInt(discountId),
+            name: document.getElementById('edit-eventName').value,
+            type: document.getElementById('edit-discountType').value,
+            value: parseFloat(document.getElementById('edit-discountValue').value),
+            startDate: sDate,
+            endDate: eDate,
+            description: document.getElementById('edit-eventDesc').value,
+            scope: document.querySelector('input[name="editApplyScope"]:checked').value,
+            categoryId: document.getElementById('editApplyCategories').value
+        };
+
+        try {
+            const response = await fetch(contextPath + '/api/admin/update-discount', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'id=' + id
-            })
-                .then(res => {
-                    // Đọc dưới dạng text trước để debug nếu JSON lỗi
-                    return res.text().then(text => {
-                        try {
-                            return JSON.parse(text);
-                        } catch (e) {
-                            console.error("Nội dung Server trả về lỗi:", text);
-                            throw new Error("Server trả về định dạng không hợp lệ (Xem console)");
-                        }
-                    });
-                })
-                .then(data => {
-                    if (data.status === "success") {
-                        alert("Xóa thành công!");
-                        location.reload();
-                    } else {
-                        alert("Lỗi từ Server: " + data.message);
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert(err.message);
-                });
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert("Cập nhật thành công!");
+                backToEventList();
+                if (typeof loadDiscountList === 'function') loadDiscountList();
+            } else {
+                alert("Cập nhật thất bại: " + result.message);
+            }
+        } catch (err) {
+            alert("Lỗi kết nối Server.");
         }
     }
+
+    // Event Radios
+    document.querySelectorAll('input[name="editApplyScope"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const box = document.getElementById('editScopeCategory');
+            if (box) box.style.display = (e.target.value === 'category') ? 'block' : 'none';
+        });
+    });
 </script>
-<!-- Link JS -->
 <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </html>

@@ -1,7 +1,10 @@
 package com.webgiadung.doanweb.controller.admin;
 
 import com.webgiadung.doanweb.model.Discounts;
+import com.webgiadung.doanweb.model.Categories;
 import com.webgiadung.doanweb.services.DiscountService;
+import com.webgiadung.doanweb.services.CategoriesService; // Đảm bảo đã import
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,8 +17,8 @@ import java.time.format.DateTimeFormatter;
 
 @WebServlet("/api/admin/discount-detail")
 public class ViewDiscountController extends HttpServlet {
-
     private final DiscountService discountService = new DiscountService();
+    private final CategoriesService categoriesService = new CategoriesService();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @Override
@@ -24,14 +27,12 @@ public class ViewDiscountController extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
         PrintWriter out = response.getWriter();
-        String idParam = request.getParameter("id");
 
         try {
+            String idParam = request.getParameter("id");
             if (idParam == null || idParam.isEmpty()) {
-                response.setStatus(400);
-                out.print("{\"error\": \"Missing ID\"}");
+                out.print("{\"status\":\"error\", \"message\": \"ID không hợp lệ\"}");
                 return;
             }
 
@@ -39,41 +40,40 @@ public class ViewDiscountController extends HttpServlet {
             Discounts d = discountService.getDiscountById(id);
 
             if (d != null) {
+
+                String categoryName = "Tất cả sản phẩm";
+                if (d.getId_cate() > 0) {
+                    Categories cat = categoriesService.getCategory(d.getId_cate());
+                    if (cat != null) {
+                        categoryName = cat.getName();
+                    }
+                }
+
                 StringBuilder json = new StringBuilder();
                 json.append("{");
+                json.append("\"status\": \"success\",");
                 json.append("\"id\": ").append(d.getId()).append(",");
                 json.append("\"name\": \"").append(escapeJson(d.getName())).append("\",");
-
-                // SỬA Ở ĐÂY: Nếu là chuỗi thì phải có \" bao quanh giá trị
-                // Nếu getTypeDiscount trả về chuỗi "percentage", nó sẽ thành "typeDiscount": "percentage"
                 json.append("\"typeDiscount\": \"").append(d.getTypeDiscount()).append("\",");
-
                 json.append("\"discount\": ").append(d.getDiscount()).append(",");
                 json.append("\"description\": \"").append(escapeJson(d.getDescription())).append("\",");
                 json.append("\"startDate\": \"").append(d.getStartDate().format(formatter)).append("\",");
-                json.append("\"endDate\": \"").append(d.getEndDate().format(formatter)).append("\"");
+                json.append("\"endDate\": \"").append(d.getEndDate().format(formatter)).append("\","); // CÓ DẤU PHẨY
+                json.append("\"categoryName\": \"").append(escapeJson(categoryName)).append("\"");    // TRƯỜNG CUỐI KHÔNG DẤU PHẨY
                 json.append("}");
 
                 out.print(json.toString());
-                out.flush(); // Đẩy dữ liệu đi ngay
-            }else {
-                response.setStatus(404);
-                out.print("{\"error\": \"Not found\"}");
+            } else {
+                out.print("{\"status\":\"error\", \"message\": \"Không tìm thấy dữ liệu\"}");
             }
         } catch (Exception e) {
-            e.printStackTrace();
             response.setStatus(500);
-            out.print("{\"error\": \"Server error\"}");
-        } finally {
-            out.flush();
+            out.print("{\"status\":\"error\", \"message\": \"Lỗi: " + e.getMessage() + "\"}");
         }
     }
 
     private String escapeJson(String input) {
         if (input == null) return "";
-        return input.replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", " ")
-                .replace("\r", "");
+        return input.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", " ").replace("\r", "");
     }
 }

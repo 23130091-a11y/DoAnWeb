@@ -130,5 +130,11 @@ public class ProductService {
     public List<Product> searchByDiscountName(String discountName) {
         return pdao.searchByDiscountName(discountName);
     }
+    public int updateProductPricesByDiscountId(int discountId) {
+        return pdao.updateProductPricesByDiscountId(discountId);
+    }
+    public int removeDiscount(int discountId) {
+        return pdao.removeDiscount(discountId);
+    }
 }
 

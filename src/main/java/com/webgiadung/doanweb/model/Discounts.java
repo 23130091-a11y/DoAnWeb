@@ -11,18 +11,28 @@ public class Discounts implements Serializable {
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private int id_cate;
 
     public Discounts() {
     }
 
-    public Discounts(int id, String name, String typeDiscount, double discount, String description, LocalDateTime startDate, LocalDateTime endDate) {
+    public Discounts(int id, String name, String typeDiscount, double discount, String description, LocalDateTime endDate, LocalDateTime startDate, int id_cate) {
         this.id = id;
         this.name = name;
         this.typeDiscount = typeDiscount;
         this.discount = discount;
         this.description = description;
-        this.startDate = startDate;
         this.endDate = endDate;
+        this.startDate = startDate;
+        this.id_cate = id_cate;
+    }
+
+    public int getId_cate() {
+        return id_cate;
+    }
+
+    public void setId_cate(int id_cate) {
+        this.id_cate = id_cate;
     }
 
     public int getId() {

@@ -13,6 +13,7 @@ public class Slide implements Serializable {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+
     public Slide() {
     }
 
