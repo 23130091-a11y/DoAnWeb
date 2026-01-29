@@ -1,6 +1,6 @@
 package com.webgiadung.doanweb.controller.admin;
 
-import com.webgiadung.doanweb.model.FileUtil;
+import com.webgiadung.doanweb.utils.FileUtils;
 import com.webgiadung.doanweb.model.Product;
 import com.webgiadung.doanweb.model.ProductDescriptions;
 import com.webgiadung.doanweb.model.ProductDetails;
@@ -57,10 +57,12 @@ public class AddProductController extends HttpServlet {
             p.setQuantity(Integer.parseInt(req.getParameter("productStock")));
             p.setPost("1".equals(postStatusRaw) ? 1 : 0);
 
-            // Lưu ảnh chính sản phẩm
+            String realPath = getServletContext().getRealPath("/");
+
+            // Ảnh chính
             Part mainPart = req.getPart("productImage");
             if (mainPart != null && mainPart.getSize() > 0) {
-                p.setImage(FileUtil.saveFile(mainPart, "products"));
+                p.setImage(FileUtils.saveFile(mainPart, realPath, "products"));
             }
 
             // --- 2. LƯU SẢN PHẨM & LẤY ID ---
@@ -97,8 +99,9 @@ public class AddProductController extends HttpServlet {
                         detail.setTitle(detTitles[i]);
                         detail.setDescription(detContents[i]);
 
+                        // Ảnh chi tiết
                         if (i < detImages.size()) {
-                            detail.setImage(FileUtil.saveFile(detImages.get(i), "details"));
+                            detail.setImage(FileUtils.saveFile(detImages.get(i), realPath, "details"));
                         }
                         productService.addProductDetail(detail);
                     }

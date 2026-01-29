@@ -8,17 +8,17 @@ public class AuthService {
 
     public User checkLogin(String email, String password) {
         User user = authDao.getUserByEmail(email);
+
+        // 1. Kiểm tra tồn tại
         if (user == null) return null;
 
-        // CHẶN TÀI KHOẢN BỊ KHÓA
-        if (user.getStatus() != 1) return null;
+        // 2. Check password (Dùng equals để so sánh chuỗi MD5)
+        // password truyền vào đây phải là chuỗi đã băm MD5 từ Controller
+        if (user.getPassword() != null && user.getPassword().equals(password)) {
+            return user;
+        }
 
-        // check password
-        if (user.getPassword() == null) return null;
-        if (password == null) password = "";
-        if (!user.getPassword().equals(password)) return null;
-
-        return user;
+        return null; // Sai mật khẩu
     }
 
     public User loginWithGoogle(String email, String name) {

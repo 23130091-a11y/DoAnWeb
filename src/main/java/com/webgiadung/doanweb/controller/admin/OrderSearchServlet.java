@@ -14,7 +14,6 @@ public class OrderSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String keyword = request.getParameter("keyword");
-
         OrderAdminDao orderAdminDao = new OrderAdminDao();
         List<OrderAdmin> orders;
 
@@ -23,9 +22,19 @@ public class OrderSearchServlet extends HttpServlet {
         } else {
             orders = orderAdminDao.searchOrders(keyword.trim());
         }
-        request.setAttribute("keyword", keyword);
+
         request.setAttribute("orders", orders);
-        request.getRequestDispatcher("/admin.jsp").forward(request, response);
+
+        // Kiểm tra xem đây có phải là yêu cầu AJAX không
+        String xRequestedWith = request.getHeader("X-Requested-With");
+        if ("XMLHttpRequest".equals(xRequestedWith)) {
+            // Chỉ trả về phần bảng (tạo file jsp riêng hoặc dùng file hiện tại nhưng chỉ lấy đoạn nội dung)
+            request.getRequestDispatcher("/_order_list.jsp").forward(request, response);
+        } else {
+            // Trả về cả trang nếu người dùng load trực tiếp bằng link
+            request.setAttribute("keyword", keyword);
+            request.getRequestDispatcher("/admin.jsp").forward(request, response);
+        }
     }
 
     @Override

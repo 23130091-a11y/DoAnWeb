@@ -46,7 +46,7 @@
             <!-- Login Google -->
             <div class="social-login">
                 <a class="btn-google" href="https://accounts.google.com/o/oauth2/auth?scope=profile email&redirect_uri=http://localhost:8080/DoAnWeb/login-google&response_type=code
-		   &client_id=your-client-key&approval_prompt=force">
+		   &client_id=&approval_prompt=force">
                     <i class="fa-brands fa-google"></i>
                     Đăng nhập với Google
                 </a>

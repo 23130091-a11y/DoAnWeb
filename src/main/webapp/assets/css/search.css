@@ -123,4 +123,44 @@
     padding: 15px; 
     margin-top: 20px; 
 }
+.product-card .price-discount {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 4px;
+    margin-bottom: 5px;
+}
+
+.price-discount .price-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-discount .price-bottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.price-discount .price-bottom .new-price {
+    color: red;
+}
+
+.price-discount .price-top .old-price {
+    color: #989292;
+    text-decoration: line-through;
+    font-weight: normal;
+}
+
+.price-discount .price-top .discount-badge {
+    background-color: #FFF9C4;
+    color: red;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 10;
+}
 

@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="assets/css/grid.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/search.css">
+    <link rel="stylesheet" href="assets/css/search.css?v=1">
 
     <!-- Link favicon -->
 </head>
@@ -83,25 +83,52 @@
                             <article class="search-filter__category">
                                 <h3 class="search-filter__title">Theo thương hiệu</h3>
                                 <div class="search-filter__options">
+
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-bear" value="Bear" />
-                                        <label class="search-filter__checkbox" for="brand-bear">Bear</label>
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-spark-l" value="SPARK-L" />
+                                        <label class="search-filter__checkbox" for="brand-spark-l">SPARK-L</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-vietnhat" value="Việt Nhật Plastic" />
-                                        <label class="search-filter__checkbox" for="brand-vietnhat">Việt Nhật Plastic</label>
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-oboking" value="Obo king" />
+                                        <label class="search-filter__checkbox" for="brand-oboking">Obo king</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-akata" value="AKATA" />
-                                        <label class="search-filter__checkbox" for="brand-akata">AKATA</label>
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-gardena" value="Gardena" />
+                                        <label class="search-filter__checkbox" for="brand-gardena">Gardena</label>
                                     </div>
 
                                     <div class="search-filter__item">
-                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-inochi" value="inochi" />
-                                        <label class="search-filter__checkbox" for="brand-inochi">inochi</label>
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-worx" value="WORX" />
+                                        <label class="search-filter__checkbox" for="brand-worx">WORX</label>
                                     </div>
+
+                                    <div class="search-filter__item">
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-black-decker" value="Black+Decker" />
+                                        <label class="search-filter__checkbox" for="brand-black-decker">Black+Decker</label>
+                                    </div>
+
+                                    <div class="search-filter__item">
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-okabe" value="Okabe" />
+                                        <label class="search-filter__checkbox" for="brand-okabe">Okabe</label>
+                                    </div>
+
+                                    <div class="search-filter__item">
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-anhvica" value="Anh Vi Cá" />
+                                        <label class="search-filter__checkbox" for="brand-anhvica">Anh Vi Cá</label>
+                                    </div>
+
+                                    <div class="search-filter__item">
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-mayo" value="Mayo" />
+                                        <label class="search-filter__checkbox" for="brand-mayo">Mayo</label>
+                                    </div>
+
+                                    <div class="search-filter__item">
+                                        <input hidden type="checkbox" name="brands" class="filter-checkbox" id="brand-kobayashi" value="Kobayashi" />
+                                        <label class="search-filter__checkbox" for="brand-kobayashi">Kobayashi</label>
+                                    </div>
+
                                 </div>
                             </article>
 
@@ -218,17 +245,15 @@
                         <section class="product-search-list">
                             <div class="search-header">
                                 <c:choose>
-
+                                    <%-- Ưu tiên hiện Keyword nếu đang search --%>
                                     <c:when test="${not empty keyword}">
-                                        <p>Kết quả tìm kiếm:</p>
-                                        <div class="word-search">${keyword}</div>
+                                        <p>Kết quả tìm kiếm cho: <span class="word-search">${keyword}</span></p>
                                     </c:when>
 
+                                    <%-- Hiện Tên Danh Mục thật từ Database --%>
                                     <c:when test="${not empty category}">
-                                        <p>Danh mục:</p>
-                                        <div class="word-search">${category.name}</div>
+                                        <p>Danh mục: <span class="word-search">${category.name}</span></p>
                                     </c:when>
-
                                 </c:choose>
                             </div>
                             <div class="row-list row small-gutter" id="content-products">
@@ -248,22 +273,15 @@
                                         </a>
 
                                         <div class="price-discount">
-                                                <%-- Chỉ hiện phần giá cũ nếu có giảm giá --%>
                                             <c:if test="${p.discountPercent > 0}">
                                                 <div class="price-top">
-                                                 <span class="old-price">
-                                                    <fmt:formatNumber value="${p.firstPrice}" type="number"/>đ
-                                                  </span>
-                                                    <div class="discount-badge" style="color: red;">
-                                                        Giảm ${p.discountPercent}%
-                                                    </div>
+                                                    <span class="old-price"><fmt:formatNumber value="${p.firstPrice}" type="number"/>đ</span>
+                                                    <div class="discount-badge">Giảm ${p.discountPercent}%</div>
                                                 </div>
                                             </c:if>
 
                                             <div class="price-bottom">
-                                            <span class="new-price">
-                                              <fmt:formatNumber value="${p.totalPrice}" type="number"/>đ
-                                               </span>
+                                                <span class="new-price"><fmt:formatNumber value="${p.totalPrice}" type="number"/>đ</span>
                                             </div>
                                         </div>
                                         <div class="bottom">
@@ -318,7 +336,7 @@
 
             const urlParams = new URLSearchParams(window.location.search);
 
-            let categoryId = urlParams.get('id') || "";
+            let categoryId = urlParams.get('categoryId') || "";
 
 
             let keyword = urlParams.get('keyword') || "";

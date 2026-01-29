@@ -20,17 +20,27 @@ public class OrderDeleteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String[] ids = request.getParameterValues("orderIds"); // nhận mảng id từ form
+        String[] ids = request.getParameterValues("orderIds");
         OrderAdminDao dao = new OrderAdminDao();
+
         if(ids != null && ids.length > 0) {
             List<Integer> orderIds = Arrays.stream(ids)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-
             dao.deleteOrders(orderIds);
         }
 
-        // Sau khi xóa, redirect về trang order admin
-        response.sendRedirect("order-admin");
+        // Kiểm tra nếu là yêu cầu AJAX
+        String xRequestedWith = request.getHeader("X-Requested-With");
+        if ("XMLHttpRequest".equals(xRequestedWith)) {
+            // Lấy lại danh sách mới sau khi đã xóa
+            List<OrderAdmin> orders = dao.getAllOrders();
+            request.setAttribute("orders", orders);
+            // Trả về cái "ruột" bảng để AJAX cập nhật giao diện
+            request.getRequestDispatcher("/_order_list.jsp").forward(request, response);
+        } else {
+            // Nếu xóa theo kiểu cũ thì redirect
+            response.sendRedirect("order-admin");
+        }
     }
 }

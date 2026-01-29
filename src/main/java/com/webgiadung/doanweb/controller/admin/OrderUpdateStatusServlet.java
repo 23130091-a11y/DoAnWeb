@@ -21,12 +21,21 @@ public class OrderUpdateStatusServlet extends HttpServlet {
         String type = request.getParameter("type");
         int status = Integer.parseInt(request.getParameter("status"));
 
+        // Thực hiện update
         if ("transport".equals(type)) {
             orderAdminDao.updateStatusTransport(orderId, status);
         } else if ("payment".equals(type)) {
             orderAdminDao.updateStatusPayment(orderId, status);
         }
 
-        response.sendRedirect("order-admin");
+        // Kiểm tra AJAX
+        String xRequestedWith = request.getHeader("X-Requested-With");
+        if ("XMLHttpRequest".equals(xRequestedWith)) {
+            // Lấy lại danh sách mới để cập nhật giao diện
+            request.setAttribute("orders", orderAdminDao.getAllOrders());
+            request.getRequestDispatcher("/_order_list.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("order-admin");
+        }
     }
 }

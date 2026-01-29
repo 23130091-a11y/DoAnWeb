@@ -2,6 +2,7 @@ package com.webgiadung.doanweb.controller;
 
 import com.webgiadung.doanweb.model.User;
 import com.webgiadung.doanweb.services.AuthService;
+import com.webgiadung.doanweb.utils.SecurityUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -17,68 +18,45 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Làm sạch đầu vào (tránh lỗi null hoặc khoảng trắng)
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        email = (email == null) ? "" : email.trim().toLowerCase();
+        password = (password == null) ? "" : password;
 
         AuthService authService = new AuthService();
-        User user = authService.checkLogin(email, password);
 
-        // 1) Sai tài khoản/mật khẩu
+        // Băm mật khẩu để so sánh
+        String hashedInput = SecurityUtils.hashMD5(password);
+
+        // Gọi Service (Lúc này AuthService chỉ nên check Email & Password)
+        User user = authService.checkLogin(email, hashedInput);
+
+        // 1) Kiểm tra nếu sai tài khoản hoặc sai mật khẩu
         if (user == null) {
-            request.setAttribute("error", "Sai email hoặc mật khẩu");
+            request.setAttribute("error", "Email hoặc mật khẩu không chính xác!");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
 
-        // 2) Bị khóa
+        // 2) Kiểm tra trạng thái tài khoản (Sau khi đã xác nhận đúng Pass)
+        // Nếu status = 0 (Chưa verify email hoặc bị Admin khóa)
         if (user.getStatus() == 0) {
-            request.setAttribute("error", "Tài khoản đã bị khóa!");
+            request.setAttribute("error", "Tài khoản chưa được kích hoạt hoặc đã bị khóa.");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
 
-        // 3) Lưu session
+        // 3) Đăng nhập thành công -> Lưu session
         HttpSession session = request.getSession(true);
         session.setAttribute("user", user);
         session.setAttribute("USER_LOGIN", user);
 
-        // ===== LOAD CART FROM DB INTO SESSION (for header) =====
-        try {
-            com.webgiadung.doanweb.dao.CartDao cartDao = new com.webgiadung.doanweb.dao.CartDao();
-            com.webgiadung.doanweb.dao.CartItemDao itemDao = new com.webgiadung.doanweb.dao.CartItemDao();
-            com.webgiadung.doanweb.services.ProductService productService = new com.webgiadung.doanweb.services.ProductService();
-
-            int cartId = cartDao.getOrCreateCartId(user.getId());
-            session.setAttribute("CART_ID", cartId);
-
-            var rows = itemDao.findItems(cartId);
-            com.webgiadung.doanweb.model.Cart cart = new com.webgiadung.doanweb.model.Cart();
-            for (var r : rows) {
-                com.webgiadung.doanweb.model.Product p = productService.getProduct(r.productId);
-                if (p != null) cart.addItem(p, r.quantity);
-            }
-            session.setAttribute("cart", cart);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        // 4) Điều hướng theo role
-        if (user.getRole() == 1) {
+        // 4) Điều hướng theo vai trò (Role)
+        if (user.getRole() == 1) { // 1 là Admin
             response.sendRedirect(request.getContextPath() + "/admin/customers");
-            return;
-        }
-
-// USER thường: nếu có redirect hợp lệ thì quay lại đúng trang
-        String redirect = request.getParameter("redirect");
-        if (redirect != null) redirect = redirect.trim();
-
-// chỉ cho redirect nội bộ (tránh open redirect)
-        if (redirect != null && !redirect.isEmpty() && redirect.startsWith("/") && !redirect.startsWith("//")) {
-            response.sendRedirect(request.getContextPath() + redirect);
-        } else {
+        } else { // 0 là User
             response.sendRedirect(request.getContextPath() + "/list-product");
         }
-
     }
 }

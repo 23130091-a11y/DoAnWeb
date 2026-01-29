@@ -127,4 +127,8 @@ public class ProductService {
     public List<Product> getProductsFromIds(List<Integer> viewedIds) {
         return pdao.getProductsFromIds(viewedIds);
     }
+    public List<Product> searchByDiscountName(String discountName) {
+        return pdao.searchByDiscountName(discountName);
+    }
 }
+

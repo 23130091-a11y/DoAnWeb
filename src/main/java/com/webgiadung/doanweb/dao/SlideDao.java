@@ -16,6 +16,24 @@ public class SlideDao extends BaseDao{
 
         return slides;
     }
-
+    public static Slide getById(int id) {
+        return get().withHandle(h -> {
+            return h.createQuery("SELECT * FROM slide WHERE id = :id AND status = 1")
+                    .bind("id", id)
+                    .mapToBean(Slide.class)
+                    .findOne()
+                    .orElse(null);
+        });
+    }
+    public static int insert(Slide slide) {
+        return get().withHandle(handle -> {
+            return handle.createUpdate(
+                            "INSERT INTO slide (name, avatar, text, status, created_at, updated_at) " +
+                                    "VALUES (:name, :avatar, :text, :status, NOW(), NOW())"
+                    )
+                    .bindBean(slide)
+                    .execute();
+        });
+    }
 
 }

@@ -392,12 +392,12 @@
                                     <c:otherwise>
                                         <c:forEach var="u" items="${users}">
                                             <tr>
-                                               <td>
-                                                 <img class="customer-table__img customer-avatar"
-                                                      src="${pageContext.request.contextPath}/${empty u.avatar ? 'assets/img/default-avatar.png' : u.avatar}"
-                                                      alt="avatar"
-                                                      onerror="this.src='${pageContext.request.contextPath}/assets/img/default-avatar.png'">
-                                               </td>
+                                                <td>
+                                                    <img class="customer-table__img customer-avatar"
+                                                         src="${pageContext.request.contextPath}/${empty u.avatar ? 'assets/img/default-avatar.png' : u.avatar}"
+                                                         alt="avatar"
+                                                         onerror="this.src='${pageContext.request.contextPath}/assets/img/default-avatar.png'">
+                                                </td>
                                                 <td>${fn:escapeXml(u.name)}</td>
                                                 <td>${fn:escapeXml(u.email)}</td>
                                                 <td>${fn:escapeXml(u.address)}</td>
@@ -512,8 +512,8 @@
                                 </div>
 
                                 <div class="customer-detail__row">
-                                   <span class="label">Ngày cập nhật:</span>
-                                   <span class="value" id="customerDetailUpdatedAt">-</span>
+                                    <span class="label">Ngày cập nhật:</span>
+                                    <span class="value" id="customerDetailUpdatedAt">-</span>
                                 </div>
                             </div>
                         </div>
@@ -913,32 +913,34 @@
                         <div class="slide-table">
                             <div class="slide-table__header">
                                 <button type="submit" form="addSlideForm" class="slide-table__save">
-                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <i class="fa-solid fa-floppy-disk"></i> Lưu slide
                                 </button>
                             </div>
 
                             <div class="slide-table__inner">
-                                <form id="addSlideForm" class="add-slide-form">
+                                <form id="addSlideForm" class="add-slide-form" enctype="multipart/form-data">
 
-                                    <!-- Tên slide -->
                                     <div class="add-slide-form__field">
                                         <label class="add-slide-form__label">Tên slide:</label>
-                                        <input type="text" class="add-slide-form__input" required>
+                                        <input type="text" name="name" class="add-slide-form__input" placeholder="Nhập tên slide..." required>
                                     </div>
 
-                                    <!-- Trạng thái -->
+                                    <div class="add-slide-form__field">
+                                        <label class="add-slide-form__label">Mô tả ngắn:</label>
+                                        <input type="text" name="text" class="add-slide-form__input" placeholder="Nhập mô tả slide...">
+                                    </div>
+
                                     <div class="add-slide-form__field">
                                         <label class="add-slide-form__label">Trạng thái:</label>
-                                        <select class="add-slide-form__input">
-                                            <option value="active">Đang post</option>
-                                            <option value="inactive">Chưa post</option>
+                                        <select name="status" class="add-slide-form__input">
+                                            <option value="1">Đang post</option>
+                                            <option value="0">Chưa post</option>
                                         </select>
                                     </div>
 
-                                    <!-- Ảnh slide -->
                                     <div class="add-slide-form__field">
                                         <label class="add-slide-form__label">Ảnh slide:</label>
-                                        <input type="file" class="add-slide-form__input" accept="image/*" required>
+                                        <input type="file" name="avatar" class="add-slide-form__input" accept="image/*" required>
                                     </div>
 
                                     <button type="button"
@@ -946,7 +948,6 @@
                                             onclick="hideSlideAdd()">
                                         Quay lại
                                     </button>
-
                                 </form>
                             </div>
                         </div>
@@ -1009,46 +1010,46 @@
                             <button class="product-menu__btn active" data-target="product-list">Danh mục sản phẩm</button>
                             <button class="product-menu__btn" data-target="product-event">Sự kiện giảm giá</button>
                         </div>
-                            <div class="product-layout">
-                                <aside class="product-sidebar">
-                                    <h3 class="product-sidebar__heading">Danh mục</h3>
-                                    <ul class="product-sidebar__list" id="category-list">
-                                        <li class="product-sidebar__item">
-                                            <a href="#!" class="product-sidebar__link">Đang tải...</a>
-                                        </li>
-                                    </ul>
-                                </aside>
+                        <div class="product-layout">
+                            <aside class="product-sidebar">
+                                <h3 class="product-sidebar__heading">Danh mục</h3>
+                                <ul class="product-sidebar__list" id="category-list">
+                                    <li class="product-sidebar__item">
+                                        <a href="#!" class="product-sidebar__link">Đang tải...</a>
+                                    </li>
+                                </ul>
+                            </aside>
                             <div class="product-main-content">
                                 <div id="product-list-section">
-                                <div class="product-table">
-                                    <div class="event-search">
-                                        <div class="event-search__wrapper">
-                                            <input type="text" id="productSearchInput" class="event-search__input" placeholder="Tìm kiếm tên sản phẩm...">
-                                            <button class="event-search__btn" id="productSearchBtn">
-                                                <i class="fas fa-search"></i> Tìm kiếm
-                                            </button>
+                                    <div class="product-table">
+                                        <div class="event-search">
+                                            <div class="event-search__wrapper">
+                                                <input type="text" id="productSearchInput" class="event-search__input" placeholder="Tìm kiếm tên sản phẩm...">
+                                                <button class="event-search__btn" id="productSearchBtn">
+                                                    <i class="fas fa-search"></i> Tìm kiếm
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="product-table__header">
+                                            <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
+                                        </div>
+                                        <div class="product-table__inner">
+
+                                            <div class="product-table__row table-header">
+                                                <div class="product-table__cell">Ảnh</div>
+                                                <div class="product-table__cell">Tên sản phẩm</div>
+                                                <div class="product-table__cell">Post</div> <div class="product-table__cell">Giá</div>
+                                                <div class="product-table__cell">Xem</div>
+                                                <div class="product-table__cell">Sửa</div>
+                                                <div class="product-table__cell">Xóa</div>
+                                            </div>
+
+                                            <div id="product-list-container">
+                                                <div style="text-align: center; padding: 20px;">Đang tải dữ liệu...</div>
+                                            </div>
+
                                         </div>
                                     </div>
-                                    <div class="product-table__header">
-                                        <button class="btn btn--default-color product-table__btn">Thêm sản phẩm</button>
-                                    </div>
-                                    <div class="product-table__inner">
-
-                                        <div class="product-table__row table-header">
-                                            <div class="product-table__cell">Ảnh</div>
-                                            <div class="product-table__cell">Tên sản phẩm</div>
-                                            <div class="product-table__cell">Post</div> <div class="product-table__cell">Giá</div>
-                                            <div class="product-table__cell">Xem</div>
-                                            <div class="product-table__cell">Sửa</div>
-                                            <div class="product-table__cell">Xóa</div>
-                                        </div>
-
-                                        <div id="product-list-container">
-                                            <div style="text-align: center; padding: 20px;">Đang tải dữ liệu...</div>
-                                        </div>
-
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -1698,7 +1699,7 @@
                         <div class="order-table">
 
                             <!-- Form tìm kiếm -->
-                            <form action="<c:url value='/order-search'/>" method="get">
+                            <form id="searchOrderForm" action="${pageContext.request.contextPath}/order-search" method="get">
                                 <div class="order-table__filter">
                                     <div class="order-table__filter-label">
                                         Điều kiện lọc
@@ -1715,143 +1716,16 @@
                                             class="btn btn--default-color order-table__search-btn">
                                         Tìm kiếm
                                     </button>
+                                    <button type="button" id="btnReloadAll" class="btn btn--default-color" style="margin-left: 10px; min-width: 130px; --height: 30px;">
+                                        Tất cả đơn hàng
+                                    </button>
                                 </div>
                             </form>
 
-                        <div class="order-table" id="order-main-content">
-                            <!-- Form xóa -->
-                            <form id="deleteOrdersForm" action="<c:url value='/order-delete'/>" method="post">
-                                <div class="order-table__header">
-                                    <h3 class="order-table__heading">Danh sách đơn hàng</h3>
-                                    <!-- Nút xóa phải nằm trong form này -->
-                                    <button type="submit" class="btn btn--default-color order-table__btn">Xóa các mục đã chọn</button>
-                                </div>
-
-                                <div class="order-table__inner">
-
-                                    <!-- Header -->
-                                    <div class="order-table__row">
-                                        <div class="order-table__check">
-                                            <input type="checkbox" id="selectAll" class="order-table__checkbox">
-                                        </div>
-                                        <div class="order-table__cell">Mã</div>
-                                        <div class="order-table__cell">Khách hàng</div>
-                                        <div class="order-table__cell">Trạng thái</div>
-                                        <div class="order-table__cell">Thanh toán</div>
-                                        <div class="order-table__cell">Ngày tạo</div>
-                                        <div class="order-table__cell">Tổng tiền</div>
-                                    </div>
-
-                                    <!-- Row -->
-                                    <c:forEach var="order" items="${orders}">
-                                        <article class="order-table__row ${order.rowClass}">
-                                            <div class="order-table__check">
-                                                <input type="checkbox" name="orderIds" value="${order.id}" class="order-table__checkbox">
-                                            </div>
-
-                                            <div class="order-table__cell">
-                                                <a href="#!" class="order-table__text order-table__link">${order.id}</a>
-                                            </div>
-
-                                            <div class="order-table__cell">
-                                                <span class="order-table__text">${order.customer_name}</span>
-                                            </div>
-
-                                            <!-- ===== TRẠNG THÁI ĐƠN HÀNG ===== -->
-                                            <div class="order-table__cell">
-
-                                                <!-- Hiển thị -->
-                                                <span class="order-table__status ${order.statusTransportClass}">
-                                                        ${order.statusTransportText}
-                                                </span>
-
-                                                <!-- Điều khiển -->
-                                                <form action="<c:url value='order-update-status'/>"
-                                                      method="post"
-                                                      style="margin-top:6px">
-
-                                                    <input type="hidden" name="orderId" value="${order.id}">
-                                                    <input type="hidden" name="type" value="transport">
-
-                                                    <select name="status"
-                                                        ${order.status_transport == 1 || order.status_transport == 2
-                                                                ? 'disabled' : ''}>
-
-                                                        <option value="0"
-                                                            ${order.status_transport == 0 ? 'selected' : ''}>
-                                                            Đơn hàng mới
-                                                        </option>
-
-                                                        <option value="1"
-                                                            ${order.status_transport == 1 ? 'selected' : ''}>
-                                                            Hoàn thành
-                                                        </option>
-
-                                                        <option value="2"
-                                                            ${order.status_transport == 2 ? 'selected' : ''}>
-                                                            Hủy đơn
-                                                        </option>
-
-                                                    </select>
-
-                                                    <button type="submit"
-                                                            class="btn btn--default-color"
-                                                        ${order.status_transport == 1 || order.status_transport == 2
-                                                                ? 'disabled' : ''}>
-                                                        Lưu
-                                                    </button>
-                                                </form>
-                                            </div>
-
-
-                                            <!-- ===== TRẠNG THÁI THANH TOÁN ===== -->
-                                            <div class="order-table__cell">
-
-                                                <!-- Hiển thị -->
-                                                <span class="order-table__status ${order.statusPaymentClass}">
-                                                        ${order.statusPaymentText}
-                                                </span>
-
-                                                <!-- Điều khiển -->
-                                                <form action="<c:url value='order-update-status'/>"
-                                                      method="post"
-                                                      style="margin-top:6px">
-
-                                                    <input type="hidden" name="orderId" value="${order.id}">
-                                                    <input type="hidden" name="type" value="payment">
-
-                                                    <select name="status"
-                                                        ${order.status_payment == 1 ? 'disabled' : ''}>
-
-                                                        <option value="0"
-                                                            ${order.status_payment == 0 ? 'selected' : ''}>
-                                                            Chưa thanh toán
-                                                        </option>
-
-                                                        <option value="1"
-                                                            ${order.status_payment == 1 ? 'selected' : ''}>
-                                                            Đã thanh toán
-                                                        </option>
-
-                                                    </select>
-
-                                                    <button type="submit"
-                                                            class="btn btn--default-color"
-                                                        ${order.status_payment == 1 ? 'disabled' : ''}>
-                                                        Lưu
-                                                    </button>
-                                                </form>
-                                            </div>
-
-                                            <div class="order-table__cell">${order.created_at}</div>
-
-                                            <div class="order-table__cell">${order.total_price}đ</div>
-                                        </article>
-                                    </c:forEach>
-                                </div>
-                            </form>
+                            <div class="order-table" id="order-main-content">
+                                <jsp:include page="_order_list.jsp" />
+                            </div>
                         </div>
-
                     </section>
                 </div>
             </div>
@@ -1930,24 +1804,24 @@
         sectionEventEdit.style.display = "none";
 
     }
-// Mở đúng tab theo controller
-const serverTab = "${tab}"; // controller đang set "customers"
+    // Mở đúng tab theo controller
+    const serverTab = "${tab}"; // controller đang set "customers"
 
-window.addEventListener("DOMContentLoaded", () => {
-    if (!serverTab) return; // nếu không có tab thì thôi
+    window.addEventListener("DOMContentLoaded", () => {
+        if (!serverTab) return; // nếu không có tab thì thôi
 
-    hideAllSections();
+        hideAllSections();
 
-    if (serverTab === "customers") {
-        sectionCustomer.style.display = "block";
-    } else if (serverTab === "product") {
-        sectionProduct.style.display = "block";
-    } else if (serverTab === "order") {
-        sectionOrder.style.display = "block";
-    } else {
-        sectionConfig.style.display = "block";
-    }
-});
+        if (serverTab === "customers") {
+            sectionCustomer.style.display = "block";
+        } else if (serverTab === "product") {
+            sectionProduct.style.display = "block";
+        } else if (serverTab === "order") {
+            sectionOrder.style.display = "block";
+        } else {
+            sectionConfig.style.display = "block";
+        }
+    });
     // Click menu
     menuLinks.forEach(link => {
         link.addEventListener("click", function (e) {
@@ -3765,6 +3639,161 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         container.innerHTML = html;
+    }
+</script>
+<script>
+    document.getElementById('addSlideForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+
+        const formData = new FormData(this);
+
+        const saveBtn = this.closest('.slide-table').querySelector('.slide-table__save');
+        saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
+        saveBtn.disabled = true;
+
+        fetch('${pageContext.request.contextPath}/api/add-slide', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Thêm slide thành công!");
+                    location.reload();
+                } else {
+                    alert("Lỗi: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Đã có lỗi xảy ra khi kết nối server.");
+            })
+            .finally(() => {
+                saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Lưu slide';
+                saveBtn.disabled = false;
+            });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        // 1. AJAX TÌM KIẾM
+        $(document).on('submit', '#searchOrderForm', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'GET',
+                data: $(this).serialize(),
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                success: function(data) {
+                    $('#order-main-content').html(data);
+                }
+            });
+        });
+
+        // 2. CHỌN TẤT CẢ CHECKBOX
+        $(document).on('change', '#selectAll', function() {
+            $('.order-table__checkbox').prop('checked', this.checked);
+        });
+
+        // 3. AJAX XÓA NHIỀU (Sửa lại logic click nút thay vì submit form)
+        $(document).on('click', '#btnDeleteAll', function() {
+            let selectedIds = [];
+            $('input[name="orderIds"]:checked').each(function() {
+                selectedIds.push($(this).val());
+            });
+
+            if (selectedIds.length === 0) {
+                alert("Vui lòng chọn ít nhất một đơn hàng!");
+                return;
+            }
+
+            if (confirm('Bạn có chắc chắn muốn xóa các mục đã chọn?')) {
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/order-delete',
+                    type: 'POST',
+                    data: { orderIds: selectedIds }, // Gửi mảng ID
+                    traditional: true, // Quan trọng để gửi mảng qua AJAX cho Java nhận diện
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    success: function(response) {
+                        $('#order-main-content').html(response);
+                        alert("Đã xóa thành công!");
+                    }
+                });
+            }
+        });
+
+        // 4. AJAX CẬP NHẬT TRẠNG THÁI (Cả vận chuyển và thanh toán)
+        $(document).on('submit', '.form-update-status', function(e) {
+            e.preventDefault();
+            let form = $(this);
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize(),
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                success: function(response) {
+                    $('#order-main-content').html(response);
+                    alert("Cập nhật thành công!");
+                }
+            });
+        });
+    });
+
+    $(document).on('click', '#btnReloadAll', function() {
+        // Xóa trắng ô input tìm kiếm
+        $('input[name="keyword"]').val('');
+
+        // Gửi AJAX không kèm keyword để lấy toàn bộ danh sách
+        $.ajax({
+            url: '${pageContext.request.contextPath}/order-search',
+            type: 'GET',
+            data: { keyword: '' },
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+            success: function(data) {
+                $('#order-main-content').html(data);
+            }
+        });
+    });
+</script>
+<script>
+    function deleteDiscount(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa?")) {
+            const url = contextPath + '/api/admin/delete-discount';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'id=' + id
+            })
+                .then(res => {
+                    // Đọc dưới dạng text trước để debug nếu JSON lỗi
+                    return res.text().then(text => {
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error("Nội dung Server trả về lỗi:", text);
+                            throw new Error("Server trả về định dạng không hợp lệ (Xem console)");
+                        }
+                    });
+                })
+                .then(data => {
+                    if (data.status === "success") {
+                        alert("Xóa thành công!");
+                        location.reload();
+                    } else {
+                        alert("Lỗi từ Server: " + data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert(err.message);
+                });
+        }
     }
 </script>
 <!-- Link JS -->

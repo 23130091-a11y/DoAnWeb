@@ -47,13 +47,12 @@ public class Product implements Serializable {
     private String discountType;      // percentage | fixed
 
     public Double getDiscountPercent() {
-        return discountPercent;
+        return discountPercent != null ? discountPercent : 0.0;
     }
 
     public void setDiscountPercent(Double discountPercent) {
         this.discountPercent = discountPercent;
     }
-
     public String getDiscountType() {
         return discountType;
     }

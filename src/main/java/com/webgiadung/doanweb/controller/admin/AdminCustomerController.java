@@ -1,4 +1,4 @@
-package com.webgiadung.doanweb.controller;
+package com.webgiadung.doanweb.controller.admin;
 
 import com.webgiadung.doanweb.dao.AuthDao;
 import com.webgiadung.doanweb.model.User;

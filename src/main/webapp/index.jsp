@@ -68,7 +68,7 @@
                                                 <c:forEach items="${parent.children}" var="child">
                                                     <li class="category-menu__item">
                                                         <a class="category-menu__link"
-                                                           href="${pageContext.request.contextPath}/category?id=${child.id}">
+                                                           href="${pageContext.request.contextPath}/search-product?categoryId=${child.id}">
                                                                 ${child.name}
                                                         </a>
                                                     </li>
@@ -89,7 +89,7 @@
                             <div id="slider">
                                 <c:forEach var="slide" items="${slides}">
                                     <a class="slide"
-                                       href="slide.jsp?id=${slide.id}"
+                                       href="view-slide?id=${slide.id}"
                                        style="background-image: url('${slide.avatar}')">
                                     </a>
                                 </c:forEach>
